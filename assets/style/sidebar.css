@@ -31,7 +31,7 @@
 
 }
 body{
-    height: 100vh;
+    height: 100%;
     background-color: var(--body-color);
     font-family: url('../Radikal/Nootype\ -\ Radikal\ Medium.otf');
 }
@@ -123,4 +123,83 @@ header .image-text .header-text{
     height: 100%;
     margin-top: 80%;
     align-items: end;
+}
+
+
+/*searchbar e perfil */
+
+
+.top-content{
+    height: 10vh;
+    align-items: center;
+    display: flex;
+    width: calc(100%-88px);
+   left: 8cm;
+   margin: 0;
+   position: relative;
+    
+}
+.top-content .nav-link {
+    list-style: none;
+    text-decoration: none;
+    height: 30px;
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+    display: flex;
+    padding: 10px 15px;
+    align-items: center;
+    border-radius: 6px;
+    transition: var(--tran-04);
+}
+.top-content .searchbar{
+    width: calc(100vw - 40vw);
+    height: 30px;
+    color: var(--text-color);
+    font-size: 1.1em;
+    outline:none;
+    margin-left: 10px;
+    font-family: radikal-light;
+    border-radius: 6px;
+    border:none;
+    
+}
+.top-content .nav-link-profile-dropdown, .nav-link-notifications{
+    list-style: none;
+    text-decoration: none;
+    height: 30px;
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+    display: flex;
+    padding: 10px 20px 10px 15px;
+    align-items: center;
+    border-radius: 6px;
+    transition: var(--tran-04);
+}
+.top-content .nav-link-notifications{
+    padding: 10px 10px !important;
+    margin-left: 40px;
+}
+.top-content .nav-link-notifications a{
+    margin-top: 5px;
+}
+.top-content .nav-link-profile-dropdown a{
+font-family: radikal-medium;
+text-decoration: none;
+margin-left: 10px;
+display: flex;
+}
+
+.top-content .nav-link-profile-dropdow{
+   min-width: 5cm;
+}
+.top-content{
+    width: calc(100vw - 20vw) ;
+    justify-content: space-between;
+}
+
+iframe{
+    width: calc(100vw - 20vw);
+    margin-left: 8cm;
+    height: 85vh;
+    display: flex;
 }
