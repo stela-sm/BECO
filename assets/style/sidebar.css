@@ -177,7 +177,7 @@ header .image-text .header-text{
 }
 .top-content .nav-link-notifications{
     padding: 10px 10px !important;
-    margin-left: 40px;
+    margin-left: 30px;
 }
 .top-content .nav-link-notifications a{
     margin-top: 5px;
@@ -185,12 +185,12 @@ header .image-text .header-text{
 .top-content .nav-link-profile-dropdown a{
 font-family: radikal-medium;
 text-decoration: none;
-margin-left: 10px;
+margin-left: 8px;
 display: flex;
 }
 
-.top-content .nav-link-profile-dropdow{
-   min-width: 5cm;
+.top-content .profile-name{
+   min-width: 2cm ;
 }
 .top-content{
     width: calc(100vw - 20vw) ;
