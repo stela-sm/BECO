@@ -1,0 +1,126 @@
+@font-face {
+    font-family: radikal-medium;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Medium.otf);
+  }
+  @font-face {
+    font-family: radikal-bold;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Bold.otf);
+  }
+  @font-face {
+    font-family: radikal-light;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Thin.otf);
+  }
+:root{
+    /*****  cores  *****/
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+     --primary-color: lightblue;
+    /*--secondary-color:;
+    --toogle-color:; */
+    --text-color:#707070;
+
+    /* transições */
+
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease 
+
+    /***** tipografia *****/
+    
+
+}
+body{
+    height: 100vh;
+    background-color: var(--body-color);
+    font-family: url('../Radikal/Nootype\ -\ Radikal\ Medium.otf');
+}
+
+/*********   barra lateral   *********/
+
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    height: 100%;
+    padding: 20px 15px;
+    width: 250px;
+    background-color: var(--sidebar-color);
+    
+}
+.sidebar .image-text img{
+    width: 50px ;
+    border-radius: 6px;
+}
+.sidebar header .image-text{
+    display: flex;
+    padding: 15px;
+    align-items: center ;
+    font-family: radikal-medium;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.sidebar .text{
+    font-size: 1.2em;
+}
+.sidebar li{
+    list-style: none;
+    text-decoration: none;
+    height: 60px;
+    margin-top:10px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: var(--tran-04);
+}
+.sidebar li:hover{
+    background-color: var(--primary-color);
+    color: #f6f7fa !important;
+}
+
+.sidebar li:hover a, .sidebar li:hover .icon{
+   stroke: #f6f7fa;
+   color: #f6f7fa ;
+}
+.sidebar li a{
+    font-family: radikal-medium;
+    color: black;
+    text-decoration: none;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    font-size: 100%;
+}
+
+.sidebar li .icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60px;
+}
+.sidebar .image{
+    min-width:60px;
+    display:flex;
+    align-items:center;
+}
+
+header .image-text .header-text{
+    display: flex;
+    flex-direction: column;
+    
+}
+.profession{
+    font-size: 80%;
+    
+}
+.name{
+    font-size: 120%;
+}
+.bottom-content{
+    height: 100%;
+    margin-top: 80%;
+    align-items: end;
+}
