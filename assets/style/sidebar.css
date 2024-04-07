@@ -202,4 +202,5 @@ iframe{
     margin-left: 8cm;
     height: 85vh;
     display: flex;
+    background-color: var(--body-color);
 }
