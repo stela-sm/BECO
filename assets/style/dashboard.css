@@ -37,7 +37,7 @@ body{
 
 /*======================= CSS CARD SUPERIORES ==========================*/
 .dashboard-upper-cards{
-    min-width:22%;
+    min-width:24%;
     align-items: center;
     display: flex;
     border-radius: 6px;
@@ -50,7 +50,7 @@ body{
 }
 .upper-cards-row{
     justify-content: space-between;
-    height: 20vh;
+    height: 15vh;
 }
 
 .upper-cards-col .upper-card{
@@ -90,6 +90,9 @@ font-size: 1.6em;
 
 /*************  CSS GRAFICOS ******************/
 
+.row-one{
+  margin-bottom: 3%;
+}
 .graphic-col{
   background-color: var(--sidebar-color);
   border-radius: 6px;
@@ -97,19 +100,58 @@ font-size: 1.6em;
   align-items: center;
   justify-content: left;
   display: flex;
-  padding: 10px;
-  width: auto;
-  height: auto;
+  padding: 20px 20px !important;
+display: table;
   
+}
+.chart-one{
+  font-family: radikal-light;
+  margin-top: 10px;
+max-height: 32vh;
+max-width: 70vw;
 }
 .col-row{
   justify-content: space-between;
 }
-.chart-one{
-  font-family: radikal-light;
-}
+
 .curve_chart{
   font-family: radikal-light;
 margin-left: -10px;
 font-size: 2em;
+}
+.graphic-one-title{
+  font-family: radikal-medium;
+  font-size: 1.2em;
+  
+}
+.chart_view{
+  max-height: 20vh;
+  margin-top: 10px;
+}
+
+.graphic-pie{
+  min-width: 24%;
+  background-color: #FFF;
+  align-items: center;
+  margin-left: 10px;
+  border-radius: 6px;
+  padding: 20px ;
+  justify-content: center;
+}
+.canvas-div-pie{
+ min-height: 100%;
+ min-width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  
+}
+
+.canvas-div-pie > canvas {
+  display: flex;
+  max-width: 30vh;
+  max-height: 30vh;
+  justify-content: center;
+  align-items: center;
+  
 }
