@@ -47,6 +47,7 @@ body{
     padding: 20px 15px;
     width: 250px;
     background-color: var(--sidebar-color);
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
     
 }
 .sidebar .image-text img{
@@ -161,6 +162,7 @@ header .image-text .header-text{
     font-family: radikal-light;
     border-radius: 6px;
     border:none;
+   
     
 }
 .top-content .nav-link-profile-dropdown, .nav-link-notifications{
