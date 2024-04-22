@@ -1,0 +1,77 @@
+@font-face {
+    font-family: radikal-medium;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Medium.otf);
+  }
+  @font-face {
+    font-family: radikal-bold;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Bold.otf);
+  }
+  @font-face {
+    font-family: radikal-light;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Thin.otf);
+  }
+:root{
+    /*****  cores  *****/
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+     --primary-color: lightblue;
+    /*--secondary-color:;
+    --toogle-color:; */
+    --text-color:#707070;
+
+    /* transições */
+
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease 
+
+    /***** tipografia *****/
+    
+
+}
+
+body{
+  background-color: transparent !important ;
+}
+
+/*------------------ Coluna lateral --------------*/
+
+.coluna-lateral{
+  border-radius: 6px;
+  background-color: var(--sidebar-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  padding: 15px;
+  font-family: radikal-light;
+}
+.coluna-lateral table{
+  display: flex;
+  text-align: center;
+  align-items: end;
+  height: 100%;
+}
+ .pfp-circle img{
+  border-radius: 50%;
+  max-width: 30vh;
+}
+.coluna-lateral .name-span{
+  font-family: radikal-medium;
+  max-width: 80%;
+  font-size: 1.3em;
+  padding-top: 15px;
+}
+
+
+.coluna-lateral table tr td button{
+border: none;
+background-color: transparent;
+}
+
+.td-coluna-lateral, .tr-coluna-lateral{
+  min-height: 60px;
+
+}

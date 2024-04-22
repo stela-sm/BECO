@@ -37,6 +37,7 @@ body{
 
 /*------------------HEADER --------------*/
 
+
 .header-col{
     background-color: #a0a6f5;
     border-radius: 6px;
@@ -61,7 +62,9 @@ body{
   max-height: 70%;
   
 }
-
+.adm-filters-table th{
+  padding-left: 3px !important;
+  }
 .input-icon {
   position: relative; 
   max-width: 90%;
@@ -102,7 +105,7 @@ background-color: var(--sidebar-color);
   border-radius: 6px;
 }
 
-.table-header-col .table-header, .table-content{
+.table-header-col .table-header{
   width: 100%;
 }
 
@@ -115,8 +118,62 @@ background-color: var(--sidebar-color);
   text-align: left;
 }
 
-td{
+.table-header td{
   text-align: left !important;
   padding: 15px;
-  width: 14%;
+  width: auto;
 }
+
+
+
+/*------------SETA DO SELECT--------------------*/
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  min-width: 12vw;
+}
+.select-wrapper select
+{
+  min-width: 12VW;
+  border-radius: 6px !important;
+  padding: 10px !important;
+  border: none !important;
+  outline: none !important;  
+  appearance: none; 
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-color: transparent;
+}
+.select-wrapper input[type="date"] {
+ 
+  min-width: 11VW;
+
+}
+
+.icon-tabler-circle-arrow-down, .icon-tabler-calendar-search {
+  position: absolute;
+  right: 10px; 
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Impede que o SVG bloqueie o clique no select */
+}
+
+
+/* OLHO DA TABELA */
+.btn-eye{
+  background-color: transparent;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+
+
+}
+
+.icon-tabler-eye:hover{
+  opacity: 0.5;
+  transition: 0.3s ;
+  }
+  .icon-tabler-eye{
+    opacity: 1;
+  transition: 0.3s ease;
+  }
