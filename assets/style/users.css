@@ -1,0 +1,179 @@
+@font-face {
+    font-family: radikal-medium;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Medium.otf);
+  }
+  @font-face {
+    font-family: radikal-bold;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Bold.otf);
+  }
+  @font-face {
+    font-family: radikal-light;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Thin.otf);
+  }
+:root{
+    /*****  cores  *****/
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+     --primary-color: lightblue;
+    /*--secondary-color:;
+    --toogle-color:; */
+    --text-color:#707070;
+
+    /* transições */
+
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease 
+
+    /***** tipografia *****/
+    
+
+}
+
+body{
+  background-color: transparent !important ;
+}
+
+/*------------------HEADER --------------*/
+
+
+.header-col{
+    background-color: #7faaeb;
+    border-radius: 6px;
+    color: var(--sidebar-color);
+    padding: 20px;
+}
+
+.header-col .title-section{
+    font-size: 1.8em;
+   
+    font-family: radikal-medium;
+}
+.header-col .adm-filters-table{
+    margin-top: 15px;
+    font-family: radikal-light;
+}
+
+.td-input{
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  max-height: 70%;
+  
+}
+.adm-filters-table th{
+  padding-left: 3px !important;
+  }
+.input-icon {
+  position: relative; 
+  max-width: 90%;
+  
+ border-radius: 6px;
+  background-color: var(--sidebar-color);
+}
+.input-icon > input {
+  
+  border-radius: 6px !important;
+  width: calc(100% - 44px) !important;
+  padding: 10px !important;
+  border: none !important;
+  outline: none !important;  
+  
+}
+
+.input-icon svg {
+background-color: var(--sidebar-color);
+
+  right: 0; 
+  top: 50;
+}
+
+
+/*----------ÍNDICES DA TABELA ----------------*/
+
+.table-header-col{
+  margin-top: 2%;  
+  background-color: var(--sidebar-color);
+  border-radius: 6px;
+}
+.table-content-col{
+  font-family: radikal-light;
+ 
+  margin-top: 1%;
+  background-color: var(--sidebar-color);
+  border-radius: 6px;
+}
+
+.table-header-col .table-header{
+  width: 100%;
+}
+
+.table-header-th{
+  padding: 15px;
+  font-family: radikal-light;
+  text-transform: uppercase;
+  color: var(--text-color);
+  font-size: 0.8em;
+  text-align: left;
+}
+
+.table-header td{
+  text-align: left !important;
+  padding: 15px;
+  width: auto;
+}
+
+
+
+/*------------SETA DO SELECT--------------------*/
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  min-width: 12vw;
+}
+.select-wrapper select
+{
+  min-width: 12VW;
+  border-radius: 6px !important;
+  padding: 10px !important;
+  border: none !important;
+  outline: none !important;  
+  appearance: none; 
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-color: transparent;
+}
+.select-wrapper input[type="date"] {
+ 
+  min-width: 11VW;
+
+}
+
+.icon-tabler-circle-arrow-down, .icon-tabler-calendar-search {
+  position: absolute;
+  right: 10px; 
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Impede que o SVG bloqueie o clique no select */
+}
+
+
+/* OLHO DA TABELA */
+.btn-eye{
+  background-color: transparent;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+
+
+}
+
+.icon-tabler-eye:hover{
+  opacity: 0.5;
+  transition: 0.3s ;
+  }
+  .icon-tabler-eye{
+    opacity: 1;
+  transition: 0.3s ease;
+  }
