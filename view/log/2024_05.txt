@@ -1,0 +1,11 @@
+2024-05-07 22:10:33 - ::1 - Novo usuário stelamontenegro3@gmail.com inserido na tabela cliente_temp.
+2024-05-07 22:13:03 - ::1 - Login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-05-07 22:13:38 - ::1 - Erro no login do administrador stela@pizzaetec.com pelo dispositivo de ip ::1.
+2024-05-07 22:14:00 - ::1 - Login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-05-07 22:22:07 - ::1 - Erro no login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-05-07 22:22:13 - ::1 - Login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-05-07 22:22:53 - ::1 - Erro no login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-05-07 22:22:57 - ::1 - Erro no login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-05-07 22:23:01 - ::1 - Login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-05-07 22:24:41 - ::1 - Login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-05-07 22:25:17 - ::1 - Login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.

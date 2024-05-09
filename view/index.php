@@ -1,9 +1,12 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/style/sidebar.css">
+    <link rel="stylesheet" href="../assets/style/sidebar.css">
     <title>BECO | Administração</title>
 </head>
 <body>
@@ -11,7 +14,7 @@
         <header>
             <div class="image-text">
         <span class="image">
-            <img src="assets/media/logo.png" alt="logo BECO">
+            <img src="../assets/media/logo.png" alt="logo BECO">
         </span>
         <div class="text header-text">
     <span class="name">BECO</span>
@@ -23,7 +26,7 @@
         <div class="menu-bar">
             <div class="menu">
                                <li class="nav-link">
-                    <a href="view/dashboard.html" target="iframe">
+                    <a href="dashboard.html" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chart-pie" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <path d="M10 3.2a9 9 0 1 0 10.8 10.8a1 1 0 0 0 -1 -1h-6.8a2 2 0 0 1 -2 -2v-7a.9 .9 0 0 0 -1 -.8" />
@@ -34,7 +37,7 @@
                 </li>
 
                 <li class="nav-link">
-                    <a href="view/adm.html" target="iframe">
+                    <a href="adm.html" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h2" />
@@ -46,7 +49,7 @@
                 </li>
 
                 <li class="nav-link">
-                    <a href="view/users.html" target="iframe">
+                    <a href="users.html" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -59,7 +62,7 @@
         
 
                 <li class="nav-link">
-                    <a href="view/dashboard.html" target="iframe">
+                    <a href="dashboard.html" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
@@ -71,7 +74,7 @@
                 </li>
 
                 <li class="nav-link">
-                    <a href="view/dashboard.html" target="iframe">
+                    <a href="dashboard.html" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-exclamation-mark" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M12 19v.01" />
@@ -82,7 +85,7 @@
                 </li>
 
                 <li class="nav-link">
-                    <a href="view/dashboard.html" target="iframe">
+                    <a href="dashboard.html" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-databricks" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M3 17l9 5l9 -5v-3l-9 5l-9 -5v-3l9 5l9 -5v-3l-9 5l-9 -5l9 -5l5.418 3.01" />
@@ -92,7 +95,7 @@
                 </li>
 
                 <li class="nav-link">
-                    <a href="view/dashboard.html" target="iframe">
+                    <a href="dashboard.html" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
@@ -103,7 +106,7 @@
                 </li>
 
                 <li class="nav-link">
-                    <a href="view/dashboard.html" target="iframe">
+                    <a href="dashboard.html" target="iframe">
                        <span></span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
@@ -121,7 +124,7 @@
             <div class="bottom-content">
                
                 <li class="list">
-                    <a href="view/dashboard.html" target="iframe">
+                    <a href="dashboard.html" target="iframe">
                         <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
@@ -163,7 +166,7 @@
             <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
             <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
           </svg>
-          <a href="" class="profile-name">Bem Vindo(a), Stela</a>
+          <a href="" class="profile-name">Bem Vindo(a), <?php echo  strtok($_SESSION['ADM_NOME'], " ,.!"); ?></a>
           
         </li>
     </div>

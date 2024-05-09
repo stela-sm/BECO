@@ -177,3 +177,12 @@ background-color: var(--sidebar-color);
     opacity: 1;
   transition: 0.3s ease;
   }
+
+
+
+  
+/* add adm */
+
+.add-adm{
+margin-left: 8%;
+}
