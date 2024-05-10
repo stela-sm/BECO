@@ -28,7 +28,75 @@ class Manager extends Conexao{
     }
 
 
-
+        //exit(); 
+        public function admTable($busca, $campo) {
+            if($busca == "0" || $campo =="0"){
+            $sql = "SELECT * FROM administradores;";
+            }
+            $res = $this->connect()->query($sql);
+        
+            if (!$res) {
+                $this->connect()->close();
+                return ['result' => -1, 'error' => $this->connect()->close()];
+            }
+        
+            if ($res->num_rows > 0) {
+                $dados = [];
+                $i = 0;
+                while ($row = $res->fetch_assoc()) {
+                    $dados[$i] = [
+                        'ID_ADM'   => $row['ID_ADM'],
+                        'nome'     => $row['nome'],
+                        'email'    => $row['email'],
+                        'celular'  => $row['celular'],
+                        'poder'    => $row['poder'],
+                        'status'   => $row['status'],
+                        'data'     => $row['datahora']
+                    ];
+                    $i++;
+                }
+                $dados['result'] = $i; // Store count or simply use true to indicate success
+                $this->connect()->close();
+                return $dados;
+            } else {
+                $this->connect()->close();
+                return ['result' => 0]; // No rows found
+            }
+        }
+        
+        public function getAdmData($id) {
+            $sql = "SELECT * FROM administradores WHERE ID_ADM = {$id};";
+            $res = $this->connect()->query($sql);
+        
+            if (!$res) {
+                $this->connect()->close();
+                return ['result' => -1, 'error' => $this->connect()->close()];
+            }
+        
+            if ($res->num_rows > 0) {
+                $dados = [];
+                $i = 0;
+                while ($row = $res->fetch_assoc()) {
+                    $dados[$i] = [
+                        'ID_ADM'   => $row['ID_ADM'],
+                        'nome'     => $row['nome'],
+                        'email'    => $row['email'],
+                        'celular'  => $row['celular'],
+                        'poder'    => $row['poder'],
+                        'status'   => $row['status'],
+                        'data'     => $row['datahora']
+                    ];
+                    $i++;
+                }
+                $dados['result'] = $i; // Store count or simply use true to indicate success
+                $this->connect()->close();
+                return $dados;
+            } else {
+                $this->connect()->close();
+                return ['result' => 0]; // No rows found
+            }
+        }
+        
 
 
 

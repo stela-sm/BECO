@@ -25,7 +25,15 @@
   }
     </style>
 </head>
+<?php
+
+require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> getAdmData("$_REQUEST[id]");
+
+  ?>
 <body>
+  
   <div class=" conteiner-flex row row-menu">
     
         <div class="col-2 coluna-lateral">
@@ -73,7 +81,7 @@
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Email</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
+                  <input disabled  type="text" class="input disabled -padrao" value="<?php echo $r["email"] ?>">
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Celular</label><br>
