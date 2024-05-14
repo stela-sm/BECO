@@ -88,5 +88,65 @@ if($r["result"] == 0){
 }
             }}
 
+
+
+
+// DESATIVAR ACESSO //
+
+if(isset($_REQUEST["desativar_adm"])){
+
+    $id = $_REQUEST["desativar_adm"];
+    
+require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> admStatus($id, '0');
+require "../model/log.class.php";
+$log = new Log();
+$ip = $_SERVER['REMOTE_ADDR'];
+$log->setTexto("{$ip} - Acesso do adminstrador {$id} desativado\n");
+$log->fileWriter();
+
+?>
+    <form action="../index.php" name="return" id="return" method="post">
+    <input type="hidden" name="cod" value="OP50">
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+<?php
+
+
+}
+
+
+
+
+
+
+if(isset($_REQUEST["reativar_adm"])){
+
+    $id = $_REQUEST["reativar_adm"];
+    
+require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> admStatus($id, '1');
+require "../model/log.class.php";
+$log = new Log();
+$ip = $_SERVER['REMOTE_ADDR'];
+$log->setTexto("{$ip} - Acesso do adminstrador {$id} reativado\n");
+$log->fileWriter();
+
+?>
+    <form action="../index.php" name="return" id="return" method="post">
+    <input type="hidden" name="cod" value="OP50">
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+<?php
+
+
+}
+
 ?>
            

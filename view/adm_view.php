@@ -31,7 +31,8 @@ require "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> getAdmData("$_REQUEST[id]");
 
-  ?>
+?>
+
 <body>
   
   <div class=" conteiner-flex row row-menu">
@@ -40,12 +41,17 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
             <div class="pfp-circle">
                 <img src="../assets/media/pfpjpg.jpg" alt="Foto de Perfil">
             </div>
-            <span class="name-span">Stela dos Santos Montenegro</span>
-            <span class="data-span">Desde 01/01/2024</span>
+            <span class="name-span"><?php echo $r[0]["nome"]?></span>
+            <span class="data-span"><?php echo $r[0]["data"] ?></span>
                 <table>
-                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button id="info-button" onclick="input()"  href="">Alterar informações</button></td></tr>
-                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="">Desativar Acesso</button></td></tr>
-                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="">Excluir Perfil</button></td></tr>
+                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button id="info-button" onclick="input('alterar')"  href="">Alterar informações</button></td></tr>
+                    <?php if ($r[0]["status"] == 1){?>
+                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="" onclick="input('desativar', '<?php echo $r[0]['ID_ADM'] ?>')">Desativar Acesso</button></td></tr>
+                    <?php }else{?>
+                      <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="" onclick="input('reativar', '<?php echo $r[0]['ID_ADM'] ?>')">Reativar Acesso</button></td></tr>
+                    <?php }?>
+                    
+                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="" onclick="input('excluir')"  >Excluir Perfil</button></td></tr>
                     <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="">Mensagem</button></td></tr>
                 </table>
         </div>
@@ -67,11 +73,12 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
           </nav>
           <br>
           <div class="container-fluid table-container">
+            <form action="controller.php?adm_update=1" name="form_adm_update" id="form_adm_update" method="post">
             <table class="adm-info-table"id="adm-info-table" >
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Nome Completo</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
+                  <input disabled  type="text" class="input disabled -padrao" value="<?php echo $r[0]["nome"] ?>">
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Estado</label><br>
@@ -81,17 +88,17 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Email</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="<?php echo $r["email"] ?>">
+                  <input disabled  type="text" class="input disabled -padrao" value="<?php echo $r[0]["email"] ?>">
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Celular</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
+                  <input disabled  type="text" class="input disabled -padrao" value="<?php echo $r[0]["celular"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">CPF</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
+                  <input disabled  type="text" class="input disabled -padrao" value="40527647810">
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Aniversário</label><br>
@@ -157,7 +164,7 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Poder</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
+                  <input disabled  type="text" class="input disabled -padrao" value="<?php echo $r[0]["poder"] ?>">>
                 </td>
               </tr>
               <tr>
@@ -178,7 +185,7 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
                 </td>
                 
               </tr>
-             
+              </form>
             </table>
           </div>
         </div>
@@ -202,7 +209,8 @@ function changeTwo() {
   finan.style.display = ""; 
 }
 
-function input(){
+function input(elemento, id){
+  if (elemento == 'alterar'){
   var inputs = document.getElementsByTagName("input");  
   for (var i = 0; i < inputs.length; i++) {  
     inputs[i].disabled = false;  
@@ -214,9 +222,34 @@ function input(){
   button.onclick = input2
 }
 
+if (elemento == 'desativar'){
+  if (confirm("Deseja desativar o acesso deste administrador?") == true){
+    window.open("../controller/controller.php?desativar_adm="+id);
+
+    
+  }
+}
+if (elemento == 'reativar'){
+  if (confirm("Deseja reativar o acesso deste administrador?") == true){
+    window.open("../controller/controller.php?reativar_adm="+id);
+   
+  }
+}
+
+if (elemento == 'excluir'){
+  if (confirm("Deseja excluir permanentemente esse administrador? Aconselhamos apenas desativar seu acesso") == true){
+    alert("vai excluir ")
+    
+  }
+}
+
+}
+
+
+
 function input2(){
   if (confirm("Deseja Salvar as Alterações?") == true){
-    alert("vai alterar")
+    alert("vai salvar")
   }
 }
   </script>

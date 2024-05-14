@@ -100,6 +100,29 @@ class Manager extends Conexao{
 
 
 
+        public function admStatus($id, $status){
+            $sql = "UPDATE administradores SET status = {$status} WHERE ID_ADM = {$id};";
+            $res = $this->connect()->query($sql);
+            if (!$res) {
+                $this->connect()->close();
+                return ['result' => 0, 'error' => $this->connect()->close()];
+            }else{
+                $this->connect()->close();
+                return ['result' => 1];
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function verifyMailTabCliente($email){
         $sql = "SELECT * FROM cliente WHERE email = '{$email}'";
