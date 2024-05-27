@@ -26,7 +26,7 @@
     </style>
 </head>
 <?php
-
+session_start();
 require "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> getAdmData("$_REQUEST[id]");
@@ -51,7 +51,7 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
                       <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="" onclick="input('reativar', '<?php echo $r[0]['ID_ADM'] ?>')">Reativar Acesso</button></td></tr>
                     <?php }?>
                     
-                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="" onclick="input('excluir')"  >Excluir Perfil</button></td></tr>
+                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="" onclick="input('excluir', '<?php echo $r[0]['ID_ADM'] ?>')" >Excluir Perfil</button></td></tr>
                     <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="">Mensagem</button></td></tr>
                 </table>
         </div>
@@ -73,62 +73,64 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
           </nav>
           <br>
           <div class="container-fluid table-container">
-            <form action="controller.php?adm_update=1" name="form_adm_update" id="form_adm_update" method="post">
+            <form action="../controller/controller.php?adm_update=<?php echo $r[0]["ID_ADM"]?>" name="form_adm_update" id="form_adm_update" method="post">
             <table class="adm-info-table"id="adm-info-table" >
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Nome Completo</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="<?php echo $r[0]["nome"] ?>">
+                  <input disabled name="nome" id="nome" type="text" class="input disabled padrao" value="<?php echo $r[0]["nome"] ?>">
                 </td>
                 <td>
-                  <label for="nome" class="label-padrao">Estado</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
+                  <label for="nome" class="label-padrao">Estado Cívil</label><br>
+                  <input disabled  type="text" name="estado" class="input disabled padrao" value="<?php echo $r[0]["estado"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Email</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="<?php echo $r[0]["email"] ?>">
+                  <input disabled  type="text" name="email" class="input disabled -padrao" value="<?php echo $r[0]["email"] ?>">
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Celular</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="<?php echo $r[0]["celular"] ?>">
+                  <input disabled  type="text" name="celular" class="input disabled padrao" value="<?php echo $r[0]["celular"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">CPF</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="40527647810">
+                  <input disabled  type="text" name="cpf" class="input disabled padrao" value="<?php echo $r[0]["cpf"] ?>">
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Aniversário</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
+                  <input disabled  type="date" name="data_nascimento" class="input disabled padrao" value="<?php echo $r[0]["datan"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">RG</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
+                  <input disabled  type="text" name="rg" class="input disabled padrao" value="<?php echo $r[0]["rg"] ?>">
                 </td>
                 <td>
-                  <label for="nome" class="label-padrao">Estado Civil</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
+                  <label for="nome" class="label-padrao">Poder</label><br>
+                  <input disabled  type="text" class="input disabled padrao" value="<?php echo $r[0]["poder"] ?>" name="poder">
+
+              
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">CEP</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
+                  <input disabled  type="text" name="cep" class="input disabled padrao" value="<?php echo $r[0]["cep"] ?>">
                 </td>
                 <td class="obs-td">
                   <label for="nome" class="label-padrao">Observações</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
+                  <input disabled  type="text" name="obs" class="input disabled padrao" value="<?php echo $r[0]["obs"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Número</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
+                  <input disabled  type="text" name="numero" class="input disabled padrao" value="<?php echo $r[0]["numero"] ?>">
                 </td>
                     </tr>
             </table>
@@ -163,9 +165,10 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
                   <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
                 </td>
                 <td>
-                  <label for="nome" class="label-padrao">Poder</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="<?php echo $r[0]["poder"] ?>">>
+                  <label for="nome" class="label-padrao">Estado Civil</label><br>
+                  <input disabled  type="text" name="estado_civil" class="input disabled -padrao" value="Stela dos Santos Montenegro">
                 </td>
+                 
               </tr>
               <tr>
                 <td>
@@ -238,8 +241,8 @@ if (elemento == 'reativar'){
 
 if (elemento == 'excluir'){
   if (confirm("Deseja excluir permanentemente esse administrador? Aconselhamos apenas desativar seu acesso") == true){
-    alert("vai excluir ")
-    
+    window.open("../controller/controller.php?excluir_adm="+id);
+   
   }
 }
 
@@ -249,7 +252,7 @@ if (elemento == 'excluir'){
 
 function input2(){
   if (confirm("Deseja Salvar as Alterações?") == true){
-    alert("vai salvar")
+    $('#form_adm_update').submit();
   }
 }
   </script>

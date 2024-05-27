@@ -84,7 +84,15 @@ class Manager extends Conexao{
                         'celular'  => $row['celular'],
                         'poder'    => $row['poder'],
                         'status'   => $row['status'],
-                        'data'     => $row['datahora']
+                        'data'     => $row['datahora'],
+                        'rg'     => $row['rg'],
+                        'cpf'     => $row['cpf'],
+                        'cep'     => $row['cep'],
+                        'obs'     => $row['obs'],
+                        'estado'     => $row['estado_civil'],
+                        'numero'     => $row['numero'],
+                        'datan'     => $row['data_nascimento']
+
                     ];
                     $i++;
                 }
@@ -112,13 +120,52 @@ class Manager extends Conexao{
             }
         }
 
+        public function admExcluir($id){
+            $sql = "DELETE FROM administradores WHERE ID_ADM = {$id};";
+            $res = $this->connect()->query($sql);
+            if (!$res) {
+                $this->connect()->close();
+                return ['result' => 0, 'error' => $this->connect()->close()];
+            }else{
+                $this->connect()->close();
+                return ['result' => 1];
+            }
+        }
+
+        public function admUpdate($dados){
+            $sql = "UPDATE administradores SET 
+            nome = '{$dados['nome']}', 
+            email = '{$dados['email']}', 
+            celular = '{$dados['celular']}', 
+            poder = '{$dados['poder']}', 
+            data_nascimento = '{$dados['data_nascimento']}', 
+            rg = '{$dados['rg']}', 
+            estado_civil = '{$dados['estado_civil']}', 
+            cep = '{$dados['cep']}', 
+            numero = '{$dados['numero']}', 
+            cpf = '{$dados['cpf']}', 
+            obs = '{$dados['obs']}'
+        WHERE ID_ADM = '{$dados['id']}';";
+
+
+            $res = $this->connect()->query($sql);
+            if (!$res) {
+                $this->connect()->close();
+                return ['result' => 0, 'error' => $this->connect()->close()];
+            }else{
+                $this->connect()->close();
+                return ['result' => 1];
+            }
+        }
 
 
 
 
 
-
-
+        public function registrosAdd($nome){
+            $sql = "INSERT INTO registros (nome) VALUES ('{$nome}');";
+            $res = $this->connect()->query($sql);
+        }
 
 
 

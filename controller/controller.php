@@ -107,7 +107,7 @@ $log->setTexto("{$ip} - Acesso do adminstrador {$id} desativado\n");
 $log->fileWriter();
 
 ?>
-    <form action="../index.php" name="return" id="return" method="post">
+    <form action="../view/index.php" name="return" id="return" method="post">
     <input type="hidden" name="cod" value="OP50">
     </form>
     <script>
@@ -137,7 +137,95 @@ $log->setTexto("{$ip} - Acesso do adminstrador {$id} reativado\n");
 $log->fileWriter();
 
 ?>
-    <form action="../index.php" name="return" id="return" method="post">
+    <form action="../view/index.php" name="return" id="return" method="post">
+    <input type="hidden" name="cod" value="OP50">
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+<?php
+
+
+}
+
+
+
+
+
+if(isset($_REQUEST["excluir_adm"])){
+
+    $id = $_REQUEST["excluir_adm"];
+    
+require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> admExcluir($id);
+require "../model/log.class.php";
+$log = new Log();
+$ip = $_SERVER['REMOTE_ADDR'];
+$log->setTexto("{$ip} - Exclusão do adminstrador {$id} ");
+$log->fileWriter();
+
+?>
+    <form action="../view/index.php" name="return" id="return" method="post">
+    <input type="hidden" name="cod" value="OP50">
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+<?php
+
+
+}
+
+
+
+
+if(isset($_REQUEST["adm_update"])){
+
+    $dados = [
+        'id' => $_REQUEST['adm_update'],
+        'nome' => $_REQUEST['nome'],
+        'email' => $_REQUEST['email'],
+        'celular' => $_REQUEST['celular'],
+        'poder' => $_REQUEST['poder'],
+        'data_nascimento' => $_REQUEST['data_nascimento'],
+        'rg' => $_REQUEST['rg'],
+        'estado_civil' => $_REQUEST['estado_civil'],
+        'cep' => $_REQUEST['cep'],
+        'numero' => $_REQUEST['numero'],
+        'cpf' => $_REQUEST['cpf'],
+        'obs' => $_REQUEST['obs']
+    ];
+    
+require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> admUpdate($dados);
+
+require "../model/log.class.php";
+
+$id = $dados["id"];
+if($r["result"]!=1){
+
+    $log = new Log();    
+$ip = $_SERVER['REMOTE_ADDR'];
+$log->setTexto("{$ip} - Falha na alteração de dados do adminstrador {$dados["id"]} ");
+$log->fileWriter();
+?>
+<form action="../view/adm_view.php?id=<?php echo $id; ?>" name="return" id="return" method="post">
+    <input type="hidden" name="cod" value="OP50">
+</form>
+<script>
+    document.getElementById("return").submit();
+</script>
+<?php
+
+
+}else{
+
+}
+
+?>
+    <form action="../view/adm_view.php?id=<?php echo $id; ?>" name="return" id="return" method="post">
     <input type="hidden" name="cod" value="OP50">
     </form>
     <script>

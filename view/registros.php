@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/style/users.css">  
+    <link rel="stylesheet" href="../assets/style/registros.css">  
 
   <!--BOOTSTRAP EM PORTUGUêS -  NÃO USAR O GRINGO-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -30,14 +30,14 @@
 <body>
     <section>
     <div class="col-12 header-col">
-        <span class="title-section">Usuários</span>
+        <span class="title-section">Registros</span>
            <table class="adm-filters-table  col-3 ">
             <tr>
                 <th>
                     Data
                 </th>
                 <th>
-                    Status
+                    
                 </th>
                 
                 <th>
@@ -60,20 +60,6 @@
 
 
 
-                  <td class="td-input ">
-                    <div class="input-icon select-wrapper">
-                    <select name="" class="input-search" id="">
-                      <option value="2" selected>Todos</option>
-                      <option value="1">Ativo</option>
-                      <option value="0">Inativo</option>
-                    </select>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-arrow-down" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                      <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-                      <path d="M8 12l4 4" />
-                      <path d="M12 8v8" />
-                      <path d="M16 12l-4 4" />
-                    </svg></div> </td>
 
 
 
@@ -91,7 +77,7 @@
           ID do Usuário
         </th>
         <th class="table-header-th">
-          Nome de Usuário
+          Nome do Arquivo
         </th>
         <th class="table-header-th">
           Email

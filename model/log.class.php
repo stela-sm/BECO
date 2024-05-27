@@ -16,11 +16,14 @@ class Log{
         return $nameFile;
     }
 
+
     public function fileWriter(){
         $nameFile = $this->fileName();
         $arquivo = fopen("../view/log/{$nameFile}","a");
         fwrite($arquivo, $this->texto);
-        fclose($arquivo);
+        fclose($arquivo);        
+        
+   
     }
 
 }
