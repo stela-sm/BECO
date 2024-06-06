@@ -27,7 +27,7 @@
 </head>
 <?php
 session_start();
-require "../model/manager.class.php";
+require_once( "../model/manager.class.php");
 $manager = new Manager();
 $r = $manager-> getAdmData("$_REQUEST[id]");
 

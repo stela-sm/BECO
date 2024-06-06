@@ -1,5 +1,5 @@
 <?php
-require 'Conexao.class.php';
+require_once('Conexao.class.php');
 
 class Manager extends Conexao{
 
@@ -163,7 +163,7 @@ class Manager extends Conexao{
 
 
         public function registrosAdd($nome){
-            $sql = "INSERT INTO registros (nome) VALUES ('{$nome}');";
+            $sql = "INSERT INTO registros (nome, datahora) VALUES ('{$nome}', now());";
             $res = $this->connect()->query($sql);
         }
 
@@ -192,6 +192,10 @@ class Manager extends Conexao{
             return $dados;
         }
     }
+
+
+
+
     public function insertNewClientTemp($dados){
 
         $sql = "INSERT INTO cliente_temp (string,pnome,snome,email,senha,cidade,uf,datahora,status) VALUES ('{$dados["string"]}','{$dados["pnome"]}','{$dados["snome"]}','{$dados["email"]}','{$dados["senha"]}','{$dados["cidade"]}','{$dados["uf"]}',now(),1)";

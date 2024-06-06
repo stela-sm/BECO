@@ -1,6 +1,8 @@
 <?php
 
-class Log{
+require_once('manager.class.php');
+
+class Log extends Manager{
 
     public $texto;
 
@@ -18,13 +20,29 @@ class Log{
 
 
     public function fileWriter(){
+
         $nameFile = $this->fileName();
-        $arquivo = fopen("../view/log/{$nameFile}","a");
-        fwrite($arquivo, $this->texto);
-        fclose($arquivo);        
-        
-   
+    
+        if (!file_exists("../view/log/{$nameFile}")) {
+            $arquivo = fopen("../view/log/{$nameFile}","a");
+            fwrite($arquivo, $this->texto);
+            fclose($arquivo);        
+
+            
+             
+        } else {
+            
+            $arquivo = fopen("../view/log/{$nameFile}","a");
+            fwrite($arquivo, $this->texto);
+            fclose($arquivo);
+        }
+
+        $manager = new Manager();
+     $manager->registrosAdd($nameFile); //verificar pq nn tá funcionando
+     
     }
+    
+    
 
 }
 
