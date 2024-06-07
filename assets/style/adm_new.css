@@ -1,0 +1,188 @@
+@font-face {
+    font-family: radikal-medium;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Medium.otf);
+  }
+  @font-face {
+    font-family: radikal-bold;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Bold.otf);
+  }
+  @font-face {
+    font-family: radikal-light;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Thin.otf);
+  }
+:root{
+    /*****  cores  *****/
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+     --primary-color: lightblue;
+    /*--secondary-color:;
+    --toogle-color:; */
+    --text-color:#707070;
+
+    /* transições */
+
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease 
+
+    /***** tipografia *****/
+    
+
+}
+
+body{
+  background-color: var(--body-color)!important ;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+/*------------------ Coluna lateral --------------*/
+
+.coluna-lateral{
+  border-radius: 6px;
+  background-color: var(--sidebar-color);
+  display: flex;
+  margin-left: 10px;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  height: 90vh;
+  padding: 30px 20px 0px 20px;
+  position: absolute;
+  font-family: radikal-light;
+}
+.coluna-lateral table{
+  display: flex;
+  text-align: center;
+  align-items: end;
+  height: 100%;
+}
+ .pfp-circle img{
+  border-radius: 50%;
+  max-width: 25vh;
+}
+.coluna-lateral .name-span{
+  font-family: radikal-medium;
+  max-width: 80%;
+  font-size: 1.4em;
+  padding-top: 15px;
+}
+
+
+.coluna-lateral table tr td button{
+border: none;
+width: 100%;
+background-color: transparent;
+}
+.coluna-lateral button{
+  height: 100%;
+}
+.tr-coluna-lateral{
+  border-top: 1px rgb(195, 231, 243)  solid;
+  font-size: 1.1em;
+}
+.td-coluna-lateral, .tr-coluna-lateral{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  min-height: 70px;
+}
+
+.coluna-lateral table, .coluna-lateral tbody{
+  width: 100%;
+  justify-content: center;
+}
+
+/*-------- menu -----------*/
+.row-menu{
+  margin: 0;
+  padding: 0;
+  min-width: 110vw;
+}
+.menu-col{
+  font-family: radikal-light !important;
+  
+}
+.navbar{
+  background-color: var(--sidebar-color);
+  padding: 15px;
+  border-radius: 6px;
+
+}
+.navbar a{
+  
+color: #222222 !important;
+  font-size: 1.1em;
+}
+
+.active-link{
+  font-family: radikal-medium;
+}
+.table-data{
+  width: 100%;
+  background-color: var(--sidebar-color);
+}
+
+/*-----------TABLEAS ---------------*/
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.adm-info-table{
+  width: 100%;
+  transition: fade-in .3s ease-out;
+}
+.adm-info-table td{
+ padding-bottom:25px;
+ 
+}
+.adm-info-table input:disabled{
+  width: 90%;
+  border: 1px #ececec solid ;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-family: radikal-light;
+  transition: 0.2s;
+}
+.adm-info-table input{
+  width: 90%;
+  border: 1px #7bdb7b solid ;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-family: radikal-light;
+  transition: 0.2s;
+}
+
+.adm-info-table label{
+  
+color: var(--text-color);
+font-family: radikal-medium;
+}
+.table-container{
+  padding: 30px 60px;
+  background-color: var(--sidebar-color);
+  border-radius: 6px;
+}
+
+
+
+
+
+/*-------TRANSIÇÕES--------*/
+.fade-element {
+  display: none; /* Inicialmente oculto */
+  opacity: 0;
+  transition: opacity 0.5s linear; 
+}
+
+.show {
+  display: table;
+ 
+}
