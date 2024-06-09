@@ -1,3 +1,8 @@
 2024-06-07 01:25:44 - ::1 - Login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
 2024-06-07 01:27:07 - ::1 - Login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
 2024-06-07 01:28:17 - ::1 - Login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-06-09 20:05:27 - ::1 - Erro no login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-06-09 20:05:32 - ::1 - Erro no login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-06-09 20:05:39 - ::1 - Erro no login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-06-09 20:05:47 - ::1 - Erro no login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-06-09 20:08:02 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.

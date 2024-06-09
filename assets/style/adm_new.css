@@ -59,10 +59,20 @@ body{
   align-items: end;
   height: 100%;
 }
- .pfp-circle img{
-  border-radius: 50%;
-  max-width: 25vh;
+.pfp-circle {
+  width: 25vh; /* Define o tamanho do círculo */
+  border-radius: 50%; /* Faz o elemento ser um círculo */
+  overflow: hidden; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  
 }
+
+.pfp-circle img {
+  width: 100%; /* Faz a imagem ocupar todo o espaço dentro do círculo */
+  height: 100%; /* Faz a imagem ocupar todo o espaço dentro do círculo */
+  object-fit: cover; /* Faz com que a imagem preencha o espaço do círculo sem distorção */
+  aspect-ratio: 1 / 1; /* Mantém a proporção da imagem em 1:1 */
+}
+
 .coluna-lateral .name-span{
   font-family: radikal-medium;
   max-width: 80%;

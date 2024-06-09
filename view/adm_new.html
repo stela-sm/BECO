@@ -35,9 +35,12 @@
             <img src="../assets/media/nopfp.png" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
 
 <!-- Input file oculto -->
-<input type="file" id="input_file" style="display: none;">
+<input type="file" id="input_file" style="display: none;"><br><br>
+<i id="select_text">Selecione uma Foto de Perfil</i>
         </div>
-       
+        <table>
+          <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button id="info-button" onclick="input('criar')"  href="">Continuar</button></td></tr>
+      </table>
     </div>
  
 
@@ -57,46 +60,46 @@
           </nav>
           <br>
           <div class="container-fluid table-container">
-            <form action="../controller/controller.php?adm_update=" name="form_adm_update" id="form_adm_update" method="post">
+            <form action="../controller/controller.php?adm_update=" name="form_adm_new" id="form_adm_new" method="post">
             <table class="adm-info-table"id="adm-info-table" >
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Nome Completo</label><br>
-                  <input  name="nome" id="nome" type="text" class="input  padrao" >
+                  <input  name="nome" id="nome" required type="text" class="input  padrao" >
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Estado Cívil</label><br>
-                  <input   type="text" name="estado" class="input  padrao" >
+                  <input   type="text" name="estado" required class="input  padrao" >
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Email</label><br>
-                  <input   type="text" name="email" class="input  -padrao" >
+                  <input   type="text" name="email" required class="input  -padrao" >
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Celular</label><br>
-                  <input   type="text" name="celular" class="input  padrao" >
+                  <input   type="text" name="celular" required class="input  padrao" >
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">CPF</label><br>
-                  <input   type="text" name="cpf" class="input  padrao" >
+                  <input   type="text" name="cpf" required class="input  padrao" >
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Aniversário</label><br>
-                  <input   type="date" name="data_nascimento" class="input  padrao" >
+                  <input   type="date" name="data_nascimento" required class="input  padrao" >
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">RG</label><br>
-                  <input   type="text" name="rg" class="input  padrao" >
+                  <input   type="text" name="rg" required class="input  padrao" >
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Poder</label><br>
-                  <input   type="text" class="input  padrao" >
+                  <input   type="text" required class="input  padrao" >
 
               
                 </td>
@@ -104,17 +107,17 @@
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">CEP</label><br>
-                  <input   type="text" name="cep" class="input  padrao">
+                  <input   type="text" required name="cep" class="input  padrao">
                 </td>
                 <td class="obs-td">
                   <label for="nome" class="label-padrao">Observações</label><br>
-                  <input   type="text" name="obs" class="input  padrao" >
+                  <input   type="text" required name="obs" class="input  padrao" >
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Número</label><br>
-                  <input   type="text" name="numero" class="input  padrao" >
+                  <input   type="text" required name="numero" class="input  padrao" >
                 </td>
                     </tr>
             </table>
@@ -181,28 +184,26 @@
   <script>
   
   var input = document.getElementById('input_file');
+        var botaoImagem = document.getElementById('botao_imagem');
 
-// Captura o elemento da imagem
-var botaoImagem = document.getElementById('botao_imagem');
+        botaoImagem.addEventListener('click', function() {
+            input.click();
+        });
 
-// Adiciona um evento de clique à imagem
-botaoImagem.addEventListener('click', function() {
-    input.click(); // Simula um clique no input file
-});
+        input.addEventListener('change', function() {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-// Adiciona um evento de mudança ao input file
-input.addEventListener('change', function() {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+                reader.onload = function (e) {
+                    // Exibe a imagem selecionada na tela
+                    botaoImagem.src = e.target.result;
+                    
+                    document.getElementById("select_text").value = "Imagem Selecionada";
+                }
 
-        reader.onload = function (e) {
-            // Exibe a imagem selecionada na tela
-            botaoImagem.src = e.target.result;
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
-});
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
   
   function change() {
   var info = document.getElementById("adm-info-table");
@@ -212,6 +213,14 @@ input.addEventListener('change', function() {
 
 
 
+}
+
+function criar(){
+  if (confirm("Deseja criar o acesso deste administrador?") == true){
+    $('#form_adm_new').submit();
+
+    
+  }
 }
 
 function changeTwo() {

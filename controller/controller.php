@@ -236,5 +236,70 @@ $log->fileWriter();
 
 }
 
+
+
+
+if(isset($_REQUEST["adm_new"])){
+            
+    require "../model/ferramentas.class.php";
+    $ferramentas = new Ferramentas();
+    $senhaCript = $ferramentas->sha256("123456");
+    $dados = array(
+        "nome" => $_POST["nome"],
+        "estadoCivil" => $_POST["estado"],
+        "email" => $_POST["email"],
+        "celular" => $_POST["celular"],
+        "cpf" => $_POST["cpf"],
+        "dataNascimento" => $_POST["data_nascimento"],
+        "rg" => $_POST["rg"],
+        "poder" => $_POST["poder"],
+        "cep" => $_POST["cep"],
+        "observacoes" => $_POST["obs"],
+        "numero" => $_POST["numero"],
+        "senha" => $senhaCript
+    );
+
+    require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> admNew($dados);
+
+require "../model/log.class.php";
+if($r["result"]!=1){
+
+    $log = new Log();    
+$ip = $_SERVER['REMOTE_ADDR'];
+$log->setTexto("{$ip} - Falha na criação de um novo adm");
+$log->fileWriter();
+?>
+<form action="../view/adm_new.php" name="return" id="return" method="post">
+    <input type="hidden" name="cod" value="OP50">
+</form>
+<script>
+    document.getElementById("return").submit();
+</script>
+<?php
+
+
+}else{
+    $log = new Log();    
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $log->setTexto("{$ip} - Criação do administrador ". $_POST["email"]);
+    $log->fileWriter();
+
+?>
+
+    <form action="../view/adm.php" name="return" id="return" method="post">
+    <input type="hidden" name="cod" value="OP50">
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+<?php
+
+
+}
+
+}
+
 ?>
            
