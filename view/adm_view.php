@@ -36,22 +36,26 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
 <body>
   
   <div class=" conteiner-flex row row-menu">
-    
+  
         <div class="col-2 coluna-lateral">
             <div class="pfp-circle">
-                <img src="../assets/media/pfpjpg.jpg" alt="Foto de Perfil">
+            <form action="../controller/controller.php?adm_update=<?php echo $r[0]["ID_ADM"]?>" name="form_adm_update" enctype="multipart/form-data" enctype="multipart/form-data" id="form_adm_update" method="post">
+            <img src="../assets/media/pfp_adm/<?php echo $r[0]['pfp'];  ?>" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
             </div>
+            
+            <input type="hidden" name="old_pfp" value="<?php echo $r[0]['pfp'];  ?>">
+            <input type="file" id="input_file" name="pfp" disabled required name="pfp" style="display:none;">
             <span class="name-span"><?php echo $r[0]["nome"]?></span>
             <span class="data-span"><?php echo $r[0]["data"] ?></span>
                 <table>
-                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button id="info-button" onclick="input('alterar')"  href="">Alterar informações</button></td></tr>
+                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button id="info-button" onclick="input_change('alterar')"  href="">Alterar informações</button></td></tr>
                     <?php if ($r[0]["status"] == 1){?>
-                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="" onclick="input('desativar', '<?php echo $r[0]['ID_ADM'] ?>')">Desativar Acesso</button></td></tr>
+                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="#" onclick="input_change('desativar', '<?php echo $r[0]['ID_ADM'] ?>')">Desativar Acesso</button></td></tr>
                     <?php }else{?>
-                      <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="" onclick="input('reativar', '<?php echo $r[0]['ID_ADM'] ?>')">Reativar Acesso</button></td></tr>
+                      <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="#" onclick="input_change('reativar', '<?php echo $r[0]['ID_ADM'] ?>')">Reativar Acesso</button></td></tr>
                     <?php }?>
                     
-                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="" onclick="input('excluir', '<?php echo $r[0]['ID_ADM'] ?>')" >Excluir Perfil</button></td></tr>
+                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="#" onclick="input_change('excluir', '<?php echo $r[0]['ID_ADM'] ?>')" >Excluir Perfil</button></td></tr>
                     <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="">Mensagem</button></td></tr>
                 </table>
         </div>
@@ -73,7 +77,7 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
           </nav>
           <br>
           <div class="container-fluid table-container">
-            <form action="../controller/controller.php?adm_update=<?php echo $r[0]["ID_ADM"]?>" name="form_adm_update" id="form_adm_update" method="post">
+           
             <table class="adm-info-table"id="adm-info-table" >
               <tr>
                 <td>
@@ -202,6 +206,33 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
    
   </div>
   <script>
+
+  var input = document.getElementById('input_file');
+        var botaoImagem = document.getElementById('botao_imagem');
+
+        botaoImagem.addEventListener('click', function() {
+          if (!input.disabled) {
+            input.click();
+          }
+        });
+
+        input.addEventListener('change', function() {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    // Exibe a imagem selecionada na tela
+                    botaoImagem.src = e.target.result;
+                    
+                    document.getElementById("select_text").value = "Imagem Selecionada";
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+  
+
+
   function change() {
   var info = document.getElementById("adm-info-table");
   info.style.display = ""; 
@@ -219,7 +250,8 @@ function changeTwo() {
   finan.style.display = ""; 
 }
 
-function input(elemento, id){
+function input_change(elemento, id){
+  event.preventDefault();
   if (elemento == 'alterar'){
     var elements = document.querySelectorAll("input, select");
         for (var i = 0; i < elements.length; i++) {
@@ -234,21 +266,21 @@ function input(elemento, id){
 
 if (elemento == 'desativar'){
   if (confirm("Deseja desativar o acesso deste administrador?") == true){
-    window.open("../controller/controller.php?desativar_adm="+id);
+     window.location.href = "../controller/controller.php?desativar_adm="+id;
 
     
   }
 }
 if (elemento == 'reativar'){
   if (confirm("Deseja reativar o acesso deste administrador?") == true){
-    window.open("../controller/controller.php?reativar_adm="+id);
+     window.location.href = "../controller/controller.php?reativar_adm="+id;
    
   }
 }
 
 if (elemento == 'excluir'){
   if (confirm("Deseja excluir permanentemente esse administrador? Aconselhamos apenas desativar seu acesso") == true){
-    window.open("../controller/controller.php?excluir_adm="+id);
+    window.location.href = "../controller/controller.php?excluir_adm="+id;
    
   }
 }

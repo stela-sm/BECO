@@ -80,6 +80,7 @@ class Manager extends Conexao{
                     $dados[$i] = [
                         'ID_ADM'   => $row['ID_ADM'],
                         'nome'     => $row['nome'],
+                        'pfp'     => $row['pfp'],
                         'email'    => $row['email'],
                         'celular'  => $row['celular'],
                         'poder'    => $row['poder'],
@@ -120,6 +121,9 @@ class Manager extends Conexao{
             }
         }
 
+
+
+        
         public function admExcluir($id){
             $sql = "DELETE FROM administradores WHERE ID_ADM = {$id};";
             $res = $this->connect()->query($sql);
@@ -136,6 +140,7 @@ class Manager extends Conexao{
             $sql = "UPDATE administradores SET 
             nome = '{$dados['nome']}', 
             email = '{$dados['email']}', 
+            pfp = '{$dados['pfp']}', 
             celular = '{$dados['celular']}', 
             poder = {$dados['poder']}, 
             data_nascimento = '{$dados['data_nascimento']}', 
@@ -230,7 +235,7 @@ class Manager extends Conexao{
 
 
     public function admNew($dados){
-        $sql = "INSERT INTO administradores (nome,email,celular,poder,status,rg,cpf,cep,numero,estado_civil,data_nascimento,obs, senha, datahora) VALUES ('{$dados["nome"]}', '{$dados["email"]}', '{$dados["celular"]}', '{$dados["poder"]}', '{$dados["status"]}', '{$dados["rg"]}', '{$dados["cpf"]}', '{$dados["cep"]}', '{$dados["numero"]}', '{$dados["estadoCivil"]}', '{$dados["dataNascimento"]}',  '{$dados["obs"]}',  '{$dados["senha"]}',NOW());";
+        $sql = "INSERT INTO administradores (pfp, nome,email,celular,poder,status,rg,cpf,cep,numero,estado_civil,data_nascimento,obs, senha, datahora) VALUES ('{$dados["pfp"]}','{$dados["nome"]}', '{$dados["email"]}', '{$dados["celular"]}', '{$dados["poder"]}', '{$dados["status"]}', '{$dados["rg"]}', '{$dados["cpf"]}', '{$dados["cep"]}', '{$dados["numero"]}', '{$dados["estadoCivil"]}', '{$dados["dataNascimento"]}',  '{$dados["obs"]}',  '{$dados["senha"]}',NOW());";
         $res = $this->connect()->query($sql);
 
         if($res){

@@ -34,6 +34,15 @@ class Ferramentas{
         }
         return $random_str;
     }
+    public function pegaExtensao($arq){
+        $ext = explode('.',$arq);
+        return $ext[1];
+    }
 
+    public function geradorMicroTime(){
+        $time = microtime(true);
+        $valor = explode('.',$time);
+        return $valor[0];
+    }
 }
 ?>

@@ -107,7 +107,7 @@ $log->setTexto("{$ip} - Acesso do adminstrador {$id} desativado\n");
 $log->fileWriter();
 
 ?>
-    <form action="../view/index.php" name="return" id="return" method="post">
+    <form action="../view/adm.php" name="return" id="return" method="post">
     <input type="hidden" name="cod" value="OP50">
     </form>
     <script>
@@ -137,7 +137,7 @@ $log->setTexto("{$ip} - Acesso do adminstrador {$id} reativado\n");
 $log->fileWriter();
 
 ?>
-    <form action="../view/index.php" name="return" id="return" method="post">
+    <form action="../view/adm.php" name="return" id="return" method="post">
     <input type="hidden" name="cod" value="OP50">
     </form>
     <script>
@@ -166,7 +166,7 @@ $log->setTexto("{$ip} - Exclusão do adminstrador {$id} ");
 $log->fileWriter();
 
 ?>
-    <form action="../view/index.php" name="return" id="return" method="post">
+    <form action="../view/adm.php" name="return" id="return" method="post">
     <input type="hidden" name="cod" value="OP50">
     </form>
     <script>
@@ -182,6 +182,7 @@ $log->fileWriter();
 
 if(isset($_REQUEST["adm_update"])){
 
+  
     $dados = [
         'id' => $_REQUEST['adm_update'],
         'nome' => $_REQUEST['nome'],
@@ -196,6 +197,17 @@ if(isset($_REQUEST["adm_update"])){
         'cpf' => $_REQUEST['cpf'],
         'obs' => $_REQUEST['obs']
     ];
+    if(isset($_FILES["pfp"])){
+        $img = $_FILES["pfp"];
+        require_once "../model/ferramentas.class.php";
+        $ferramentas = new ferramentas();
+        $ext = $ferramentas->pegaExtensao($img["name"]);
+        $newName = $ferramentas->geradorMicroTime() . "." . $ext;
+        $dados["pfp"] = $newName;
+    }else{
+        $dados["pfp"] = $_REQUEST["old_pfp"];
+    }
+    var_dump($_FILES);
     var_dump($dados);
 require "../model/manager.class.php";
 $manager = new Manager();
@@ -222,6 +234,11 @@ $log->fileWriter();
 
 }else{
 
+    if(isset($_FILES["pfp"])){
+    $resp = move_uploaded_file($img["tmp_name"],"../assets/media/pfp_adm/".$newName);
+    $old_pfp = "../assets/media/pfp_adm/".$_REQUEST["old_pfp"];
+    unlink($old_pfp);
+    }
 }
 
 ?>
@@ -240,11 +257,16 @@ $log->fileWriter();
 
 
 if(isset($_REQUEST["adm_new"])){
-            
-    require "../model/ferramentas.class.php";
-    $ferramentas = new Ferramentas();
+    $img = $_FILES["pfp"];
+    require_once "../model/ferramentas.class.php";
+    $ferramentas = new ferramentas();
+    $ext = $ferramentas->pegaExtensao($img["name"]);
+    $newName = $ferramentas->geradorMicroTime() . "." . $ext;
+    $resp = move_uploaded_file($img["tmp_name"],"../assets/media/pfp_adm/".$newName);
+
     $senhaCript = $ferramentas->sha256("123456");
     $dados = array(
+        "pfp" => $newName,
         "nome" => $_POST["nome"],
         "estadoCivil" => $_POST["estado"],
         "email" => $_POST["email"],

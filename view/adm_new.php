@@ -33,9 +33,9 @@
     <div class="col-2 coluna-lateral">
         <div class="pfp-circle">
             <img src="../assets/media/nopfp.png" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
-            <form action="../controller/controller.php?adm_new=" enctype="multipart/form-data"name="form_adm_new" id="form_adm_new" method="post">
+            <form action="../controller/controller.php?adm_new=1" enctype="multipart/form-data"name="form_adm_new" id="form_adm_new" method="post">
 <!-- Input file oculto -->
-<input type="file" id="input_file" style="display: none;"><br><br>
+<input type="file" id="input_file" required name="pfp" style="display: none;"><br><br>
 <i id="select_text">Selecione uma Foto de Perfil</i>
         </div>
         <table>
