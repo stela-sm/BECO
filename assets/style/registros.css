@@ -75,7 +75,7 @@ body{
 .input-icon > input {
   
   border-radius: 6px !important;
-  width: calc(100% - 44px) !important;
+  width:14vw;
   padding: 10px !important;
   border: none !important;
   outline: none !important;  
@@ -130,11 +130,11 @@ background-color: var(--sidebar-color);
 .select-wrapper {
   position: relative;
   display: inline-block;
-  min-width: 12vw;
+  min-width: 14vw;
 }
 .select-wrapper select
 {
-  min-width: 12VW;
+  min-width: 14VW;
   border-radius: 6px !important;
   padding: 10px !important;
   border: none !important;
@@ -144,15 +144,15 @@ background-color: var(--sidebar-color);
   -moz-appearance: none !important;
   background-color: transparent;
 }
-.select-wrapper input[type="date"] {
- 
-  min-width: 11VW;
+.select-wrapper input[type="month"] {
+ box-sizing: unset;
+  max-width: 12VW;
 
 }
 
 .icon-tabler-circle-arrow-down, .icon-tabler-calendar-search {
   position: absolute;
-  right: 10px; 
+  right: 30px; 
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none; /* Impede que o SVG bloqueie o clique no select */

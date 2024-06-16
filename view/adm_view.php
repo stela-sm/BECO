@@ -82,37 +82,44 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Estado Cívil</label><br>
-                  <input disabled  type="text" name="estado" class="input disabled padrao" value="<?php echo $r[0]["estado"] ?>">
+                  <input disabled  type="text" name="estado_civil" class="input-padrao" value="<?php echo $r[0]["estado"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Email</label><br>
-                  <input disabled  type="text" name="email" class="input disabled -padrao" value="<?php echo $r[0]["email"] ?>">
+                  <input disabled  type="text" name="email" class="input-padrao" value="<?php echo $r[0]["email"] ?>">
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Celular</label><br>
-                  <input disabled  type="text" name="celular" class="input disabled padrao" value="<?php echo $r[0]["celular"] ?>">
+                  <input disabled  type="text" name="celular" maxlength="11" class="input-padrao" value="<?php echo $r[0]["celular"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">CPF</label><br>
-                  <input disabled  type="text" name="cpf" class="input disabled padrao" value="<?php echo $r[0]["cpf"] ?>">
+                  <input disabled  type="text" name="cpf" maxlength="11" class="input-padrao" value="<?php echo $r[0]["cpf"] ?>">
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Aniversário</label><br>
-                  <input disabled  type="date" name="data_nascimento" class="input disabled padrao" value="<?php echo $r[0]["datan"] ?>">
+                  <input disabled  type="date" name="data_nascimento" class="input-padrao" value="<?php echo $r[0]["datan"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">RG</label><br>
-                  <input disabled  type="text" name="rg" class="input disabled padrao" value="<?php echo $r[0]["rg"] ?>">
+                  <input disabled  type="text" name="rg" maxlength="9" class="input-padrao" value="<?php echo $r[0]["rg"] ?>">
                 </td>
                 <td>
-                  <label for="nome" class="label-padrao">Poder</label><br>
-                  <input disabled  type="text" class="input disabled padrao" value="<?php echo $r[0]["poder"] ?>" name="poder">
+      <label for="poder" class="label-padrao">Poder</label><br>
+                <select disabled class="input-padrao" name="poder">
+                    <option value="1" <?php echo $r[0]["poder"] == 1 ? 'selected' : ''; ?>>1 - Visualizador</option>
+                    <option value="2" <?php echo $r[0]["poder"] == 2 ? 'selected' : ''; ?>>2 - Editor</option>
+                    <option value="3" <?php echo $r[0]["poder"] == 3 ? 'selected' : ''; ?>>3 - Moderador</option>
+                    <option value="4" <?php echo $r[0]["poder"] == 4 ? 'selected' : ''; ?>>4 - Gerente</option>
+                    <option value="5" <?php echo $r[0]["poder"] == 5 ? 'selected' : ''; ?>>5 - Administrador</option>
+                </select>
+
 
               
                 </td>
@@ -120,22 +127,23 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">CEP</label><br>
-                  <input disabled  type="text" name="cep" class="input disabled padrao" value="<?php echo $r[0]["cep"] ?>">
+                  <input disabled  type="text" name="cep" maxlength="8" class="input-padrao" value="<?php echo $r[0]["cep"] ?>">
                 </td>
                 <td class="obs-td">
                   <label for="nome" class="label-padrao">Observações</label><br>
-                  <input disabled  type="text" name="obs" class="input disabled padrao" value="<?php echo $r[0]["obs"] ?>">
+                  <input disabled  type="text" name="obs" class="input-padrao" value="<?php echo $r[0]["obs"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Número</label><br>
-                  <input disabled  type="text" name="numero" class="input disabled padrao" value="<?php echo $r[0]["numero"] ?>">
+                  <input disabled  type="text" name="numero" class="input-padrao" value="<?php echo $r[0]["numero"] ?>">
                 </td>
                     </tr>
             </table>
 
 
+            </form>
 
 
             <table class="adm-info-table"id="adm-finan-table" style="display: none;" >
@@ -188,7 +196,6 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
                 </td>
                 
               </tr>
-              </form>
             </table>
           </div>
         </div>
@@ -214,10 +221,10 @@ function changeTwo() {
 
 function input(elemento, id){
   if (elemento == 'alterar'){
-  var inputs = document.getElementsByTagName("input");  
-  for (var i = 0; i < inputs.length; i++) {  
-    inputs[i].disabled = false;  
-  }
+    var elements = document.querySelectorAll("input, select");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].disabled = false;
+        }
   var button = document.getElementById("info-button");
   button.innerHTML= "Salvar Informações"
   button.style.color = "green"

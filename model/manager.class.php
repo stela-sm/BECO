@@ -137,7 +137,7 @@ class Manager extends Conexao{
             nome = '{$dados['nome']}', 
             email = '{$dados['email']}', 
             celular = '{$dados['celular']}', 
-            poder = '{$dados['poder']}', 
+            poder = {$dados['poder']}, 
             data_nascimento = '{$dados['data_nascimento']}', 
             rg = '{$dados['rg']}', 
             estado_civil = '{$dados['estado_civil']}', 
