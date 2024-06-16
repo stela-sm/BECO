@@ -211,12 +211,12 @@ $ip = $_SERVER['REMOTE_ADDR'];
 $log->setTexto("{$ip} - Falha na alteração de dados do adminstrador {$dados["id"]} ");
 $log->fileWriter();
 ?>
-<!-- <form action="../view/adm_view.php?id=<?php echo $id; ?>" name="return" id="return" method="post">
+<form action="../view/adm_view.php?id=<?php echo $id; ?>" name="return" id="return" method="post">
     <input type="hidden" name="cod" value="OP50">
 </form>
 <script>
     document.getElementById("return").submit();
-</script> -->
+</script>
 <?php
 
 
@@ -225,12 +225,12 @@ $log->fileWriter();
 }
 
 ?>
-    <!-- <form action="../view/adm_view.php?id=<?php echo $id; ?>" name="return" id="return" method="post">
+    <form action="../view/adm_view.php?id=<?php echo $id; ?>" name="return" id="return" method="post">
     <input type="hidden" name="cod" value="OP50">
     </form>
     <script>
         document.getElementById("return").submit();
-    </script> -->
+    </script>
 <?php
 
 
@@ -254,11 +254,11 @@ if(isset($_REQUEST["adm_new"])){
         "rg" => $_POST["rg"],
         "poder" => $_POST["poder"],
         "cep" => $_POST["cep"],
-        "observacoes" => $_POST["obs"],
+        "obs" => $_POST["obs"],
         "numero" => $_POST["numero"],
+        "status" => "1",
         "senha" => $senhaCript
     );
-
     require "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> admNew($dados);

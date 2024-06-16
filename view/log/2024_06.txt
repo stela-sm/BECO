@@ -15,3 +15,4 @@
 2024-06-16 20:41:27 - ::1 - Erro no login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
 2024-06-16 20:41:32 - ::1 - Erro no login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
 2024-06-16 20:41:39 - ::1 - Login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-06-16 21:12:28 - ::1 - Falha na criação de um novo adm2024-06-16 21:14:03 - ::1 - Falha na criação de um novo adm2024-06-16 21:16:53 - ::1 - Falha na criação de um novo adm2024-06-16 21:17:13 - ::1 - Falha na criação de um novo adm2024-06-16 21:17:38 - ::1 - Falha na criação de um novo adm2024-06-16 21:24:53 - ::1 - Falha na criação de um novo adm2024-06-16 21:25:58 - ::1 - Falha na criação de um novo adm2024-06-16 21:26:45 - ::1 - Falha na criação de um novo adm2024-06-16 21:27:51 - ::1 - Criação do administrador stelamontenegro3@gmail.com2024-06-16 21:28:23 - ::1 - Exclusão do adminstrador 5 

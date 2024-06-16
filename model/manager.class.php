@@ -230,7 +230,19 @@ class Manager extends Conexao{
 
 
     public function admNew($dados){
-        $sql = "INSERT INTO administrador (nome,email,celular,poder,status,rg,cpf,cep,numero,estado_civil,data_nascimento,obs, senha, datahora) VALUES ('{$dados["nome"]}', '{$dados["email"]}', '{$dados["celular"]}', '{$dados["poder"]}', '{$dados["status"]}', '{$dados["rg"]}', '{$dados["cpf"]}', '{$dados["cep"]}', '{$dados["numero"]}', '{$dados["estadoCivil"]}', '{$dados["dataNascimento"]}',  '{$dados["dataNascimento"]}' ,NOW());";
+        $sql = "INSERT INTO administradores (nome,email,celular,poder,status,rg,cpf,cep,numero,estado_civil,data_nascimento,obs, senha, datahora) VALUES ('{$dados["nome"]}', '{$dados["email"]}', '{$dados["celular"]}', '{$dados["poder"]}', '{$dados["status"]}', '{$dados["rg"]}', '{$dados["cpf"]}', '{$dados["cep"]}', '{$dados["numero"]}', '{$dados["estadoCivil"]}', '{$dados["dataNascimento"]}',  '{$dados["obs"]}',  '{$dados["senha"]}',NOW());";
+        $res = $this->connect()->query($sql);
+
+        if($res){
+            $this->connect()->close();
+            $data['result'] = 1;
+            return $data;
+        }else{
+            $this->connect()->close();
+            $data['result'] = 0;
+            return $data;
+        }
+    
     }
 }
 ?>

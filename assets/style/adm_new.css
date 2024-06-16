@@ -162,7 +162,7 @@ color: #222222 !important;
   font-family: radikal-light;
   transition: 0.2s;
 }
-.adm-info-table input{
+.adm-info-table input, select{
   width: 90%;
   border: 1px #7bdb7b solid ;
   border-radius: 6px;

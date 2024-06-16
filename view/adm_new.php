@@ -79,13 +79,13 @@
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Celular</label><br>
-                  <input   type="text" name="celular" required class="input  padrao" >
+                  <input   type="text" name="celular" maxlength="11" required class="input  padrao" >
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">CPF</label><br>
-                  <input   type="text" name="cpf" required class="input  padrao" >
+                  <input   type="text" name="cpf" maxlength="11" required class="input  padrao" >
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Aniversário</label><br>
@@ -95,19 +95,24 @@
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">RG</label><br>
-                  <input   type="text" name="rg" required class="input  padrao" >
+                  <input   type="text" name="rg"  maxlength="9" required class="input  padrao" >
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Poder</label><br>
-                  <input   type="text" required class="input  padrao" >
-
+                  <select class="input-padrao" name="poder" >
+            <option value="1" selected>1 - Visualizador</option>
+            <option value="2">2 - Editor de Conteúdo</option>
+            <option value="3">3 - Moderador</option>
+            <option value="4">4 - Gerente</option>
+            <option value="5">5 - Administrador</option>
+        </select>
               
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">CEP</label><br>
-                  <input   type="text" required name="cep" class="input  padrao">
+                  <input   type="text" required name="cep" maxlength="8" class="input  padrao">
                 </td>
                 <td class="obs-td">
                   <label for="nome" class="label-padrao">Observações</label><br>
