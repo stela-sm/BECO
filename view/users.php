@@ -74,9 +74,6 @@
                       <path d="M12 8v8" />
                       <path d="M16 12l-4 4" />
                     </svg></div> </td>
-
-
-
             </tr>
            </table> 
     </div>
@@ -121,37 +118,44 @@
 </section>
 
 <section>
-      <tr class="table-content-row">
+<?php
+require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> userTable("0","0");
+
+for($i=0;$i<$r["result"];$i++){
+      echo "<tr class='table-content-row'>
           <td>
-            2333
+            ".$r[$i]["ID_USER"]."
           </td>
           <td>
-            somuch_arts
+           ".$r[$i]["username"]."
           </td>
           <td>
-            stelamontenegro3@gmail.com
+           ".$r[$i]["email"]."
           </td>
           <td>
-            11963220905
+            ".$r[$i]["celular"]."
           </td>
           
           <td>
-            Ativo
+            ".$r[$i]["status"]."
           </td>
           <td>
-            11/03/2022
+            ".$r[$i]["data"]."
           </td>
           
-          <td class="eye-td">
-            <a class="btn btn-eye" href="user_view.php">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-              </svg>
-            </a>
-          </td>
-      </tr>
+         
+<td class='eye-td'>
+  <a class='btn btn-eye' href='adm_view.php?id=".$r[$i]['ID_USER']."'>
+    <svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-eye' width='26' height='26' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+      <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
+      <path d='M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0' />
+      <path d='M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6' />
+    </svg>
+  </a>
+</td>
+      </tr>";}?>
     </table>
   </div>
 </section>

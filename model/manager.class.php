@@ -176,6 +176,111 @@ class Manager extends Conexao{
 
 
 
+
+    public function admNew($dados){
+        $sql = "INSERT INTO administradores (pfp, nome,email,celular,poder,status,rg,cpf,cep,numero,estado_civil,data_nascimento,obs, senha, datahora) VALUES ('{$dados["pfp"]}','{$dados["nome"]}', '{$dados["email"]}', '{$dados["celular"]}', '{$dados["poder"]}', '{$dados["status"]}', '{$dados["rg"]}', '{$dados["cpf"]}', '{$dados["cep"]}', '{$dados["numero"]}', '{$dados["estadoCivil"]}', '{$dados["dataNascimento"]}',  '{$dados["obs"]}',  '{$dados["senha"]}',NOW());";
+        $res = $this->connect()->query($sql);
+
+        if($res){
+            $this->connect()->close();
+            $data['result'] = 1;
+            return $data;
+        }else{
+            $this->connect()->close();
+            $data['result'] = 0;
+            return $data;
+        }
+    
+    }
+
+
+
+
+
+
+
+
+
+
+    public function userTable($busca, $campo) {
+        if($busca == "0" || $campo =="0"){
+        $sql = "SELECT * FROM usuario;";
+        }
+        $res = $this->connect()->query($sql);
+    
+        if (!$res) {
+            $this->connect()->close();
+            return ['result' => -1, 'error' => $this->connect()->close()];
+        }
+    
+        if ($res->num_rows > 0) {
+            $dados = [];
+            $i = 0;
+            while ($row = $res->fetch_assoc()) {
+                $dados[$i] = [
+                    'ID_USER'   => $row['ID_USER'],  
+                    'username'     => $row['username'],
+                    'email'    => $row['email'],
+                    'celular'  => $row['celular'],
+                    'status'   => $row['status'],
+                    'data'     => $row['datahora']
+                ];
+                $i++;
+            }
+            $dados['result'] = $i; // Store count or simply use true to indicate success
+            $this->connect()->close();
+            return $dados;
+        } else {
+            $this->connect()->close();
+            return ['result' => 0]; // No rows found
+        }
+    }
+    
+  public function getUserData($id) {
+            $sql = "SELECT * FROM usuario WHERE ID_USER = {$id};";
+            $res = $this->connect()->query($sql);
+        
+            if (!$res) {
+                $this->connect()->close();
+                return ['result' => -1, 'error' => $this->connect()->close()];
+            }
+        
+            if ($res->num_rows > 0) {
+                $dados = [];
+                $i = 0;
+                while ($row = $res->fetch_assoc()) {
+                    $dados[$i] = [
+                        'ID_USER'   => $row['ID_USER'],
+                        'username'     => $row['username'],
+                        'pfp'     => $row['pfp'],
+                        'email'    => $row['email'],
+                        'celular'  => $row['celular'],
+                        'status'   => $row['status'],
+                        'data'     => $row['datahora'],
+                        'obs'     => $row['obs'],
+                        'estado'     => $row['estado_civil'],
+                        'pais'     => $row['pais'],
+                        'datan'     => $row['data_nascimento']
+
+                    ];
+                    $i++;
+                }
+                $dados['result'] = $i; // Store count or simply use true to indicate success
+                $this->connect()->close();
+                return $dados;
+            } else {
+                $this->connect()->close();
+                return ['result' => 0]; // No rows found
+            }
+        }
+
+
+
+
+
+
+
+
     public function verifyMailTabCliente($email){
         $sql = "SELECT * FROM cliente WHERE email = '{$email}'";
         $res = $this->connect()->query($sql);
@@ -197,9 +302,6 @@ class Manager extends Conexao{
             return $dados;
         }
     }
-
-
-
 
     public function insertNewClientTemp($dados){
 
@@ -234,20 +336,6 @@ class Manager extends Conexao{
     }
 
 
-    public function admNew($dados){
-        $sql = "INSERT INTO administradores (pfp, nome,email,celular,poder,status,rg,cpf,cep,numero,estado_civil,data_nascimento,obs, senha, datahora) VALUES ('{$dados["pfp"]}','{$dados["nome"]}', '{$dados["email"]}', '{$dados["celular"]}', '{$dados["poder"]}', '{$dados["status"]}', '{$dados["rg"]}', '{$dados["cpf"]}', '{$dados["cep"]}', '{$dados["numero"]}', '{$dados["estadoCivil"]}', '{$dados["dataNascimento"]}',  '{$dados["obs"]}',  '{$dados["senha"]}',NOW());";
-        $res = $this->connect()->query($sql);
-
-        if($res){
-            $this->connect()->close();
-            $data['result'] = 1;
-            return $data;
-        }else{
-            $this->connect()->close();
-            $data['result'] = 0;
-            return $data;
-        }
     
-    }
 }
 ?>
