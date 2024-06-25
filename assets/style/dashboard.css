@@ -165,19 +165,14 @@ font-size: 2em;
 }
 
 .list-col{
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  
   background-color: #FFF;
 border-radius: 6px;
 min-width:24%;
 padding: 20px ;
 }
 
-.publi-col{
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-  background-color:#6679CF;
-  font-family: radikal-medium;
-color: white;
-}
+
 .number-publi{
   font-size: 1.6em;
 }

@@ -147,7 +147,7 @@ for($i=0;$i<$r["result"];$i++){
           
          
 <td class='eye-td'>
-  <a class='btn btn-eye' href='adm_view.php?id=".$r[$i]['ID_USER']."'>
+  <a class='btn btn-eye' href='user_view.php?id=".$r[$i]['ID_USER']."'>
     <svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-eye' width='26' height='26' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'>
       <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
       <path d='M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0' />

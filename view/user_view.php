@@ -39,23 +39,23 @@ $r = $manager-> getUserData("$_REQUEST[id]");
   
         <div class="col-2 coluna-lateral">
             <div class="pfp-circle">
-            <form action="../controller/controller.php?adm_update=<?php echo $r[0]["ID_ADM"]?>" name="form_adm_update" enctype="multipart/form-data" enctype="multipart/form-data" id="form_adm_update" method="post">
-            <img src="../assets/media/pfp_adm/<?php echo $r[0]['pfp'];  ?>" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
+            <form action="../controller/controller.php?user_update=<?php echo $r[0]["ID_USER"]?>" name="form_user_update" enctype="multipart/form-data" enctype="multipart/form-data" id="form_user_update" method="post">
+            <img src="../assets/media/pfp_user/<?php echo $r[0]['pfp'];  ?>" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
             </div>
             
             <input type="hidden" name="old_pfp" value="<?php echo $r[0]['pfp'];  ?>">
             <input type="file" id="input_file" name="pfp" disabled required name="pfp" style="display:none;">
-            <span class="name-span"><?php echo $r[0]["nome"]?></span>
+            <span class="name-span"><?php echo $r[0]["username"]?></span>
             <span class="data-span"><?php echo $r[0]["data"] ?></span>
                 <table>
                     <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button id="info-button" onclick="input_change('alterar')"  href="">Alterar informações</button></td></tr>
                     <?php if ($r[0]["status"] == 1){?>
-                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="#" onclick="input_change('desativar', '<?php echo $r[0]['ID_ADM'] ?>')">Desativar Acesso</button></td></tr>
+                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="#" onclick="input_change('desativar', '<?php echo $r[0]['ID_USER'] ?>')">Desativar Acesso</button></td></tr>
                     <?php }else{?>
-                      <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="#" onclick="input_change('reativar', '<?php echo $r[0]['ID_ADM'] ?>')">Reativar Acesso</button></td></tr>
+                      <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="#" onclick="input_change('reativar', '<?php echo $r[0]['ID_USER'] ?>')">Reativar Acesso</button></td></tr>
                     <?php }?>
                     
-                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="#" onclick="input_change('excluir', '<?php echo $r[0]['ID_ADM'] ?>')" >Excluir Perfil</button></td></tr>
+                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="#" onclick="input_change('excluir', '<?php echo $r[0]['ID_USER'] ?>')" >Excluir Perfil</button></td></tr>
                     <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="">Mensagem</button></td></tr>
                 </table>
         </div>
@@ -71,7 +71,7 @@ $r = $manager-> getUserData("$_REQUEST[id]");
                 <span class="nav-link">|</span>
               </li>
               <li class="nav-item">
-                <a class="nav-link" onclick="changeTwo()">Financeiro e Contrato</a>
+                <a class="nav-link" onclick="changeTwo()">Projetos</a>
               </li>
               </ul>
           </nav>
@@ -81,48 +81,44 @@ $r = $manager-> getUserData("$_REQUEST[id]");
             <table class="adm-info-table"id="adm-info-table" >
               <tr>
                 <td>
-                  <label for="nome" class="label-padrao">Nome Completo</label><br>
-                  <input disabled name="nome" id="nome" type="text" class="input disabled padrao" value="<?php echo $r[0]["nome"] ?>">
+                  <label for="nome" class="label-padrao">Nome de usuário</label><br>
+                  <input disabled name="nome" id="nome" type="text" class="input disabled padrao" value="<?php echo $r[0]["username"] ?>">
                 </td>
                 <td>
-                  <label for="nome" class="label-padrao">Estado Cívil</label><br>
+                  <label for="nome" class="label-padrao">Estado </label><br>
                   <input disabled  type="text" name="estado_civil" class="input-padrao" value="<?php echo $r[0]["estado"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
-                  <label for="nome" class="label-padrao">Email</label><br>
+                  <label for="nome" class="label-padrao">Nome Completo</label><br>
                   <input disabled  type="text" name="email" class="input-padrao" value="<?php echo $r[0]["email"] ?>">
                 </td>
                 <td>
-                  <label for="nome" class="label-padrao">Celular</label><br>
-                  <input disabled  type="text" name="celular" maxlength="11" class="input-padrao" value="<?php echo $r[0]["celular"] ?>">
+                <label for="nome" class="label-padrao">País</label><br>
+                <input disabled  type="text" name="pais" class="input-padrao" value="<?php echo $r[0]["pais"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
-                  <label for="nome" class="label-padrao">CPF</label><br>
-                  <input disabled  type="text" name="cpf" maxlength="11" class="input-padrao" value="<?php echo $r[0]["cpf"] ?>">
+                <label for="nome" class="label-padrao">Email</label><br>
+                <input disabled  type="text" name="email" class="input-padrao" value="<?php echo $r[0]["email"] ?>">
+               
+                 
                 </td>
                 <td>
-                  <label for="nome" class="label-padrao">Aniversário</label><br>
+                  <label for="nome" class="label-padrao">Seguidores</label><br>
                   <input disabled  type="date" name="data_nascimento" class="input-padrao" value="<?php echo $r[0]["datan"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
-                  <label for="nome" class="label-padrao">RG</label><br>
-                  <input disabled  type="text" name="rg" maxlength="9" class="input-padrao" value="<?php echo $r[0]["rg"] ?>">
+                <label for="nome" class="label-padrao">Celular</label><br>
+                <input disabled  type="text" name="celular" maxlength="11" class="input-padrao" value="<?php echo $r[0]["celular"] ?>">
                 </td>
                 <td>
-      <label for="poder" class="label-padrao">Poder</label><br>
-                <select disabled class="input-padrao" name="poder">
-                    <option value="1" <?php echo $r[0]["poder"] == 1 ? 'selected' : ''; ?>>1 - Visualizador</option>
-                    <option value="2" <?php echo $r[0]["poder"] == 2 ? 'selected' : ''; ?>>2 - Editor</option>
-                    <option value="3" <?php echo $r[0]["poder"] == 3 ? 'selected' : ''; ?>>3 - Moderador</option>
-                    <option value="4" <?php echo $r[0]["poder"] == 4 ? 'selected' : ''; ?>>4 - Gerente</option>
-                    <option value="5" <?php echo $r[0]["poder"] == 5 ? 'selected' : ''; ?>>5 - Administrador</option>
-                </select>
+                <label for="nome" class="label-padrao">Seguindo</label><br>
+                <input disabled  type="date" name="data_nascimento" class="input-padrao" value="<?php echo $r[0]["datan"] ?>">
 
 
               
@@ -130,8 +126,8 @@ $r = $manager-> getUserData("$_REQUEST[id]");
               </tr>
               <tr>
                 <td>
-                  <label for="nome" class="label-padrao">CEP</label><br>
-                  <input disabled  type="text" name="cep" maxlength="8" class="input-padrao" value="<?php echo $r[0]["cep"] ?>">
+                  <label for="nome" class="label-padrao">Biografia</label><br>
+                  <input disabled  type="text" name="cep" maxlength="8" class="input-padrao" value="<?php echo $r[0]["bio"] ?>">
                 </td>
                 <td class="obs-td">
                   <label for="nome" class="label-padrao">Observações</label><br>
@@ -140,8 +136,8 @@ $r = $manager-> getUserData("$_REQUEST[id]");
               </tr>
               <tr>
                 <td>
-                  <label for="nome" class="label-padrao">Número</label><br>
-                  <input disabled  type="text" name="numero" class="input-padrao" value="<?php echo $r[0]["numero"] ?>">
+                <label for="nome" class="label-padrao">Aniversário</label><br>
+                <input disabled  type="date" name="data_nascimento" class="input-padrao" value="<?php echo $r[0]["datan"] ?>">
                 </td>
                     </tr>
             </table>

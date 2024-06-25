@@ -254,11 +254,12 @@ class Manager extends Conexao{
                         'username'     => $row['username'],
                         'pfp'     => $row['pfp'],
                         'email'    => $row['email'],
+                        'bio'    => $row['biografia'],
                         'celular'  => $row['celular'],
                         'status'   => $row['status'],
+                        'obs'   => $row['obs'],
                         'data'     => $row['datahora'],
-                        'obs'     => $row['obs'],
-                        'estado'     => $row['estado_civil'],
+                        'estado'     => $row['estado'],
                         'pais'     => $row['pais'],
                         'datan'     => $row['data_nascimento']
 

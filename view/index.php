@@ -30,7 +30,7 @@ session_start();
         <div class="menu-bar">
             <div class="menu">
                                <li class="nav-link">
-                    <a href="dashboard.html" target="iframe">
+                    <a href="dashboard.php" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chart-pie" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <path d="M10 3.2a9 9 0 1 0 10.8 10.8a1 1 0 0 0 -1 -1h-6.8a2 2 0 0 1 -2 -2v-7a.9 .9 0 0 0 -1 -.8" />
@@ -53,7 +53,7 @@ session_start();
                 </li>
 
                 <li class="nav-link">
-                    <a href="users.html" target="iframe">
+                    <a href="users.php" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -78,7 +78,7 @@ session_start();
                 </li>
 
                 <li class="nav-link">
-                    <a href="dashboard.html" target="iframe">
+                    <a href="dashboard.php" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-exclamation-mark" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M12 19v.01" />
@@ -99,7 +99,7 @@ session_start();
                 </li>
 
                 <li class="nav-link">
-                    <a href="dashboard.html" target="iframe">
+                    <a href="dashboard.php" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
@@ -108,26 +108,8 @@ session_start();
                           <span class="text nav-text">Chat</span>
                     </a>
                 </li>
-
+<br><br>
                 <li class="nav-link">
-                    <a href="dashboard.html" target="iframe">
-                       <span></span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
-                        <path d="M16 3l0 4" />
-                        <path d="M8 3l0 4" />
-                        <path d="M4 11l16 0" />
-                        <path d="M8 15h2v2h-2z" />
-                      </svg></span>
-                          <span class="text nav-text">Calendário</span>
-                    </a>
-                </li>
-          
-
-
-            <div class="bottom-content">
-               
-                <li class="list">
                     <a href="dashboard.html" target="iframe">
                         <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -138,7 +120,8 @@ session_start();
                            <span class="text nav-text">LogOut</span>
                      </a>
                 </li>
-            </div>
+          
+
 
 
             </div>
