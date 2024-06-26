@@ -5,17 +5,24 @@ class Ferramentas{
     public $param;
     public $senha;
 
-    public function antiInjection($param){
-        $strParam = strlen($param);
-        $palavras = array("from","select","insert","delete","where","drop","table","show","update","declare","exec","set","alter","cst","union","column","*","%","\"","'","\\","--");
-        //$palavras2 = array("FROM","SELECT","INSERT","DELETE","WHERE","DROP","TABLE","SHOW","UPDATE","DECLARE","EXEC","SET","ALTER","CST","UNION","COLUMN","*","%","\"","'","\\","--");
+    public function antiInjection($param) {
+        // Define as palavras-chave e caracteres potencialmente perigosos
+        $palavras = array(
+            "from", "select", "insert", "delete", "where", "drop", "table", "show", 
+            "update", "declare", "exec", "set", "alter", "cst", "union", "column", 
+            "*", "%", "\"", "'", "\\", "--"
+        );
+        
+        // Converte a string para minúsculas
         $paramL = strtolower($param);
-		//$paramU = strtoupper($param);
-        $str = str_replace($palavras,"",$paramL);
-        $strParams = strlen($str);
-        if($strParam != $strParams){
-			return 0;
-		}else{
+        
+        // Remove as palavras-chave e caracteres da string
+        $str = str_replace($palavras, "", $paramL);
+        
+        // Compara o comprimento da string original com a string modificada
+        if (strlen($param) != strlen($str)) {
+            return 0;
+        } else {
             return 1;
         }
     }

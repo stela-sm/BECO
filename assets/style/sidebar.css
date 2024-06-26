@@ -206,3 +206,51 @@ iframe{
     display: flex;
     background-color: var(--body-color);
 }
+
+
+/*MODAL-----------------------------*/
+ .pfp-circle img{
+  border-radius: 50%;
+  max-width: 16vh;
+}
+.modal-dialog {
+    max-width: 35%; 
+}
+.modal-profile{
+    padding: 30px 25px;
+    border-radius: 15px;
+}
+
+.modal-title {
+    margin-left: 20px;
+}
+.motal-title span {
+    
+    font-family: radikal-bold !important;
+    display: block;
+    width: 100vw;    
+    margin-top: 20px;
+    font-size: 1.5em;
+    
+}
+
+.spacing-right {
+    padding-right: 30px;
+}
+
+.info-title{
+    margin-top: 20px;
+    font-family: radikal-bold !important;
+    font-size: 1.2em;
+}
+.label-upper{
+    font-family: radikal-medium;
+    font-size: 0.8em;
+    margin-bottom: -5px;
+    color: #a3a3a3;
+}
+.input-bottom{
+    border: none;
+    font-family: radikal-medium;
+    font-size: 1em;
+}

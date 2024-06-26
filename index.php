@@ -23,6 +23,7 @@ if(isset($_REQUEST["msg"])){
 	echo "<script>alert('" . $MSG[$cod] . "');</script>";
     unset($cod);
 }
+
 ?>
 </body>
 </html>

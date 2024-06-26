@@ -165,20 +165,92 @@ session_start();
 <!-- Modal -->
 <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="TituloModalCentralizado">Título do modal</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Salvar mudanças</button>
-      </div>
+    <div class="modal-content modal-profile">
+     
+     <div class="col-12">
+      <table>
+        <tr>
+        <td class="spacing-right">
+     <div class="pfp-circle">
+            <form action="../controller/controller.php?adm_update=<?php echo $r[0]["ID_ADM"]?>" name="form_adm_update" enctype="multipart/form-data" enctype="multipart/form-data" id="form_adm_update" method="post">
+            <img src="../assets/media/pfp_adm/IMG.jpeg" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
+            </div>
+            </td>
+            <td>
+  <p class="motal-title">
+    <span class="name"><?php ECHO $_SESSION["ADM_NOME"]?>
+    <br>
+    ID: <?php echo  $_SESSION["ADM_ID"]?></span>
+  </p>
+  </td>
+  </tr>
+  <tr>
+    <td class="spacing-right">
+    </td>
+
+    <td>
+      <p class="info-title">
+        Informações Pessoais
+      </p>
+
+
+      <table>
+        <tr>
+          <td>
+            <label for="cpf" class="label-upper"> CPF</label>
+            <br> <input type="text" name="cpf" class="input-bottom" value="40527647810">
+          </td>
+          <td>
+            <label for="cpf" class="label-upper"> Poder</label>
+            <br> <input type="text" name="cpf" class="input-bottom" value="<?php echo  $_SESSION["ADM_PODER"]?>">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="cpf" class="label-upper"> RG</label>
+            <br> <input type="text" name="cpf" class="input-bottom" value="<?php echo  $_SESSION["ADM_RG"]?>">
+          </td>
+          <td>
+            <label for="cpf" class="label-upper"> Email</label>
+            <br> <input type="text" name="cpf" class="input-bottom" value="<?php echo  $_SESSION["ADM_EMAIL"]?>">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="cpf" class="label-upper"> Data de nascimento</label>
+            <br> <input type="text" name="cpf" class="input-bottom" value="<?php echo  $_SESSION["ADM_DATAN"]?>">
+          </td>
+          <td>
+            <label for="cpf" class="label-upper"> Estado Civil</label>
+            <br> <input type="text" name="cpf" class="input-bottom" value="<?php echo  $_SESSION["ADM_ESTADO_CIVIL"]?>">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="cpf" class="label-upper"> CEP</label>
+            <br> <input type="text" name="cpf" class="input-bottom" value="<?php echo  $_SESSION["ADM_CEP"]?>">
+          </td>
+          <td>
+            <label for="cpf" class="label-upper"> Celular</label>
+            <br> <input type="text" name="celular" class="input-bottom" value="<?php echo  $_SESSION["ADM_CELULAR"]?>">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="cpf" class="label-upper"> Número</label>
+            <br> <input type="text" name="cpf" class="input-bottom" value="<?php echo  $_SESSION["ADM_NUMERO"]?>">
+          </td>
+          <td>
+          <label for="cpf" class="label-upper"> Senha</label>
+            <br> <input type="text" name="cpf" class="input-bottom" value="40527647810">
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+</div>
+</div>
     </div>
   </div>
 </div>

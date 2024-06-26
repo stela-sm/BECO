@@ -6,27 +6,47 @@ class Manager extends Conexao{
    
 
     public function admLogin($dados){
-        $sql = "SELECT * FROM administradores WHERE email = '{$dados['email']}' and senha ='{$dados['senha']}';";
-        $res = $this->connect()->query($sql);
-       
-        //exit(); 
-        if($res->num_rows > 0){
-            $dados=array();
-            $dados["result"] = 1;
-            while($row=$res->fetch_assoc()){
-                $dados["ID_ADM"] = $row["ID_ADM"];
-                $dados["nome"] = $row["nome"];
-                $dados["email"] = $row["email"];
-            }
-            $this->connect()->close();
-            return $dados;
-        }else{
-            $this->connect()->close();
-            $dados['result'] = 0;
-            return $dados;
-        }
-    }
+    // Estabelece a conexão
+    $conn = $this->connect();
 
+    // Consulta SQL
+    $sql = "SELECT * FROM administradores WHERE email = ? AND senha = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $dados['email'], $dados['senha']);
+
+    // Executa a consulta
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+    // Verifica se há resultados
+    if ($res->num_rows > 0) {
+        $dados = array();
+        $dados["result"] = 1;
+        $row = $res->fetch_assoc();
+
+        $dados["ID_ADM"] = $row["ID_ADM"];
+        $dados["nome"] = $row["nome"];
+        $dados["email"] = $row["email"];
+        $dados["pfp"] = $row["pfp"];
+        $dados["cpf"] = $row["cpf"];
+        $dados["cep"] = $row["cep"];
+        $dados["celular"] = $row["celular"];
+        $dados["rg"] = $row["rg"];
+        $dados["poder"] = $row["poder"];
+        $dados["numero"] = $row["numero"];
+        $dados["datan"] = $row["data_nascimento"];
+        $dados["estado_civil"] = $row["estado_civil"];
+        
+        $stmt->close();
+        $conn->close();
+        return $dados;
+    } else {
+        $stmt->close();
+        $conn->close();
+        $dados['result'] = 0;
+        return $dados;
+    }
+}
 
         //exit(); 
         public function admTable($busca, $campo) {

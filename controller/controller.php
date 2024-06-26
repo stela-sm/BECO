@@ -13,80 +13,85 @@ if(isset($_REQUEST["login_adm"])){
                             document.getElementById('myForm').submit();//envio automático submit()
                             </script>  
                 <?php
-            }else{
-
+         }else{
 
             
-require "../model/ferramentas.class.php";
-$ferramentas = new Ferramentas();
-$resp[0] = $ferramentas->antiInjection($_POST["adm"]);
-$resp[1] = $ferramentas->antiInjection($_POST["senha"]);;
+ require "../model/ferramentas.class.php";
+ $ferramentas = new Ferramentas();
+ $resp[0] = $ferramentas->antiInjection($_REQUEST["adm"]);
+ $resp[1] = $ferramentas->antiInjection($_REQUEST["senha"]);;
 
-for($i = 0;$i < 2;$i++){
+ for($i = 0;$i < 2;$i++){
     //print $resp[$i] . " - <br>"; 
-    if($resp[$i] == 0){
+   if($resp[$i] == 0){
         ?>
  <form action="../index.php" name="form" id="myForm" method="POST">
  <input type="hidden" name="msg" value="FR01">
  </form> 
  <script>
  document.getElementById('myForm').submit();
- </script>  
+ </script>   
         <?php
         exit();
     }
-}
+ }
 
 
-$email = $_REQUEST["adm"];
-$senha = $_REQUEST["senha"];
-$senhaCript = $ferramentas->sha256($senha);
+ $dados["email"] = $_REQUEST["adm"];
+ $senha = $_REQUEST["senha"];
+ $senhaCript = $ferramentas->sha256($senha);
+ $dados["senha"] = $senhaCript;
 
-$dados["email"] = $email;
-$dados["senha"] = $senhaCript;
+ require "../model/manager.class.php";
+ $manager = new Manager();
 
-require "../model/manager.class.php";
-$manager = new Manager();
+// // verificar se e-mail existe
 
-// verificar se e-mail existe
+ $r = $manager-> admLogin($dados);
 
-$r = $manager-> admLogin($dados);
-
-require "../model/log.class.php";
-$log = new Log();
-
+ require "../model/log.class.php";
+ $log = new Log();
 
 
 if($r["result"] == 0){
     $ip = $_SERVER['REMOTE_ADDR'];
-    $log->setTexto("{$ip} - Erro no login do administrador {$dados['email']} pelo dispositivo de ip {$ip}.\n");
-    $log->fileWriter();
+     $log->setTexto("{$ip} - Erro no login do administrador {$dados['email']} pelo dispositivo de ip {$ip}.\n");
+     $log->fileWriter();
 
-    ?>
-        <form action="../index.php" name="return" id="return" method="post">
-        <input type="hidden" name="cod" value="BD00">
-        </form>
+     ?>
+      <form action="../index.php" name="return" id="return" method="post">
+      <input type="hidden" name="cod" value="BD00">
+       </form>
         <script>
-            document.getElementById("return").submit();
-        </script>
-    <?php
-}else{
-    $ip = $_SERVER['REMOTE_ADDR'];
-    $log->setTexto("{$ip} - Login do administrador {$dados['email']} pelo dispositivo de ip {$ip}.\n");    $log->fileWriter();
-    // gravar log de acesso
-    $_SESSION["ADM_ID"] = $r["ID_ADM"];
-    $_SESSION["ADM_NOME"] = $r["nome"];
-    $_SESSION["ADM_EMAIL"] = $r["email"];
-    ?>
+                  document.getElementById("return").submit();
+        </script> 
+     <?php
+ }else{
+     $ip = $_SERVER['REMOTE_ADDR'];
+     $log->setTexto("{$ip} - Login do administrador {$dados['email']} pelo dispositivo de ip {$ip}.\n");    $log->fileWriter();
+     // gravar log de acesso
+     $_SESSION["ADM_ID"] = $r["ID_ADM"];
+     $_SESSION["ADM_NOME"] = $r["nome"];
+     $_SESSION["ADM_EMAIL"] = $r["email"];
+     $_SESSION["ADM_PFP"] = $r["pfp"];
+     $_SESSION["ADM_CPF"] = $r["cpf"];
+     $_SESSION["ADM_CEP"] = $r["cep"];
+     $_SESSION["ADM_RG"] = $r["rg"]; 
+     $_SESSION["ADM_PODER"] = $r["poder"];
+     $_SESSION["ADM_NUMERO"] = $r["numero"];
+     $_SESSION["ADM_CELULAR"] = $r["celular"];
+     $_SESSION["ADM_DATAN"] = $r["datan"];
+     $_SESSION["ADM_ESTADO_CIVIL"] = $r["estado_civil"];
+     
+ ?>
         <form action="../view/index.php" id="return" method="post">
-        <input type="hidden" name="msg" value="FR52">
-        </form>
-        <script>
-            document.getElementById("return").submit();
-        </script>
-    <?php
-}
-            }}
+         <input type="hidden" name="msg" value="FR52">
+       </form>
+       <script>
+         document.getElementById("return").submit();
+       </script> <?php
+  }
+   }}
 
 
 
