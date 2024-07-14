@@ -31,6 +31,9 @@ require_once( "../model/manager.class.php");
 $manager = new Manager();
 $r = $manager-> getUserData("$_REQUEST[id]");
 
+if($r[0]['pfp']==""){
+  $r[0]['pfp'] == "nopfp.png";
+  }
 ?>
 
 <body>

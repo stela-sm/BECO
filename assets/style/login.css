@@ -1,0 +1,75 @@
+@font-face {
+    font-family: radikal-medium;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Medium.otf);
+  }
+  @font-face {
+    font-family: radikal-bold;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Bold.otf);
+  }
+  @font-face {
+    font-family: radikal-light;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Thin.otf);
+  }
+:root{
+    /*****  cores  *****/
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+     --primary-color: lightblue;
+    /*--secondary-color:;
+    --toogle-color:; */
+    --text-color:#707070;
+
+    /* transições */
+
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease 
+
+    /***** tipografia *****/
+    
+
+}
+
+body{
+    font-family: radikal-bold;
+}
+.container-center{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.div-form{
+    display: flex;
+    height: 100vh;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.div-form h2{
+    font-family: radikal-bold;
+}
+.div-form {
+    
+    font-family: radikal-medium;
+}
+.div-form input{
+    width: 90%;
+    padding: 10px 10px;
+    border-radius: 10px;
+    border: 1px solid #b7b7b8;
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    color: #252525;
+}
+.div-form input[type=submit]{
+    background-color: #252525;
+    color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.div-form form{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    padding: 80px;
+    border-radius: 10px;
+}

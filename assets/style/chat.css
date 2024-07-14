@@ -1,0 +1,119 @@
+@font-face {
+    font-family: radikal-medium;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Medium.otf);
+  }
+  @font-face {
+    font-family: radikal-bold;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Bold.otf);
+  }
+  @font-face {
+    font-family: radikal-light;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Thin.otf);
+  }
+:root{
+    /*****  cores  *****/
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+     --primary-color: lightblue;
+    /*--secondary-color:;
+    --toogle-color:; */
+    --text-color:#707070;
+
+    /* transições */
+
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease 
+
+    /***** tipografia *****/
+    
+
+}
+
+body{
+  background-color: var(--sidebar-color) !important ;
+}
+.col-8{
+    height: 100vh;
+}
+.chat{
+    
+}
+
+.chat header {
+    font-family: radikal-medium;
+padding: 16px;
+    color:#b9b9b9;
+    text-align: center;
+}
+
+.chat .chatbox{
+    overflow-y: auto;
+    height: 80vh;
+    padding: 15px 15px ;
+}
+
+.img-src{
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    align-self: flex-end;
+}
+.img-incoming{
+    margin: 0px 10px 20px 0px;
+}
+.img-outgoing{
+    margin:0px 0px 20px 10px;
+}
+.img{
+    align-self: flex-end;
+}
+.chatbox .outgoing{
+justify-content: flex-end;
+margin-top: 20px ;
+}
+.chatbox .chat{
+    display: flex;
+}
+
+.chatbox .chat p{
+    color: white;
+    font-family: radikal-light;
+    font-size: 0.95rem;
+    padding: 12px 16px;
+    border-radius: 10px 10px 0px 10px;
+    background-color: #724ae8;
+    max-width: 75%;
+}
+
+.chatbox .incoming p {
+    color: #000;
+    background: rgb(216, 209, 209);
+    border-radius: 10px 10px 10px 0px;
+}
+
+.chat .chat-input{
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background-color: #E4E9F7;
+    padding: 5px 20px;
+    border-top: 10x solid #ccc;
+}
+.chat-input textarea{
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 0.95rem;
+    height: 55px;
+    width: 90%;
+    background-color: #E4E9F7;
+    padding: 16px 15px 16px 0 ;
+}
+.chat-input{
+    display: flex;
+}
+.send{
+    align-self:center;
+}
