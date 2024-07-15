@@ -2,3 +2,4 @@
 2024-07-12 22:59:27 - ::1 - Erro no login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
 2024-07-12 23:01:32 - ::1 - Login do administrador stela@g.com pelo dispositivo de ip ::1.
 2024-07-14 21:10:04 - ::1 - Login do administrador stela@g.com pelo dispositivo de ip ::1.
+2024-07-15 01:17:17 - ::1 - Login do administrador stela@g.com pelo dispositivo de ip ::1.

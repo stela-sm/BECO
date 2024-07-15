@@ -12,28 +12,62 @@
     <title>Chat</title>
 </head>
 <body>
+
+
+
+<?php
+session_start();
+require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> showMessages("1");
+
+
+var_dump($r);
+
+?>
+
+    <input type="hidden" name="" class="pfp-outgoing" value="nopfp.png">
+    <input type="hidden" name="" class="pfp-incoming" value="nopfp.png">
     <div class=" col-8 chat">
         <header>
             <h5>@somuch</h5>
         </header>
         <ul class="chatbox">
+
+<?php
+        for($i=0;$i<=$r["number"];$i++){
+    if($r[$i]["id_remetente"]==$_SESSION["ADM_ID"]){
+        
+        echo "
+            <li class='chat outgoing'>
+            <p>".$r[$i]["texto_mensagem"]."</p>
+            <div class='img'>
+                    <img class='img-src img-outgoing' src='../assets/media/pfp/nopfp.png' alt=''>
+                </div>
+               
+            </li>";
+    }else{
+        echo "<li class='chat incoming'>
+        <div class='img '>
+            <img class='img-src img-incoming' src='../assets/media/pfp/nopfp.png' alt=''>
+        </div>
+          <p>".$r[$i]["texto_mensagem"]."</p>
+    </li>";
+
+    }
+}
+
+?>
             <li class="chat incoming">
                 <div class="img ">
-                    <img class="img-src img-incoming " src="../assets/media/pfp_user/nopfp.png" alt="">
+                    <img class="img-src img-incoming " src="../assets/media/pfp/nopfp.png" alt="">
                 </div>
                 <p>Hi there, how can i help you?</p>
             </li>
 
-            <li class="chat outgoing">
-            <p>Hi there, how can i help you? Hi there, how can i help you? Hi there, how can i help you? Hi there, how can i help you?</p>
-            <div class="img ">
-                    <img class="img-src img-outgoing" src="../assets/media/pfp_user/nopfp.png" alt="">
-                </div>
-               
-            </li>
         </ul>
         <div class="chat-input">
-            <textarea name="" id="" placeholder="Digite uma mensagem..."></textarea>
+            <textarea name="" id="" class="msg" placeholder="Digite uma mensagem..."></textarea>
             <div class="send">
             
             <svg xmlns="http://www.w3.org/2000/svg" class=" icon icon-tabler icon-tabler-send-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -45,5 +79,7 @@
         </div>
       
     </div>
+   
+    <script  src="../assets/js/chat.js"></script>
 </body>
 </html>

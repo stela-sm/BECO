@@ -40,7 +40,7 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
         <div class="col-2 coluna-lateral">
             <div class="pfp-circle">
             <form action="../controller/controller.php?adm_update=<?php echo $r[0]["ID_ADM"]?>" name="form_adm_update" enctype="multipart/form-data" enctype="multipart/form-data" id="form_adm_update" method="post">
-            <img src="../assets/media/pfp_adm/<?php echo $r[0]['pfp'];  ?>" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
+            <img src="../assets/media/pfp/<?php echo $r[0]['pfp'];  ?>" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
             </div>
             
             <input type="hidden" name="old_pfp" value="<?php echo $r[0]['pfp'];  ?>">

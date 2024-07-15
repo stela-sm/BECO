@@ -173,7 +173,7 @@ session_start();
         <td class="spacing-right">
      <div class="pfp-circle">
             <form action="../controller/controller.php?adm_update=<?php echo $r[0]["ID_ADM"]?>" name="form_adm_update" enctype="multipart/form-data" enctype="multipart/form-data" id="form_adm_update" method="post">
-            <img src="../assets/media/pfp_adm/IMG.jpeg" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
+            <img src="../assets/media/pfp/IMG.jpeg" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
             </div>
             </td>
             <td>

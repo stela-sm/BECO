@@ -357,6 +357,52 @@ class Manager extends Conexao{
     }
 
 
+
+
+    public function showMessages($idConversa) {
+        $sql = "SELECT m.ID_MENSAGEM, m.texto_mensagem, m.datahora, u.ID_ADM AS id_remetente, u.nome AS nome_remetente, 
+                       c.id_user1, a1.nome AS nome_user1, 
+                       c.id_user2, a2.nome AS nome_user2
+                FROM mensagens m
+                JOIN administradores u ON m.id_remetente = u.ID_ADM
+                JOIN conversas c ON m.ID_CONVERSA = c.id_conversa
+                JOIN administradores a1 ON c.id_user1 = a1.ID_ADM
+                JOIN administradores a2 ON c.id_user2 = a2.ID_ADM
+                WHERE m.id_conversa = {$idConversa}
+                ORDER BY m.datahora;";
+    
+        $res = $this->connect()->query($sql);
+    
+        if (!$res) {
+            $this->connect()->close();
+            return ['result' => -1, 'error' => $this->connect()->error];
+        }
+    
+        if ($res->num_rows > 0) {
+            $mensagens = [];
+            $i = 0;
+            while ($row = $res->fetch_assoc()) {
+                $mensagens[$i] = [
+                    'ID_MENSAGEM' => $row['ID_MENSAGEM'],
+                    'texto_mensagem' => $row['texto_mensagem'],
+                    'datahora' => $row['datahora'],
+                    'id_remetente' => $row['id_remetente'],
+                    'id_user1' => $row['id_user1'],
+                    'nome_user1' => $row['nome_user1'],
+                    'id_user2' => $row['id_user2'],
+                    'nome_user2' => $row['nome_user2']
+                ];
+                $mensagens["number"] = $i;
+                $i++;
+            }
+            $mensagens['result'] = $i; // Armazena a contagem ou simplesmente usa true para indicar sucesso
+            $this->connect()->close();
+            return $mensagens;
+        } else {
+            $this->connect()->close();
+            return ['result' => 0]; // Nenhuma linha encontrada
+        }
+    }
     
 }
 ?>

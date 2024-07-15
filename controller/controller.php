@@ -240,8 +240,8 @@ $log->fileWriter();
 }else{
 
     if(isset($_FILES["pfp"])){
-    $resp = move_uploaded_file($img["tmp_name"],"../assets/media/pfp_adm/".$newName);
-    $old_pfp = "../assets/media/pfp_adm/".$_REQUEST["old_pfp"];
+    $resp = move_uploaded_file($img["tmp_name"],"../assets/media/pfp/".$newName);
+    $old_pfp = "../assets/media/pfp/".$_REQUEST["old_pfp"];
     unlink($old_pfp);
     }
 }
@@ -267,7 +267,7 @@ if(isset($_REQUEST["adm_new"])){
     $ferramentas = new ferramentas();
     $ext = $ferramentas->pegaExtensao($img["name"]);
     $newName = $ferramentas->geradorMicroTime() . "." . $ext;
-    $resp = move_uploaded_file($img["tmp_name"],"../assets/media/pfp_adm/".$newName);
+    $resp = move_uploaded_file($img["tmp_name"],"../assets/media/pfp/".$newName);
 
     $senhaCript = $ferramentas->sha256("123456");
     $dados = array(
