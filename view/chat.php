@@ -8,6 +8,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <title>Chat</title>
 </head>
@@ -16,48 +18,69 @@
 
 
 <?php
+
 session_start();
-require "../model/manager.class.php";
-$manager = new Manager();
-$r = $manager-> showMessages("1");
-
-
-var_dump($r);
-
+echo "<input type=\"hidden\" name=\"\" class=\"ID_SESSION\" value='".$_SESSION["ADM_ID"]."'>";
 ?>
 
     <input type="hidden" name="" class="pfp-outgoing" value="nopfp.png">
+    
     <input type="hidden" name="" class="pfp-incoming" value="nopfp.png">
     <div class=" col-8 chat">
         <header>
             <h5>@somuch</h5>
+            
         </header>
         <ul class="chatbox">
 
-<?php
-        for($i=0;$i<=$r["number"];$i++){
-    if($r[$i]["id_remetente"]==$_SESSION["ADM_ID"]){
-        
-        echo "
-            <li class='chat outgoing'>
-            <p>".$r[$i]["texto_mensagem"]."</p>
-            <div class='img'>
-                    <img class='img-src img-outgoing' src='../assets/media/pfp/nopfp.png' alt=''>
-                </div>
-               
-            </li>";
-    }else{
-        echo "<li class='chat incoming'>
-        <div class='img '>
-            <img class='img-src img-incoming' src='../assets/media/pfp/nopfp.png' alt=''>
-        </div>
-          <p>".$r[$i]["texto_mensagem"]."</p>
-    </li>";
+<script>
+   $(document).ready(function() {
+            function atualizarChat() {
+                $.ajax({
+                    url: '../controller/controller_chat.php?select=1',
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {
+                        id_conversa: 1 // Substitua pelo ID da conversa relevante
+                    },
+                    success: function(response) {
+                        var chatList = $('.chatbox');
+                        chatList.empty();
+                        for (var i = 0; i <= response.number; i++) {
+                            var mensagem = response[i];
+                            if (mensagem.id_remetente == <?php echo $_SESSION["ADM_ID"]; ?>) {
+                                chatList.append(
+                                    "<li class='chat outgoing'>" +
+                                        "<p>" + mensagem.texto_mensagem + "</p>" +
+                                        "<div class='img'>" +
+                                            "<img class='img-src img-outgoing' src='../assets/media/pfp/nopfp.png' alt=''>" +
+                                        "</div>" +
+                                    "</li>"
+                                );
+                            } else {
+                                chatList.append(
+                                    "<li class='chat incoming'>" +
+                                        "<div class='img '>" +
+                                            "<img class='img-src img-incoming' src='../assets/media/pfp/nopfp.png' alt=''>" +
+                                        "</div>" +
+                                        "<p>" + mensagem.texto_mensagem + "</p>" +
+                                    "</li>"
+                                );
+                            }
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro na requisição:', error);
+                    }
+                });
+            }
 
-    }
-}
+            setInterval(atualizarChat, 100);
 
-?>
+            atualizarChat();
+        });
+    </script>
+
             <li class="chat incoming">
                 <div class="img ">
                     <img class="img-src img-incoming " src="../assets/media/pfp/nopfp.png" alt="">

@@ -404,5 +404,22 @@ class Manager extends Conexao{
         }
     }
     
+
+
+        public function enviarMsg($dados){
+            $sql = "INSERT INTO mensagens (id_conversa, id_remetente, texto_mensagem, datahora) VALUES (('{$dados["id_conversa"]}','{$dados["id_remetente"]}','{$dados["txt"]}', NOW())";
+            $res = $this->connect()->query($sql);
+            return $res;
+        }
+
+            
+        
+
+
+
+
+
+
+
 }
 ?>
