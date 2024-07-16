@@ -1,0 +1,122 @@
+@font-face {
+    font-family: radikal-medium;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Medium.otf);
+  }
+  @font-face {
+    font-family: radikal-bold;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Bold.otf);
+  }
+  @font-face {
+    font-family: radikal-light;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Thin.otf);
+  }
+:root{
+    /*****  cores  *****/
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+     --primary-color: lightblue;
+    /*--secondary-color:;
+    --toogle-color:; */
+    --text-color:#707070;
+
+    /* transições */
+
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease 
+
+    /***** tipografia *****/
+    
+
+}
+.row-all{
+    display: flex;
+    height: 99vh;
+}
+.iframe-chat{
+    width: 100%;
+}
+.col-lateral h5 {
+    font-family: radikal-medium;
+padding: 16px;
+    color:#b9b9b9;
+    text-align: center;
+}
+.col-lateral .searchbar-div{
+    padding: 10px 15px;
+    background-color: #dddddd;
+    border-radius: 6px;
+}
+.col-lateral .searchbar-div input{
+width: 90%;
+border:none;
+outline:none;
+font-family: radikal-light;
+background-color: transparent;
+}
+
+.col-lateral .lista-conversas{
+    max-height: 90%;
+    width: 100%;
+    overflow-y: auto;
+    padding-top: 10px;
+}
+.col-lateral .lista-conversas .ul-conversa {
+    padding: 0px;
+    margin-top: 15px;
+}
+.col-lateral .lista-conversas .ul-conversa li{
+list-style: none;
+padding: 10px 15px;
+align-items: center;
+}
+
+.ul-conversa li{
+    padding-top: 10px;
+    border-radius: 6px;
+}
+
+
+.ul-conversa li, .ul-conversa a{
+    display: flex;
+    transition: 0.2s;
+    text-decoration: none !important;
+align-items: center;
+}
+
+.ul-conversa li .img-pfp img, .ul-conversa li .img-pfp{
+    
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+
+}
+
+.ul-conversa li a .name{
+    font-family: radikal-medium;
+    padding: 10px 7px 0px 7px;
+    color: var(--text-color) !important;
+    font-size: 1.2em;
+    display: grid;
+}
+
+
+.ul-conversa li a .name .demotext{
+    font-family: radikal-light;
+    color: #b9b9b9 !important;
+    font-size: 0.7em;
+    padding-left: 3px
+}
+
+
+
+
+.ul-conversa li.active{
+    background-color: rgb(240, 240, 240);}
+
+.ul-conversa a:hover{
+    transition: 0.2s;
+    transform: scale(0.96);
+
+}

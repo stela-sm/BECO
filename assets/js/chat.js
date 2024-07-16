@@ -34,9 +34,31 @@ function enviarMensagem(idConversa, idRemetente, textoMensagem) {
             alert('Erro na requisição: ' + error);
         }
     });
+
 }
 
 
 
 
 senChatBtn.addEventListener("click", handleChat) // ao clicar, chama a função handlechat
+
+
+
+function checkForGetParameter() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var roomParam = urlParams.get('room');
+
+    if (roomParam) {
+        console.log('Parâmetro room encontrado:', roomParam);
+        atualizarChat(roomParam);
+        // Aqui você pode adicionar lógica adicional, se necessário
+    } else {
+        console.log('Nenhum parâmetro room encontrado.');
+    }
+}
+
+// Verifica a cada 3 segundos (3000 milissegundos)
+setInterval(checkForGetParameter, 1000);
+
+// Chama a função imediatamente para verificar na carga inicial da página
+checkForGetParameter();

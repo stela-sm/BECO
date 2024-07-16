@@ -21,12 +21,15 @@
 
 session_start();
 echo "<input type=\"hidden\" name=\"\" class=\"ID_SESSION\" value='".$_SESSION["ADM_ID"]."'>";
+if(isset($_REQUEST["room"])){
+echo "<input type=\"hidden\" name=\"\" class=\"ID_CONV\" value='".$_REQUEST["room"]."'>";
+
 ?>
 
     <input type="hidden" name="" class="pfp-outgoing" value="nopfp.png">
     
     <input type="hidden" name="" class="pfp-incoming" value="nopfp.png">
-    <div class=" col-8 chat">
+    <div class=" chat">
         <header>
             <h5>@somuch</h5>
             
@@ -34,14 +37,14 @@ echo "<input type=\"hidden\" name=\"\" class=\"ID_SESSION\" value='".$_SESSION["
         <ul class="chatbox">
 
 <script>
-   $(document).ready(function() {
-            function atualizarChat() {
+   
+            function atualizarChat(idConvo) {
                 $.ajax({
                     url: '../controller/controller_chat.php?select=1',
                     method: 'GET',
                     dataType: 'json',
                     data: {
-                        id_conversa: 1 // Substitua pelo ID da conversa relevante
+                        id_conversa: idConvo 
                     },
                     success: function(response) {
                         var chatList = $('.chatbox');
@@ -75,18 +78,11 @@ echo "<input type=\"hidden\" name=\"\" class=\"ID_SESSION\" value='".$_SESSION["
                 });
             }
 
-            setInterval(atualizarChat, 100);
+     
 
-            atualizarChat();
-        });
+        
     </script>
 
-            <li class="chat incoming">
-                <div class="img ">
-                    <img class="img-src img-incoming " src="../assets/media/pfp/nopfp.png" alt="">
-                </div>
-                <p>Hi there, how can i help you?</p>
-            </li>
 
         </ul>
         <div class="chat-input">
@@ -102,7 +98,16 @@ echo "<input type=\"hidden\" name=\"\" class=\"ID_SESSION\" value='".$_SESSION["
         </div>
       
     </div>
-   
+        <?php } else{
+            
+         ?>
+
+selecione uma conversa
+
+<?php
+            
+
+        }?>
     <script  src="../assets/js/chat.js"></script>
 </body>
 </html>
