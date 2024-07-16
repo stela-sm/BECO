@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+function list(){
     var elementos = document.querySelectorAll('.li-conversa');
 
     elementos.forEach(function(elemento) {
@@ -12,4 +12,4 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
         });
     });
-});
+};

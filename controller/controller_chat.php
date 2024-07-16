@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_REQUEST["inserir"])) {
-    
+     
     $conn = new mysqli('localhost', 'root', '', 'beco_bd');
 
    
@@ -38,6 +38,9 @@ if (isset($_REQUEST["inserir"])) {
 
 
 
+
+
+
 if(isset($_REQUEST["select"])){
 
     require "../model/manager.class.php";
@@ -46,6 +49,17 @@ if(isset($_REQUEST["select"])){
     $idConversa = $_GET['id_conversa']; // Substitua '1' pelo ID da conversa desejada
    
 $r = $manager->showMessages($idConversa);
+
+echo json_encode($r);
+}
+
+
+if(isset($_REQUEST["conversas"])){
+
+require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> showConversas($_SESSION["ADM_ID"]);
+
 
 echo json_encode($r);
 }

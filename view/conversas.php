@@ -33,13 +33,70 @@
                 <ul class="ul-conversa">
                     <?PHP
                     session_start();
-                    require "../model/manager.class.php";
-                    $manager = new Manager();
-                    $r = $manager-> showConversas($_SESSION["ADM_ID"]);
-                    
-                    
-for($i=0;$i<=$r["result"];$i++){
+                 
 ?>
+
+<script>
+    function list(){
+    var elementos = document.querySelectorAll('.li-conversa');
+
+    elementos.forEach(function(elemento) {
+        elemento.addEventListener('click', function() {
+            // Remove a classe 'active' de todos os elementos primeiro
+            elementos.forEach(function(el) {
+                el.classList.remove('active');
+            });
+
+            // Adiciona a classe 'active' apenas ao elemento clicado
+            this.classList.add('active');
+        });
+    });
+};
+function atualizarConversas() {
+    
+    $.ajax({
+        url: '../controller/controller_chat.php?conversas=1',
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            var chatList = $('.ul-conversa');
+            chatList.empty();
+
+            // Itera sobre as propriedades numéricas da resposta
+            Object.keys(response).forEach(function(key) {
+                // Verifica se a chave é um número e não é "result"
+                if (!isNaN(key)) {
+                    var conversa = response[key];
+                    var listItem = '<li class="li-conversa" onclick="list()" ><a href="chat.php?room=' + conversa.id_conversa + '&pfp='+conversa.pfp2+'" target="iframe_chat" class="a-conversa">' +
+                        '<div class="img-pfp">' +
+                        '<img src="../assets/media/pfp/' + conversa.pfp2 + '" alt="" srcset="">' +
+                        '</div>' +
+                        '<p class="name">' +
+                        conversa.nome2 +
+                        '<span class="demotext">demo texto</span>' +
+                        '</p>' +
+                        '</a></li>';
+
+                    chatList.append(listItem);
+                }
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Erro na requisição:', error);
+        }
+    });
+}
+
+// Chama a função atualizarConversas inicialmente
+$(document).ready(function() {
+    atualizarConversas();
+
+    // Define um intervalo para atualizar as conversas a cada 30 segundos
+    setInterval(atualizarConversas, 30000); // 30 segundos
+});
+</script>
+
+
 
 <li class="li-conversa" onclick="active()"><a  href="chat.php?room=<?php echo $r[$i]["id_conversa"]?>&pfp=<?php echo $r[$i]["pfp2"]?>" target="iframe_chat"  class="a-conversa">
                             
@@ -56,9 +113,7 @@ for($i=0;$i<=$r["result"];$i++){
                             </a></li>
 
 
-<?php
-}
-                    ?>
+
                            
 
                             <li class="li-conversa"><a href="chat.php?room=2" target="iframe_chat"  class="a-conversa">
