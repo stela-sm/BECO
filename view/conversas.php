@@ -16,7 +16,7 @@
 <body>
     <div class="row-all">
     <div class="col-9">
-        <iframe src="chat.php?room=1" frameborder="0" name="iframe_chat" class="iframe-chat" height="100%"></iframe>
+        <iframe src="chat.php" frameborder="0" name="iframe_chat" class="iframe-chat" height="100%"></iframe>
     </div>
     <div class="col-3 col-lateral">
         <h5>Conversas</h5>
@@ -31,14 +31,24 @@
 
             <div class="lista-conversas">
                 <ul class="ul-conversa">
-                            <li class="li-conversa active"><a href="chat.php?room=1" target="iframe_chat"  class="a-conversa">
+                    <?PHP
+                    session_start();
+                    require "../model/manager.class.php";
+                    $manager = new Manager();
+                    $r = $manager-> showConversas($_SESSION["ADM_ID"]);
+                    
+                    
+for($i=0;$i<=$r["result"];$i++){
+?>
+
+<li class="li-conversa" onclick="active()"><a  href="chat.php?room=<?php echo $r[$i]["id_conversa"]?>&pfp=<?php echo $r[$i]["pfp2"]?>" target="iframe_chat"  class="a-conversa">
                             
                             <div class="img-pfp">
-                                <img src="../assets/media/pfp/nopfp.png" alt="" srcset="">
+                                <img src="../assets/media/pfp/<?php echo $r[$i]["pfp2"]?>" alt="" srcset="">
                             </div>
 
                             <p class="name">
-                                @somuch 
+                                <?php echo  $r[$i]["nome2"]?>
                                 <span class="demotext"> 
                                     demo texto
                                 </span>
@@ -46,6 +56,10 @@
                             </a></li>
 
 
+<?php
+}
+                    ?>
+                           
 
                             <li class="li-conversa"><a href="chat.php?room=2" target="iframe_chat"  class="a-conversa">
                             
@@ -79,5 +93,7 @@
             </div>
     </div>
     </div>
+
+    <script src="../assets/js/conversas.js"></script>
 </body>
 </html>

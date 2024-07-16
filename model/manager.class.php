@@ -409,11 +409,55 @@ class Manager extends Conexao{
         public function enviarMsg($dados){
             $sql = "INSERT INTO mensagens (id_conversa, id_remetente, texto_mensagem, datahora) VALUES (('{$dados["id_conversa"]}','{$dados["id_remetente"]}','{$dados["txt"]}', NOW())";
             $res = $this->connect()->query($sql);
+            $this->connect()->close();
             return $res;
         }
 
+        public function getUserInfo($id_user){
+            $sql= "SELECT * FROM administradores where ID_ADM = {$id_user}";              
+            $res = $this->connect()->query($sql);
+            $dados = [];
+            while($row=$res->fetch_assoc()){
+                $dados["nome"] = $row["nome"];
+                $dados["pfp"] = $row["pfp"];
+            }
             
+            $this->connect()->close();
+            return $dados;
+         }
+
+        public function showConversas($idRemetente){
+
+            $sql= "SELECT * FROM conversas where id_user1 = {$idRemetente} or id_user2 = {$idRemetente}";  
+            $res = $this->connect()->query($sql);
+            $dados = [];
+            $i = 0;
+            while($row=$res->fetch_assoc()){
+                if ($row["id_user1"]==$idRemetente){
+                $infoUsuario = $this->getUserInfo($row["id_user2"]);
+                $dados[$i]["id_user"] = $row["id_user2"];
+                $dados[$i]["nome2"] = $infoUsuario["nome"];
+                    $dados[$i]["pfp2"] = $infoUsuario["pfp"];
+            }else{
+                $infoUsuario = $this->getUserInfo($row["id_user1"]);
+                $dados[$i]["id_user"] = $row["id_user1"];
+                $dados[$i]["nome2"] = $infoUsuario["nome"];
+                $dados[$i]["pfp2"] = $infoUsuario["pfp"];
+            }
+                $dados[$i]["id_conversa"] = $row["ID_CONVERSA"];
+                $dados[$i]["datahora"] = $row["datahora"];
+            
+                $dados["result"] = $i;
+                $i++;
+                
+            }
+            $this->connect()->close();
+            return $dados;
         
+
+        }
+
+       
 
 
 

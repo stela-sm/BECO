@@ -113,7 +113,9 @@ align-items: center;
 
 
 .ul-conversa li.active{
-    background-color: rgb(240, 240, 240);}
+    background-color: rgb(240, 240, 240);
+transition:0.2s;
+}
 
 .ul-conversa a:hover{
     transition: 0.2s;

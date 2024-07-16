@@ -116,3 +116,19 @@ margin-bottom: -18px;
 .send{
     align-self:center;
 }
+.frase{
+    font-family: radikal-medium;
+    font-size:1.2em;
+
+}
+.container-flex{
+    display: flex;
+    position: absolute;
+    top:50;
+    height: 100%;
+    width: 100%;
+    align-self: baseline;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}

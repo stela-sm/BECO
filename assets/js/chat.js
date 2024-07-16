@@ -3,7 +3,8 @@ const input = document.querySelector(".chat-input textarea") //pega o input da m
 const chatbox =document.querySelector(".chatbox")
 const pfpO = document.querySelector(".pfp-outgoing").value
 const pfpI = document.querySelector(".pfp-incoming").value
-const id = document.querySelector(".ID_SESSION").value
+const idsession = document.querySelector(".ID_SESSION").value
+const idconv = document.querySelector(".ID_CONV").value
 let msg;
 
 
@@ -13,7 +14,7 @@ let msg;
 const handleChat = () =>{
     
 msg = input.value.trim()
-enviarMensagem(1,id,msg)
+enviarMensagem(idconv,idsession,msg)
 
 
 }
@@ -50,8 +51,7 @@ function checkForGetParameter() {
 
     if (roomParam) {
         console.log('Parâmetro room encontrado:', roomParam);
-        atualizarChat(roomParam);
-        // Aqui você pode adicionar lógica adicional, se necessário
+        atualizarChat(roomParam, pfpO, pfpI);
     } else {
         console.log('Nenhum parâmetro room encontrado.');
     }
@@ -59,6 +59,4 @@ function checkForGetParameter() {
 
 // Verifica a cada 3 segundos (3000 milissegundos)
 setInterval(checkForGetParameter, 1000);
-
-// Chama a função imediatamente para verificar na carga inicial da página
 checkForGetParameter();

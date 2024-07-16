@@ -21,24 +21,26 @@
 
 session_start();
 echo "<input type=\"hidden\" name=\"\" class=\"ID_SESSION\" value='".$_SESSION["ADM_ID"]."'>";
+echo "<input type=\"hidden\" name=\"\" class=\"pfp-outgoing\" value='".$_SESSION["ADM_PFP"]."'>";
 if(isset($_REQUEST["room"])){
 echo "<input type=\"hidden\" name=\"\" class=\"ID_CONV\" value='".$_REQUEST["room"]."'>";
+echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST["pfp"]."'>";
 
 ?>
 
-    <input type="hidden" name="" class="pfp-outgoing" value="nopfp.png">
+    <input type="hidden" name="" class="" value="nopfp.png">
     
     <input type="hidden" name="" class="pfp-incoming" value="nopfp.png">
     <div class=" chat">
         <header>
-            <h5>@somuch</h5>
+            <h5>Chat</h5>
             
         </header>
         <ul class="chatbox">
 
 <script>
    
-            function atualizarChat(idConvo) {
+            function atualizarChat(idConvo, imgO, imgI) {
                 $.ajax({
                     url: '../controller/controller_chat.php?select=1',
                     method: 'GET',
@@ -56,7 +58,7 @@ echo "<input type=\"hidden\" name=\"\" class=\"ID_CONV\" value='".$_REQUEST["roo
                                     "<li class='chat outgoing'>" +
                                         "<p>" + mensagem.texto_mensagem + "</p>" +
                                         "<div class='img'>" +
-                                            "<img class='img-src img-outgoing' src='../assets/media/pfp/nopfp.png' alt=''>" +
+                                            "<img class='img-src img-outgoing' src='../assets/media/pfp/"+imgO+"' alt=''>" +
                                         "</div>" +
                                     "</li>"
                                 );
@@ -64,7 +66,7 @@ echo "<input type=\"hidden\" name=\"\" class=\"ID_CONV\" value='".$_REQUEST["roo
                                 chatList.append(
                                     "<li class='chat incoming'>" +
                                         "<div class='img '>" +
-                                            "<img class='img-src img-incoming' src='../assets/media/pfp/nopfp.png' alt=''>" +
+                                            "<img class='img-src img-incoming' src='../assets/media/pfp/"+imgI+"' alt=''>" +
                                         "</div>" +
                                         "<p>" + mensagem.texto_mensagem + "</p>" +
                                     "</li>"
@@ -102,7 +104,18 @@ echo "<input type=\"hidden\" name=\"\" class=\"ID_CONV\" value='".$_REQUEST["roo
             
          ?>
 
-selecione uma conversa
+<div class="container-flex">
+    <p class="frase">
+        Selecione uma conversa ao lado
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mood-wink" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+  <path d="M15 10h.01" />
+  <path d="M9.5 15a3.5 3.5 0 0 0 5 0" />
+  <path d="M8.5 8.5l1.5 1.5l-1.5 1.5" />
+</svg>
+    </p>
+</div>
 
 <?php
             
