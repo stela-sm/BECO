@@ -21,6 +21,7 @@
     <div class="col-3 col-lateral">
         <h5>Conversas</h5>
         <div class="searchbar-div">
+            <form action="">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#707070" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
@@ -28,7 +29,7 @@
               </svg>
             <input type="text" name="" id="" class="searchbar" placeholder="Pesquise...">        
             </div>
-
+            </form>
             <div class="lista-conversas">
                 <ul class="ul-conversa">
                     <?PHP
@@ -37,6 +38,45 @@
 ?>
 
 <script>
+function searchConversations(query) {
+    $.ajax({
+        url: '../controller/controller_chat.php',
+        method: 'GET',
+        dataType: 'json',
+        data: {
+            search: query
+        },
+        success: function(response) {
+            var chatList = $('.ul-conversa');
+            chatList.empty();
+
+            if (response.result > 0) {
+                Object.keys(response).forEach(function(key) {
+                    if (key !== 'result') {
+                        var conversa = response[key];
+                        var listItem = '<li class="li-conversa"><a href="chat.php?room=new&pfp='+conversa.pfp+'&new='+conversa.ID_ADM +'" target="iframe_chat" class="a-conversa">' +
+                            '<div class="img-pfp">' +
+                            '<img src="../assets/media/pfp/' + conversa.pfp + '" alt="">' +
+                            '</div>' +
+                            '<p class="name">' +
+                            conversa.nome +
+                            '<span class="demotext">demo texto</span>' +
+                            '</p>' +
+                            '</a></li>';
+
+                        chatList.append(listItem);
+                    }
+                });
+            } else {
+                chatList.append('<li class="li-conversa">Não há conversas disponíveis</li>');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Erro na requisição:', error);
+            console.error(xhr.responseText); // Para ver a resposta completa do servidor
+        }
+    });
+}
     function list(){
     var elementos = document.querySelectorAll('.li-conversa');
 
@@ -87,30 +127,30 @@ function atualizarConversas() {
     });
 }
 
-// Chama a função atualizarConversas inicialmente
+
 $(document).ready(function() {
     atualizarConversas();
 
-    // Define um intervalo para atualizar as conversas a cada 30 segundos
-    setInterval(atualizarConversas, 30000); // 30 segundos
+    setInterval(atualizarConversas, 30000); 
 });
+
+
+$(document).ready(function() {
+    $('.searchbar').on('input', function() {
+        var query = $(this).val();
+        if (query === '') {
+            atualizarConversas();
+        } else {
+            searchConversations(query);
+        }
+    });
+
+    
+    atualizarConversas();
+});
+
 </script>
 
-
-
-<li class="li-conversa" onclick="active()"><a  href="chat.php?room=<?php echo $r[$i]["id_conversa"]?>&pfp=<?php echo $r[$i]["pfp2"]?>" target="iframe_chat"  class="a-conversa">
-                            
-                            <div class="img-pfp">
-                                <img src="../assets/media/pfp/<?php echo $r[$i]["pfp2"]?>" alt="" srcset="">
-                            </div>
-
-                            <p class="name">
-                                <?php echo  $r[$i]["nome2"]?>
-                                <span class="demotext"> 
-                                    demo texto
-                                </span>
-                            </p>
-                            </a></li>
 
 
 

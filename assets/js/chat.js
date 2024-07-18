@@ -21,7 +21,7 @@ enviarMensagem(idconv,idsession,msg)
 
 
 function enviarMensagem(idConversa, idRemetente, textoMensagem) {
-  
+    console.log(idConversa, idRemetente, textoMensagem)
     console.log(textoMensagem + "ooiiii")
     $.ajax({
         url: '../controller/controller_chat.php?inserir=1',
@@ -45,18 +45,61 @@ senChatBtn.addEventListener("click", handleChat) // ao clicar, chama a função 
 
 
 
+function inserirConversa(idUser1, idUser2, pfp) {
+    $.ajax({
+        url: '../controller/controller_chat.php?inserir_conv=1',
+        method: 'POST',
+        dataType: 'json',
+        data: {
+            id_user1: idUser1,
+            id_user2: idUser2
+        },
+        success: function(response) {
+            if (response.result === 1) {
+                var room = response.room.room; 
+                
+                console.log('ID da conversa (room) criada:', room);
+                var url = 'chat.php?room=' + encodeURIComponent(room) + "&pfp=" + encodeURIComponent(pfp);
+
+
+                
+                window.location.href = url;
+
+            } else {
+                console.error('Erro ao inserir conversa:', response.error);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Erro na requisição AJAX:', error);
+        }
+    });
+}
+
+
+
+
+
 function checkForGetParameter() {
     var urlParams = new URLSearchParams(window.location.search);
     var roomParam = urlParams.get('room');
+    var pfpParam = urlParams.get('pfp');
 
-    if (roomParam) {
+    if (!isNaN(roomParam)) {
         console.log('Parâmetro room encontrado:', roomParam);
         atualizarChat(roomParam, pfpO, pfpI);
     } else {
-        console.log('Nenhum parâmetro room encontrado.');
+        
+        var idnew = document.querySelector(".ID_NEW").value
+        inserirConversa(idsession, idnew, pfpParam);
+        
+        
     }
 }
 
-// Verifica a cada 3 segundos (3000 milissegundos)
-setInterval(checkForGetParameter, 1000);
+
+
+
+
+
+ setInterval(checkForGetParameter, 100);
 checkForGetParameter();

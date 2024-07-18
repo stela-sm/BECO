@@ -5,10 +5,6 @@ if (isset($_REQUEST["inserir"])) {
      
     $conn = new mysqli('localhost', 'root', '', 'beco_bd');
 
-   
-    if ($conn->connect_error) {
-        die(json_encode(['result' => 'erro', 'error' => 'Falha na conexão com o banco de dados: ' . $conn->connect_error]));
-    }
 
     $idConversa = $_REQUEST["id_conversa"];
     $idRemetente = $_REQUEST["id_remetente"];
@@ -16,10 +12,6 @@ if (isset($_REQUEST["inserir"])) {
 
     $sql = "INSERT INTO mensagens (id_conversa, id_remetente, texto_mensagem, datahora) VALUES (?, ?, ?, NOW())";
     $stmt = $conn->prepare($sql);
-
-    if ($stmt === false) {
-        die(json_encode(['result' => 'erro', 'error' => 'Erro na preparação da consulta: ' . $conn->error]));
-    }
 
     $stmt->bind_param('iis', $idConversa, $idRemetente, $textoMensagem);
     $result = $stmt->execute();
@@ -62,5 +54,42 @@ $r = $manager-> showConversas($_SESSION["ADM_ID"]);
 
 
 echo json_encode($r);
+}
+
+
+
+if (isset($_REQUEST['search'])) {
+  
+
+    $query = $_REQUEST['search'];
+
+    require "../model/manager.class.php";
+    $manager = new Manager();
+
+    $results = $manager->searchConversas($query);
+
+    header('Content-Type: application/json');
+    echo json_encode($results);
+    exit();
+}
+
+
+
+if (isset($_REQUEST['inserir_conv'])) {
+    require "../model/manager.class.php";
+    $manager = new Manager();
+    $id_user1 = $_POST['id_user1'];
+    $id_user2 = $_POST['id_user2'];
+
+    $result = $manager->inserirConversa($id_user1, $id_user2);
+
+    if ($result) {
+        $room = $result; 
+        
+        echo json_encode(['result' => 1, 'room' => $room]);
+    } else {
+        echo json_encode(['result' => 0, 'error' => 'Erro ao inserir conversa']);
+    }
+
 }
 ?>

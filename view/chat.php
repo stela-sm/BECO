@@ -22,6 +22,10 @@
 session_start();
 echo "<input type=\"hidden\" name=\"\" class=\"ID_SESSION\" value='".$_SESSION["ADM_ID"]."'>";
 echo "<input type=\"hidden\" name=\"\" class=\"pfp-outgoing\" value='".$_SESSION["ADM_PFP"]."'>";
+if(isset($_REQUEST["new"])){
+    
+echo "<input type=\"hidden\" name=\"\" class=\"ID_NEW\" value='".$_REQUEST["new"]."'>";
+}
 if(isset($_REQUEST["room"])){
 echo "<input type=\"hidden\" name=\"\" class=\"ID_CONV\" value='".$_REQUEST["room"]."'>";
 echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST["pfp"]."'>";
@@ -41,6 +45,7 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
 <script>
    
             function atualizarChat(idConvo, imgO, imgI) {
+                console.log(idConvo, imgO, imgI)
                 $.ajax({
                     url: '../controller/controller_chat.php?select=1',
                     method: 'GET',
@@ -81,8 +86,6 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
             }
 
      
-
-        
     </script>
 
 

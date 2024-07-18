@@ -459,11 +459,75 @@ class Manager extends Conexao{
 
        
 
+        public function searchConversas($query) {
+            $sql = "SELECT * FROM administradores WHERE nome LIKE '%$query%' LIMIT 15";
+            $res = $this->connect()->query($sql);
+        
+            if (!$res) {
+                return ['result' => -1, 'error' => $this->connect()->error];
+            }
+        
+            if ($res->num_rows > 0) {
+                $dados = [];
+                $i = 0;
+                while ($row = $res->fetch_assoc()) {
+                    $dados[$i] = [
+                        'ID_ADM' => $row['ID_ADM'],
+                        'nome' => $row['nome'],
+                        'pfp' => $row['pfp']
+                    ];
+                    $i++;
+                }
+                $dados['result'] = $i; // Store count or simply use true to indicate success
+                return $dados;
+            } else {
+                return ['result' => 0]; // No rows found
+            }
+        }
+    
+
+        public function verificarConversa($id_user1, $id_user2){
+            $sql = "SELECT * FROM conversas WHERE id_user1 = '$id_user1'
+            AND id_user2 = '$id_user2' OR id_user1 = '$id_user2'
+            AND id_user2 = '$id_user1'";
+            $res = $this->connect()->query($sql);
+            if (!$res) {
+                return ['result' => -1, 'error' => $this->connect()->error];
+                }
+                if ($res->num_rows > 0) {
+                    return ['result' => 1];
+                    } else {
+                        return ['result' => 0];
+                        }
+        }
 
 
+        public function inserirConversa($id_user1, $id_user2) {
+            
+           $verif = $this-> verificarConversa($id_user1,$id_user2);
+           if($verif['result'] == 0){
+            $sql = "INSERT INTO conversas (id_user1, id_user2, datahora) VALUES ({$id_user1}, {$id_user2}, NOW())";
+            $res = $this->connect()->query($sql);
+           }
+           $room = $this-> pegarRoom($id_user1,$id_user2);
+            $this->connect()->close();
+            return $room;
+        }
 
+        public function pegarRoom($id_user1, $id_user2) {
+            $sql = "SELECT * FROM conversas WHERE id_user1 = {$id_user1}
+            AND id_user2 = {$id_user2}";
+            $res = $this->connect()->query($sql);
 
-
-
-}
+            if ($res->num_rows > 0) {
+                while ($row = $res->fetch_assoc()) {
+                    $dados = [
+                        'room' => $row['ID_CONVERSA']
+                    ];
+                
+                }}
+            $this->connect()->close();
+            return $dados;
+        }
+    }
 ?>
