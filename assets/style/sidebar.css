@@ -130,6 +130,11 @@ header .image-text .header-text{
 /*searchbar e perfil */
 
 
+.lupa-buscar{
+    background-color: transparent;
+    border: none;
+    outline: none !important;
+  }
 .top-content{
     height: 10vh;
     align-items: center;

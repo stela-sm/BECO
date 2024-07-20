@@ -11,6 +11,14 @@ let msg;
 
 
 
+const scrollToBottom = () =>{
+    window.scrollTo(0, document.body.scrollHeight);
+    console.log("CACETE")
+}
+
+
+
+
 const handleChat = () =>{
     
 msg = input.value.trim()
@@ -21,8 +29,7 @@ enviarMensagem(idconv,idsession,msg)
 
 
 function enviarMensagem(idConversa, idRemetente, textoMensagem) {
-    console.log(idConversa, idRemetente, textoMensagem)
-    console.log(textoMensagem + "ooiiii")
+    
     $.ajax({
         url: '../controller/controller_chat.php?inserir=1',
         method: 'POST',
@@ -35,7 +42,7 @@ function enviarMensagem(idConversa, idRemetente, textoMensagem) {
             alert('Erro na requisição: ' + error);
         }
     });
-
+    scrollToBottom()
 }
 
 
@@ -58,7 +65,6 @@ function inserirConversa(idUser1, idUser2, pfp) {
             if (response.result === 1) {
                 var room = response.room.room; 
                 
-                console.log('ID da conversa (room) criada:', room);
                 var url = 'chat.php?room=' + encodeURIComponent(room) + "&pfp=" + encodeURIComponent(pfp);
 
 
@@ -85,8 +91,9 @@ function checkForGetParameter() {
     var pfpParam = urlParams.get('pfp');
 
     if (!isNaN(roomParam)) {
-        console.log('Parâmetro room encontrado:', roomParam);
         atualizarChat(roomParam, pfpO, pfpI);
+        scrollToBottom()
+        
     } else {
         
         var idnew = document.querySelector(".ID_NEW").value
@@ -98,8 +105,10 @@ function checkForGetParameter() {
 
 
 
-
-
+window.onload = function() {
+    scrollToBottom();
+};
 
  setInterval(checkForGetParameter, 100);
+ setInterval(scrollToBottom, 100);
 checkForGetParameter();

@@ -75,11 +75,20 @@ body{
 .input-icon > input {
   
   border-radius: 6px !important;
-  width: calc(100% - 44px) !important;
+  width: calc(100% - 34px) !important;
   padding: 10px !important;
   border: none !important;
   outline: none !important;  
   
+}
+
+
+.send-button-filter{
+  padding: 10px !important;
+  border: none !important;
+  outline: none !important;  
+  border-radius: 6px !important;
+  background-color: var(--sidebar-color);
 }
 
 .input-icon svg {
@@ -186,3 +195,5 @@ background-color: var(--sidebar-color);
     box-shadow: none !important;
   margin-left: 10px;
   }
+
+

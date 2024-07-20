@@ -49,10 +49,22 @@ class Manager extends Conexao{
 }
 
         //exit(); 
-        public function admTable($busca, $campo) {
-            if($busca == "0" || $campo =="0"){
+        public function admTable($busca) {
+
+            if($busca["status"] == "" && $busca["poder"] =="" && $busca["pesquisa"] == ""){
             $sql = "SELECT * FROM administradores;";
+            }else if($busca["status"] != "" && $busca["poder"] != ""){
+                $sql = "SELECT * FROM administradores WHERE poder = {$busca["poder"]} AND status = {$busca["status"]}";
+            }else if($busca["status"] != "" && $busca["poder"] == ""){
+                $sql = "SELECT * FROM administradores WHERE status = {$busca["status"]}";
+            }else if ($busca["status"] == "" && $busca["poder"] != ""){
+                $sql = "SELECT * FROM administradores WHERE poder = {$busca["poder"]}";
+            }else if ($busca["pesquisa"] != ""){
+
+                $pesquisa = $busca["pesquisa"];
+                $sql = "SELECT * FROM administradores WHERE nome LIKE '%$pesquisa%'  OR email LIKE '%$pesquisa%' ";
             }
+
             $res = $this->connect()->query($sql);
         
             if (!$res) {

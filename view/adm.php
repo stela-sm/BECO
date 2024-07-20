@@ -27,15 +27,22 @@
   }
     </style>
 </head>
+<?php
+$status = isset($_GET['status']) ? $_GET['status'] : '';
+$poder = isset($_GET['poder']) ? $_GET['poder'] : '';
+
+function isSelected($status, $valorComparacao) {
+    return ($status === $valorComparacao) ? 'selected' : '';
+}
+?>
 <body>
     <section>
     <div class="col-12 header-col">
-        <span class="title-section">Administradores</span>
-           <table class="adm-filters-table  col-5 ">
+        <span class="title-section">Administradores</span>  
+        <table class="adm-filters-table  col-4 ">
+          <form action="adm.php" method="get">
             <tr>
-                <th>
-                    Data
-                </th>
+             
                 <th>
                     Status
                 </th>
@@ -48,26 +55,14 @@
             </tr>
 
             <tr>
-                <td class="td-input select-wrapper">
-                  <div class="input-icon"><input type="date" value="2024-01-01" id="dateInput" class="  input-search date">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-search" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M11.5 21h-5.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4.5" />
-                    <path d="M16 3v4" />
-                    <path d="M8 3v4" />
-                    <path d="M4 11h16" />
-                    <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                    <path d="M20.2 20.2l1.8 1.8" />
-                  </svg></div> </td>
-
-
+               
 
                   <td class="td-input ">
                     <div class="input-icon select-wrapper">
-                    <select name="" class="input-search" id="">
-                      <option value="2" selected>Todos</option>
-                      <option value="1">Ativo</option>
-                      <option value="0">Inativo</option>
+                    <select name="status" class="input-search" id="">
+                      <option value="" <?php echo isSelected($status, '2'); ?> selected>Todos</option>
+                      <option value="1" <?php echo isSelected($status, '1'); ?> >Ativo</option>
+                      <option value="0" <?php echo isSelected($status, '0'); ?> >Inativo</option>
                     </select>
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-arrow-down" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -81,13 +76,13 @@
 
                     <td class="td-input ">
                       <div class="input-icon select-wrapper">
-                      <select name="" class="input-search" id="">
-                        <option value="0" selected>Todos</option>
-                        <option value="1">1 - Assistente</option>
-                        <option value="2">2 - Deapartamento</option>
-                        <option value="3">3 - Sitema</option>
-                        <option value="4">4 - Administrador</option>
-                        <option value="5">5 - Sysop</option>
+                      <select name="poder" class="input-search" id="">
+                        <option value="" <?php echo isSelected($poder, '0'); ?>selected>Todos</option>
+                        <option value="1"  <?php echo isSelected($poder, '1'); ?>>1 - Assistente</option>
+                        <option value="2"  <?php echo isSelected($poder, '2'); ?>>2 - Deapartamento</option>
+                        <option value="3"  <?php echo isSelected($poder, '3'); ?>>3 - Sistema</option>
+                        <option value="4"  <?php echo isSelected($poder, '4'); ?>>4 - Administrador</option>
+                        <option value="5"  <?php echo isSelected($poder, '5'); ?>>5 - Sysop</option>
                       </select>
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-arrow-down" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -97,6 +92,15 @@
                         <path d="M16 12l-4 4" />
                       </svg></div> </td>
 
+                      <td>
+                        <button type="submit" class="send-button-filter">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-filter-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M11.18 20.274l-2.18 .726v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v3" />
+  <path d="M15 19l2 2l4 -4" />
+</svg></button>
+                      </td>
+                      </form>
             </tr>
            </table> 
     </div>
@@ -147,7 +151,25 @@
 <?php
 require "../model/manager.class.php";
 $manager = new Manager();
-$r = $manager-> admTable("0","0");
+$pesquisa = [];
+
+if (isset($_GET["pesquisa"])){
+  $pesquisa["pesquisa"] = $_GET["pesquisa"];
+}else{
+  $pesquisa["pesquisa"] = "";
+}
+
+if(isset($_GET["status"])){
+  $pesquisa["status"] = $_GET["status"];
+}else{
+  $pesquisa["status"] = "";
+}
+if(isset($_GET["poder"])){
+  $pesquisa["poder"] = $_GET["poder"];
+  }else{
+    $pesquisa["poder"] = "";
+    }
+$r = $manager-> admTable($pesquisa);
 
 for($i=0;$i<$r["result"];$i++){
   echo "
