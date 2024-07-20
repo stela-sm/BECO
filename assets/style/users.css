@@ -90,6 +90,13 @@ background-color: var(--sidebar-color);
 }
 
 
+.send-button-filter{
+  padding: 10px !important;
+  border: none !important;
+  outline: none !important;  
+  border-radius: 6px !important;
+  background-color: var(--sidebar-color);
+}
 /*----------ÍNDICES DA TABELA ----------------*/
 
 .table-header-col{

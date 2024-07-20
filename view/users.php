@@ -27,14 +27,27 @@
   }
     </style>
 </head>
+<?php
+$status = isset($_GET['status']) ? $_GET['status'] : '';
+if (isset($_GET['data'])){
+  $data = $_GET['data'];
+};
+
+function isSelected($status, $valorComparacao) {
+  return ($status === $valorComparacao) ? 'selected' : '';
+}
+
+?>
 <body>
-    <section>
+  
+<section>
     <div class="col-12 header-col">
         <span class="title-section">Usuários</span>
+        <form action="users.php" method="get">
            <table class="adm-filters-table  col-3 ">
             <tr>
                 <th>
-                    Data
+                    Data (A partir de)
                 </th>
                 <th>
                     Status
@@ -47,7 +60,10 @@
 
             <tr>
                 <td class="td-input select-wrapper">
-                  <div class="input-icon"><input type="date" value="2024-01-01" id="dateInput" class="  input-search date">
+                  <div class="input-icon"><input type="date" value="<?php 
+                  if (isset($_GET['data'])){
+                  echo $_GET['data'];};?>"
+                  id="dateInput" name="data" class="  input-search date">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-search" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M11.5 21h-5.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4.5" />
@@ -62,10 +78,10 @@
 
                   <td class="td-input ">
                     <div class="input-icon select-wrapper">
-                    <select name="" class="input-search" id="">
-                      <option value="2" selected>Todos</option>
-                      <option value="1">Ativo</option>
-                      <option value="0">Inativo</option>
+                    <select name="status" class="input-search" id="">
+                      <option value="" <?php echo isSelected($status, ''); ?> selected>Todos</option>
+                      <option value="1" <?php echo isSelected($status, '1'); ?> >Ativo</option>
+                      <option value="0" <?php echo isSelected($status, '0'); ?> >Inativo</option>
                     </select>
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-arrow-down" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -74,7 +90,17 @@
                       <path d="M12 8v8" />
                       <path d="M16 12l-4 4" />
                     </svg></div> </td>
+
+                    <td>
+                        <button type="submit" class="send-button-filter">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-filter-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M11.18 20.274l-2.18 .726v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v3" />
+  <path d="M15 19l2 2l4 -4" />
+</svg></button>
+                      </td>
             </tr>
+            </form>
            </table> 
     </div>
 </section>
@@ -121,7 +147,25 @@
 <?php
 require "../model/manager.class.php";
 $manager = new Manager();
-$r = $manager-> userTable("0","0");
+$pesquisa = [];
+
+if (isset($_GET["pesquisa"])){
+  $pesquisa["pesquisa"] = $_GET["pesquisa"];
+}else{
+  $pesquisa["pesquisa"] = "";
+}
+
+if(isset($_GET["status"])){
+  $pesquisa["status"] = $_GET["status"];
+}else{
+  $pesquisa["status"] = "";
+}
+if(isset($_GET["data"])){
+  $pesquisa["data"] = $_GET["data"];
+  }else{
+    $pesquisa["data"] = "";
+    }
+$r = $manager-> userTable($pesquisa);
 
 for($i=0;$i<$r["result"];$i++){
       echo "<tr class='table-content-row'>

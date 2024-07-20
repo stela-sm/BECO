@@ -234,10 +234,21 @@ class Manager extends Conexao{
 
 
 
-    public function userTable($busca, $campo) {
-        if($busca == "0" || $campo =="0"){
+    public function userTable($busca) {
+        if($busca["status"] == "" && $busca["data"] =="" && $busca["pesquisa"] == ""){
         $sql = "SELECT * FROM usuario;";
-        }
+            }else if($busca["status"] != "" && $busca["data"] != ""){
+                $sql = "SELECT * FROM usuario WHERE datahora <= {$busca["data"]} AND status = {$busca["status"]}";
+            }else if($busca["status"] != "" && $busca["data"] == ""){
+                $sql = "SELECT * FROM usuario WHERE status = {$busca["status"]}";
+            }else if ($busca["status"] == "" && $busca["data"] != ""){
+                $sql = "SELECT * FROM usuario WHERE datahora <= {$busca["data"]}";
+            }else if ($busca["pesquisa"] != ""){
+
+                $pesquisa = $busca["pesquisa"];
+                $sql = "SELECT * FROM usuario WHERE username LIKE '%$pesquisa%' OR email LIKE '%$pesquisa%' ";
+            }
+      
         $res = $this->connect()->query($sql);
     
         if (!$res) {
