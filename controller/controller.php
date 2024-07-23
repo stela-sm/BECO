@@ -328,5 +328,93 @@ $log->fileWriter();
 
 }
 
+
+if(isset($_REQUEST["recuperar"])){
+    
+    $email = $_REQUEST["email"];
+    require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> emailVerif($email);
+
+if($r!=1){
+    ?>
+    <form action="../index.php" name="return" id="return" method="get">
+    <input type="hidden" name="erro" value="OP50">
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+<?php
+}else{
+    require('../mailer/mailer.php');
+    $dados["pessoa"] = "Administrador";
+    $dados["assunto"] = "Recuperação de senha";
+    $dados["email"] = $email;
+
+    $r = enviarEmail($dados);
+    session_start();
+    $_SESSION["email"] = "$email";
+  ?>
+    <form action="../index.php" name="return" id="return" method="get">
+    <input type="hidden" name="form2" value=1>
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+<?php
+}
+}
+
+
+
+if(isset($_REQUEST["verificar"])){
+    $cod = $_REQUEST["codigo"];
+    require "../model/manager.class.php";
+    $manager = new Manager();
+    $r = $manager-> verificar_cod($cod);
+  
+    if($r!=1){
+        ?>
+        <form action="../index.php" name="return" id="return" method="get">
+        <input type="hidden" name="form2" value="OP50">
+        </form>
+        <script>
+            document.getElementById("return").submit();
+        </script>
+    <?php
+    }else{
+        ?>
+        <form action="../index.php" name="return" id="return" method="get">
+        <input type="hidden" name="senha" value=1>
+        </form>
+        <script>
+            document.getElementById("return").submit();
+        </script>
+    <?php
+    }
+}
+
+    if(isset($_REQUEST["newpass"])){
+        
+        $senha = $_REQUEST["senha"];
+        require "../model/ferramentas.class.php";
+        $ferramentas = new Ferramentas();
+        $senhaCript = $ferramentas->sha256($senha);
+        require "../model/manager.class.php";
+        $manager = new Manager();
+        $email = $_SESSION["email"];
+        $r = $manager-> alterarSenha($senhaCript, $email);
+     ?>
+        <form action="../index.php" name="return" id="return" method="get">
+        <input type="hidden" name="sucesso" value=1>
+        </form>
+        <script>
+            document.getElementById("return").submit();
+        </script>
+    <?php
+        echo "AAAAAAA";
+        }
+    
+
 ?>
            

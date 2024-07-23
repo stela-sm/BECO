@@ -34,6 +34,10 @@
 body{
     font-family: radikal-bold;
 }
+.display-none{
+    display:none;
+}
+
 .container-center{
     text-align: center;
     align-items: center;

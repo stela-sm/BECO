@@ -121,7 +121,7 @@
 <?php
 require "../model/manager.class.php";
 $manager = new Manager();
-$r = $manager-> userTable("0","0");
+$r = $manager-> chamadosTable("0","0");
 
 for($i=0;$i<$r["result"];$i++){
       echo "<tr class='table-content-row'>

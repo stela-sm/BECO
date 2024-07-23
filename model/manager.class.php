@@ -552,5 +552,79 @@ class Manager extends Conexao{
             $this->connect()->close();
             return $dados;
         }
+    
+
+
+    public function chamadosTable(){
+
     }
+
+
+
+
+
+
+
+
+ public function inserirCod($codigo){ 
+  
+   
+     $sql="INSERT INTO codigos (codigo, datahora) VALUES ('$codigo', now())";
+     $this->connect()->query($sql);
+      $this->connect()->close();
+     return;
+ }
+
+
+public function verificar_cod($dados){
+
+    $sql="SELECT * FROM codigos WHERE codigo = '$dados' ";
+    $res = $this->connect()->query($sql);
+
+    if($res->num_rows > 0){
+      $dados = "1";
+      $this->connect()->close();
+        return $dados;
+    }    else{
+        $this->connect()->close();
+        $dados = "0";
+        return $dados;
+   }
+
+
+ } 
+
+
+
+public function emailVerif($email){
+    $sql="SELECT * FROM administradores WHERE email = '$email'";
+    $res = $this->connect()->query($sql);
+    if($res->num_rows > 0){
+        $dados = "1";
+        $this->connect()->close();
+        return $dados;
+        }    else{
+            $this->connect()->close();
+            $dados = "0";
+            return $dados;
+            }
+}
+
+public function alterarSenha($senha, $email){
+    $sql="UPDATE administradores SET senha = '$senha' WHERE email = '$email'";
+    $res = $this->connect()->query($sql);
+    if($res){
+        $dados = "1";
+        $this->connect()->close();
+        return $dados;
+        }    else{
+            $this->connect()->close();
+            $dados = "0";
+            return $dados;
+            }
+            
+
+}
+
+}
 ?>
