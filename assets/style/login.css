@@ -77,3 +77,56 @@ body{
     padding: 80px;
     border-radius: 10px;
 }
+
+
+.modal{
+
+font-family: radikal-medium;
+
+}
+.modal h5{
+    margin-left: 10px;
+    color: #272728;
+}
+.modal .icons-modal{
+    margin-top: 3px;
+}
+
+.label-rec{
+    font-family: radikal-light;
+}
+.input-rec{
+    font-family: radikal-light;
+    border: 1px solid #b7b7b8;
+    border-radius: 6px;
+    width: 80%;
+    padding: 5px 10px;
+}
+
+.send-btn{
+    background-color: #133c2f;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    width: 15%;
+    padding: 5px 10px;
+
+}
+
+.sucesso{
+    color: green;
+    font-family: radikal-medium;
+}
+.erro{
+    color: red;
+    font-family: radikal-medium;
+}
+
+
+.button-password{
+background-color: transparent;
+border: none;
+font-family: radikal-light;
+text-decoration: underline;
+font-size: 0.8em;
+}

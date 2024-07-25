@@ -21,8 +21,7 @@
         <input type="text" placeholder="Email..." id="adm" name="adm"><br/>
         <input type="password" placeholder="Senha..." id="" name="senha"><br/><br/>
         <input type="submit" value="Entrar"/>
-        <button type="button" class="button-password" data-toggle="modal" data-target="#modalExemplo">
-  Esqueci minha senha
+        <button type="button" class="button-password" data-toggle="modal" data-target="#modalExemplo">Esqueci minha senha
 </button>   
     </form>
     </form>
@@ -44,10 +43,16 @@ if(isset($_REQUEST["msg"])){
 
 <!-- Modal -->
 
-<div class="modal fade" id="modalExemplo" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalExemplo" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-check icons-modal" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M11 19h-6a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v6" />
+  <path d="M3 7l9 6l9 -6" />
+  <path d="M15 19l2 2l4 -4" />
+</svg>
         <h5 class="modal-title" id="exampleModalLabel">Recuperar Senha</h5>
         <button type="button" onclick="limpar();" class="close" data-dismiss="modal" aria-label="Fechar">
           <span aria-hidden="true">&times;</span>
@@ -59,8 +64,13 @@ if(isset($_REQUEST["msg"])){
       <form method="post" class="form_1 <?php if(isset($_REQUEST["form2"]) || isset($_REQUEST["senha"]) || isset($_REQUEST["sucesso"]) || isset($_REQUEST["erro"])){echo 'display-none';}?>" action="controller/controller.php?recuperar=1">
         <input type="hidden" name="recuperar" value=1>
         <label class="label-rec" for="email">Insira seu email cadastrado para receber o código de verificação</label>
+        <br><br>
         <input type="text" class="input-rec" required placeholder="Email..." id="email" name="email">
-        <button type="submit" class="btn btn-primary">Verificar</button>
+        <button type="submit" class="send-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 6l6 6l-6 6" />
+</svg></button>
         
     </form> 
 
@@ -71,11 +81,14 @@ if(isset($_REQUEST["msg"])){
     <form method="post" class="form_2 <?php if(!isset($_REQUEST["form2"])){echo 'display-none';}?>" action="controller/controller.php?verificar=1">
         <label class="label-rec" for="email">Insira o código recebido no
             email</label>
+            <br><br>
             <input type="text" class="input-rec" required placeholder="Código..." id="codigo" name="codigo">
      
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Verificar</button>
-        </div> 
+      <button type="submit" class="send-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 6l6 6l-6 6" />
+</svg></button>
         </form>
    
 
@@ -85,11 +98,14 @@ if(isset($_REQUEST["msg"])){
 
         <form method="post" class="form_2 <?php if(!isset($_REQUEST["senha"])){echo 'display-none';}?>" action="controller/controller.php?newpass=1">
         <label class="label-rec" for="email">Defina uma nova senha</label>
-            <input type="password" class="input-rec" minlength="6" required placeholder="Mínimo de 6 caracteres" id="senha" name="senha">
+        <br><br>    
+        <input type="password" class="input-rec" minlength="6" required placeholder="Mínimo de 6 caracteres" id="senha" name="senha">
      
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Verificar</button>
-        </div> 
+      <button type="submit" class="send-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 6l6 6l-6 6" />
+</svg></button>
         </form>
 
 
@@ -97,16 +113,16 @@ if(isset($_REQUEST["msg"])){
 
 
 
-        <form method="post" class="form_1 <?php if(!isset($_REQUEST["erro"])){echo 'display-none';}?> ">
-            <p>Dados inválidos, por favor tente novamente</p>    
+        <form method="post" class="form_1 erro <?php if(!isset($_REQUEST["erro"])){echo 'display-none';}?> ">
+            <p> <span class="erro"> Dados inválidos </spam>, por favor tente novamente</p>    
     </form>
 
 
   
 
 
-    <form method="post" class="form_1 <?php if(!isset($_REQUEST["sucesso"])){echo "display-none";}?> ">
-            <p>Senha alterada com sucesso!</p>    
+    <form method="post" class="form_1 sucesso <?php if(!isset($_REQUEST["sucesso"])){echo "display-none";}?> ">
+            <p>Senha alterada com <span class="sucesso"> sucesso!</spam></p>    
     </form>
 
 
