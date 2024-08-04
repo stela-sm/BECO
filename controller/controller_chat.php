@@ -1,7 +1,10 @@
 <?php
 session_start();
 
+$key= "FCRIiJHS139fJvs91euZCdVqmgmiC8EK";
 if (isset($_REQUEST["inserir"])) {
+    require_once('../model/ferramentas.class.php');
+    $ferramentas = new Ferramentas();
      
     $conn = new mysqli('localhost', 'root', '', 'beco_bd');
 
@@ -9,11 +12,12 @@ if (isset($_REQUEST["inserir"])) {
     $idConversa = $_REQUEST["id_conversa"];
     $idRemetente = $_REQUEST["id_remetente"];
     $textoMensagem = $_REQUEST["texto_mensagem"];
+   $texto =  $ferramentas->criptografar($textoMensagem,$key);
 
     $sql = "INSERT INTO mensagens (id_conversa, id_remetente, texto_mensagem, datahora) VALUES (?, ?, ?, NOW())";
     $stmt = $conn->prepare($sql);
 
-    $stmt->bind_param('iis', $idConversa, $idRemetente, $textoMensagem);
+    $stmt->bind_param('iis', $idConversa, $idRemetente, $texto);
     $result = $stmt->execute();
 
     if ($result) {
@@ -40,7 +44,7 @@ if(isset($_REQUEST["select"])){
     $manager = new Manager();
     $idConversa = $_GET['id_conversa']; // Substitua '1' pelo ID da conversa desejada
    
-$r = $manager->showMessages($idConversa);
+$r = $manager->showMessages($idConversa,$key);
 
 echo json_encode($r);
 }

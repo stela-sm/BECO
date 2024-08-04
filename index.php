@@ -53,7 +53,7 @@ if(isset($_REQUEST["msg"])){
   <path d="M3 7l9 6l9 -6" />
   <path d="M15 19l2 2l4 -4" />
 </svg>
-        <h5 class="modal-title" id="exampleModalLabel">Recuperar Senha</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Atenção</h5>
         <button type="button" onclick="limpar();" class="close" data-dismiss="modal" aria-label="Fechar">
           <span aria-hidden="true">&times;</span>
         </button>

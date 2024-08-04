@@ -107,6 +107,12 @@
     </style>
 </head>
 <body>
+  <?php
+  require "../model/manager.class.php";
+  $manager = new Manager();
+  $users = $manager-> quantidade("usuario");
+  
+  ?>
     <section>
         
             <div class="col-12 upper-cards-col">
@@ -123,7 +129,7 @@
                       </svg>
                     </a>
                     <a href="" class="text-card">
-                    <span class="data-card">134,8K</span>
+                    <span class="data-card"><?php echo $users;?></span>
                     <span class="name-card">Usuários</span>
                 </a>
                                   

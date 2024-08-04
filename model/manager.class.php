@@ -325,64 +325,13 @@ class Manager extends Conexao{
 
 
 
-    public function verifyMailTabCliente($email){
-        $sql = "SELECT * FROM cliente WHERE email = '{$email}'";
-        $res = $this->connect()->query($sql);
-        $dados=array();
-        $dados["result"] = 1;
-        while($row=$res->fetch_assoc()){
-            $dados["id"] = $row["ID_CLIENTE"];
-            $dados["nome"] = $row["nome"];
-            $dados["email"] = $row["email"];
-        }
-        //exit(); 
-        if($res->num_rows > 0){
-            $this->connect()->close();
-            $dados['result'] = 1;
-            return $dados;
-        }else{
-            $this->connect()->close();
-            $dados['result'] = 0;
-            return $dados;
-        }
-    }
 
-    public function insertNewClientTemp($dados){
 
-        $sql = "INSERT INTO cliente_temp (string,pnome,snome,email,senha,cidade,uf,datahora,status) VALUES ('{$dados["string"]}','{$dados["pnome"]}','{$dados["snome"]}','{$dados["email"]}','{$dados["senha"]}','{$dados["cidade"]}','{$dados["uf"]}',now(),1)";
+    public function showMessages($idConversa,$key) {
         
-        $res = $this->connect()->query($sql);
-        if($res->num_rows > 0){
-            $this->connect()->close();
-            $data['result'] = 1;
-            return $data;
-        }else{
-            $this->connect()->close();
-            $data['result'] = 0;
-            return $data;
-        }
-    }
-
-    public function insertNewClient($dados){
-
-        $sql = "INSERT INTO cliente (pnome,snome,email,senha,cidade,uf,datahora,status) VALUES ('{$dados["pnome"]}','{$dados["snome"]}','{$dados["email"]}','{$dados["senha"]}','{$dados["cidade"]}','{$dados["uf"]}',now(),1)";
-        
-        $res = $this->connect()->query($sql);
-        if($res->num_rows > 0){
-            $this->connect()->close();
-            $data['result'] = 1;
-            return $data;
-        }else{
-            $this->connect()->close();
-            $data['result'] = 0;
-            return $data;
-        }
-    }
-
-
-
-
-    public function showMessages($idConversa) {
+        require_once('../model/ferramentas.class.php');
+        $ferramentas = new Ferramentas();
+         
         $sql = "SELECT m.ID_MENSAGEM, m.texto_mensagem, m.datahora, u.ID_ADM AS id_remetente, u.nome AS nome_remetente, 
                        c.id_user1, a1.nome AS nome_user1, 
                        c.id_user2, a2.nome AS nome_user2
@@ -407,7 +356,7 @@ class Manager extends Conexao{
             while ($row = $res->fetch_assoc()) {
                 $mensagens[$i] = [
                     'ID_MENSAGEM' => $row['ID_MENSAGEM'],
-                    'texto_mensagem' => $row['texto_mensagem'],
+                    'texto_mensagem' => $ferramentas-> descriptografar($row['texto_mensagem'],$key),
                     'datahora' => $row['datahora'],
                     'id_remetente' => $row['id_remetente'],
                     'id_user1' => $row['id_user1'],
@@ -624,6 +573,37 @@ public function alterarSenha($senha, $email){
             }
             
 
+}
+
+
+public function quantidade($tabela){
+    $sql = "SELECT COUNT(*) FROM $tabela";
+    $res = $this->connect()->query($sql);
+    $dados = $res->fetch_row();
+    $this->connect()->close();
+    return $dados[0];
+    
+}
+
+
+public function getClientIP() {
+    $ipaddress = '';
+    if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } elseif (isset($_SERVER['HTTP_X_FORWARDED'])) {
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    } elseif (isset($_SERVER['HTTP_FORWARDED_FOR'])) {
+        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    } elseif (isset($_SERVER['HTTP_FORWARDED'])) {
+        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    } elseif (isset($_SERVER['REMOTE_ADDR'])) {
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    } else {
+        $ipaddress = 'UNKNOWN';
+    }
+    return $ipaddress;
 }
 
 }

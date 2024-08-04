@@ -61,6 +61,7 @@ body{
 }
  .pfp-circle img{
   border-radius: 50%;
+  min-width: 25vh;
   max-width: 25vh;
 }
 .coluna-lateral .name-span{

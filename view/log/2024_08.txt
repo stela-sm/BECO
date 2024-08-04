@@ -1,0 +1,6 @@
+2024-08-05 01:31:45 - ::1 - Erro no login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-08-05 01:32:42 - ::1 - Erro no login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-08-05 01:33:26 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-08-05 01:45:43 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-08-05 01:46:18 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-08-05 01:49:39 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.

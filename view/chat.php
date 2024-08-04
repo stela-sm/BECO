@@ -43,7 +43,8 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
         <ul class="chatbox">
 
 <script>
-   
+  
+
             function atualizarChat(idConvo, imgO, imgI) {
                 console.log(idConvo, imgO, imgI)
                 $.ajax({
@@ -78,6 +79,8 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
                                 );
                             }
                         }
+                        
+
                     },
                     error: function(xhr, status, error) {
                         console.error('Erro na requisição:', error);

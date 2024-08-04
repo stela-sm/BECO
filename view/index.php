@@ -110,7 +110,7 @@ session_start();
                 </li>
 <br><br>
                 <li class="nav-link">
-                    <a href="logout.php" target="iframe">
+                    <a href="../controller/logout.php" >
                         <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
@@ -166,6 +166,10 @@ session_start();
     <iframe id="iframe" class="iframe" name="iframe" src="" frameborder="0" ></iframe>
 </section>
 
+
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -176,8 +180,8 @@ session_start();
         <tr>
         <td class="spacing-right">
      <div class="pfp-circle">
-            <form action="../controller/controller.php?adm_update=<?php echo $r[0]["ID_ADM"]?>" name="form_adm_update" enctype="multipart/form-data" enctype="multipart/form-data" id="form_adm_update" method="post">
-            <img src="../assets/media/pfp/IMG.jpeg" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
+            <form action="../controller/controller.php?adm_update=<?php echo $_SESSION["ADM_ID"]?>" name="form_adm_update" enctype="multipart/form-data" enctype="multipart/form-data" id="form_adm_update" method="post">
+            <img src="../assets/media/pfp/<?php echo $_SESSION["ADM_PFP"]?>" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
             </div>
             </td>
             <td>

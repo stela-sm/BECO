@@ -40,11 +40,23 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
         <div class="col-2 coluna-lateral">
             <div class="pfp-circle">
             <form action="../controller/controller.php?adm_update=<?php echo $r[0]["ID_ADM"]?>" name="form_adm_update" enctype="multipart/form-data" enctype="multipart/form-data" id="form_adm_update" method="post">
-            <img src="../assets/media/pfp/<?php echo $r[0]['pfp'];  ?>" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
+           
+           
+            <img src="../assets/media/pfp/<?php echo $r[0]['pfp'];  ?>" id="botao_imagem" alt="Selecionar 
+          Imagem" style="cursor: pointer;">
             </div>
             
+            
             <input type="hidden" name="old_pfp" value="<?php echo $r[0]['pfp'];  ?>">
-            <input type="file" id="input_file" name="pfp" disabled required name="pfp" style="display:none;">
+            
+            
+            
+            <input type="file" id="input_file" name="pfp" disabled name="pfp" style="display:none;" value="">
+
+
+
+
+
             <span class="name-span"><?php echo $r[0]["nome"]?></span>
             <span class="data-span"><?php echo $r[0]["data"] ?></span>
                 <table>

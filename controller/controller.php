@@ -186,8 +186,7 @@ $log->fileWriter();
 
 
 if(isset($_REQUEST["adm_update"])){
-
-  
+    
     $dados = [
         'id' => $_REQUEST['adm_update'],
         'nome' => $_REQUEST['nome'],
@@ -202,18 +201,21 @@ if(isset($_REQUEST["adm_update"])){
         'cpf' => $_REQUEST['cpf'],
         'obs' => $_REQUEST['obs']
     ];
-    if(isset($_FILES["pfp"])){
+
+
+
+    if(isset($_FILES["pfp"]["name"]) and $_FILES["pfp"]["name"]!=""){
         $img = $_FILES["pfp"];
         require_once "../model/ferramentas.class.php";
         $ferramentas = new ferramentas();
         $ext = $ferramentas->pegaExtensao($img["name"]);
         $newName = $ferramentas->geradorMicroTime() . "." . $ext;
         $dados["pfp"] = $newName;
+
+        echo "$newName";
     }else{
         $dados["pfp"] = $_REQUEST["old_pfp"];
     }
-    var_dump($_FILES);
-    var_dump($dados);
 require "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> admUpdate($dados);
@@ -239,7 +241,7 @@ $log->fileWriter();
 
 }else{
 
-    if(isset($_FILES["pfp"])){
+    if(isset($_FILES["pfp"]["name"]) and $_FILES["pfp"]["name"]!="" ){
     $resp = move_uploaded_file($img["tmp_name"],"../assets/media/pfp/".$newName);
     $old_pfp = "../assets/media/pfp/".$_REQUEST["old_pfp"];
     unlink($old_pfp);
@@ -247,7 +249,7 @@ $log->fileWriter();
 }
 
 ?>
-    <form action="../view/adm_view.php?id=<?php echo $id; ?>" name="return" id="return" method="post">
+     <form action="../view/adm_view.php?id=<?php echo $id; ?>" name="return" id="return" method="post">
     <input type="hidden" name="cod" value="OP50">
     </form>
     <script>

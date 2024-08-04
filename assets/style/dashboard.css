@@ -179,3 +179,10 @@ padding: 20px ;
 .number{ 
 font-size: 2em;
 }
+
+
+/*calendáro*/
+
+.ui-datepicker{
+  border:none;
+}
