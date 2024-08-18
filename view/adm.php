@@ -150,6 +150,7 @@ function isSelected($status, $valorComparacao) {
 <section>
 <?php
 require "../model/manager.class.php";
+
 $manager = new Manager();
 $pesquisa = [];
 
@@ -224,6 +225,15 @@ for($i=0;$i<$r["result"];$i++){
 <script>
  
 </script>
-
+<?php
+if(isset($_REQUEST["return"])){
+  echo
+  "
+  <script>
+  alert('Área restrita, seu nível não é suficiente.');
+  </script>
+  ";
+}
+?>
 </body>
 </html>

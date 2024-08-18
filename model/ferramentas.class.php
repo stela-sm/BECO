@@ -84,5 +84,9 @@ public function descriptografar($encryptedMessage, $key)
     return $decryptedMessage;
 }
 
+public function unsetCookie($name) {
+    setcookie($name, '', time() - 3600, '/');
+}
+
 }
 ?>

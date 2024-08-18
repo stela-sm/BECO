@@ -111,6 +111,7 @@
   require "../model/manager.class.php";
   $manager = new Manager();
   $users = $manager-> quantidade("usuario");
+  $acessos = $manager-> quantidade("acessos");
   
   ?>
     <section>
@@ -184,8 +185,8 @@
                           </svg>
                         </a>
                         <a href="" class="text-card">
-                        <span class="data-card">80K</span>
-                        <span class="name-card">Chamados Atendidos</span>
+                        <span class="data-card"><?php echo $users;?></span>
+                        <span class="name-card">Acessos</span>
                     </a>
                                       
                             

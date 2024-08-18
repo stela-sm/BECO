@@ -1,5 +1,37 @@
 <?php 
  session_start();
+if(isset($_REQUEST["cookie"])){
+    
+ require "../model/manager.class.php";
+ $manager = new Manager(); 
+ 
+ require "../model/log.class.php";
+ $log = new Log();
+$cookie = $_COOKIE["ADM_ID"];
+ $r = $manager-> admLoginID($_COOKIE["ADM_ID"]);
+ $ip = $_SERVER['REMOTE_ADDR'];
+     $log->setTexto("{$ip} - Login do administrador {$cookie}, via cookies, pelo dispositivo de ip {$ip}.\n");    $log->fileWriter();
+     $_SESSION["ADM_ID"] = $r["ID_ADM"];
+     $_SESSION["ADM_NOME"] = $r["nome"];
+     $_SESSION["ADM_EMAIL"] = $r["email"];
+     $_SESSION["ADM_PFP"] = $r["pfp"];
+     $_SESSION["ADM_CPF"] = $r["cpf"];
+     $_SESSION["ADM_CEP"] = $r["cep"];
+     $_SESSION["ADM_RG"] = $r["rg"]; 
+     $_SESSION["ADM_PODER"] = $r["poder"];
+     $_SESSION["ADM_NUMERO"] = $r["numero"];
+     $_SESSION["ADM_CELULAR"] = $r["celular"];
+     $_SESSION["ADM_DATAN"] = $r["datan"];
+     $_SESSION["ADM_ESTADO_CIVIL"] = $r["estado_civil"];
+     ?>
+        <form action="../view/index.php" id="return" method="post">
+         <input type="hidden" name="msg" value="FR52">
+       </form>
+       <script>
+         document.getElementById("return").submit();
+       </script> <?php
+}
+
 
 if(isset($_REQUEST["login_adm"])){
             if((!isset($_REQUEST["adm"]) || $_REQUEST["adm"] == "") || (!isset($_REQUEST["senha"])) || $_REQUEST["senha"] == "" ){ //se algum dado do formulário de login estiver
@@ -69,6 +101,7 @@ if($r["result"] == 0){
  }else{
      $ip = $_SERVER['REMOTE_ADDR'];
      $log->setTexto("{$ip} - Login do administrador {$dados['email']} pelo dispositivo de ip {$ip}.\n");    $log->fileWriter();
+     setcookie("ADM_ID", $r["ID_ADM"], time() + (86400 * 30), "/", "", false, true); 
      // gravar log de acesso
      $_SESSION["ADM_ID"] = $r["ID_ADM"];
      $_SESSION["ADM_NOME"] = $r["nome"];

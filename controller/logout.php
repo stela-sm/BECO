@@ -1,6 +1,9 @@
 <?php
 session_start();
 session_destroy();
+require '../model/ferramentas.class.php';
+$ferramentas = new Ferramentas();
+$ferramentas -> unsetCookie('ADM_ID');
 ?>
             <form action="../index.php" name="form" id="myForm" method="post">
             <input type="hidden" name="" value=""><!--"FR01" => "Dado(s) não preenchido(s).",-->
