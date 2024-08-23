@@ -186,3 +186,75 @@ font-size: 2em;
 .ui-datepicker{
   border:none;
 }
+
+
+#calendar-container {
+    max-height: min-content;
+  font-family:radikal-medium ;
+  text-align: center;
+padding-top: -5px;}
+
+#month-year-container {
+  margin-top: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0px;
+}
+
+#month-year {
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+#prev-month, #next-month{
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  
+}
+
+
+
+#calendar {
+  font-size: 0.7em;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+.day, .header {
+  
+  cursor: pointer;
+  padding: 8px;
+  border: none;
+}
+.day{
+  
+  transition: 0.2s;
+  font-family:radikal-light;
+}
+.day:hover{
+  cursor: pointer;
+  transform: scale(0.7);
+  transition: 0.2s;
+}
+
+.today {
+  background-color: #6f3bff;
+  color:white;
+
+  font-family:radikal-medium;
+  border-radius: 6px;
+}
+
+/* Animação de fade */
+.fade {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.fade.show {
+  opacity: 1;
+}

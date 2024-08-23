@@ -1,0 +1,125 @@
+@font-face {
+    font-family: radikal-medium;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Medium.otf);
+  }
+  @font-face {
+    font-family: radikal-bold;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Bold.otf);
+  }
+  @font-face {
+    font-family: radikal-light;
+    src: url(../Radikal/Nootype\ -\ Radikal\ Thin.otf);
+  }
+:root{
+    /*****  cores  *****/
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+     --primary-color: lightblue;
+    /*--secondary-color:;
+    --toogle-color:; */
+    --text-color:#707070;
+
+    /* transições */
+
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease 
+
+    /***** tipografia *****/
+    
+
+}
+
+body{
+  background-color: var(--body-color) !important ;
+  width: 99% !important;
+}
+
+/*------------------HEADER --------------*/
+
+.col-banner, .col-concursos, .col-direita{
+  background-color: var(--sidebar-color);
+  padding: 20px 20px !important;
+  border-radius: 6px;
+}
+.col-banner{
+  margin-top: 15px;
+}
+.title-section{
+  font-family: radikal-medium;
+  font-size: 1.5em;
+   
+}
+table{
+  font-family: radikal-light;
+ color: var(--text-color);
+ width: 100%;
+  margin-top: 2%;
+  background-color: var(--sidebar-color);
+  border-radius: 6px;
+}
+
+.label-padrao, .input-padrao{
+  width: 40% !important;
+}
+.label-padrao{
+  font-family: radikal-light;
+ color: var(--text-color);
+ margin-top: 15px;
+ margin-bottom: -5px;
+}
+.input-padrao{
+  padding: 10px;
+  border:none;
+  border-radius: 6px;
+  background-color: #e6e6e6;
+}
+.input-descricao{  
+  width: 81%;
+  resize: none;
+  padding: 10px;
+  border:none;
+  border-radius: 6px;
+  background-color: #e6e6e6;
+}
+.sendButton{
+  width: 100%;
+  padding-top: 20px;
+  margin-top: 30px;
+  font-family: radikal-medium;
+  background-color: transparent;
+  border: none;
+  border-top: 1px solid #c5c5c5;
+}
+
+.upload-square, .upload-rectangle {
+  border-radius: 6px;
+  margin-top: 10px;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  transition: border-color 0.3s ease;
+
+}
+.upload-rectangle{
+  width: 290px;
+  height: 150px;
+  
+}
+.upload-container {
+  display: flex; 
+  gap: 40px; 
+}
+.upload-square{
+  width: 150px;
+  height: 150px;
+  
+}
+.upload-square:hover, .upload-rectangle:hover {
+  border-color: #888;
+}

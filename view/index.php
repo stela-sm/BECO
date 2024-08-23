@@ -75,7 +75,7 @@ setcookie("ADM_ID", $_SESSION["ADM_ID"], time() + (86400 * 30), "/", "", false, 
         
 
                 <li class="nav-link">
-                    <a href="dashboard.html" target="iframe">
+                    <a href="transacoes.php" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
@@ -87,16 +87,23 @@ setcookie("ADM_ID", $_SESSION["ADM_ID"], time() + (86400 * 30), "/", "", false, 
                 </li>
 
                 <li class="nav-link">
-                    <a href="chamados.php" target="iframe">
-                       <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-exclamation-mark" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M12 19v.01" />
-                        <path d="M12 15v-10" />
-                      </svg></span>
-                          <span class="text nav-text">Chamados</span>
+                    <a href="developers.php" target="iframe">
+                       <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code-circle" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M10 14l-2 -2l2 -2" />
+  <path d="M14 10l2 2l-2 2" />
+  <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+</svg></span>
+                          <span class="text nav-text">Developer</span>
                     </a>
                 </li>
 
+                <li class="nav-link">
+                    <a href="chamados.php" target="iframe">
+                       <span><svg  xmlns="http://www.w3.org/2000/svg"  width="26"  height="26"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-message-circle-exclamation"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15.02 19.52c-2.34 .736 -5 .606 -7.32 -.52l-4.7 1l1.3 -3.9c-2.324 -3.437 -1.426 -7.872 2.1 -10.374c3.526 -2.501 8.59 -2.296 11.845 .48c1.96 1.671 2.898 3.963 2.755 6.227" /><path d="M19 16v3" /><path d="M19 22v.01" /></svg></span>
+                          <span class="text nav-text">Chamados</span>
+                    </a>
+                </li>
                 <li class="nav-link">
                     <a href="registros.php" target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-databricks" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -172,7 +179,7 @@ setcookie("ADM_ID", $_SESSION["ADM_ID"], time() + (86400 * 30), "/", "", false, 
     </div>
 </section>
 <section>
-    <iframe id="iframe" class="iframe" name="iframe" src="" frameborder="0" ></iframe>
+    <iframe id="iframe" class="iframe" name="iframe" src="dashboard.php" frameborder="0" ></iframe>
 </section>
 
 

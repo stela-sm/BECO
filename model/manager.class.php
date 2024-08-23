@@ -365,9 +365,65 @@ public function admLoginID($dados){
 
 
 
+       public function getUsersByMonth() {
+            $sql = "SELECT MONTH(datahora) AS month, YEAR(datahora) AS year, COUNT(*) AS count 
+                    FROM usuario 
+                    GROUP BY YEAR(datahora), MONTH(datahora) 
+                    ORDER BY YEAR(datahora), MONTH(datahora)";
+        
+            $result = $this->connect()->query($sql);
+    
+        
+            $months = array_fill(1, 12, 0); // Preenche o array com 0 para cada mês (1 a 12)
+            $data = [];
+        
+            // Verificar se há resultados e preenchê-los no array
+            while ($row = $result->fetch_assoc()) {
+                $month = (int)$row['month'];
+                $year = (int)$row['year'];
+                $count = (int)$row['count'];
+        
+                // Armazenar a contagem de usuários para cada mês
+                $data["$year-$month"] = $count;
+            }
+        
+         
+            $this->connect()->close();
+        
+            // Ordenar os meses
+            foreach ($months as $month => &$value) {
+                $key = date('Y') . '-' . $month; // Adiciona o ano corrente para meses do ano atual
+                $value = isset($data[$key]) ? $data[$key] : 0;
+            }
+            
+            return $months;
+        }
+        
+        
+        
 
-
-
+        function getAccessesByMonth() {
+          
+            // mano como q isso funciona vsfd
+            $sql = "SELECT MONTH(datahora) AS month, COUNT(*) AS count 
+                    FROM acessos 
+                    GROUP BY MONTH(datahora)";
+        
+             $result = $this->connect()->query($sql);
+        
+            $months = array_fill(1, 12, 0); // Preenche o array com 0 para cada mês (1 a 12)
+        
+            // Verificar se há resultados e preenchê-los no array
+            while ($row = $result->fetch_assoc()) {
+                $month = (int)$row['month'];  
+                $count = (int)$row['count'];
+                $months[$month] = $count;
+            }
+        
+            $this->connect()->close();
+            return $months;
+        }
+        
 
 
 
@@ -668,6 +724,98 @@ public function novoAcesso($ip){
     }
     
 
+
+
+    public function getConcursoData() {
+        $sql = "SELECT * FROM concursos";
+        $res = $this->connect()->query($sql);
+    
+        if (!$res) {
+            $this->connect()->close();
+            return ['result' => -1, 'error' => $this->connect()->error];
+        }
+    
+        if ($res->num_rows > 0) {
+            $dados = [];
+            $i = 0;
+            while ($row = $res->fetch_assoc()) {
+                $dados[$i] = [
+                    'ID_CONCURSO' => $row['ID_CONCURSO'],
+                    'titulo'      => $row['titulo'],
+                    'tag'         => $row['tag'],
+                    'descricao'   => $row['descricao'],
+                    'img_anuncio' => $row['img_anuncio'],
+                    'img_banner'  => $row['img_banner'],
+                    'data_inicio' => $row['data_inicio'],
+                    'data_fim'    => $row['data_fim'],
+                    'status'      => $row['status']
+                ];
+                $i++;
+            }
+            $dados['result'] = $i;
+            $this->connect()->close();
+            return $dados;
+        } else {
+            $this->connect()->close();
+            return ['result' => 0];
+        }
+    }
+    
+    public function getUltimaDataFim() {
+        $sql = "SELECT data_fim FROM concursos ORDER BY data_fim DESC LIMIT 1;";
+        $res = $this->connect()->query($sql);
+    
+        if (!$res) {
+            $this->connect()->close();
+            return ['result' => -1, 'error' => $this->connect()->error];
+        }    
+        if ($res->num_rows > 0) {
+            $row = $res->fetch_assoc();
+            $this->connect()->close();
+    
+            // Convertendo a data para um objeto DateTime e adicionando um dia
+            $date = new DateTime($row['data_fim']);
+            $date->modify('+1 day');
+    
+            return ['result' => 1, 'data_fim' => $date->format('Y-m-d')];
+        } else {
+            $this->connect()->close();
+            return ['result' => 0];
+        }
+    }
+    
+
+
+    public function getBannerData() {
+        $sql = "SELECT * FROM banner"; 
+        $res = $this->connect()->query($sql);
+    
+        if (!$res) {
+            $this->connect()->close();
+            return ['result' => -1, 'error' => $this->connect()->error];
+        }
+    
+        if ($res->num_rows > 0) {
+            $dados = [];
+            $i = 0;
+            while ($row = $res->fetch_assoc()) {
+                $dados[$i] = [
+                    'ID_BANNER' => $row['ID_BANNER'],
+                    'img' => $row['img'],
+                    'datahora' => $row['datahora'],
+                    'status' => $row['status']
+                ];
+                $i++;
+            }
+            $dados['result'] = $i; 
+            $this->connect()->close();
+            return $dados;
+        } else {
+            $this->connect()->close();
+            return ['result' => 0]; 
+        }
+    }
+    
 }
 
 

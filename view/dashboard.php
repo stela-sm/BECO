@@ -103,6 +103,11 @@
 }
 
 
+#chart_bars {
+    width: 100% !important; /* Faz o canvas ocupar 100% da largura do contêiner */
+    height: auto; /* Ajusta a altura automaticamente */
+}
+
 
     </style>
 </head>
@@ -112,7 +117,14 @@
   $manager = new Manager();
   $users = $manager-> quantidade("usuario");
   $acessos = $manager-> quantidade("acessos");
-  
+  $transactions = $manager->quantidade("compras");
+  $prod = $manager->quantidade("produtos");
+  $serv = $manager->quantidade("servicos");
+  $post = $prod + $serv;
+  $access = $manager -> getAccessesByMonth(); //não tenho mais criatividade pra nome de variável
+
+  $months = $manager -> getUsersByMonth();
+ 
   ?>
     <section>
         
@@ -149,7 +161,7 @@
                           </svg>
                         </a>
                         <a href="" class="text-card">
-                        <span class="data-card">657K</span>
+                        <span class="data-card"><?php echo $transactions ?></span>
                         <span class="name-card">Transações</span>
                     </a>
                       </li> 
@@ -166,8 +178,8 @@
                           </svg>
                         </a>
                         <a href="" class="text-card">
-                        <span class="data-card">204,8K</span>
-                        <span class="name-card">Uploads</span>
+                        <span class="data-card"><?php echo $post; ?></span>
+                        <span class="name-card">Postagens</span>
                     </a>
                         
                     </li> 
@@ -234,41 +246,23 @@
                 
               </div>
 
-              <div class="col-2 list-col">
-                <span class="graphic-one-title">
-                  Origem dos Usuários
-                </span>
-                <table class="list-table">
-                  <tr>
-                    <td class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-instagram" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" />
-                        <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                        <path d="M16.5 7.5l0 .01" />
-                      </svg>
-                    </td>
-                    <td class="quant">
-                      120
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c0 -.249 1.51 -2.772 1.818 -4.013z" />
-                      </svg>
-                    </td>
-                    <td class="quant">
-                      120
-                    </td>
-                  </tr>
-                </table>
+              <div class="col-2 list-col" style="max-height:300px">
+              <span class="graphic-one-title">
+              Categorias de Posts 
+            </span>
+                
+              <canvas class="chart_bars" id="chart_bars"  style="padding-bottom:10px;"></canvas>
               </div>
                
-              <div class="col-2 list-col">
-              <div class='datepicker'>
-  <div class="datepicker-header"></div>
+              <div class="col-2 list-col" id="calendar-container">
+             
+        <div id="month-year-container">
+            <button id="prev-month"><svg  xmlns="http://www.w3.org/2000/svg"  width="14"  height="14"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-caret-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13.883 5.007l.058 -.005h.118l.058 .005l.06 .009l.052 .01l.108 .032l.067 .027l.132 .07l.09 .065l.081 .073l.083 .094l.054 .077l.054 .096l.017 .036l.027 .067l.032 .108l.01 .053l.01 .06l.004 .057l.002 .059v12c0 .852 -.986 1.297 -1.623 .783l-.084 -.076l-6 -6a1 1 0 0 1 -.083 -1.32l.083 -.094l6 -6l.094 -.083l.077 -.054l.096 -.054l.036 -.017l.067 -.027l.108 -.032l.053 -.01l.06 -.01z" /></svg></button>
+            <div id="month-year"></div>
+            <button id="next-month"><svg  xmlns="http://www.w3.org/2000/svg"  width="14"  height="14"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-caret-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6c0 -.852 .986 -1.297 1.623 -.783l.084 .076l6 6a1 1 0 0 1 .083 1.32l-.083 .094l-6 6l-.094 .083l-.077 .054l-.096 .054l-.036 .017l-.067 .027l-.108 .032l-.053 .01l-.06 .01l-.057 .004l-.059 .002l-.059 -.002l-.058 -.005l-.06 -.009l-.052 -.01l-.108 -.032l-.067 -.027l-.132 -.07l-.09 -.065l-.081 -.073l-.083 -.094l-.054 -.077l-.054 -.096l-.017 -.036l-.027 -.067l-.032 -.108l-.01 -.053l-.01 -.06l-.004 -.057l-.002 -12.059z" /></svg></button>
+        </div>
+        <div id="calendar"></div>
+  
 </div>
               </div>
              
@@ -287,71 +281,46 @@
     </body>
    
 
-<!-- Script jQuery para inicializar o datepicker -->
-<script>
- $(document).ready(function() {
 
-$(".datepicker").datepicker({
-  prevText: '<i class="fa-solid fa-angle-left"></i>',
-  nextText: '<i class="fa-solid fa-angle-right"></i>'
-});
-});
-
-
-</script>
-    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', '', 'Expenses'],
-          ['jan',  1000,      400],
-          ['Fev',  1170,      460],
-          ['Mar',  660,       1120],
-          ['Abr',  1030,      540],
-          ['Mai',  1030,      540],
-          ['Jun',  1030,      540],
-          ['Jul',  1030,      540],
-          ['Ago',  1030,      540],
-          ['Set',  1030,      540],
-          ['Out',  1030,      540],
-          ['Nov',  1030,      540],
-          ['Dez',  1030,      540]
-        
-        ]);
-
-        var options = {
-          title: 'Novos usuários por mês',
-          width: 800,
-          height: 300,
-          display: 'flex',
-          curveType: 'function',
-          font: 'verdana',
-          legend: { position: 'right' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
-      }
-    </script> -->
  
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script>
       Chart.defaults.font.family = 'Radikal-Light';
+
+
+
+
+
+
+
+
+
       const ctx = document.getElementById('chart_users');
-    
+      var data = {
+    "jan":  <?php echo json_encode($months[1]); ?>,
+    "feb":  <?php echo json_encode($months[2]); ?>,
+    "mar": <?php echo json_encode($months[3]); ?>,
+    "apr": <?php echo json_encode($months[4]); ?>,
+    "may": <?php echo json_encode($months[5]); ?>,
+    "jun": <?php echo json_encode($months[6]); ?>,
+    "jul": <?php echo json_encode($months[7]); ?>,
+    "aug": <?php echo json_encode($months[8]); ?>,
+    "sep": <?php echo json_encode($months[9]); ?>,
+    "oct": <?php echo json_encode($months[10]); ?>,
+    "nov": <?php echo json_encode($months[11]); ?>,
+    "dec": <?php echo json_encode($months[12]); ?>
+};
+
+
       new Chart(ctx, {
         type: 'line',
         data: {
           labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
           datasets: [{
             label: '# of Votes',
-            data: [4, 60, 3, 5, 2, 3],
+            data: [data['jan'], data['feb'], data['mar'], data['jun'], data['jul'], data['aug'], data['sep'], data['oct'],data['nov'],data['dec']],
             borderWidth: 1
           }]
         },
@@ -374,6 +343,14 @@ $(".datepicker").datepicker({
         
     }
       });
+
+
+
+
+
+
+
+
 
       const ctx_pie = document.getElementById('chart_pie_users');
     
@@ -415,15 +392,41 @@ $(".datepicker").datepicker({
             }
         });
 
+
+
+
+
+
+
+
+
+
+
+        //chart acessos
         const ctx_view = document.getElementById('chart_view');
-    
+        var data = {
+    "jan": <?php echo json_encode($access[1]); ?>,
+    "feb": <?php echo json_encode($access[2]); ?>,
+    "mar": <?php echo json_encode($access[3]); ?>,
+    "apr": <?php echo json_encode($access[4]); ?>,
+    "may": <?php echo json_encode($access[5]); ?>,
+    "jun": <?php echo json_encode($access[6]); ?>,
+    "jul": <?php echo json_encode($access[7]); ?>,
+    "aug": <?php echo json_encode($access[8]); ?>,
+    "sep": <?php echo json_encode($access[9]); ?>,
+    "oct": <?php echo json_encode($access[10]); ?>,
+    "nov": <?php echo json_encode($access[11]); ?>,
+    "dec": <?php echo json_encode($access[12]); ?>
+};
       new Chart(ctx_view, {
+        
         type: 'line',
+        
         data: {
           labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
           datasets: [{
             label: '# of Votes',
-            data: [4, 4, 3, 5, 2, 3],
+            data: [data['jan'], data['feb'], data['mar'], data['jun'], data['jul'], data['aug'], data['sep'], data['oct'],data['nov'],data['dec']],
             borderWidth: 1
           }]
         },
@@ -438,6 +441,141 @@ $(".datepicker").datepicker({
     }
       });
     
+
+
+
+
+
+
+
+
+
+
+//chart bars
+const ctx_bars = document.getElementById('chart_bars').getContext('2d');
+
+const datab = {
+    labels: ['January', 'February', 'March'],
+    datasets: [{
+        label: 'Categorias',
+        data: [65, 59, 80],
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)'
+        ],
+        borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)'
+        ],
+        borderWidth: 1
+    }]
+};
+
+const config = {
+    type: 'bar',
+    data: datab,
+    options: {
+        responsive: true, /* Torna o gráfico responsivo */
+        maintainAspectRatio: false, /* Permite que o gráfico ocupe todo o espaço */
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    },
+    plugins:{
+      legend:{
+        display:false
+        }
+
+    }
+};
+
+const myChart = new Chart(ctx_bars, config);
+
     </script>
 
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+    const calendar = document.getElementById('calendar');
+    const monthYear = document.getElementById('month-year');
+    const prevMonthBtn = document.getElementById('prev-month');
+    const nextMonthBtn = document.getElementById('next-month');
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+
+    const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+    const dayNames = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+
+    function generateCalendar(month, year) {
+        calendar.innerHTML = '';
+        monthYear.textContent = `${monthNames[month]} ${year}`;
+
+ 
+        dayNames.forEach(day => {
+            const dayHeader = document.createElement('div');
+            dayHeader.classList.add('header');
+            dayHeader.innerText = day;
+            calendar.appendChild(dayHeader);
+        });
+
+     
+        const firstDay = new Date(year, month).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  
+        for (let i = 0; i < firstDay; i++) {
+            const emptyCell = document.createElement('div');
+            emptyCell.classList.add('day');
+            calendar.appendChild(emptyCell);
+        }
+
+  
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayCell = document.createElement('div');
+            dayCell.classList.add('day');
+            if (day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) {
+                dayCell.classList.add('today');
+            }
+            dayCell.innerText = day;
+            calendar.appendChild(dayCell);
+        }
+    }
+
+    function updateCalendar() {
+        calendar.classList.remove('show');
+        setTimeout(() => {
+            generateCalendar(currentMonth, currentYear);
+            calendar.classList.add('show');
+        }, 50); // Pequeno atraso para a animação de fade funcionar
+    }
+
+    prevMonthBtn.addEventListener('click', function() {
+        if (currentMonth === 0) {
+            currentMonth = 11;
+            currentYear--;
+        } else {
+            currentMonth--;
+        }
+        updateCalendar();
+    });
+
+    nextMonthBtn.addEventListener('click', function() {
+        if (currentMonth === 11) {
+            currentMonth = 0;
+            currentYear++;
+        } else {
+            currentMonth++;
+        }
+        updateCalendar();
+    });
+
+    updateCalendar();
+});
+
+
+
+</script>
 </html>

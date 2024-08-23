@@ -101,8 +101,9 @@ if($r["result"] == 0){
  }else{
      $ip = $_SERVER['REMOTE_ADDR'];
      $log->setTexto("{$ip} - Login do administrador {$dados['email']} pelo dispositivo de ip {$ip}.\n");    $log->fileWriter();
+
      setcookie("ADM_ID", $r["ID_ADM"], time() + (86400 * 30), "/", "", false, true); 
-     // gravar log de acesso
+// gravar log de acesso
      $_SESSION["ADM_ID"] = $r["ID_ADM"];
      $_SESSION["ADM_NOME"] = $r["nome"];
      $_SESSION["ADM_EMAIL"] = $r["email"];
