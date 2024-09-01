@@ -85,7 +85,10 @@ margin-bottom: -18px;
     background-color: #724ae8;
     max-width: 75%;
 }
-
+.chatbox .outgoing svg, .chatbox .outgoing a{
+    stroke: white !important;
+    color: white !important;
+}
 .chatbox .incoming p {
     color: #000;
     background: rgb(216, 209, 209);
@@ -131,4 +134,8 @@ margin-bottom: -18px;
     align-items: center;
     text-align: center;
     justify-content: center;
+}
+.atached{
+    align-self:center;
+    
 }

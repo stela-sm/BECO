@@ -432,7 +432,7 @@ public function admLoginID($dados){
         require_once('../model/ferramentas.class.php');
         $ferramentas = new Ferramentas();
          
-        $sql = "SELECT m.ID_MENSAGEM, m.texto_mensagem, m.datahora, u.ID_ADM AS id_remetente, u.nome AS nome_remetente, 
+        $sql = "SELECT m.ID_MENSAGEM, m.texto_mensagem, m.datahora, m.file, u.ID_ADM AS id_remetente, u.nome AS nome_remetente, 
                        c.id_user1, a1.nome AS nome_user1, 
                        c.id_user2, a2.nome AS nome_user2
                 FROM mensagens m
@@ -457,6 +457,7 @@ public function admLoginID($dados){
                 $mensagens[$i] = [
                     'ID_MENSAGEM' => $row['ID_MENSAGEM'],
                     'texto_mensagem' => $ferramentas-> descriptografar($row['texto_mensagem'],$key),
+                    'file' => $row['file'],
                     'datahora' => $row['datahora'],
                     'id_remetente' => $row['id_remetente'],
                     'id_user1' => $row['id_user1'],
@@ -574,7 +575,7 @@ public function admLoginID($dados){
         }
 
 
-        public function inserirConversa($id_user1, $id_user2) {
+        public function inserirConversa($id_user1, $id_user2, ) {
             
            $verif = $this-> verificarConversa($id_user1,$id_user2);
            if($verif['result'] == 0){

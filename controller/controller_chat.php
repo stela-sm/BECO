@@ -32,7 +32,37 @@ if (isset($_REQUEST["inserir"])) {
 }
 
 
+if (isset($_REQUEST["inserir_file"])) {
+    require_once('../model/ferramentas.class.php');
+    $ferramentas = new Ferramentas();
+     
+    $conn = new mysqli('localhost', 'root', '', 'beco_bd');
 
+    $idConversa = $_REQUEST["id_conversa"];
+    $idRemetente = $_REQUEST["id_remetente"];
+
+    $img = $_FILES["arquivo"];
+    require_once "../model/ferramentas.class.php";
+    $ferramentas = new ferramentas();
+    $ext = $ferramentas->pegaExtensao($img["name"]);
+    $newName = $ferramentas->geradorMicroTime() . "." . $ext;
+    $resp = move_uploaded_file($img["tmp_name"],"../assets/media/chat/".$newName);
+
+
+    $sql = "INSERT INTO mensagens (id_conversa, id_remetente, file, datahora) VALUES ('$idConversa', '$idRemetente', '$newName', NOW())";
+    $stmt = $conn->prepare($sql);
+    $result = $stmt->execute();
+
+    if ($result) {
+        echo json_encode(['result' => $sql]);
+    } else {
+        echo json_encode(['result' => 'erro', 'error' => 'Erro ao enviar mensagem: ' . $stmt->error]);
+    }
+
+
+    $stmt->close();
+    $conn->close();
+}
 
 
 

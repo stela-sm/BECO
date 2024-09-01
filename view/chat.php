@@ -41,7 +41,24 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
             
         </header>
         <ul class="chatbox">
+<style>
 
+</style>
+<li class="chat file outgoing">
+    
+<p >
+<a href="../assets/media/banner/1725210189.jpeg" style="color:white !important;" download="1725210189.jpeg">
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+  <path d="M12 17v-6" />
+  <path d="M9.5 14.5l2.5 2.5l2.5 -2.5" />
+</svg> 
+    927382873.png
+</p>
+</a>
+        </li>
 <script>
   
 
@@ -59,7 +76,10 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
                         chatList.empty();
                         for (var i = 0; i <= response.number; i++) {
                             var mensagem = response[i];
+                            console.log(response)
+                            if(mensagem.texto_mensagem != false){
                             if (mensagem.id_remetente == <?php echo $_SESSION["ADM_ID"]; ?>) {
+                              
                                 chatList.append(
                                     "<li class='chat outgoing'>" +
                                         "<p>" + mensagem.texto_mensagem + "</p>" +
@@ -77,6 +97,51 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
                                         "<p>" + mensagem.texto_mensagem + "</p>" +
                                     "</li>"
                                 );
+                            }}else if(mensagem.texto_mensagem == false){
+                                if (mensagem.id_remetente == <?php echo $_SESSION["ADM_ID"]; ?>) {
+                              
+                              chatList.append(
+                                  "<li class='chat file outgoing'>"+
+    
+"<p>"+
+"<a href='../assets/media/chat/"+mensagem.file+"' style='color:white !important;' download='"+mensagem.file+"'>"+
+"<svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-file-download' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='white' fill='none' stroke-linecap='round' stroke-linejoin='round'>"+
+  "<path stroke='none' d='M0 0h24v24H0z' fill='none'/>"+
+  "<path d='M14 3v4a1 1 0 0 0 1 1h4' />"+
+  "<path d='M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z' />"+
+  "<path d='M12 17v-6' />"+
+  "<path d='M9.5 14.5l2.5 2.5l2.5 -2.5' />"
++"</svg> "+
+    mensagem.file
++ "</p>"+
+"<div class='img'>" +
+                                            "<img class='img-src img-outgoing' src='../assets/media/pfp/"+imgO+"' alt=''>" +
+                                        "</div>" +
+"</a>"+
+       "</li>"
+                              );
+                          } else {
+                              chatList.append(
+                                "<li class='chat file incoming'>"+
+    
+    "<p>"+
+    "<a href='../assets/media/chat/"+mensagem.file+"' style='color:white !important;' download='"+mensagem.file+"'>"+
+    "<svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-file-download' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='white' fill='none' stroke-linecap='round' stroke-linejoin='round'>"+
+      "<path stroke='none' d='M0 0h24v24H0z' fill='none'/>"+
+      "<path d='M14 3v4a1 1 0 0 0 1 1h4' />"+
+      "<path d='M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z' />"+
+      "<path d='M12 17v-6' />"+
+      "<path d='M9.5 14.5l2.5 2.5l2.5 -2.5' />"
+    +"</svg> "+
+        mensagem.file
+    + "</p>"+
+    "<div class='img'>" +
+                                                "<img class='img-src img-outgoing' src='../assets/media/pfp/"+imgI+"' alt=''>" +
+                                            "</div>" +
+    "</a>"+
+           "</li>"
+                              );
+                          }
                             }
                         }
                         
@@ -97,9 +162,9 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
         </ul>
       
         <div class="chat-input">
-        <div class="atached">
+        <div class="atached" style="align-self:center;">
             <input type="file" name="arquivo" style="display:none;" id="arquivoInput">
-        <svg  xmlns="http://www.w3.org/2000/svg" onclick="arquivoInput()" style="margin-right:10px;" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-paperclip"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" /></svg>
+        <svg class="inputArquivo" xmlns="http://www.w3.org/2000/svg" onclick="arquivoInput()" style="margin-right:10px;" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-paperclip"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" /></svg>
         </div>
             <textarea name="" id="" class="msg" placeholder="Digite uma mensagem..."></textarea>
             <div class="send">
@@ -137,31 +202,40 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
     <script  src="../assets/js/chat.js"></script>
     <script>
 
-function uploadFile(file) {
-      var formData = new FormData();
-      formData.append('arquivo', file);
 
-      $.ajax({
-        url: 'upload.php', // URL para onde o arquivo será enviado
+
+const idRemetente = document.querySelector(".ID_SESSION").value
+
+const idConversa = document.querySelector(".ID_CONV").value
+
+function uploadFile(file, idConversa, idRemetente) {
+    var formData = new FormData();
+    formData.append('arquivo', file);
+    formData.append('id_conversa', idConversa); // Adiciona o parâmetro id_conversa ao FormData
+    formData.append('id_remetente', idRemetente); // Adiciona o parâmetro id_remetente ao FormData
+
+    $.ajax({
+        url: '../controller/controller_chat.php?inserir_file=1', // URL para onde o arquivo será enviado
         type: 'POST',
         data: formData,
         contentType: false,
         processData: false,
         success: function(response) {
-          console.log('Arquivo enviado com sucesso:', response);
-          // Faça algo com a resposta aqui
+            console.log('Arquivo enviado com sucesso:', response);
+            // Faça algo com a resposta aqui
         },
         error: function(xhr, status, error) {
-          console.error('Erro ao enviar o arquivo:', status, error);
+            console.error('Erro ao enviar o arquivo:', status, error);
         }
-      });
-    }
+    });
+}
 
     // Adiciona um listener para o evento 'change' no input file
     document.getElementById('arquivoInput').addEventListener('change', function(event) {
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
       var file = event.target.files[0]; // Obtém o arquivo selecionado
       if (file) {
-        uploadFile(file); // Chama a função AJAX para enviar o arquivo
+        uploadFile(file, idConversa,idRemetente); // Chama a função AJAX para enviar o arquivo
       }
     });
     </script>
