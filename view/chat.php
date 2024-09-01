@@ -88,12 +88,19 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
                 });
             }
 
-     
+            function arquivoInput() {
+      document.getElementById('arquivoInput').click();
+    }
     </script>
 
 
         </ul>
+      
         <div class="chat-input">
+        <div class="atached">
+            <input type="file" name="arquivo" style="display:none;" id="arquivoInput">
+        <svg  xmlns="http://www.w3.org/2000/svg" onclick="arquivoInput()" style="margin-right:10px;" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-paperclip"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" /></svg>
+        </div>
             <textarea name="" id="" class="msg" placeholder="Digite uma mensagem..."></textarea>
             <div class="send">
             
@@ -128,5 +135,35 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
 
         }?>
     <script  src="../assets/js/chat.js"></script>
+    <script>
+
+function uploadFile(file) {
+      var formData = new FormData();
+      formData.append('arquivo', file);
+
+      $.ajax({
+        url: 'upload.php', // URL para onde o arquivo será enviado
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+          console.log('Arquivo enviado com sucesso:', response);
+          // Faça algo com a resposta aqui
+        },
+        error: function(xhr, status, error) {
+          console.error('Erro ao enviar o arquivo:', status, error);
+        }
+      });
+    }
+
+    // Adiciona um listener para o evento 'change' no input file
+    document.getElementById('arquivoInput').addEventListener('change', function(event) {
+      var file = event.target.files[0]; // Obtém o arquivo selecionado
+      if (file) {
+        uploadFile(file); // Chama a função AJAX para enviar o arquivo
+      }
+    });
+    </script>
 </body>
 </html>

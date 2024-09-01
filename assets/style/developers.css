@@ -63,13 +63,18 @@ table{
 .label-padrao, .input-padrao{
   width: 40% !important;
 }
+
+.select-padrao{
+  width: 100% !important;
+  margin-top: 10px;
+}
 .label-padrao{
   font-family: radikal-light;
  color: var(--text-color);
  margin-top: 15px;
  margin-bottom: -5px;
 }
-.input-padrao{
+.input-padrao, .select-padrao{
   padding: 10px;
   border:none;
   border-radius: 6px;
@@ -92,8 +97,16 @@ table{
   border: none;
   border-top: 1px solid #c5c5c5;
 }
-
-.upload-square, .upload-rectangle {
+.sendButtonTwo{
+  width: 100%;
+  padding-top: 10px;
+  margin-top: 10px;
+  font-family: radikal-medium;
+  background-color: transparent;
+  border: none;
+  border-top: 1px solid #c5c5c5;
+}
+.upload-square, .upload-rectangle, .upload-rectangle-banner {
   border-radius: 6px;
   margin-top: 10px;
   border: 2px dashed #ccc;
@@ -105,6 +118,10 @@ table{
   background-position: center;
   transition: border-color 0.3s ease;
 
+}
+.upload-rectangle-banner{
+  width: 250px;
+  height: 100px;
 }
 .upload-rectangle{
   width: 290px;
@@ -122,4 +139,8 @@ table{
 }
 .upload-square:hover, .upload-rectangle:hover {
   border-color: #888;
+}
+td{
+  padding-top: 20px !important;
+ 
 }

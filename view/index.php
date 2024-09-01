@@ -279,9 +279,7 @@ setcookie("ADM_ID", $_SESSION["ADM_ID"], time() + (86400 * 30), "/", "", false, 
   </div>
 </div>
 
-
-
-
+</div>
 <script>
      document.getElementById('pesquisar').addEventListener('submit', function(event) {
             event.preventDefault(); 

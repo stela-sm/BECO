@@ -456,6 +456,72 @@ if(isset($_REQUEST["verificar"])){
         echo "AAAAAAA";
         }
     
+        if(isset($_REQUEST["newConcurso"])){
+
+                            $img = $_FILES["img_anuncio"];
+                            require_once "../model/ferramentas.class.php";
+                            $ferramentas = new ferramentas();
+                            $ext = $ferramentas->pegaExtensao($img["name"]);
+                            $newNameAnuncio = $ferramentas->geradorMicroTime() . "." . $ext;
+                            $resp = move_uploaded_file($img["tmp_name"],"../assets/media/concursos/".$newNameAnuncio);
+                        
+                            $img = $_FILES["img_banner"];
+                            $ext = $ferramentas->pegaExtensao($img["name"]);
+                            $newNameBanner = $ferramentas->geradorMicroTime() . "." . $ext;
+                            $resp = move_uploaded_file($img["tmp_name"],"../assets/media/concursos/".$newNameBanner);
+    
+            $dados["title"] = $_REQUEST["title"];
+            $dados["tag"] = $_REQUEST["tag"];
+            $dados["descricao"] = $_REQUEST["descricao"];
+            $dados["img_anuncio"] =  $newNameAnuncio;
+            $dados["img_banner"] = $newNameBanner;
+            $dados["data_inicio"] = $_REQUEST["data_inicio"];
+            $dados["data_fim"] = $_REQUEST["data_fim"];
+            require "../model/manager.class.php";
+            $manager = new Manager();
+            $manager->novoConcurso($dados);
+            require "../model/log.class.php";
+            $log = new Log();    
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $log->setTexto("{$ip} - Novo concurso criado por ". $_SESSION["ADM_EMAIL"]);
+            $log->fileWriter();
+            ?>
+            <form action="../view/developers.php" name="return" id="return" method="get">
+            <input type="hidden" name="sucesso" value=1>
+            </form>
+            <script>
+                document.getElementById("return").submit();
+            </script>
+        <?php
+        }
+        
+if(isset($_REQUEST["newBanner"])){
+        $img = $_FILES["img_banner_new"];
+        require_once "../model/ferramentas.class.php";
+        $ferramentas = new ferramentas();
+        $ext = $ferramentas->pegaExtensao($img["name"]);
+        $newName = $ferramentas->geradorMicroTime() . "." . $ext;
+        $resp = move_uploaded_file($img["tmp_name"],"../assets/media/banner/".$newName);
+        $dados["img"] = $newName;
+        $dados["status"] = $_REQUEST["status"];
+     require "../model/manager.class.php";
+    $manager = new Manager();
+    $manager->novoBanner($dados);
+    require "../model/log.class.php";
+    $log = new Log();    
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $log->setTexto("{$ip} - Novo banner adicionado por ". $_SESSION["ADM_EMAIL"]);
+    $log->fileWriter();
+    ?>
+    <form action="../view/developers.php" name="return" id="return" method="get">
+    <input type="hidden" name="sucesso" value=1>
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+
+<?php
+}
 
 ?>
            

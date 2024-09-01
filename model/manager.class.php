@@ -479,7 +479,7 @@ public function admLoginID($dados){
 
 
         public function enviarMsg($dados){
-            $sql = "INSERT INTO mensagens (id_conversa, id_remetente, texto_mensagem, datahora) VALUES (('{$dados["id_conversa"]}','{$dados["id_remetente"]}','{$dados["txt"]}', NOW())";
+            $sql = "INSERT INTO mensagens (id_conversa, id_remetente, texto_mensagem, datahora) VALUES ('{$dados["id_conversa"]}','{$dados["id_remetente"]}','{$dados["txt"]}', NOW())";
             $res = $this->connect()->query($sql);
             $this->connect()->close();
             return $res;
@@ -815,7 +815,37 @@ public function novoAcesso($ip){
             return ['result' => 0]; 
         }
     }
+
+    public function novoConcurso($dados){
+        $sql = "INSERT INTO concursos (titulo, tag, descricao, img_anuncio, img_banner, data_inicio,
+        data_fim, status) VALUES ('{$dados["title"]}','{$dados["tag"]}','{$dados["descricao"]}','{$dados["img_anuncio"]}','{$dados["img_banner"]}', '{$dados["data_inicio"]}', '{$dados["data_fim"]}', '1')";
+       $res = $this->connect()->query($sql);
     
+       if (!$res) {
+           $this->connect()->close();
+           return ['result' => -1, 'error' => $this->connect()->error];
+       }else{
+           $this->connect()->close();
+           return ['result' => 1]; 
+       
+   }
+}
+    public function novoBanner($dados){
+        if ($dados["status"] == "1") {
+            $id = $dados["status"] ;
+            $this->connect()->query("UPDATE banner SET status = 0 WHERE ID_BANNER <> $id");
+        }
+        $sql = "INSERT INTO banner (img, datahora, status) VALUES ('{$dados["img"]}',now(), '{$dados["status"]}')";
+        $res = $this->connect()->query($sql);
+        if (!$res) {
+            $this->connect()->close();
+            return ['result' => -1, 'error' => $this->connect()->error];
+        }else{
+            $this->connect()->close();
+            return ['result' => 1]; 
+        
+    } 
+    }
 }
 
 
