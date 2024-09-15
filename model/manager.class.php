@@ -249,10 +249,6 @@ public function admLoginID($dados){
         }
 
 
-
-
-
-
     public function admNew($dados){
         $sql = "INSERT INTO administradores (pfp, nome,email,celular,poder,status,rg,cpf,cep,numero,estado_civil,data_nascimento,obs, senha, datahora) VALUES ('{$dados["pfp"]}','{$dados["nome"]}', '{$dados["email"]}', '{$dados["celular"]}', '{$dados["poder"]}', '{$dados["status"]}', '{$dados["rg"]}', '{$dados["cpf"]}', '{$dados["cep"]}', '{$dados["numero"]}', '{$dados["estadoCivil"]}', '{$dados["dataNascimento"]}',  '{$dados["obs"]}',  '{$dados["senha"]}',NOW());";
         $res = $this->connect()->query($sql);
@@ -270,27 +266,19 @@ public function admLoginID($dados){
     }
 
 
-
-
-
-
-
-
-
-
     public function userTable($busca) {
         if($busca["status"] == "" && $busca["data"] =="" && $busca["pesquisa"] == ""){
         $sql = "SELECT * FROM usuario;";
+        }else if ($busca["pesquisa"] != ""){
+            $pesquisa = $busca["pesquisa"];
+            $sql = "SELECT * FROM usuario WHERE username LIKE '%$pesquisa%' OR email LIKE '%$pesquisa%' ";
+        
             }else if($busca["status"] != "" && $busca["data"] != ""){
-                $sql = "SELECT * FROM usuario WHERE datahora <= {$busca["data"]} AND status = {$busca["status"]}";
+                $sql = "SELECT * FROM usuario WHERE datahora >= '{$busca["data"]}' AND status = {$busca["status"]}";
             }else if($busca["status"] != "" && $busca["data"] == ""){
                 $sql = "SELECT * FROM usuario WHERE status = {$busca["status"]}";
             }else if ($busca["status"] == "" && $busca["data"] != ""){
-                $sql = "SELECT * FROM usuario WHERE datahora <= {$busca["data"]}";
-            }else if ($busca["pesquisa"] != ""){
-
-                $pesquisa = $busca["pesquisa"];
-                $sql = "SELECT * FROM usuario WHERE username LIKE '%$pesquisa%' OR email LIKE '%$pesquisa%' ";
+                $sql = "SELECT * FROM usuario WHERE datahora >= '{$busca["data"]}'";
             }
       
         $res = $this->connect()->query($sql);
@@ -402,7 +390,7 @@ public function admLoginID($dados){
         
         
 
-        function getAccessesByMonth() {
+    public   function getAccessesByMonth() {
           
             // mano como q isso funciona vsfd
             $sql = "SELECT MONTH(datahora) AS month, COUNT(*) AS count 
@@ -579,7 +567,8 @@ public function admLoginID($dados){
             
            $verif = $this-> verificarConversa($id_user1,$id_user2);
            if($verif['result'] == 0){
-            $sql = "INSERT INTO conversas (id_user1, id_user2, datahora) VALUES ({$id_user1}, {$id_user2}, NOW())";
+            $sql = "INSERT INTO conversas (id_user1, id_user2, datahora, tabela) VALUES ({$id_user1}, {$id_user2}, NOW(), 'administradores')";
+           //ver se essa PORRA dessa BUCETA de campo de TABELA tá setado na PORRA do front end
             $res = $this->connect()->query($sql);
            }
            $room = $this-> pegarRoom($id_user1,$id_user2);
@@ -847,7 +836,54 @@ public function novoAcesso($ip){
         
     } 
     }
+public function transacoesTable($busca){
+    if($busca["data"] =="" && $busca["pesquisa"] == "" && $busca["metodo"] == ""){
+        $sql = "SELECT * FROM compras;";
+        }else if ($busca["pesquisa"] != ""){
+            $pesquisa = $busca["pesquisa"];
+            $sql = "SELECT * FROM compras WHERE comprador LIKE '%$pesquisa%'  OR vendedor LIKE '%$pesquisa%' ";
+        }else if($busca["data"] != "" && $busca["metodo"] != ""){
+            $sql = "SELECT * FROM compras WHERE datahora > {$busca["data"]} AND metodo = {$busca["metodo"]}";
+        }else if($busca["data"] != "" && $busca["metodo"] == ""){
+            $sql = "SELECT * FROM compras WHERE datahora > '{$busca["data"]}'";
+        }else if ($busca["data"] == "" && $busca["medoto"] != ""){
+            $sql = "SELECT * FROM compras WHERE metodo = {$busca["metodo"]}";
+        }
+
+        $res = $this->connect()->query($sql);
+    
+        if (!$res) {
+            $this->connect()->close();
+            return ['result' => -1, 'error' => $this->connect()->close()];
+        }
+    
+        if ($res->num_rows > 0) {
+            $dados = [];
+            $i = 0;
+            while ($row = $res->fetch_assoc()) {
+                $dados[$i] = [
+                    'ID_COMPRA'   => $row['ID_COMPRA'],
+                    'id_prod'     => $row['id_prod'],
+                    'valor'     => $row['valor'],
+                    'comprador'   => $row['comprador'],
+                    'vendedor'    => $row['vendedor'],
+                    'metodo'      => $row['metodo'],
+                    'status'      => $row['status'],
+                    'data'        => $row['datahora']
+                ];
+                $i++;
+            }
+            $dados['result'] = $i; // Store count or simply use true to indicate success
+            $this->connect()->close();
+            $dados['query'] = $sql;
+            return $dados;
+        } else {
+            $this->connect()->close();
+            return ['result' => 0]; // No rows found
+        }
+    }
 }
+
 
 
 ?>

@@ -38,7 +38,7 @@ class Log extends Manager{
         }
 
         $manager = new Manager();
-     $manager->registrosAdd($nameFile); //verificar pq nn tá funcionando
+     $manager->registrosAdd($nameFile); 
      
     }
     

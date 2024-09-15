@@ -105,9 +105,9 @@ function checkForGetParameter() {
 
 
 
-window.onload = function() {
-    scrollToBottom();
-};
+// window.onload = function() {
+//     scrollToBottom();
+// };
 
  setInterval(checkForGetParameter, 100);
  setInterval(scrollToBottom, 100);

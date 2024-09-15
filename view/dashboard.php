@@ -224,7 +224,7 @@
                 </div>
                 <div class="col-2  graphic-pie">
                   <span class="graphic-one-title">
-                    Transações e Lucro
+                    Pagamentos 
                   </span>
                   <div class="canvas-div-pie"> <canvas id="chart_pie_users" class="chart-two"></canvas></div>
                 </div>
@@ -248,7 +248,7 @@
 
               <div class="col-2 list-col" style="max-height:300px">
               <span class="graphic-one-title">
-              Categorias de Posts 
+              Top Criadores (Likes) 
             </span>
                 
               <canvas class="chart_bars" id="chart_bars"  style="padding-bottom:10px;"></canvas>
@@ -357,17 +357,19 @@
     new Chart(ctx_pie, {
       type: 'doughnut',
             data: {
-                labels: ['Lucro', 'Repassado'],
+                labels: ['Pix', 'Crédito', 'Boleto'],
                 datasets: [{
                     label: '# of Votes',
-                    data: [12, 19,],
+                    data: [12, 19, 20],
                     backgroundColor: [
                         'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 199, 60, 0.2)'
                     ],
                     borderColor: [
                         'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 199, 60, 0.2)'
                     ],
                     borderWidth: 2
                 }]
@@ -455,10 +457,10 @@
 const ctx_bars = document.getElementById('chart_bars').getContext('2d');
 
 const datab = {
-    labels: ['January', 'February', 'March'],
+    labels: ['@smuch', '@brtype', '@clrs'],
     datasets: [{
-        label: 'Categorias',
-        data: [65, 59, 80],
+        label: 'Likes',
+        data: [120, 90, 80],
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',

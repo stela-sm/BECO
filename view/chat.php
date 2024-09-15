@@ -20,6 +20,7 @@
 <?php
 
 session_start();
+var_dump($_POST);
 echo "<input type=\"hidden\" name=\"\" class=\"ID_SESSION\" value='".$_SESSION["ADM_ID"]."'>";
 echo "<input type=\"hidden\" name=\"\" class=\"pfp-outgoing\" value='".$_SESSION["ADM_PFP"]."'>";
 if(isset($_REQUEST["new"])){

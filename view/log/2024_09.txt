@@ -1,3 +1,4 @@
 2024-09-01 17:52:25 - ::1 - Login do administrador 6, via cookies, pelo dispositivo de ip ::1.
 2024-09-01 18:52:57 - ::1 - Novo banner adicionado por stela@g.com2024-09-01 18:55:54 - ::1 - Novo banner adicionado por stela@g.com2024-09-01 18:56:49 - ::1 - Novo banner adicionado por stela@g.com2024-09-01 18:58:15 - ::1 - Novo banner adicionado por stela@g.com2024-09-01 18:58:50 - ::1 - Novo banner adicionado por stela@g.com2024-09-01 19:01:09 - ::1 - Novo banner adicionado por stela@g.com2024-09-01 19:03:09 - ::1 - Novo banner adicionado por stela@g.com2024-09-01 19:10:27 - ::1 - Novo concurso criado por stela@g.com2024-09-01 20:46:10 - ::1 - Erro no login do administrador stela@g.com pelo dispositivo de ip ::1.
 2024-09-01 20:46:15 - ::1 - Login do administrador stela@g.com pelo dispositivo de ip ::1.
+2024-09-15 16:59:37 - ::1 - Login do administrador 6, via cookies, pelo dispositivo de ip ::1.

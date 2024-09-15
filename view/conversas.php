@@ -155,35 +155,6 @@ $(document).ready(function() {
 
 
                            
-
-                            <li class="li-conversa"><a href="chat.php?room=2" target="iframe_chat"  class="a-conversa">
-                            
-                            <div class="img-pfp">
-                                <img src="../assets/media/pfp/nopfp.png" alt="" srcset="">
-                            </div>
-
-                            <p class="name">
-                                @somuch 
-                                <span class="demotext"> 
-                                    demo texto
-                                </span>
-                            </p>
-                            </a></li>
-
-
-                            <li class="li-conversa "><a href="chat.php?room=1" target="iframe_chat"  class="a-conversa">
-                            
-                            <div class="img-pfp">
-                                <img src="../assets/media/pfp/nopfp.png" alt="" srcset="">
-                            </div>
-
-                            <p class="name">
-                                @somuch 
-                                <span class="demotext"> 
-                                    demo texto
-                                </span>
-                            </p>
-                            </a></li>
                 </ul>
             </div>
     </div>

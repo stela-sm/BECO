@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/style/chamados.css">  
+    <link rel="stylesheet" href="../assets/style/transacoes.css">  
 
   <!--BOOTSTRAP EM PORTUGUêS -  NÃO USAR O GRINGO-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -30,24 +30,24 @@
 <body>
     <section>
     <div class="col-12 header-col">
-        <span class="title-section">Chamados</span>
+        <span class="title-section">Transações</span>
+        
+        <form action="transacoes.php" method="get">
            <table class="adm-filters-table  col-3 ">
             <tr>
                 <th>
-                    Setor
-                </th>
-                <th>
-                    Status
+                    Data (A partir de)
                 </th>
                 
-                <th>
-
+                
+                <th style="padding-left:10px !important;">
+                  Método
                 </th>
             </tr>
 
             <tr>
                 <td class="td-input select-wrapper">
-                  <div class="input-icon"><input type="date" value="2024-01-01" id="dateInput" class="  input-search date">
+                  <div class="input-icon"><input type="date" value="2024-01-01"  name="data" id="dateInput" class="  input-search date">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-search" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M11.5 21h-5.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4.5" />
@@ -60,12 +60,15 @@
 
 
 
-                  <td class="td-input ">
-                    <div class="input-icon select-wrapper">
-                    <select name="" class="input-search" id="">
-                      <option value="2" selected>Todos</option>
-                      <option value="1">Ativo</option>
-                      <option value="0">Inativo</option>
+             
+
+                    <td class="td-input ">
+                    <div class="input-icon select-wrapper" style="margin-left:10px !important;">
+                    <select name="metodo" class="input-search" id="">
+                      <option value="" selected>Todos</option>
+                      <option value="1">Pix</option>
+                      <option value="0">Crédito</option>
+                      <option value="0">Boleto</option>
                     </select>
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-arrow-down" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -74,7 +77,16 @@
                       <path d="M12 8v8" />
                       <path d="M16 12l-4 4" />
                     </svg></div> </td>
-            </tr>
+
+                    <td>
+                        <button type="submit" class="send-button-filter">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-filter-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M11.18 20.274l-2.18 .726v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v3" />
+  <path d="M15 19l2 2l4 -4" />
+</svg></button></td>
+                  </tr>
+</form>
            </table> 
     </div>
 </section>
@@ -88,29 +100,27 @@
           ID 
         </th>
         <th class="table-header-th">
-          Setor
+          Valor
         </th>
         <th class="table-header-th">
-          Usuário
+          Produto     
+      </th>
+        <th class="table-header-th">
+          Comprador
         </th>
         <th class="table-header-th">
-          Mensagem
+          Vendedor
         </th>
         <th class="table-header-th">
-          Data
+          Método
         </th>        
         <th class="table-header-th">
           Status
         </th>
-        <th></th>
         <th class="table-header-th">
-         <a href="user_new.html"> <svg xmlns="http://www.w3.org/2000/svg" class=" add icon icon-tabler icon-tabler-circle-plus" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="green"fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-  <path d="M9 12h6" />
-  <path d="M12 9v6" />
-</svg>
-        </a>
+      Data  
+      </th>
+        <th class="table-header-th">
         </th>
       </tr>
   </div>
@@ -121,33 +131,59 @@
 <?php
 require "../model/manager.class.php";
 $manager = new Manager();
-$r = $manager-> chamadosTable("0","0");
 
-for($i=0;$i<$r["result"];$i++){
-      echo "<tr class='table-content-row'>
-          <td>
-            ".$r[$i]["ID_USER"]."
-          </td>
-          <td>
-           ".$r[$i]["username"]."
-          </td>
-          <td>
-           ".$r[$i]["email"]."
-          </td>
-          <td>
-            ".$r[$i]["celular"]."
-          </td>
-          
-          <td>
-            ".$r[$i]["status"]."
-          </td>
-          <td>
-            ".$r[$i]["data"]."
-          </td>
-          
-         
+
+$pesquisa = [];
+
+if (isset($_GET["pesquisa"])){
+  $pesquisa["pesquisa"] = $_GET["pesquisa"];
+}else{
+  $pesquisa["pesquisa"] = "";
+}
+
+if(isset($_GET["data"])){
+  $pesquisa["data"] = $_GET["data"];
+}else{
+  $pesquisa["data"] = "";
+}
+if(isset($_GET["metodo"])){
+  $pesquisa["metodo"] = $_GET["metodo"];
+  }else{
+    $pesquisa["metodo"] = "";
+    }
+
+$r = $manager-> transacoesTable($pesquisa);
+
+
+for($i=0; $i<$r["result"]; $i++){
+  echo "<tr class='table-content-row'>
+      <td>
+        ".$r[$i]["ID_COMPRA"]."
+      </td>
+      <td>
+        R$".$r[$i]["valor"]."
+      </td>
+         <td>
+        ".$r[$i]["id_prod"]."
+      </td>
+      <td>
+        ".$r[$i]["comprador"]."
+      </td>
+      <td>
+        ".$r[$i]["vendedor"]."
+      </td>
+      <td>
+        ".$r[$i]["metodo"]."
+      </td>
+      <td>
+        ".$r[$i]["status"]."
+      </td>
+      <td>
+        ".$r[$i]["data"]."
+      </td>
+  
 <td class='eye-td'>
-  <a class='btn btn-eye' href='user_view.php?id=".$r[$i]['ID_USER']."'>
+  <a class='btn btn-eye' href='user_view.php?id=".$r[$i]['ID_COMPRA']."'>
    <svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-pencil' width='26' height='26' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'>
   <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
   <path d='M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4' />
@@ -157,16 +193,6 @@ for($i=0;$i<$r["result"];$i++){
   </a>
 </td>
 
-<td class='eye-td'>
-  <a class='btn btn-eye' href='user_view.php?id=".$r[$i]['ID_USER']."'>
-<svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-messages' width='26' height='26' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'>
-  <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
-  <path d='M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10' />
-  <path d='M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2' />
-</svg>
-
-  </a>
-</td>
       </tr>";}?>
     </table>
   </div>
