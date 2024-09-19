@@ -146,7 +146,35 @@ $log->setTexto("{$ip} - Acesso do adminstrador {$id} desativado\n");
 $log->fileWriter();
 
 ?>
-    <form action="../view/adm.php" name="return" id="return" method="post">
+    <form action="../view/adm.php?success=1" name="return" id="return" method="post">
+    <input type="hidden" name="cod" value="OP50">
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+<?php
+
+
+}
+
+
+// DESATIVAR ACESSO //
+
+if(isset($_REQUEST["desativar_user"])){
+
+    $id = $_REQUEST["desativar_user"];
+    
+require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> userStatus($id, '0');
+require "../model/log.class.php";
+$log = new Log();
+$ip = $_SERVER['REMOTE_ADDR'];
+$log->setTexto("{$ip} - Acesso do usuário {$id} desativado\n");
+$log->fileWriter();
+
+?>
+    <form action="../view/users.php?success=1" name="return" id="return" method="post">
     <input type="hidden" name="cod" value="OP50">
     </form>
     <script>
@@ -176,7 +204,7 @@ $log->setTexto("{$ip} - Acesso do adminstrador {$id} reativado\n");
 $log->fileWriter();
 
 ?>
-    <form action="../view/adm.php" name="return" id="return" method="post">
+    <form action="../view/adm.php?success=1" name="return" id="return" method="post">
     <input type="hidden" name="cod" value="OP50">
     </form>
     <script>
@@ -187,6 +215,30 @@ $log->fileWriter();
 
 }
 
+if(isset($_REQUEST["reativar_user"])){
+
+    $id = $_REQUEST["reativar_user"];
+    
+require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> userStatus($id, '1');
+require "../model/log.class.php";
+$log = new Log();
+$ip = $_SERVER['REMOTE_ADDR'];
+$log->setTexto("{$ip} - Acesso do usuario {$id} reativado\n");
+$log->fileWriter();
+
+?>
+    <form action="../view/users.php?success=1" name="return" id="return" method="post">
+    <input type="hidden" name="cod" value="OP50">
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+<?php
+
+
+}
 
 
 
@@ -205,7 +257,7 @@ $log->setTexto("{$ip} - Exclusão do adminstrador {$id} ");
 $log->fileWriter();
 
 ?>
-    <form action="../view/adm.php" name="return" id="return" method="post">
+    <form action="../view/adm.php?success=1" name="return" id="return" method="post">
     <input type="hidden" name="cod" value="OP50">
     </form>
     <script>
@@ -215,6 +267,32 @@ $log->fileWriter();
 
 
 }
+
+if(isset($_REQUEST["excluir_user"])){
+
+    $id = $_REQUEST["excluir_user"];
+    
+require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> userExcluir($id);
+require "../model/log.class.php";
+$log = new Log();
+$ip = $_SERVER['REMOTE_ADDR'];
+$log->setTexto("{$ip} - Exclusão do usuário {$id} ");
+$log->fileWriter();
+
+?>
+    <form action="../view/users.php?success=1" name="return" id="return" method="post">
+    <input type="hidden" name="cod" value="OP50">
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+<?php
+
+
+}
+
 
 
 
@@ -246,7 +324,7 @@ if(isset($_REQUEST["adm_update"])){
         $newName = $ferramentas->geradorMicroTime() . "." . $ext;
         $dados["pfp"] = $newName;
 
-        echo "$newName";
+        // echo "$newName";
     }else{
         $dados["pfp"] = $_REQUEST["old_pfp"];
     }
@@ -293,6 +371,86 @@ $log->fileWriter();
 
 
 }
+
+
+
+
+//USER UPDATE
+if(isset($_REQUEST["user_update"])){
+    
+    $dados = [
+        'id' => $_REQUEST['user_update'],
+        'username' => $_REQUEST['username'],
+        'nome' => $_REQUEST['nome'],
+        'email' => $_REQUEST['email'],
+        'celular' => $_REQUEST['celular'],
+        'bio' => $_REQUEST['bio'],
+        'data_nascimento' => $_REQUEST['data_nascimento'],
+        'pais' => $_REQUEST['pais'],
+        'estado' => $_REQUEST['estado'],
+        'obs' => $_REQUEST['obs']
+    ];
+
+
+    if(isset($_FILES["pfp"]["name"]) and $_FILES["pfp"]["name"]!=""){
+        $img = $_FILES["pfp"];
+        require_once "../model/ferramentas.class.php";
+        $ferramentas = new ferramentas();
+        $ext = $ferramentas->pegaExtensao($img["name"]);
+        $newName = $ferramentas->geradorMicroTime() . "." . $ext;
+        $dados["pfp"] = $newName;
+
+        // echo "$newName";
+    }else{
+        $dados["pfp"] = $_REQUEST["old_pfp"];
+    }
+require "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> userUpdate($dados);
+
+require "../model/log.class.php";
+
+$id = $dados["id"];
+if($r["result"]!=1){
+
+    $log = new Log();    
+$ip = $_SERVER['REMOTE_ADDR'];
+$log->setTexto("{$ip} - Falha na alteração de dados do adminstrador {$dados["id"]} ");
+$log->fileWriter();
+?>
+<form action="../view/user_view.php?id=<?php echo $id; ?>" name="return" id="return" method="post">
+    <input type="hidden" name="cod" value="OP50">
+</form>
+<script>
+    document.getElementById("return").submit();
+</script>
+<?php
+
+
+}else{
+
+    if(isset($_FILES["pfp"]["name"]) and $_FILES["pfp"]["name"]!="" ){
+    $resp = move_uploaded_file($img["tmp_name"],"../assets/media/pfp/".$newName);
+    $old_pfp = "../assets/media/pfp/".$_REQUEST["old_pfp"];
+    unlink($old_pfp);
+    }
+}
+
+?>
+     <form action="../view/user_view.php?id=<?php echo $id; ?>" name="return" id="return" method="post">
+    <input type="hidden" name="cod" value="OP50">
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+<?php
+
+
+}
+
+
+
+
 
 
 

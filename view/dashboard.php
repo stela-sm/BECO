@@ -118,6 +118,9 @@
   $users = $manager-> quantidade("usuario");
   $acessos = $manager-> quantidade("acessos");
   $transactions = $manager->quantidade("compras");
+  $pix = $manager->quantidadePayment("pix");
+  $credito = $manager->quantidadePayment("credito");
+  $debito = $manager->quantidadePayment("debito");
   $prod = $manager->quantidade("produtos");
   $serv = $manager->quantidade("servicos");
   $post = $prod + $serv;
@@ -353,14 +356,17 @@
 
 
       const ctx_pie = document.getElementById('chart_pie_users');
-    
+      var data = {
+    "pix":  <?php echo json_encode($pix); ?>,
+    "credito":  <?php echo json_encode($credito); ?>,
+    "debito": <?php echo json_encode($debito); ?>}
     new Chart(ctx_pie, {
       type: 'doughnut',
             data: {
                 labels: ['Débito', 'Crédito', 'Pix'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 20],
+                    label: 'Pagamentos',
+                    data: [data['debito'], data['credito'], data['pix']],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',

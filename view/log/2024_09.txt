@@ -3,3 +3,9 @@
 2024-09-01 20:46:15 - ::1 - Login do administrador stela@g.com pelo dispositivo de ip ::1.
 2024-09-15 16:59:37 - ::1 - Login do administrador 6, via cookies, pelo dispositivo de ip ::1.
 2024-09-17 01:20:55 - ::1 - Login do administrador 6, via cookies, pelo dispositivo de ip ::1.
+2024-09-18 23:54:49 - ::1 - Novo banner adicionado por stela@g.com2024-09-19 00:31:11 - ::1 - Acesso do usuário 1 desativado
+2024-09-19 00:31:21 - ::1 - Acesso do usuario 1 reativado
+2024-09-19 00:34:33 - ::1 - Acesso do usuário 1 desativado
+2024-09-19 00:34:57 - ::1 - Acesso do usuario 1 reativado
+2024-09-19 00:35:12 - ::1 - Acesso do usuario 9 reativado
+2024-09-19 00:39:03 - ::1 - Exclusão do usuário 22 2024-09-19 02:05:04 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.

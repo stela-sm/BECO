@@ -221,16 +221,32 @@ for($i=0;$i<$r["result"];$i++){
          
 </table>
   </div>
-</section>
-<script>
- 
-</script>
+</section><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
 if(isset($_REQUEST["return"])){
   echo
   "
   <script>
-  alert('Área restrita, seu nível não é suficiente.');
+  Swal.fire({
+  icon: 'warning',
+  title: 'Área Restrita',
+  backdrop: false,
+  text: 'Seu perfil não tem acesso à esse recurso.',
+  });
+  </script>
+  ";
+}
+
+if(isset($_REQUEST["success"])){
+  echo
+  "
+  <script>
+  Swal.fire({
+  icon: 'success',
+  title: 'Sucesso',
+  backdrop: false,
+  text: 'Operação realizada com sucesso.',
+  });
   </script>
   ";
 }

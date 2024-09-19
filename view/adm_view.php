@@ -27,6 +27,10 @@
 </head>
 <?php
 session_start();
+if($_SESSION["ADM_PODER"] <= 3){
+  header('Location: adm.php?return="Área Restrita"');
+  exit;
+}
 require_once( "../model/manager.class.php");
 $manager = new Manager();
 $r = $manager-> getAdmData("$_REQUEST[id]");
@@ -82,9 +86,7 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
               <li class="nav-item active">
                 <span class="nav-link">|</span>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" onclick="changeTwo()">Financeiro e Contrato</a>
-              </li>
+             
               </ul>
           </nav>
           <br>
@@ -162,57 +164,7 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
             </form>
 
 
-            <table class="adm-info-table"id="adm-finan-table" style="display: none;" >
-              <tr>
-                <td>
-                  <label for="nome" class="label-padrao">Tipo de Contrato</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                <td>
-                  <label for="nome" class="label-padrao">Período</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="nome" class="label-padrao">Salário (Bruto)</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                <td>
-                  <label for="nome" class="label-padrao">Cargo</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="nome" class="label-padrao">Benefícios</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                <td>
-                  <label for="nome" class="label-padrao">Estado Civil</label><br>
-                  <input disabled  type="text" name="estado_civil" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                 
-              </tr>
-              <tr>
-                <td>
-                  <label for="nome" class="label-padrao">Carteira de trabalho</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                <td class="obs-td">
-                  <label for="nome" class="label-padrao">Observações</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                
-              </tr>
-              <tr>
-                <td>
-                  <label for="nome" class="label-padrao">Conta</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                
-              </tr>
-            </table>
+            
           </div>
         </div>
    

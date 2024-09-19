@@ -197,11 +197,35 @@ public function admLoginID($dados){
             }
         }
 
+        public function userStatus($id, $status){
+            $sql = "UPDATE usuario SET status = {$status} WHERE ID_USER = {$id};";
+            $res = $this->connect()->query($sql);
+            if (!$res) {
+                $this->connect()->close();
+                return ['result' => 0, 'error' => $this->connect()->close()];
+            }else{
+                $this->connect()->close();
+                return ['result' => 1];
+            }
+        }
+
 
 
         
         public function admExcluir($id){
             $sql = "DELETE FROM administradores WHERE ID_ADM = {$id};";
+            $res = $this->connect()->query($sql);
+            if (!$res) {
+                $this->connect()->close();
+                return ['result' => 0, 'error' => $this->connect()->close()];
+            }else{
+                $this->connect()->close();
+                return ['result' => 1];
+            }
+        }
+
+        public function userExcluir($id){
+            $sql = "DELETE FROM usuario WHERE ID_USER = {$id};";
             $res = $this->connect()->query($sql);
             if (!$res) {
                 $this->connect()->close();
@@ -240,7 +264,29 @@ public function admLoginID($dados){
         }
 
 
-
+        public function userUpdate($dados){
+            $sql = "UPDATE usuario SET 
+                    username = '{$dados['username']}', 
+                    nome = '{$dados['nome']}', 
+                    email = '{$dados['email']}', 
+                    celular = '{$dados['celular']}',
+                    data_nascimento = '{$dados['data_nascimento']}', 
+                    estado = '{$dados['estado']}', 
+                    pais = '{$dados['pais']}', 
+                    pfp = '{$dados['pfp']}', 
+                    biografia = '{$dados['bio']}',  
+                    obs = '{$dados['obs']}'
+                WHERE ID_USER = '{$dados['id']}';";
+       
+            $res = $this->connect()->query($sql);
+            if (!$res) {
+                $this->connect()->close();
+                return ['result' => 0, 'error' => $this->connect()->error];
+            } else {
+                $this->connect()->close();
+                return ['result' => 1];
+            }
+        }
 
 
         public function registrosAdd($nome){
@@ -668,6 +714,16 @@ public function alterarSenha($senha, $email){
 
 public function quantidade($tabela){
     $sql = "SELECT COUNT(*) FROM $tabela";
+    $res = $this->connect()->query($sql);
+    $dados = $res->fetch_row();
+    $this->connect()->close();
+    return $dados[0];
+    
+}
+
+
+public function quantidadePayment($payway){
+    $sql = "SELECT COUNT(*) FROM compras WHERE metodo = '{$payway}'";
     $res = $this->connect()->query($sql);
     $dados = $res->fetch_row();
     $this->connect()->close();

@@ -51,7 +51,21 @@ if($r[0]['pfp']==""){
             <span class="name-span"><?php echo $r[0]["username"]?></span>
             <span class="data-span"><?php echo $r[0]["data"] ?></span>
                 <table>
-                    <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button id="info-button" onclick="input_change('alterar')"  href="">Alterar informações</button></td></tr>
+                  <?php
+                  
+if($_SESSION["ADM_PODER"] >= 2){
+ ?>
+   <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button id="info-button" onclick="input_change('alterar')"  href="">Alterar informações</button></td></tr>
+   <?php
+}else{
+
+?>
+<tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button type="button" id="info-button" onclick="restrito()"  href="#">Alterar informações</button></td></tr>
+<?php
+}
+                  
+                  ?>
+                  
                     <?php if ($r[0]["status"] == 1){?>
                     <tr class="tr-coluna-lateral"><td class="td-coluna-lateral"><button href="#" onclick="input_change('desativar', '<?php echo $r[0]['ID_USER'] ?>')">Desativar Acesso</button></td></tr>
                     <?php }else{?>
@@ -85,17 +99,17 @@ if($r[0]['pfp']==""){
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Nome de usuário</label><br>
-                  <input disabled name="nome" id="nome" type="text" class="input disabled padrao" value="<?php echo $r[0]["username"] ?>">
+                  <input disabled name="username" id="nome" type="text" class="input disabled padrao" value="<?php echo $r[0]["username"] ?>">
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">Estado </label><br>
-                  <input disabled  type="text" name="estado_civil" class="input-padrao" value="<?php echo $r[0]["estado"] ?>">
+                  <input disabled  type="text" name="estado" class="input-padrao" value="<?php echo $r[0]["estado"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Nome Completo</label><br>
-                  <input disabled  type="text" name="email" class="input-padrao" value="<?php echo $r[0]["email"] ?>">
+                  <input disabled  type="text" name="nome" class="input-padrao" value="<?php echo $r[0]["email"] ?>">
                 </td>
                 <td>
                 <label for="nome" class="label-padrao">País</label><br>
@@ -110,8 +124,8 @@ if($r[0]['pfp']==""){
                  
                 </td>
                 <td>
-                  <label for="nome" class="label-padrao">Seguidores</label><br>
-                  <input disabled  type="date" name="data_nascimento" class="input-padrao" value="<?php echo $r[0]["datan"] ?>">
+                  <label for="nome" class="label-padrao">CPF</label><br>
+                  <input disabled  type="date" name="cpf" class="input-padrao" value="<?php echo $r[0]["datan"] ?>">
                 </td>
               </tr>
               <tr>
@@ -119,23 +133,17 @@ if($r[0]['pfp']==""){
                 <label for="nome" class="label-padrao">Celular</label><br>
                 <input disabled  type="text" name="celular" maxlength="11" class="input-padrao" value="<?php echo $r[0]["celular"] ?>">
                 </td>
-                <td>
-                <label for="nome" class="label-padrao">Seguindo</label><br>
-                <input disabled  type="date" name="data_nascimento" class="input-padrao" value="<?php echo $r[0]["datan"] ?>">
-
-
-              
+                <td class="obs-td">
+                  <label for="nome" class="label-padrao">Observações</label><br>
+                  <input disabled  type="text" name="obs" class="input-padrao" value="<?php echo $r[0]["obs"] ?>">
                 </td>
               </tr>
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Biografia</label><br>
-                  <input disabled  type="text" name="cep" maxlength="8" class="input-padrao" value="<?php echo $r[0]["bio"] ?>">
+                  <input disabled  type="text" name="bio" maxlength="" class="input-padrao" value="<?php echo $r[0]["bio"] ?>">
                 </td>
-                <td class="obs-td">
-                  <label for="nome" class="label-padrao">Observações</label><br>
-                  <input disabled  type="text" name="obs" class="input-padrao" value="<?php echo $r[0]["obs"] ?>">
-                </td>
+               
               </tr>
               <tr>
                 <td>
@@ -149,61 +157,12 @@ if($r[0]['pfp']==""){
             </form>
 
 
-            <table class="adm-info-table"id="adm-finan-table" style="display: none;" >
-              <tr>
-                <td>
-                  <label for="nome" class="label-padrao">Tipo de Contrato</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                <td>
-                  <label for="nome" class="label-padrao">Período</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="nome" class="label-padrao">Salário (Bruto)</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                <td>
-                  <label for="nome" class="label-padrao">Cargo</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="nome" class="label-padrao">Benefícios</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                <td>
-                  <label for="nome" class="label-padrao">Estado Civil</label><br>
-                  <input disabled  type="text" name="estado_civil" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                 
-              </tr>
-              <tr>
-                <td>
-                  <label for="nome" class="label-padrao">Carteira de trabalho</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                <td class="obs-td">
-                  <label for="nome" class="label-padrao">Observações</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                
-              </tr>
-              <tr>
-                <td>
-                  <label for="nome" class="label-padrao">Conta</label><br>
-                  <input disabled  type="text" class="input disabled -padrao" value="Stela dos Santos Montenegro">
-                </td>
-                
-              </tr>
-            </table>
+          
           </div>
         </div>
    
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
 
   var input = document.getElementById('input_file');
@@ -264,22 +223,22 @@ function input_change(elemento, id){
 }
 
 if (elemento == 'desativar'){
-  if (confirm("Deseja desativar o acesso deste administrador?") == true){
-     window.location.href = "../controller/controller.php?desativar_adm="+id;
+  if (confirm("Deseja desativar o acesso deste usuário?") == true){
+     window.location.href = "../controller/controller.php?desativar_user="+id;
 
     
   }
 }
 if (elemento == 'reativar'){
-  if (confirm("Deseja reativar o acesso deste administrador?") == true){
-     window.location.href = "../controller/controller.php?reativar_adm="+id;
+  if (confirm("Deseja reativar o acesso deste usuário?") == true){
+     window.location.href = "../controller/controller.php?reativar_user="+id;
    
   }
 }
 
 if (elemento == 'excluir'){
-  if (confirm("Deseja excluir permanentemente esse administrador? Aconselhamos apenas desativar seu acesso") == true){
-    window.location.href = "../controller/controller.php?excluir_adm="+id;
+  if (confirm("Deseja excluir permanentemente esse usuário? Aconselhamos apenas desativar seu acesso") == true){
+    window.location.href = "../controller/controller.php?excluir_user="+id;
    
   }
 }
@@ -290,8 +249,18 @@ if (elemento == 'excluir'){
 
 function input2(){
   if (confirm("Deseja Salvar as Alterações?") == true){
-    $('#form_adm_update').submit();
+    $('#form_user_update').submit();
   }
+}
+
+function restrito(){
+ 
+  Swal.fire({
+  icon: 'warning',
+  title: 'Área Restrita',
+  backdrop: false,
+  text: 'Seu perfil não tem acesso à esse recurso.',
+  });
 }
   </script>
 </body>
