@@ -44,7 +44,7 @@ class Ferramentas{
 
     public function pegaExtensao($arq) {
         $ext = explode('.', $arq);
-        var_dump($ext);
+        // var_dump($ext);
         return end($ext);  // Return the last part after splitting by dots
     }
 

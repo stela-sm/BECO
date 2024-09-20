@@ -217,6 +217,7 @@ iframe{
  .pfp-circle img{
   border-radius: 50%;
   max-width: 16vh;
+  max-height: 18vh;
 }
 .modal-dialog {
     max-width: 35%; 
@@ -224,6 +225,7 @@ iframe{
 .modal-profile{
     padding: 30px 25px;
     border-radius: 15px;
+    width: 120%;
 }
 
 .modal-title {
@@ -255,7 +257,9 @@ iframe{
     color: #a3a3a3;
 }
 .input-bottom{
-    border: none;
+    border: none !important;
     font-family: radikal-medium;
     font-size: 1em;
+    width: 180%;
+    outline: none !important;
 }

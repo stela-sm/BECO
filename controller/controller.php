@@ -604,7 +604,7 @@ if(isset($_REQUEST["verificar"])){
         $log->setTexto("{$ip} - Criação do administrador ". $_POST["email"]);
         $log->fileWriter();
      ?>
-        <form action="../index.php" name="return" id="return" method="get">
+        <form action="../index.php?success=1" name="return" id="return" method="get">
         <input type="hidden" name="sucesso" value=1>
         </form>
         <script>
@@ -615,18 +615,26 @@ if(isset($_REQUEST["verificar"])){
         }
     
         if(isset($_REQUEST["newConcurso"])){
-
+            //VER PQ CARALHOS ISSO TÁ INSERINDOA MESMA IMAGEM NOS DOIS CAMPOS
+        
                             $img = $_FILES["img_anuncio"];
+        
                             require_once "../model/ferramentas.class.php";
                             $ferramentas = new ferramentas();
                             $ext = $ferramentas->pegaExtensao($img["name"]);
                             $newNameAnuncio = $ferramentas->geradorMicroTime() . "." . $ext;
                             $resp = move_uploaded_file($img["tmp_name"],"../assets/media/concursos/".$newNameAnuncio);
                         
-                            $img = $_FILES["img_banner"];
-                            $ext = $ferramentas->pegaExtensao($img["name"]);
-                            $newNameBanner = $ferramentas->geradorMicroTime() . "." . $ext;
-                            $resp = move_uploaded_file($img["tmp_name"],"../assets/media/concursos/".$newNameBanner);
+                            echo $newNameAnuncio;
+
+                            $img2 = $_FILES["img_banner"];
+                           
+                            
+                            $ext2 = $ferramentas->pegaExtensao($img2["name"]);
+                            $newNameBanner = $ferramentas->geradorMicroTime() . "." . $ext2;
+                            $resp2 = move_uploaded_file($img2["tmp_name"],"../assets/media/concursos/".$newNameBanner);
+
+                            echo $newNameBanner;
     
             $dados["title"] = $_REQUEST["title"];
             $dados["tag"] = $_REQUEST["tag"];
@@ -644,12 +652,12 @@ if(isset($_REQUEST["verificar"])){
             $log->setTexto("{$ip} - Novo concurso criado por ". $_SESSION["ADM_EMAIL"]);
             $log->fileWriter();
             ?>
-            <form action="../view/developers.php" name="return" id="return" method="get">
+            <!-- <form action="../view/developers.php?success=1" name="return" id="return" method="get">
             <input type="hidden" name="sucesso" value=1>
             </form>
             <script>
                 document.getElementById("return").submit();
-            </script>
+            </script> -->
         <?php
         }
         
@@ -671,7 +679,7 @@ if(isset($_REQUEST["newBanner"])){
     $log->setTexto("{$ip} - Novo banner adicionado por ". $_SESSION["ADM_EMAIL"]);
     $log->fileWriter();
     ?>
-    <form action="../view/developers.php" name="return" id="return" method="get">
+    <form action="../view/developers.php?success=1" name="return" id="return" method="get">
     <input type="hidden" name="sucesso" value=1>
     </form>
     <script>
@@ -680,6 +688,48 @@ if(isset($_REQUEST["newBanner"])){
 
 <?php
 }
-
+       
+if(isset($_REQUEST["excluir_banner"])){
+ require "../model/manager.class.php";
+$manager = new Manager();
+$manager->excluirBanner($_REQUEST["excluir_banner"]);
+require "../model/log.class.php";
+$log = new Log();    
+$ip = $_SERVER['REMOTE_ADDR'];
+$log->setTexto("{$ip} - Banner excluido por ". $_SESSION["ADM_EMAIL"]);
+$log->fileWriter();
 ?>
+<form action="../view/developers.php?success=1" name="return" id="return" method="get">
+<input type="hidden" name="sucesso" value=1>
+</form>
+<script>
+    document.getElementById("return").submit();
+</script>
+
+<?php
+}
+
+       
+if(isset($_REQUEST["excluir_concurso"])){
+    require "../model/manager.class.php";
+   $manager = new Manager();
+   $manager->excluirConcurso($_REQUEST["excluir_concurso"]);
+   require "../model/log.class.php";
+   $log = new Log();    
+   $ip = $_SERVER['REMOTE_ADDR'];
+   $log->setTexto("{$ip} -Concurso excluido por ". $_SESSION["ADM_EMAIL"]);
+   $log->fileWriter();
+   ?>
+   <form action="../view/developers.php?success=1" name="return" id="return" method="get">
+   <input type="hidden" name="sucesso" value=1>
+   </form>
+   <script>
+       document.getElementById("return").submit();
+   </script>
+   
+   <?php
+   }
+       
+?>
+           
            

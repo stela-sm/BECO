@@ -866,7 +866,7 @@ public function novoAcesso($ip){
         $sql = "INSERT INTO concursos (titulo, tag, descricao, img_anuncio, img_banner, data_inicio,
         data_fim, status) VALUES ('{$dados["title"]}','{$dados["tag"]}','{$dados["descricao"]}','{$dados["img_anuncio"]}','{$dados["img_banner"]}', '{$dados["data_inicio"]}', '{$dados["data_fim"]}', '1')";
        $res = $this->connect()->query($sql);
-    
+    echo "$sql";
        if (!$res) {
            $this->connect()->close();
            return ['result' => -1, 'error' => $this->connect()->error];
@@ -925,6 +925,7 @@ public function transacoesTable($busca){
                     'vendedor'    => $row['vendedor'],
                     'metodo'      => $row['metodo'],
                     'status'      => $row['status'],
+                    'cod_card_num'      => $row['cod_card_num'],
                     'data'        => $row['datahora']
                 ];
                 $i++;
@@ -937,6 +938,23 @@ public function transacoesTable($busca){
             $this->connect()->close();
             return ['result' => 0]; // No rows found
         }
+    }
+
+
+    public function excluirBanner($id){
+        $sql = "DELETE FROM banner WHERE ID_BANNER = '{$id}'";
+        $res = $this->connect()->query($sql);
+        $this->connect()->close();
+        return $res;
+        
+    }
+
+    public function excluirConcurso($id){
+        $sql = "DELETE FROM concursos WHERE ID_CONCURSO = '{$id}'";
+        $res = $this->connect()->query($sql);
+        $this->connect()->close();
+        return $res;
+        
     }
 }
 
