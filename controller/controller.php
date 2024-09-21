@@ -615,7 +615,6 @@ if(isset($_REQUEST["verificar"])){
         }
     
         if(isset($_REQUEST["newConcurso"])){
-            //VER PQ CARALHOS ISSO TÁ INSERINDOA MESMA IMAGEM NOS DOIS CAMPOS
         
                             $img = $_FILES["img_anuncio"];
         
@@ -625,16 +624,14 @@ if(isset($_REQUEST["verificar"])){
                             $newNameAnuncio = $ferramentas->geradorMicroTime() . "." . $ext;
                             $resp = move_uploaded_file($img["tmp_name"],"../assets/media/concursos/".$newNameAnuncio);
                         
-                            echo $newNameAnuncio;
 
-                            $img2 = $_FILES["img_banner"];
-                           
-                            
+                            $img2 = $_FILES["img_banner"];                                                  
                             $ext2 = $ferramentas->pegaExtensao($img2["name"]);
-                            $newNameBanner = $ferramentas->geradorMicroTime() . "." . $ext2;
+                            $microtime = $ferramentas->geradorMicroTime();
+                            $newNameBanner = $microtime + 1;
+                            $newNameBanner = $newNameBanner . "." . $ext2;
                             $resp2 = move_uploaded_file($img2["tmp_name"],"../assets/media/concursos/".$newNameBanner);
-
-                            echo $newNameBanner;
+                           
     
             $dados["title"] = $_REQUEST["title"];
             $dados["tag"] = $_REQUEST["tag"];
@@ -652,12 +649,12 @@ if(isset($_REQUEST["verificar"])){
             $log->setTexto("{$ip} - Novo concurso criado por ". $_SESSION["ADM_EMAIL"]);
             $log->fileWriter();
             ?>
-            <!-- <form action="../view/developers.php?success=1" name="return" id="return" method="get">
+            <form action="../view/developers.php?success=1" name="return" id="return" method="get">
             <input type="hidden" name="sucesso" value=1>
             </form>
             <script>
                 document.getElementById("return").submit();
-            </script> -->
+            </script>
         <?php
         }
         
