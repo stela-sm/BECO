@@ -109,7 +109,7 @@ if($_SESSION["ADM_PODER"] >= 2){
               <tr>
                 <td>
                   <label for="nome" class="label-padrao">Nome Completo</label><br>
-                  <input disabled  type="text" name="nome" class="input-padrao" value="<?php echo $r[0]["email"] ?>">
+                  <input disabled  type="text" name="nome" class="input-padrao" value="<?php echo $r[0]["nome"] ?>">
                 </td>
                 <td>
                 <label for="nome" class="label-padrao">País</label><br>
