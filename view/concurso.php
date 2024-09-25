@@ -300,8 +300,8 @@ if ($concurso["result"]==0){
       <div class="bannerMobile__hashtagTimer">
         <div class="temp_name">
 
-          <span class="temp__number" id="temporada-number" style="font-size: 25px;">#HASHTAG</span>
-          <span class="time-remaining__countdown">00d00h00m</span>
+          <span class="temp__number" id="temporada-number" style="font-size: 21px;"><?php echo $concurso['tag']?></span>
+          <span class="time-remaining__countdown temporizador"  >00d00h00m</span>
         </div>
       </div>
       <button id="shareButtonIncorp" class="containerLinkBanner">

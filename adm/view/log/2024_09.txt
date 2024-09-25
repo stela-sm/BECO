@@ -15,3 +15,7 @@
 2024-09-24 02:20:51 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
 2024-09-24 02:25:07 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
 2024-09-24 02:56:47 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
+2024-09-26 00:11:26 - ::1 - Login do administrador 1, via cookies, pelo dispositivo de ip ::1.
+2024-09-26 00:16:41 - ::1 - Login do usuario fefe@fefe.com pelo dispositivo de ip ::1.
+2024-09-26 00:17:03 - ::1 - Login do administrador 1, via cookies, pelo dispositivo de ip ::1.
+2024-09-26 00:44:10 - ::1 - Login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.

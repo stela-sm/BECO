@@ -1148,11 +1148,10 @@ if ($concurso["result"]==0){
                             <div class="containerJS-timeremaining__Concurso absolute w100 h100">
 
                                 <div class="temp_name">
-                                    <span class="tempo__inname" style="font-size: 21px;">#</span>
                                     <span class="temp__number" id="temporada-number"
-                                        style="font-size: 25px;">HASHTAG</span>
+                                        style="font-size: 21px;"><?php echo $concurso['tag']?></span>
                                 </div>
-                                <span class="time-remaining__countdown">00:00:00</span>
+                                <span   class="temporizador time-remaining__countdown">00:00:00</span>
                             </div>
                             <div class="background-darken-curtain"></div>
                             <div class="image-curtain">
@@ -1731,7 +1730,7 @@ if ($data_atual < $data_fim) {
     $diferenca = 0;
 }
                                 ?>
-                                <span id="temporizador" class="time-remaining__countdown">00:00:00</span>
+                                <span  class="temporizador time-remaining__countdown">00:00:00</span>
                             </div>
                             <div class="background-darken-curtain"></div>
                             <div class="image-curtain">
@@ -2495,11 +2494,18 @@ if ($data_atual < $data_fim) {
                 horas = horas < 10 ? "0" + horas : horas;
                 minutos = minutos < 10 ? "0" + minutos : minutos;
                 segundos = segundos < 10 ? "0" + segundos : segundos; // ta calculando os segundos mas fds
+                console.log("porra")
+                let countdowns = document.getElementsByClassName('temporizador');
+for (let i = 0; i < countdowns.length; i++) {
+    countdowns[i].innerHTML = dias + ": " + horas + ": " + minutos;
+}
 
-                document.getElementById('temporizador').innerHTML = dias + "d " + horas + "h " + minutos + "m "; // AQUI TU VAI FAZER O JS COLOCAR OS VALORES NO TEMPORIZADOR, USA AS VARIÁVEIS dia, hora e minuto
             } else {
-                document.getElementById('temporizador').innerHTML = "Tempo esgotado!"; // AQUI TU PODE POR SÓ 00-00-00, OU SUBISTIRUIR O RELÓGIO POR "TEMPO ESGOTADO" OU SEI LÁ FAZ OQ QUISER
-                clearInterval(intervalo);
+                let countdowns = document.getElementsByClassName('temporizador');
+for (let i = 0; i < countdowns.length; i++) {
+    countdowns[i].innerHTML = "";
+}
+  clearInterval(intervalo);
             }
         }
 

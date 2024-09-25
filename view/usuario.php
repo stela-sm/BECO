@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br" style="background-color: var(--contentBG);">
+<?php
+session_start();
 
+require_once "../model/manager.class.php";
+$manager = new Manager();
+$postagens= $manager -> getPostagensUser($_SESSION["USER_ID"]);
+var_dump($postagens);
+if ($postagens["result"]==0){
+
+}
+?>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -376,6 +386,38 @@
 
               </div>
             </a>
+
+<!--CARD POSTAGENS-->
+
+<?php
+for ($i=0;$i<$postagens['result'];$i++){
+echo "
+
+<div class='card-portifolio'>
+  <a class='portifImg-container' style='position: relative;' onclick='Card__clickDetector()'>
+    <div class='portifolio-curtain absolute w100 h100'></div>
+    <img ondrag='return false' src='../assets/media/thumbnail/".$postagens[$i]['thumbnail']."' alt='Thumbnail do projeto' class='img_portFolio'
+      onselect='return false' dragstart='return false'>
+    <div class='portifolio-info pgfdKksa'>
+      <div class='containerTranslate'>
+        <div class='container-pictureInfoMinor relative'>
+          <div class='author-portName'>
+            <span class='portifolio-name truncate-text' id='portifolio-name'
+              style='font-size: 12.5px;color: #fff;'>
+              ".$postagens[$i]['titulo']."
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+
+
+";
+}
+?>
 
             <div class="card-portifolio">
               <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector()">
