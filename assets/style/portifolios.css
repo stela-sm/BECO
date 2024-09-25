@@ -1,0 +1,388 @@
+/*SEGURANÇA PARA AS IMGS*/
+img {
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+* {
+  scroll-behavior: smooth;
+  font-size: 1rem;
+}
+
+/*media query para telas maiores*/
+.highlight {
+  box-shadow: rgba(202, 228, 237, 0.5) 2px 0px 0px 0px, rgba(202, 228, 237, 0.5) -2px 0px 0px 0px;
+  background-color: rgba(202, 228, 237, 0.5);
+  border-radius: 3px;
+}
+@media (min-width: 1600px) {
+
+  .portifolio-name.truncate-text,
+  .user-name.truncate-text {
+    display: inline-block;
+    max-width: 23ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/*FONTES PROVISÓRIAS*/
+@font-face {
+  font-family: "Title";
+  src: url(../fonts/Stapel/Stapel_Bold.otf);
+}
+
+/*FIM DA ÁREA DE FONTES PROVISÓRIAS*/
+/*ROOT: cores, fontes e tamanhos padronizados*/
+:root {
+  --title: "Title";
+  --logo: "Raleway, system-ui";
+  --regular-body: "Raleway, system-ui";
+
+  --FullWidth: 100%;
+  --FullHeight: 100%;
+  --Fullvw: 100vw;
+  --Fullvh: 100vh;
+  --contentBG: #fff;
+  --sidebar_shadow: 4px 4px 16px -7px rgba(0, 0, 0, 0.096);
+  --default_border: 1px solid #e8e8e8;
+  --default_background: #f9f9f9;
+  --offwhite: #f0f0f0;
+  --white: #f2f2f2;
+
+  --default-color: #000;
+  --webkit-scrollbar: var(--transparent-bg);
+  --user-color: #191919;
+  --transparent-bg: transparent;
+  --divider-border: #e7e7e7;
+  --congrats_background: #f9f9f9;
+  --blackWhite: #fff;
+
+  --min-font-size: 10px;
+  --interMin-font-size: 15px;
+  --interMed-font-size: 16px;
+  --med-font-size: 17px;
+  --regular-font-size: 23px;
+  --extra-font-size: 2rem;
+  --major-font-size: 3rem;
+}
+
+/*fim do root*/
+/*cores para modo dark*/
+.dark {
+  --contentBG: #06070d;
+  --webkit-scrollbar: #06070d;
+  --default_border: 1px solid #21272b;
+  --divider-border: #21272b;
+  --default_background: #f9f9f903;
+  --offwhite: #f0f0f0;
+
+  --user-color: #c7c7c7;
+  --congrats_background: #f9f9f9;
+  --default-color: #f2f2f2;
+  --blackWhite: #000;
+}
+
+.relative {
+  position: relative;
+}
+
+.ovrflw-hidden {
+  overflow: hidden;
+}
+
+/*fim das cores para modo dark*/
+/*CSS RESET*/
+html,
+* {
+  color: var(--default-color);
+}
+
+h1 {
+  font-family: var(--title);
+}
+
+* {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  transition: all 0.241s cubic-bezier(0.47, 0, 0.745, 0.715);
+}
+
+body,
+html {
+  min-width: 100vw !important;
+  font-family: var(--regular-body), system-ui;
+}
+
+/*FIM DO CSS RESET*/
+/*FIM DO ESTILO DO INDEX*/
+.absolute {
+  position: absolute;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.h100 {
+  height: 100%;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/*CSS do banner*/
+.banner-central {
+  display: flex;
+  min-height: 260.5px;
+  height: 213.5px;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+  border-radius: 8px;
+  max-height: auto;/*275px*/
+}
+
+.top-50 {
+  top: 50%;
+}
+
+/*fim do css do banner*/
+/*portifolios card*/
+.portifolios-viewport {
+  background-color: var(--contentBG) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 4vh;
+  height: 100%;
+}
+
+.img_portFolio,img {
+  aspect-ratio: 4/4;
+  object-fit: contain;
+  mix-blend-mode: color-burn;
+  width: 100%;
+  height: 100%;
+}
+
+.container-portifolios {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  height: auto;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  justify-items: left;
+}
+
+.card-portifolio {
+  background: transparent;
+  cursor: pointer;
+  height: 205px;
+  position: relative;
+  width: 100%;
+  font-family: "Raleway", "Radikal Regular", system-ui;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: grid;
+  gap: 2vh;
+  border: none !important;
+  border-image: linear-gradient(0deg, rgb(0 0 0 / 69%) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.portifImg-container {
+  position: relative;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.author-portName {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.container-pictureInfoMinor {
+  display: flex;
+  gap: 1vw;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 95%;
+}
+
+.author-portName>.user-name {
+  opacity: 0.4;
+  display: flex;
+  font-size: 12px;
+  line-height: 7px;
+  cursor: pointer;
+  justify-content: flex-start;
+}
+
+* {
+  text-decoration: none;
+}
+
+.user-name:hover {
+  text-decoration: underline;
+}
+
+.container-authorUserImg {
+  border: var(--default_border) !important;
+  background-color: var(--default_background);
+  border-radius: 8px 8px 8px 8px;
+  height: 40px;
+  width: 41px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+}
+
+.portifolio-curtain {
+  background-color: #00000054;
+}
+
+.card-portifolio:hover>.portifImg-container>.portifolio-curtain {
+  background-color: #00000028;
+}
+
+.truncate-text {
+  display: inline-block;
+  max-width: 13ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.container-cardIcons {
+  position: absolute;
+  right: 0;
+}
+
+.zIndex-3 {
+  z-index: 3;
+}
+
+.wht-txt {
+  color: var(--blackWhite);
+}
+
+.beco {
+  font-size: 3rem;
+  font-family: var(--title), system-ui;
+  color: #fff;
+}
+
+.view-dark {
+  background-color: #06070d;
+}
+
+.pgfdKksa {
+  position: absolute;
+  height: auto;
+  width: 100%;
+  bottom: 0;
+  padding: 3%;
+
+}
+
+.botaoContainer_thumbInterativo {
+  border: none !important;
+  outline: none !important;
+  cursor: pointer;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.LikeSalvar__thumbContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1vw;
+}
+
+.botaoContainer_thumbInterativo svg {
+  fill: none;
+  transition: fill 0.3s ease;
+}
+
+.botaoContainer_thumbInterativo:hover svg {
+  fill: #fff;
+}
+
+.containerTranslate {
+  transform: translateX(-100%);
+}
+
+.card-portifolio:hover .portifImg-container>.portifolio-info>.containerTranslate {
+  transform: translateX(0%);
+}
+
+/* telas menores */
+@media (max-width: 750px) {
+  .container-portifolios {
+    padding-top: 1%;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 0;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+
+  }
+
+  .container-pictureInfoMinor {
+    display: flex;
+    gap: 1vw;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+  }
+
+  .card-portifolio {
+    background: transparent;
+    cursor: pointer;
+   height: calc((100% - (8vh + 6%)));
+    position: relative;
+    width: 90%;
+    font-family: 'Raleway', system-ui;
+    overflow: hidden;
+    display: grid;
+    border: none !important;
+    /* grid-template-rows: repeat(2, 1fr); */
+  }
+
+  .truncate-text {
+    display: inline-block;
+    max-width: 20ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

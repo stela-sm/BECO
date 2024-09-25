@@ -1,22 +1,18 @@
 <?php
-require_once('Conexao.class.php');
+require_once('conexao.class.php');
 
-class Manager extends Conexao{
+class Manager extends ConexaoFront{
 
    
 
-    public function admLogin($dados){
+    public function userLogin($dados){
     // Estabelece a conexão
     $conn = $this->connect();
 
     // Consulta SQL
-    $sql = "SELECT * FROM administradores WHERE email = ? AND senha = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $dados['email'], $dados['senha']);
-
-    // Executa a consulta
-    $stmt->execute();
-    $res = $stmt->get_result();
+    $sql = "SELECT * FROM usuario WHERE email = '{$dados['email']}' AND senha = '{$dados['senha']}';";
+  
+    $res = $this->connect()->query($sql);
 
     // Verifica se há resultados
     if ($res->num_rows > 0) {
@@ -24,29 +20,98 @@ class Manager extends Conexao{
         $dados["result"] = 1;
         $row = $res->fetch_assoc();
 
-        $dados["ID_ADM"] = $row["ID_ADM"];
+        $dados["ID_USER"] = $row["ID_USER"];
+        $dados["username"] = $row["username"];
         $dados["nome"] = $row["nome"];
-        $dados["email"] = $row["email"];
-        $dados["pfp"] = $row["pfp"];
         $dados["cpf"] = $row["cpf"];
-        $dados["cep"] = $row["cep"];
+        $dados["email"] = $row["email"];
         $dados["celular"] = $row["celular"];
-        $dados["rg"] = $row["rg"];
-        $dados["poder"] = $row["poder"];
-        $dados["numero"] = $row["numero"];
-        $dados["datan"] = $row["data_nascimento"];
-        $dados["estado_civil"] = $row["estado_civil"];
+        $dados["senha"] = $row["senha"];
+        $dados["data_nascimento"] = $row["data_nascimento"];
+        $dados["estado"] = $row["estado"];
+        $dados["pais"] = $row["pais"];
+        $dados["pfp"] = $row["pfp"];
+        $dados["biografia"] = $row["biografia"];
+        $dados["datahora"] = $row["datahora"];
+        $dados["status"] = $row["status"];
+        $dados["obs"] = $row["obs"];
         
-        $stmt->close();
         $conn->close();
         return $dados;
     } else {
-        $stmt->close();
         $conn->close();
         $dados['result'] = 0;
         return $dados;
     }
 }
+
+
+
+public function banner(){
+    $conn = $this->connect();
+    $sql = "SELECT `img` FROM `banner` WHERE `status` = 1 ORDER BY `datahora` DESC LIMIT 1;";
+    $res = $this->connect()->query($sql);
+    $imagem = null;
+       
+        $row = $res->fetch_assoc();
+        $imagem = $row['img'];
+    
+    $conn->close();
+    return $imagem;
+}
+
+
+public function userCadastro($dados){
+    
+    $conn = $this->connect();
+    $cpf = $dados["cpf"];
+    $username = $dados["username"];  
+    $email = $dados["email"];
+    
+    $sqlVerificaDuplicados = "CALL VerificaDuplicadosUsuario('$cpf', '$username', '$email', @result);";
+    $conn->query($sqlVerificaDuplicados);
+    
+    $resultQuery = $conn->query("SELECT @result AS resultado;");
+    $row = $resultQuery->fetch_assoc();
+    
+    if ($row['resultado'] == 1) {
+        $conn->close();
+        $data['result'] = 0;
+        return $data;
+    }else{
+        $sql = "INSERT INTO `usuario` (`username`,  `cpf`, `email`, `senha`, `datahora`, `pfp`, `biografia`,`status`) 
+        VALUES ('{$dados["username"]}', '{$dados["cpf"]}', '{$dados["email"]}',  '{$dados["senha"]}', NOW(), 'nopfp.png', 'Olá, estou usando o BECO!','1');";
+        $res = $this->connect()->query($sql);
+
+    if($res){
+        $sqlObterUltimoID = "CALL ObterUltimoIDUsuario(@p_id_user);";
+        $conn->query($sqlObterUltimoID);
+        $resultQuery = $conn->query("SELECT @p_id_user AS p_id_user;");
+        $row = $resultQuery->fetch_assoc();
+        echo $row['p_id_user'];
+        $this->connect()->close();
+        $data['result'] = $row['p_id_user'];
+        return $data;
+    }else{
+        $this->connect()->close();
+        $data['result'] = 0;
+        return $data;
+    }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 public function admLoginID($dados){
@@ -197,35 +262,11 @@ public function admLoginID($dados){
             }
         }
 
-        public function userStatus($id, $status){
-            $sql = "UPDATE usuario SET status = {$status} WHERE ID_USER = {$id};";
-            $res = $this->connect()->query($sql);
-            if (!$res) {
-                $this->connect()->close();
-                return ['result' => 0, 'error' => $this->connect()->close()];
-            }else{
-                $this->connect()->close();
-                return ['result' => 1];
-            }
-        }
-
 
 
         
         public function admExcluir($id){
             $sql = "DELETE FROM administradores WHERE ID_ADM = {$id};";
-            $res = $this->connect()->query($sql);
-            if (!$res) {
-                $this->connect()->close();
-                return ['result' => 0, 'error' => $this->connect()->close()];
-            }else{
-                $this->connect()->close();
-                return ['result' => 1];
-            }
-        }
-
-        public function userExcluir($id){
-            $sql = "DELETE FROM usuario WHERE ID_USER = {$id};";
             $res = $this->connect()->query($sql);
             if (!$res) {
                 $this->connect()->close();
@@ -264,35 +305,17 @@ public function admLoginID($dados){
         }
 
 
-        public function userUpdate($dados){
-            $sql = "UPDATE usuario SET 
-                    username = '{$dados['username']}', 
-                    nome = '{$dados['nome']}', 
-                    email = '{$dados['email']}', 
-                    celular = '{$dados['celular']}',
-                    data_nascimento = '{$dados['data_nascimento']}', 
-                    estado = '{$dados['estado']}', 
-                    pais = '{$dados['pais']}', 
-                    pfp = '{$dados['pfp']}', 
-                    biografia = '{$dados['bio']}',  
-                    obs = '{$dados['obs']}'
-                WHERE ID_USER = '{$dados['id']}';";
-       
-            $res = $this->connect()->query($sql);
-            if (!$res) {
-                $this->connect()->close();
-                return ['result' => 0, 'error' => $this->connect()->error];
-            } else {
-                $this->connect()->close();
-                return ['result' => 1];
-            }
-        }
+
 
 
         public function registrosAdd($nome){
             $sql = "INSERT INTO registros (nome, datahora) VALUES ('{$nome}', now());";
             $res = $this->connect()->query($sql);
         }
+
+
+
+
 
 
     public function admNew($dados){
@@ -312,19 +335,27 @@ public function admLoginID($dados){
     }
 
 
+
+
+
+
+
+
+
+
     public function userTable($busca) {
         if($busca["status"] == "" && $busca["data"] =="" && $busca["pesquisa"] == ""){
         $sql = "SELECT * FROM usuario;";
-        }else if ($busca["pesquisa"] != ""){
-            $pesquisa = $busca["pesquisa"];
-            $sql = "SELECT * FROM usuario WHERE username LIKE '%$pesquisa%' OR email LIKE '%$pesquisa%' ";
-        
             }else if($busca["status"] != "" && $busca["data"] != ""){
-                $sql = "SELECT * FROM usuario WHERE datahora >= '{$busca["data"]}' AND status = {$busca["status"]}";
+                $sql = "SELECT * FROM usuario WHERE datahora <= {$busca["data"]} AND status = {$busca["status"]}";
             }else if($busca["status"] != "" && $busca["data"] == ""){
                 $sql = "SELECT * FROM usuario WHERE status = {$busca["status"]}";
             }else if ($busca["status"] == "" && $busca["data"] != ""){
-                $sql = "SELECT * FROM usuario WHERE datahora >= '{$busca["data"]}'";
+                $sql = "SELECT * FROM usuario WHERE datahora <= {$busca["data"]}";
+            }else if ($busca["pesquisa"] != ""){
+
+                $pesquisa = $busca["pesquisa"];
+                $sql = "SELECT * FROM usuario WHERE username LIKE '%$pesquisa%' OR email LIKE '%$pesquisa%' ";
             }
       
         $res = $this->connect()->query($sql);
@@ -374,7 +405,6 @@ public function admLoginID($dados){
                         'ID_USER'   => $row['ID_USER'],
                         'username'     => $row['username'],
                         'pfp'     => $row['pfp'],
-                        'nome'     => $row['nome'],
                         'email'    => $row['email'],
                         'bio'    => $row['biografia'],
                         'celular'  => $row['celular'],
@@ -437,7 +467,7 @@ public function admLoginID($dados){
         
         
 
-    public   function getAccessesByMonth() {
+        function getAccessesByMonth() {
           
             // mano como q isso funciona vsfd
             $sql = "SELECT MONTH(datahora) AS month, COUNT(*) AS count 
@@ -467,14 +497,14 @@ public function admLoginID($dados){
         require_once('../model/ferramentas.class.php');
         $ferramentas = new Ferramentas();
          
-        $sql = "SELECT m.ID_MENSAGEM, m.texto_mensagem, m.datahora, m.file, u.ID_ADM AS id_remetente, u.nome AS nome_remetente, 
-                       c.id_user1, a1.nome AS nome_user1, 
-                       c.id_user2, a2.nome AS nome_user2
+        $sql = "SELECT m.ID_MENSAGEM, m.texto_mensagem, m.datahora, m.file, u.ID_USER AS id_remetente, u.nome AS nome_remetente, 
+                       c.id_user1, a1.username AS nome_user1, 
+                       c.id_user2, a2.username AS nome_user2
                 FROM mensagens m
-                JOIN administradores u ON m.id_remetente = u.ID_ADM
+                JOIN usuario u ON m.id_remetente = u.ID_USER
                 JOIN conversas c ON m.ID_CONVERSA = c.id_conversa
-                JOIN administradores a1 ON c.id_user1 = a1.ID_ADM
-                JOIN administradores a2 ON c.id_user2 = a2.ID_ADM
+                JOIN usuario a1 ON c.id_user1 = a1.ID_USER
+                JOIN usuario a2 ON c.id_user2 = a2.ID_USER
                 WHERE m.id_conversa = {$idConversa}
                 ORDER BY m.datahora;";
     
@@ -522,11 +552,11 @@ public function admLoginID($dados){
         }
 
         public function getUserInfo($id_user){
-            $sql= "SELECT * FROM administradores where ID_ADM = {$id_user}";              
+            $sql= "SELECT * FROM usuario where ID_USER = {$id_user}";              
             $res = $this->connect()->query($sql);
             $dados = [];
             while($row=$res->fetch_assoc()){
-                $dados["nome"] = $row["nome"];
+                $dados["nome"] = $row["username"];
                 $dados["pfp"] = $row["pfp"];
             }
             
@@ -536,7 +566,7 @@ public function admLoginID($dados){
 
         public function showConversas($idRemetente){
 
-            $sql= "SELECT * FROM conversas where id_user1 = {$idRemetente} or id_user2 = {$idRemetente}";  
+            $sql= "SELECT * FROM conversas where id_user1 = {$idRemetente} or id_user2 = {$idRemetente} AND tabela = 'user' ";  
             $res = $this->connect()->query($sql);
             $dados = [];
             $i = 0;
@@ -568,7 +598,7 @@ public function admLoginID($dados){
        
 
         public function searchConversas($query) {
-            $sql = "SELECT * FROM administradores WHERE nome LIKE '%$query%' LIMIT 15";
+            $sql = "SELECT * FROM usuario WHERE username LIKE '%$query%' LIMIT 15";
             $res = $this->connect()->query($sql);
         
             if (!$res) {
@@ -580,8 +610,8 @@ public function admLoginID($dados){
                 $i = 0;
                 while ($row = $res->fetch_assoc()) {
                     $dados[$i] = [
-                        'ID_ADM' => $row['ID_ADM'],
-                        'nome' => $row['nome'],
+                        'ID_ADM' => $row['ID_USER'],
+                        'nome' => $row['username'],
                         'pfp' => $row['pfp']
                     ];
                     $i++;
@@ -614,8 +644,7 @@ public function admLoginID($dados){
             
            $verif = $this-> verificarConversa($id_user1,$id_user2);
            if($verif['result'] == 0){
-            $sql = "INSERT INTO conversas (id_user1, id_user2, datahora, tabela) VALUES ({$id_user1}, {$id_user2}, NOW(), 'administradores')";
-           //ver se essa PORRA dessa BUCETA de campo de TABELA tá setado na PORRA do front end
+            $sql = "INSERT INTO conversas (id_user1, id_user2, tabela, datahora) VALUES ({$id_user1}, {$id_user2}, 'user', NOW())";
             $res = $this->connect()->query($sql);
            }
            $room = $this-> pegarRoom($id_user1,$id_user2);
@@ -683,7 +712,7 @@ public function verificar_cod($dados){
 
 
 public function emailVerif($email){
-    $sql="SELECT * FROM administradores WHERE email = '$email'";
+    $sql="SELECT * FROM usuario WHERE email = '$email'";
     $res = $this->connect()->query($sql);
     if($res->num_rows > 0){
         $dados = "1";
@@ -697,7 +726,7 @@ public function emailVerif($email){
 }
 
 public function alterarSenha($senha, $email){
-    $sql="UPDATE administradores SET senha = '$senha' WHERE email = '$email'";
+    $sql="UPDATE usuario SET senha = '$senha' WHERE email = '$email'";
     $res = $this->connect()->query($sql);
     if($res){
         $dados = "1";
@@ -715,16 +744,6 @@ public function alterarSenha($senha, $email){
 
 public function quantidade($tabela){
     $sql = "SELECT COUNT(*) FROM $tabela";
-    $res = $this->connect()->query($sql);
-    $dados = $res->fetch_row();
-    $this->connect()->close();
-    return $dados[0];
-    
-}
-
-
-public function quantidadePayment($payway){
-    $sql = "SELECT COUNT(*) FROM compras WHERE metodo = '{$payway}'";
     $res = $this->connect()->query($sql);
     $dados = $res->fetch_row();
     $this->connect()->close();
@@ -867,7 +886,7 @@ public function novoAcesso($ip){
         $sql = "INSERT INTO concursos (titulo, tag, descricao, img_anuncio, img_banner, data_inicio,
         data_fim, status) VALUES ('{$dados["title"]}','{$dados["tag"]}','{$dados["descricao"]}','{$dados["img_anuncio"]}','{$dados["img_banner"]}', '{$dados["data_inicio"]}', '{$dados["data_fim"]}', '1')";
        $res = $this->connect()->query($sql);
-    echo "$sql";
+    
        if (!$res) {
            $this->connect()->close();
            return ['result' => -1, 'error' => $this->connect()->error];
@@ -892,73 +911,46 @@ public function novoAcesso($ip){
             return ['result' => 1]; 
         
     } 
-    }
-public function transacoesTable($busca){
-    if($busca["data"] =="" && $busca["pesquisa"] == "" && $busca["metodo"] == ""){
-        $sql = "SELECT * FROM compras;";
-        }else if ($busca["pesquisa"] != ""){
-            $pesquisa = $busca["pesquisa"];
-            $sql = "SELECT * FROM compras WHERE comprador LIKE '%$pesquisa%'  OR vendedor LIKE '%$pesquisa%' ";
-        }else if($busca["data"] != "" && $busca["metodo"] != ""){
-            $sql = "SELECT * FROM compras WHERE datahora > {$busca["data"]} AND metodo = {$busca["metodo"]}";
-        }else if($busca["data"] != "" && $busca["metodo"] == ""){
-            $sql = "SELECT * FROM compras WHERE datahora > '{$busca["data"]}'";
-        }else if ($busca["data"] == "" && $busca["medoto"] != ""){
-            $sql = "SELECT * FROM compras WHERE metodo = {$busca["metodo"]}";
-        }
-
-        $res = $this->connect()->query($sql);
-    
-        if (!$res) {
-            $this->connect()->close();
-            return ['result' => -1, 'error' => $this->connect()->close()];
-        }
-    
-        if ($res->num_rows > 0) {
-            $dados = [];
-            $i = 0;
-            while ($row = $res->fetch_assoc()) {
-                $dados[$i] = [
-                    'ID_COMPRA'   => $row['ID_COMPRA'],
-                    'id_prod'     => $row['id_prod'],
-                    'valor'     => $row['valor'],
-                    'comprador'   => $row['comprador'],
-                    'vendedor'    => $row['vendedor'],
-                    'metodo'      => $row['metodo'],
-                    'status'      => $row['status'],
-                    'cod_card_num'      => $row['cod_card_num'],
-                    'data'        => $row['datahora']
-                ];
-                $i++;
-            }
-            $dados['result'] = $i; // Store count or simply use true to indicate success
-            $this->connect()->close();
-            $dados['query'] = $sql;
-            return $dados;
-        } else {
-            $this->connect()->close();
-            return ['result' => 0]; // No rows found
-        }
-    }
-
-
-    public function excluirBanner($id){
-        $sql = "DELETE FROM banner WHERE ID_BANNER = '{$id}'";
-        $res = $this->connect()->query($sql);
-        $this->connect()->close();
-        return $res;
-        
-    }
-
-    public function excluirConcurso($id){
-        $sql = "DELETE FROM concursos WHERE ID_CONCURSO = '{$id}'";
-        $res = $this->connect()->query($sql);
-        $this->connect()->close();
-        return $res;
-        
-    }
 }
 
+
+
+    public function getConcursoAtual() {
+        $sql = "SELECT *
+FROM concursos
+WHERE NOW() BETWEEN data_inicio AND data_fim;
+"; 
+$res = $this->connect()->query($sql);
+    
+if (!$res) {
+    $this->connect()->close();
+    return ['result' => -1, 'error' => $this->connect()->error];
+}
+
+if ($res->num_rows > 0) {
+    $dados = [];
+    while ($row = $res->fetch_assoc()) {
+        $dados = [
+            'ID_CONCURSO' => $row['ID_CONCURSO'],
+            'titulo'      => $row['titulo'],
+            'tag'         => $row['tag'],
+            'descricao'   => $row['descricao'],
+            'img_anuncio' => $row['img_anuncio'],
+            'img_banner'  => $row['img_banner'],
+            'data_inicio' => $row['data_inicio'],
+            'data_fim'    => $row['data_fim'],
+            'status'      => $row['status']
+        ];
+    }
+    $dados['result'] = 1;
+    $this->connect()->close();
+    return $dados;
+} else {
+    $this->connect()->close();
+    return ['result' => 0];
+}
+    }
+}
 
 
 ?>

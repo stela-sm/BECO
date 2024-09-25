@@ -10,18 +10,73 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../assets/js/texto_audio.js"></script>
 
+<script>
+            document.addEventListener('DOMContentLoaded', function() {
+    var SoundIsOn = localStorage.getItem('com.beco/audio_recurso01x.all?ison');
+    if (SoundIsOn === 'ativo') {
+        inicializar2();
+    }else if(SoundIsOn === 'desativado'){
+        naoinicializar()
+    }
+});
+
+</script>
     <title>Chat</title>
+    <script>
+         window.addEventListener('message', function (event) {
+      if (event.data === 'darkMode') {
+        document.body.classList.toggle('dark');
+      }
+    })
+    document.addEventListener('DOMContentLoaded', function () {
+      var DarkMode__isOn = localStorage.getItem('DarkMode');
+      if (DarkMode__isOn === '1') {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    })
+    </script>
+        <script src="../assets/js/font.js"></script>
+<script>
+/*        document.addEventListener('DOMContentLoaded', function() {
+    var fontTam = localStorage.getItem('com.beco_fonteWeb_localData');
+    
+    let SecurityTamP__isOn = false;
+    let SecurityTamR__isOn = false;
+    let SecurityTamG__isOn = false;
+    
+    if (fontTam == 'P') {
+        SecurityTamP__isOn = true
+        SecurityTamR__isOn = false
+        SecurityTamG__isOn = false
+        P__fontNVerif()
+    } else if (fontTam == 'R') {
+        SecurityTamP__isOn = false
+        SecurityTamR__isOn = false
+        SecurityTamG__isOn = false
+        Regular__fontNVerif()
+    } else if (fontTam == 'G') {
+        SecurityTamP__isOn = false
+        SecurityTamR__isOn = false
+        SecurityTamG__isOn = true
+        G__fontNVerif()
+    }
+})  */
+
+</script>
 </head>
-<body>
+<body style="background-color: var(--sidebar-color)">
 
 
 
 <?php
 
 session_start();
-echo "<input type=\"hidden\" name=\"\" class=\"ID_SESSION\" value='".$_SESSION["ADM_ID"]."'>";
-echo "<input type=\"hidden\" name=\"\" class=\"pfp-outgoing\" value='".$_SESSION["ADM_PFP"]."'>";
+echo "<input type=\"hidden\" name=\"\" class=\"ID_SESSION\" value='".$_SESSION["USER_ID"]."'>";
+echo "<input type=\"hidden\" name=\"\" class=\"pfp-outgoing\" value='".$_SESSION["USER_PFP"]."'>";
 if(isset($_REQUEST["new"])){
     
 echo "<input type=\"hidden\" name=\"\" class=\"ID_NEW\" value='".$_REQUEST["new"]."'>";
@@ -38,27 +93,10 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
     <div class=" chat">
         <header>
             <h5>Chat</h5>
-            
+            <br><br><br><br><br><br>
         </header>
         <ul class="chatbox">
-<style>
-
-</style>
-<li class="chat file outgoing">
-    
-<p >
-<a href="../assets/media/banner/1725210189.jpeg" style="color:white !important;" download="1725210189.jpeg">
-<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-  <path d="M12 17v-6" />
-  <path d="M9.5 14.5l2.5 2.5l2.5 -2.5" />
-</svg> 
-    927382873.png
-</p>
-</a>
-        </li>
+        
 <script>
   
 
@@ -76,9 +114,9 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
                         chatList.empty();
                         for (var i = 0; i <= response.number; i++) {
                             var mensagem = response[i];
-                            console.log(response)
+                            /* console.log(response) */
                             if(mensagem.texto_mensagem != false){
-                            if (mensagem.id_remetente == <?php echo $_SESSION["ADM_ID"]; ?>) {
+                            if (mensagem.id_remetente == <?php echo $_SESSION["USER_ID"]; ?>) {
                               
                                 chatList.append(
                                     "<li class='chat outgoing'>" +
@@ -98,7 +136,7 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
                                     "</li>"
                                 );
                             }}else if(mensagem.texto_mensagem == false){
-                                if (mensagem.id_remetente == <?php echo $_SESSION["ADM_ID"]; ?>) {
+                                if (mensagem.id_remetente == <?php echo $_SESSION["USER_ID"]; ?>) {
                               
                               chatList.append(
                                   "<li class='chat file outgoing'>"+
@@ -160,8 +198,9 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
 
 
         </ul>
-      
+        
         <div class="chat-input">
+        
         <div class="atached" style="align-self:center;">
             <input type="file" name="arquivo" style="display:none;" id="arquivoInput">
         <svg class="inputArquivo" xmlns="http://www.w3.org/2000/svg" onclick="arquivoInput()" style="margin-right:10px;" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-paperclip"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" /></svg>

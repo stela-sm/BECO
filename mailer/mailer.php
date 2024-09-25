@@ -2,10 +2,9 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require 'src/Exception.php';
-require 'src/PHPMailer.php';
-require 'src/SMTP.php';
-require_once('../model/manager.class.php');
+require_once'src/Exception.php';
+require_once'src/PHPMailer.php';
+require_once'src/SMTP.php';
 
 function gerarCodigoVerificacao($tamanho = 6) {
     $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -28,6 +27,8 @@ $assunto = $emailEnviar["assunto"];
 
 
   $codigoVerificacao = gerarCodigoVerificacao(6);
+  
+require_once'..\model\manager.class.php';
   $manager = new Manager();
   $url = 'http://localhost/BECO/mailer/view/rec.php?cod=' . $codigoVerificacao;
 

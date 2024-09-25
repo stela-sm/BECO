@@ -69,7 +69,7 @@ if (isset($_REQUEST["inserir_file"])) {
 
 if(isset($_REQUEST["select"])){
 
-    require "../model/manager.class.php";
+    require_once "../model/manager.class.php";
 
     $manager = new Manager();
     $idConversa = $_GET['id_conversa']; // Substitua '1' pelo ID da conversa desejada
@@ -82,9 +82,9 @@ echo json_encode($r);
 
 if(isset($_REQUEST["conversas"])){
 
-require "../model/manager.class.php";
+require_once "../model/manager.class.php";
 $manager = new Manager();
-$r = $manager-> showConversas($_SESSION["ADM_ID"]);
+$r = $manager-> showConversas($_SESSION["USER_ID"]);
 
 
 echo json_encode($r);
@@ -97,7 +97,7 @@ if (isset($_REQUEST['search'])) {
 
     $query = $_REQUEST['search'];
 
-    require "../model/manager.class.php";
+    require_once "../model/manager.class.php";
     $manager = new Manager();
 
     $results = $manager->searchConversas($query);
@@ -110,7 +110,7 @@ if (isset($_REQUEST['search'])) {
 
 
 if (isset($_REQUEST['inserir_conv'])) {
-    require "../model/manager.class.php";
+    require_once "../model/manager.class.php";
     $manager = new Manager();
     $id_user1 = $_POST['id_user1'];
     $id_user2 = $_POST['id_user2'];

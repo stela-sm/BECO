@@ -1,5 +1,5 @@
 <?php
-class Conexao{
+class ConexaoFront{
     private $servername;
     private $username;
     private $password;

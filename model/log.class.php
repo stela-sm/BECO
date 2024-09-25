@@ -23,8 +23,8 @@ class Log extends Manager{
 
         $nameFile = $this->fileName();
     
-        if (!file_exists("../view/log/{$nameFile}")) {
-            $arquivo = fopen("../view/log/{$nameFile}","a");
+        if (!file_exists("../adm/view/log/{$nameFile}")) {
+            $arquivo = fopen("../adm/view/log/{$nameFile}","a");
             fwrite($arquivo, $this->texto);
             fclose($arquivo);        
 
@@ -32,13 +32,13 @@ class Log extends Manager{
              
         } else {
             
-            $arquivo = fopen("../view/log/{$nameFile}","a");
+            $arquivo = fopen("../adm/view/log/{$nameFile}","a");
             fwrite($arquivo, $this->texto);
             fclose($arquivo);
         }
 
         $manager = new Manager();
-     $manager->registrosAdd($nameFile); 
+     $manager->registrosAdd($nameFile); //verificar pq nn tá funcionando
      
     }
     
