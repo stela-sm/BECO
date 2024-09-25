@@ -4,6 +4,7 @@
 require_once "../model/manager.class.php";
 $manager = new Manager();
 $concurso= $manager -> getConcursoAtual();
+$postagens= $manager -> concursosPostagens($concurso['tag']);
 if ($concurso["result"]==0){
 // set the values if there isnt anyone at the actual time
 
@@ -319,6 +320,56 @@ if ($concurso["result"]==0){
     <h1 class="titulo-publi" style="font-size: 42.5px;padding-top: 3%;">Publicações</h1>
     <div class="container-portifolios" id="container-portifolios">
   <!--OS CARDS DEVEM SER COLOCADOS AQUI DENTRO!-->
+<?php
+
+for ($i=0;$i<$postagens['result'];$i++){
+echo "
+
+<div class='card-portifolio'>
+  <a class='portifImg-container' style='position: relative;' onclick='Card__clickDetector()'>
+    <div class='portifolio-curtain absolute w100 h100'></div>
+    <img ondrag='return false' src='../assets/media/thumbnail/".$postagens[$i]['thumbnail']."' alt='' class='img_portFolio' onselect='return false' dragstart='return false'>
+    <div class='portifolio-info pgfdKksa'>
+      <div class='containerTranslate'>
+        <div class='container-pictureInfoMinor relative'>
+          <div class='author-portName'>
+            <span class='portifolio-name truncate-text' id='portifolio-name' style='font-size: 12.5px;color: #fff;'>
+              ".$postagens[$i]['titulo']."
+            </span>
+            <span class='user-name truncate-text' style='color: #fff;' id='username-card'>
+             @".$postagens[$i]['username']."
+            </span>
+          </div>
+          <div class='LikeSalvar__thumbContainer'>
+            <button id='salvarPublicacao' class='botaoContainer_thumbInterativo'>
+              <svg id='salvarPubli_btn' xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-bookmark'>
+                <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+                <path d='M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z' />
+              </svg>
+            </button>
+            <button id='darLikePublicacao' class='botaoContainer_thumbInterativo'>
+              <svg id='likePubli_btn' xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-thumb-up'>
+                <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+                <path d='M7 11v8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3' />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+
+";
+
+
+
+}
+
+
+?>
+
   <!--EXEMPLO DE CARD:-->
       <div class="card-portifolio">
         <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector()">
@@ -361,6 +412,10 @@ if ($concurso["result"]==0){
           </div>
         </a>
       </div>
+
+
+
+      
   <!--FIM DO EXEMPLO-->
     </div>
     <br><br></div>

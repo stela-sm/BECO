@@ -6,7 +6,7 @@ session_start();
 require_once "../model/manager.class.php";
 $manager = new Manager();
 $postagens= $manager -> getPostagensUser($_SESSION["USER_ID"]);
-var_dump($postagens);
+
 if ($postagens["result"]==0){
 
 }

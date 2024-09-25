@@ -749,10 +749,10 @@ public function novoAcesso($ip){
 
 
 
+
+
     public function getConcursoAtual() {
-        $sql = "SELECT *
-FROM concursos
-WHERE NOW() BETWEEN data_inicio AND data_fim;
+        $sql = "SELECT * FROM concursos WHERE NOW() BETWEEN data_inicio AND data_fim;
 "; 
 $res = $this->connect()->query($sql);
     
@@ -784,7 +784,54 @@ if ($res->num_rows > 0) {
     return ['result' => 0];
 }
     }
+
+
+public function concursosPostagens($hashtag) {
+    // Criar conexão
+    $sql = "SELECT p.`ID_POST`, p.`id_user`, p.`titulo`, p.`descricao`,p.`thumbnail`, p.`tipo`, p.`datahora` AS `post_datahora`, p.`status`, 
+    m.`ID_MIDIA`, m.`id_postagem`, m.`arquivo`, m.`tipo` AS `midia_tipo`, m.`datahora` AS `midia_datahora`,
+    u.`ID_USER`, u.`username`, u.`pfp`
+FROM `postagem` p
+LEFT JOIN `midia` m ON p.`ID_POST` = m.`id_postagem`
+LEFT JOIN `usuario` u ON p.`id_user` = u.`ID_USER`
+WHERE p.`descricao` LIKE '%{$hashtag}%'";
+ $conn = $this->connect();
+ $res = $conn->query($sql);
+ if ($res->num_rows > 0) {
+    $dados = array();
+    $i = 0;
+    
+    // Percorrer todos os resultados
+    while ($row = $res->fetch_assoc()) {
+        $dados[$i] = [
+            'ID_USER'   => $row['ID_USER'],
+            'username'  => $row['username'],
+            'pfp'       => $row['pfp'],
+            'thumbnail'       => $row['thumbnail'],
+            'ID_POST'   => $row['ID_POST'],
+            'titulo'    => $row['titulo'],
+            'descricao' => $row['descricao'],
+            'tipo'      => $row['tipo'],
+            'post_datahora' => $row['post_datahora'],
+            'post_status' => $row['status'],
+            'ID_MIDIA'  => $row['ID_MIDIA'],
+            'arquivo'   => $row['arquivo'],
+            'midia_tipo'=> $row['midia_tipo'],
+            'midia_datahora' => $row['midia_datahora']
+            
+        ];
+        $i++;
+        
+        $dados['result']=$i;
+    }   $conn->close();
+    return $dados;
+} else {
+    $conn->close();
+    $dados['result'] = 0;
+    return $dados;
 }
 
+}
+}
 
 ?>
