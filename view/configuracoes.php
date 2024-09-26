@@ -1537,7 +1537,16 @@ setInterval(checkMemoryUsage, checkInterval);
         };
     </script>
     <script src="../assets/js/texto_audio.js"></script>
+    <?php
+    if(isset($_REQUEST["configperfil"])){
+        echo "
+        <script>
+document.getElementById('inCon_frame').style.display = 'block';
+document.getElementById('acess_frame').style.display = 'none';
 
+       
+        </script>";}
+    ?>
 </body>
 
 </html>

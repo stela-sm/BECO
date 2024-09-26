@@ -317,7 +317,7 @@
 
 
              //ESSA FUNCAO AQUI MANDA O INDEX ABRIR O MODAL DE PORTIFOLIO
-        function Card__clickDetector() {
+        function Card__clickDetector(id) {
             window.parent.postMessage('modalClicked', '*');
         }
     </script>

@@ -110,7 +110,7 @@ public function getPostagensUser($id){
     FROM `postagem` p
     LEFT JOIN `midia` m ON p.`ID_POST` = m.`id_postagem`
     LEFT JOIN `usuario` u ON p.`id_user` = u.`ID_USER`
-    WHERE p.`ID_POST` = '{$id}'";
+    WHERE p.`id_user` = '{$id}'";
     $conn = $this->connect();
     $res = $conn->query($sql);
     if ($res->num_rows > 0) {

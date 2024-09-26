@@ -205,6 +205,7 @@ if ($concurso["result"]==0){
     let SecurityTamG__isOn = false
     window.addEventListener('message', function(event) {
         if (event.data === 'modalClicked') {
+    console.log('Mensagem recebida do iframe:', id);
             var modal = document.getElementById('myModal');
             var isVisible = $(modal).hasClass('show');
             if (isVisible) {
@@ -1679,7 +1680,7 @@ if ($concurso["result"]==0){
                             <div class="container__profBtns" id="user-rmenuBtns">
                                 <div class="container-divideBtn">
                                     <a href="view/salvos.php" target="iframe_chat" class="equalBtn-profUser">Salvos</a>
-                                    <a id="GoToConfig__fromUserpage" class="equalBtn-profUser">Configurações</a>
+                                    <a id="GoToConfig__fromUserpage" href="view/configuracoes.php?configperfil=1" target="iframe_chat" class="equalBtn-profUser">Configurações</a>
                                 </div>
                             </div>
                         </div>

@@ -182,6 +182,16 @@
                 display: none !important;
             }
         }
+
+          /* STYLE PRA PÁGINA APARECER CUTE CUTE */
+.fade-in-css {
+    opacity: 0; 
+    transition: opacity 0.5s ease; 
+}
+
+.fade-in {
+    opacity: 1; 
+}
     </style>
 </head>
 <?PHP
@@ -309,9 +319,11 @@ $r = $manager-> banner();
     </script>
     <script>
         //ESSA FUNCAO AQUI MANDA O INDEX ABRIR O MODAL DE PORTIFOLIO
-        function Card__clickDetector() {
+        function Card__clickDetector(id) {
             window.parent.postMessage('modalClicked', '*');
+            enviarVariavel();
         }
+      
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
        
@@ -357,7 +369,7 @@ console.log("page=" + page)
              $.each(data, function(key, postsArray) {
             if (Array.isArray(postsArray)) {
                 $.each(postsArray, function(index, post) { // Itera sobre cada post no array
-                    adicionarPost(post.titulo, post.username, post.thumbnail);
+                    adicionarPost(post.ID_POST, post.titulo, post.username, post.thumbnail);
                     page++;
                 });
             }
@@ -379,10 +391,10 @@ console.log("page=" + page)
 
 <script>
     //esse bloco é o append dos posts, decidi fazer separado pra não carregar a função ajax e agilizar o carregamento da página
-    function adicionarPost(portfolioName, artistName, imageUrl) {
+    function adicionarPost(id,portfolioName, artistName, imageUrl) {
     const postHtml = `
-        <div class="card-portifolio">
-            <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector()">
+        <div class="card-portifolio fade-in-css">
+            <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector(${id})">
                 <div class="portifolio-curtain absolute w100 h100"></div>
                 <img ondrag="return false" src="assets/media/thumbnail/${imageUrl}" alt="" class="img_portFolio" onselect="return false" dragstart="return false">
                 <div class="portifolio-info pgfdKksa">
@@ -426,8 +438,10 @@ console.log("page=" + page)
 
     // Adiciona o HTML ao feed
     $('.container-portifolios').append(postHtml);
+    setTimeout(function() {
+        $('.fade-in-css').addClass('fade-in'); // Adiciona a classe após 1 segundo
+    }, 100); // 1000 milissegundos = 1 segundo
 }
-
 </script>
 </body>
 

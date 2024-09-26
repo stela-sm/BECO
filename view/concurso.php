@@ -282,6 +282,15 @@ if ($concurso["result"]==0){
       bottom: 3%;
       right: 1%;
     }
+       /* STYLE PRA PÁGINA APARECER CUTE CUTE */
+.fade-in-css {
+    opacity: 0; 
+    transition: opacity 0.5s ease; 
+}
+
+.fade-in {
+    opacity: 1; 
+}
   </style>
 </head>
 
@@ -325,8 +334,8 @@ if ($concurso["result"]==0){
 for ($i=0;$i<$postagens['result'];$i++){
 echo "
 
-<div class='card-portifolio'>
-  <a class='portifImg-container' style='position: relative;' onclick='Card__clickDetector()'>
+<div class='card-portifolio fade-in-css'>
+  <a class='portifImg-container' style='position: relative;' onclick='Card__clickDetector(".$postagens[$i]['ID_POST'].")'>
     <div class='portifolio-curtain absolute w100 h100'></div>
     <img ondrag='return false' src='../assets/media/thumbnail/".$postagens[$i]['thumbnail']."' alt='' class='img_portFolio' onselect='return false' dragstart='return false'>
     <div class='portifolio-info pgfdKksa'>
@@ -371,7 +380,7 @@ echo "
 ?>
 
   <!--EXEMPLO DE CARD:-->
-      <div class="card-portifolio">
+      <!-- <div class="card-portifolio">
         <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector()">
           <div class="portifolio-curtain absolute w100 h100"></div>
           <img ondrag="return false" src="https://via.placeholder.com/215x200" alt="" class="img_portFolio"
@@ -411,7 +420,7 @@ echo "
             </div>
           </div>
         </a>
-      </div>
+      </div> -->
 
 
 
@@ -445,10 +454,25 @@ echo "
   </script>
 
   <script>
-    function Card__clickDetector() {
+    function Card__clickDetector(id) {
       window.parent.postMessage('modalClicked', '*');
     }
   </script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        // Seleciona todos os elementos com a classe 'fade-in-css'
+        const elements = document.querySelectorAll('.fade-in-css');
+        
+        // Adiciona a classe 'fade-in' a cada elemento encontrado
+        elements.forEach(function(element) {
+            element.classList.add('fade-in');
+        });
+    }, 100); // 1000 milissegundos = 1 segundo
+});
+
+  </script>
+  
 </body>
 
 </html>

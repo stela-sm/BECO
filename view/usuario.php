@@ -391,10 +391,11 @@ if ($postagens["result"]==0){
 
 <?php
 for ($i=0;$i<$postagens['result'];$i++){
-echo "
+
+  echo "
 
 <div class='card-portifolio'>
-  <a class='portifImg-container' style='position: relative;' onclick='Card__clickDetector()'>
+  <a class='portifImg-container' style='position: relative;' onclick='Card__clickDetector(".$postagens[$i]['ID_POST'].")'>
     <div class='portifolio-curtain absolute w100 h100'></div>
     <img ondrag='return false' src='../assets/media/thumbnail/".$postagens[$i]['thumbnail']."' alt='Thumbnail do projeto' class='img_portFolio'
       onselect='return false' dragstart='return false'>
@@ -419,7 +420,7 @@ echo "
 }
 ?>
 
-            <div class="card-portifolio">
+            <!-- <div class="card-portifolio">
               <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector()">
                 <div class="portifolio-curtain absolute w100 h100"></div>
                 <img ondrag="return false" src="https://via.placeholder.com/215x200" alt="" class="img_portFolio"
@@ -437,7 +438,7 @@ echo "
                   </div>
                 </div>
               </a>
-            </div>
+            </div> -->
 
 
           </div>
@@ -506,7 +507,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
      //ESSA FUNCAO AQUI MANDA O INDEX ABRIR O MODAL DE PORTIFOLIO
-  function Card__clickDetector() {
+  function Card__clickDetector(id) {
             window.parent.postMessage('modalClicked', '*');
         }
 
