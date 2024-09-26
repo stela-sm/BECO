@@ -888,7 +888,7 @@ if ($concurso["result"]==0){
                     </li>
 
                     <li class="nav-item">
-                        <a class="btn ico_btn linkCamin__menu" <?php echo isset($_SESSION['USER_ID']) ? 'onclick="pgDirect(\'view/chat.php\')"' : 'onclick="login()"'; ?>>
+                        <a class="btn ico_btn linkCamin__menu" <?php echo isset($_SESSION['USER_ID']) ? 'pgDirect="view/chat.php"' : 'onclick="login()"'; ?>>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round"
