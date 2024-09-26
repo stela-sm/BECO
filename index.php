@@ -634,9 +634,18 @@ if ($concurso["result"]==0){
     border: var(--default_border);
     border-radius: 20px;
 }
+/* STYLE PRA PÁGINA APARECER CUTE CUTE */
+.fade-in-container {
+    opacity: 0; 
+    transition: opacity 2s ease; 
+}
+
+.fade-in {
+    opacity: 1; 
+}
 </style>
 
-<body>
+<body class="fade-in-container">
 
     <div class="container_viewport">
 
@@ -851,7 +860,7 @@ if ($concurso["result"]==0){
                             </div>
                         </div>
                     </div>
-                    <a class="btn ico_btn linkCamin__menu" pgDirect="view/chat.php" id="superChat_goout">
+                    <a class="btn ico_btn linkCamin__menu" <?php echo isset($_SESSION['USER_ID']) ? 'onclick="pgDirect(\'view/chat.php\')"' : 'onclick="login()"'; ?>  id="superChat_goout">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round"
@@ -878,7 +887,7 @@ if ($concurso["result"]==0){
                     </li>
 
                     <li class="nav-item">
-                        <a class="btn ico_btn linkCamin__menu" pgDirect="view/chat.php">
+                        <a class="btn ico_btn linkCamin__menu" <?php echo isset($_SESSION['USER_ID']) ? 'onclick="pgDirect(\'view/chat.php\')"' : 'onclick="login()"'; ?>>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round"
@@ -1619,7 +1628,7 @@ if ($concurso["result"]==0){
                         <a ChangeIframe="acess_frame" class="reDirectConfigFrame__link rDCF_ativo">
                             Acessibilidade
                         </a>
-                        <a ChangeIframe="inCon_frame" class="reDirectConfigFrame__link ">
+                        <a <?php echo isset($_SESSION['USER_ID']) ? 'ChangeIframe="inCon_frame"' : 'onclick="login()"'; ?> class="reDirectConfigFrame__link ">
                             Informações da conta
                         </a>
                         <a ChangeIframe="permi_frame" class="reDirectConfigFrame__link">
@@ -3185,6 +3194,13 @@ for (let i = 0; i < countdowns.length; i++) {
         document.querySelector('#GoToConfig__fromUserpage').addEventListener('click', () => {
             document.querySelector('#settings-link_sidebar').click()
         })
+    </script>
+     <script>
+        //FUNÇÃO FADE-IN PRA DEIXAR A PÁGINA CUTE CUTE
+        window.onload = function() {
+    const container = document.querySelector('.fade-in-container');
+    container.classList.add('fade-in'); // Adiciona a classe para o efeito de fade in
+};
     </script>
 </body>
 

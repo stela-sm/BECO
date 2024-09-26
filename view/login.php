@@ -248,6 +248,16 @@
             position: relative;
         }
     }
+
+    /* STYLE PRA PÁGINA APARECER CUTE CUTE */
+.fade-in-container {
+    opacity: 0; 
+    transition: opacity 2s ease; 
+}
+
+.fade-in {
+    opacity: 1; 
+}
 </style>
 <!--se precisar alterar algo, não altere nada listado abaixo:
 1. Qualquer ID (a maioria está integrado ao JS);
@@ -257,9 +267,10 @@
 5. Alinhamento do texto (sempre à direita/esquerda);
 6. Não alterar o atributo "data-sitekey" de forma alguma;
 7. Não alterar o JS existente, somente na integração de páginas php (há algumas variaveis que estão linkadas com páginas .html que posteriormente irão se tornar .php);
+notas: alterei muita coisa só depois eu fui ler isso aqui tmj
 -->
 
-<body onselectstart="return false">
+<body onselectstart="return false" class="fade-in-container">
     <a class="container__logo" id="logoContainerLink" href="../index.php" alt="Voltar para página inicial">
         <img id="logotipoPrincipal" width="90%" src="../assets/media/logo/white_becoComplete.png">
     </a>
@@ -1165,6 +1176,13 @@
             MostrarSen.style.display = 'block';
             senha_Inp.type = 'password';
         });
+    </script>
+    <script>
+        //FUNÇÃO FADE-IN PRA DEIXAR A PÁGINA CUTE CUTE
+        window.onload = function() {
+    const container = document.querySelector('.fade-in-container');
+    container.classList.add('fade-in'); // Adiciona a classe para o efeito de fade in
+};
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <?php

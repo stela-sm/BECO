@@ -4,7 +4,7 @@ require_once('conexao.class.php');
 class Manager extends ConexaoFront{
 
    
-
+//FUNÇÃO PRA LOGIN DO USUÁRIO
     public function userLogin($dados){
     // Estabelece a conexão
     $conn = $this->connect();
@@ -46,7 +46,7 @@ class Manager extends ConexaoFront{
 }
 
 
-
+//FUNÇÃO PRA SELECIONAR O BANNER
 public function banner(){
     $conn = $this->connect();
     $sql = "SELECT `img` FROM `banner` WHERE `status` = 1 ORDER BY `datahora` DESC LIMIT 1;";
@@ -60,7 +60,7 @@ public function banner(){
     return $imagem;
 }
 
-
+//FUNÇÃO PRA NOVO USUÁRIO
 public function userCadastro($dados){
     
     $conn = $this->connect();
@@ -101,19 +101,19 @@ public function userCadastro($dados){
 }
 
 
-
+//FUNÇÃO PRA PEGAR AS POSTAGENS DO USUÁRIO, UTILIZADO NO USUARIO.PHP 
 public function getPostagensUser($id){
 
     $sql = "SELECT p.`ID_POST`, p.`id_user`, p.`titulo`, p.`descricao`,p.`thumbnail`, p.`tipo`, p.`datahora` AS `post_datahora`, p.`status`, 
     m.`ID_MIDIA`, m.`id_postagem`, m.`arquivo`, m.`tipo` AS `midia_tipo`, m.`datahora` AS `midia_datahora`,
     u.`ID_USER`, u.`username`, u.`pfp`
-FROM `postagem` p
-LEFT JOIN `midia` m ON p.`ID_POST` = m.`id_postagem`
-LEFT JOIN `usuario` u ON p.`id_user` = u.`ID_USER`
-WHERE p.`ID_POST` = '{$id}'";
- $conn = $this->connect();
- $res = $conn->query($sql);
- if ($res->num_rows > 0) {
+    FROM `postagem` p
+    LEFT JOIN `midia` m ON p.`ID_POST` = m.`id_postagem`
+    LEFT JOIN `usuario` u ON p.`id_user` = u.`ID_USER`
+    WHERE p.`ID_POST` = '{$id}'";
+    $conn = $this->connect();
+    $res = $conn->query($sql);
+    if ($res->num_rows > 0) {
     $dados = array();
     $i = 0;
     
@@ -141,7 +141,7 @@ WHERE p.`ID_POST` = '{$id}'";
         $dados['result']=$i;
     }   $conn->close();
     return $dados;
-} else {
+    } else {
     $conn->close();
     $dados['result'] = 0;
     return $dados;
@@ -157,57 +157,12 @@ WHERE p.`ID_POST` = '{$id}'";
 
 
 
-
-
-public function admLoginID($dados){
-    // Estabelece a conexão
-    $conn = $this->connect();
-
-    // Consulta SQL
-    $sql = "SELECT * FROM administradores WHERE ID_ADM = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $dados);
-
-    // Executa a consulta
-    $stmt->execute();
-    $res = $stmt->get_result();
-
-    // Verifica se há resultados
-    if ($res->num_rows > 0) {
-        $dados = array();
-        $dados["result"] = 1;
-        $row = $res->fetch_assoc();
-
-        $dados["ID_ADM"] = $row["ID_ADM"];
-        $dados["nome"] = $row["nome"];
-        $dados["email"] = $row["email"];
-        $dados["pfp"] = $row["pfp"];
-        $dados["cpf"] = $row["cpf"];
-        $dados["cep"] = $row["cep"];
-        $dados["celular"] = $row["celular"];
-        $dados["rg"] = $row["rg"];
-        $dados["poder"] = $row["poder"];
-        $dados["numero"] = $row["numero"];
-        $dados["datan"] = $row["data_nascimento"];
-        $dados["estado_civil"] = $row["estado_civil"];
-        
-        $stmt->close();
-        $conn->close();
-        return $dados;
-    } else {
-        $stmt->close();
-        $conn->close();
-        $dados['result'] = 0;
-        return $dados;
-    }
-}
-
-        //exit(); 
+ 
     
 
 
 
-
+//FUNÇÃO PRA ADICIONAR O LOG NO BD
         public function registrosAdd($nome){
             $sql = "INSERT INTO registros (nome, datahora) VALUES ('{$nome}', now());";
             $res = $this->connect()->query($sql);
@@ -221,7 +176,7 @@ public function admLoginID($dados){
 
 
 
-    
+//FUNÇÃO PRA PEGAR A DATA DO USUAIRO ?
   public function getUserData($id) {
             $sql = "SELECT * FROM usuario WHERE ID_USER = {$id};";
             $res = $this->connect()->query($sql);
@@ -262,67 +217,6 @@ public function admLoginID($dados){
         }
 
 
-
-
-       public function getUsersByMonth() {
-            $sql = "SELECT MONTH(datahora) AS month, YEAR(datahora) AS year, COUNT(*) AS count 
-                    FROM usuario 
-                    GROUP BY YEAR(datahora), MONTH(datahora) 
-                    ORDER BY YEAR(datahora), MONTH(datahora)";
-        
-            $result = $this->connect()->query($sql);
-    
-        
-            $months = array_fill(1, 12, 0); // Preenche o array com 0 para cada mês (1 a 12)
-            $data = [];
-        
-            // Verificar se há resultados e preenchê-los no array
-            while ($row = $result->fetch_assoc()) {
-                $month = (int)$row['month'];
-                $year = (int)$row['year'];
-                $count = (int)$row['count'];
-        
-                // Armazenar a contagem de usuários para cada mês
-                $data["$year-$month"] = $count;
-            }
-        
-         
-            $this->connect()->close();
-        
-            // Ordenar os meses
-            foreach ($months as $month => &$value) {
-                $key = date('Y') . '-' . $month; // Adiciona o ano corrente para meses do ano atual
-                $value = isset($data[$key]) ? $data[$key] : 0;
-            }
-            
-            return $months;
-        }
-        
-        
-        
-
-        function getAccessesByMonth() {
-          
-            // mano como q isso funciona vsfd
-            $sql = "SELECT MONTH(datahora) AS month, COUNT(*) AS count 
-                    FROM acessos 
-                    GROUP BY MONTH(datahora)";
-        
-             $result = $this->connect()->query($sql);
-        
-            $months = array_fill(1, 12, 0); // Preenche o array com 0 para cada mês (1 a 12)
-        
-            // Verificar se há resultados e preenchê-los no array
-            while ($row = $result->fetch_assoc()) {
-                $month = (int)$row['month'];  
-                $count = (int)$row['count'];
-                $months[$month] = $count;
-            }
-        
-            $this->connect()->close();
-            return $months;
-        }
-        
 
 
 
@@ -504,12 +398,7 @@ public function admLoginID($dados){
     
 
 
-    public function chamadosTable(){
-
-    }
-
-
-
+ 
 
 
 
@@ -576,14 +465,6 @@ public function alterarSenha($senha, $email){
 }
 
 
-public function quantidade($tabela){
-    $sql = "SELECT COUNT(*) FROM $tabela";
-    $res = $this->connect()->query($sql);
-    $dados = $res->fetch_row();
-    $this->connect()->close();
-    return $dados[0];
-    
-}
 
 
 public function getClientIP() {
@@ -661,6 +542,7 @@ public function novoAcesso($ip){
         }
     }
     
+
     public function getUltimaDataFim() {
         $sql = "SELECT data_fim FROM concursos ORDER BY data_fim DESC LIMIT 1;";
         $res = $this->connect()->query($sql);
@@ -716,36 +598,6 @@ public function novoAcesso($ip){
         }
     }
 
-    public function novoConcurso($dados){
-        $sql = "INSERT INTO concursos (titulo, tag, descricao, img_anuncio, img_banner, data_inicio,
-        data_fim, status) VALUES ('{$dados["title"]}','{$dados["tag"]}','{$dados["descricao"]}','{$dados["img_anuncio"]}','{$dados["img_banner"]}', '{$dados["data_inicio"]}', '{$dados["data_fim"]}', '1')";
-       $res = $this->connect()->query($sql);
-    
-       if (!$res) {
-           $this->connect()->close();
-           return ['result' => -1, 'error' => $this->connect()->error];
-       }else{
-           $this->connect()->close();
-           return ['result' => 1]; 
-       
-   }
-}
-    public function novoBanner($dados){
-        if ($dados["status"] == "1") {
-            $id = $dados["status"] ;
-            $this->connect()->query("UPDATE banner SET status = 0 WHERE ID_BANNER <> $id");
-        }
-        $sql = "INSERT INTO banner (img, datahora, status) VALUES ('{$dados["img"]}',now(), '{$dados["status"]}')";
-        $res = $this->connect()->query($sql);
-        if (!$res) {
-            $this->connect()->close();
-            return ['result' => -1, 'error' => $this->connect()->error];
-        }else{
-            $this->connect()->close();
-            return ['result' => 1]; 
-        
-    } 
-}
 
 
 
@@ -784,6 +636,12 @@ if ($res->num_rows > 0) {
     return ['result' => 0];
 }
     }
+
+
+
+
+
+
 
 
 public function concursosPostagens($hashtag) {
@@ -832,6 +690,52 @@ WHERE p.`descricao` LIKE '%{$hashtag}%'";
 }
 
 }
+
+
+public function getAllPosts($limit, $offset) {
+    $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
+    FROM postagem p 
+    JOIN usuario u ON p.id_user = u.ID_USER 
+    ORDER BY p.datahora DESC 
+    LIMIT {$limit} OFFSET {$offset}";
+
+    $conn = $this->connect();
+    $res = $conn->query($sql);
+
+    $dados = array();
+    
+    if ($res->num_rows > 0) {
+        // Inicializa o contador de postagens
+        $dados['result'] = $res->num_rows; // Número total de postagens
+        $i=0;
+        // Percorrer todos os resultados
+        while ($row = $res->fetch_assoc()) {
+            $dados[$i][] = [
+                'ID_USER'   => $row['user_id'], // Usar 'user_id' que é o alias no SQL
+                'username'  => $row['username'],
+                'thumbnail' => $row['thumbnail'],
+                'ID_POST'   => $row['ID_POST'],
+                'titulo'    => $row['titulo'],
+                'descricao' => $row['descricao'],
+                'tipo'      => $row['tipo'],
+                'post_datahora' => $row['datahora'], // Corrigido para 'datahora'
+                'post_status' => $row['status'],
+            ];
+                $i++;
+                $dados['result'] = $i;
+        }
+    } else {
+        $dados['result'] = 0; // Se não houver postagens
+        
+    }
+    
+    $dados['query'] = $sql;
+    $conn->close(); // Fechar a conexão
+    return $dados; // Retornar os dados
+}
+
+
+
 }
 
 ?>

@@ -307,4 +307,18 @@ if(isset($_REQUEST["verificar"])){
         </script> 
     <?php
         }
+
+        if(isset($_REQUEST["loadposts"])){
+            header('Content-Type: application/json');
+            require_once "../model/manager.class.php";
+            $manager = new Manager();
+            $page = isset($_REQUEST['page']) ? (int)$_REQUEST['page'] : 0;
+            $limit = 8;  // Define quantos posts serão carregados por vez
+            $offset = $page;
+            $posts = $manager->getAllPosts($limit, $offset);
+            $posts["offset"] = "essa porra".$page;
+
+            echo json_encode($posts);
+           
+        }
 ?>
