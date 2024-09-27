@@ -735,7 +735,24 @@ public function getAllPosts($limit, $offset) {
 }
 
 
+public function editUser($dados){
+    $sql = "UPDATE usuario SET username = '{$dados['username']}' , nome = '{$dados['nickname']}', biografia = '{$dados['biografia']}' WHERE ID_USER = '{$dados['id']}';";
+ $conn = $this->connect();
+    $res = $conn->query($sql);
+    if($res){
+        $dados['result'] = 1;
+        $conn->close(); // Fechar a conexão
+    return $dados;
+    }else{
+        $dados['result'] = 0; 
+        $conn->close(); // Fechar a conexão
+    return $dados;
+    }
+}
 
+public function checkUsername($username){
+    
+}
 }
 
 ?>

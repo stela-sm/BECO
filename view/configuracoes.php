@@ -831,7 +831,7 @@ setInterval(checkMemoryUsage, checkInterval);
 
 <body>
     <div class="portifolios-viewport">
-        <form id="inCon_frame" inFrame="inCon_frame" action="#" method="post" style="display:none;">
+        <form id="inCon_frame" inFrame="inCon_frame" action="../controller/controller.php?editar_user=1" method="post" style="display:none;">
             <!--formulario de edição de informações-->
             <button class="voltarBTN__voltar vltrPMenuConfig" id="vltrPMenuConfig">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -890,6 +890,8 @@ setInterval(checkMemoryUsage, checkInterval);
                         <!--aqui é para o nome @ do usuario - o value do input é o username atual do usuario, o mesmo se aplica aos inputs abaixo-->
                         <label for="username_edit">Nome de usuario</label>
                         <input type="text" name="username_edit" id="username_edit" value="<?php echo $_SESSION["USER_USERNAME"]?>">
+                        <small id="username_error" style="color: red; display: none;">Nome de usuário já existe!</small>
+
                     </div>
                     
                     <div class="controlForm consoleItem2">
@@ -1536,6 +1538,33 @@ setInterval(checkMemoryUsage, checkInterval);
             });
         };
     </script>
+        <script>
+  $(document).ready(function() {
+
+    $('#username_edit').on('input', function() {
+      var username = $(this).val();
+
+      $.ajax({
+        url: '../controller/controller.php?checkUsername=1', 
+        type: 'POST',
+        data: { username: username },
+        success: function(response) {
+          // Se o nome de usuário já existir
+          if (response == 'exists') {
+            $('#username_edit').css('border-color', 'red');  // Muda a borda do input para vermelho
+            $('#username_error').show();  // Mostra a mensagem de erro
+            $('form').find(':input[type=submit]').prop('disabled', true);  // Desabilita o botão de submit
+          } else {
+            $('#username_edit').css('border-color', '');  // Reseta a cor da borda
+            $('#username_error').hide();  // Esconde a mensagem de erro
+            $('form').find(':input[type=submit]').prop('disabled', false);  // Habilita o botão de submit
+          }
+        }
+      });
+    });
+  });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../assets/js/texto_audio.js"></script>
     <?php
     if(isset($_REQUEST["configperfil"])){
@@ -1546,7 +1575,26 @@ document.getElementById('acess_frame').style.display = 'none';
 
        
         </script>";}
+        
+    if(isset($_REQUEST["success"])){
+        echo
+        "
+        <script>
+        Swal.fire({
+        icon: 'success',
+        title: 'Sucesso',
+        backdrop: false,
+        text: '".$_REQUEST["success"]."',
+         timer: 1000, 
+      showConfirmButton: false  
+        }).then(function() {
+    window.parent.location.reload();
+    });
+        </script>
+        ";
+      }
     ?>
+    
 </body>
 
 </html>

@@ -1648,7 +1648,7 @@ if ($concurso["result"]==0){
                         </a>
                     </div>
                     <div class="linksSoltos-bottom0">
-                        <a href="#" id="SysLogout__confMenu">
+                        <a href="view/logout.php" id="SysLogout__confMenu">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-logout">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
@@ -1686,7 +1686,7 @@ if ($concurso["result"]==0){
                         </div>
                     </div>
                     <div class="linksSoltos-bottom0">
-                        <a href="#" id="SysLogout__confMenu">
+                        <a href="view/logout.php" id="SysLogout__confMenu">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-logout">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
@@ -1892,7 +1892,7 @@ if ($data_atual < $data_fim) {
     <div class="modal fade portifolio-modal" id="portifolio-modal" tabindex="-1" role="dialog"
         aria-labelledby="portifolio-modal_label" aria-hidden="true">
         <div class="container-totalincrement">
-            <button type="button" tabCloseModal="RespVisible" class="close " data-dismiss="modal" aria-label="Fechar">
+            <button type="button" tabCloseModal="RespVisible" class="close " onclick="closeModal()" data-dismiss="modal" aria-label="Fechar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                     class="icon icon-tabler icons-tabler-outline icon-tabler-x">
@@ -1911,7 +1911,7 @@ if ($data_atual < $data_fim) {
                 style="background-color: #fff;border-radius:.6rem" role="document">
                 <div class="pdng-6pcent modal-content infoport-content h100 w100">
                     <section id="ModalDesc_AuthorHeader">
-                        <button type="button" tabCloseModal="RegulVisible" class="close" data-dismiss="modal"
+                        <button type="button" onclick="closeModal()" tabCloseModal="RegulVisible" class="close" data-dismiss="modal"
                             aria-label="Fechar">
                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5"
@@ -2170,7 +2170,7 @@ if ($data_atual < $data_fim) {
     <div class="modal fade portifolio-modal" id="portifolio-modal" tabindex="-1" role="dialog"
         aria-labelledby="portifolio-modal_label" aria-hidden="true">
         <div class="container-totalincrement">
-            <button type="button" tabCloseModal="RespVisible" class="close " data-dismiss="modal" aria-label="Fechar">
+            <button type="button" tabCloseModal="RespVisible" class="close " onclick="closeModal()" data-dismiss="modal" aria-label="Fechar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                     class="icon icon-tabler icons-tabler-outline icon-tabler-x">
@@ -2189,7 +2189,7 @@ if ($data_atual < $data_fim) {
                 style="background-color: #fff;border-radius:.6rem" role="document">
                 <div class="pdng-6pcent modal-content infoport-content h100 w100">
                     <section id="ModalDesc_AuthorHeader">
-                        <button type="button" tabCloseModal="RegulVisible" class="close" data-dismiss="modal"
+                        <button type="button" tabCloseModal="RegulVisible" onclick="closeModal()" class="close" data-dismiss="modal"
                             aria-label="Fechar">
                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5"
@@ -2872,6 +2872,12 @@ for (let i = 0; i < countdowns.length; i++) {
         });
     </script>
     <script>
+    function closeModal() {
+        // Fecha o modal programaticamente usando o Bootstrap
+        $('#portifolio-modal').modal('hide');
+    }
+</script>
+    <script>
         //recepção de mensagem -> verificar se não é o mesmo de lá de cima
         function receiveMessage(event) {
             if (event.data === 'modalClicked') {
@@ -3203,6 +3209,7 @@ for (let i = 0; i < countdowns.length; i++) {
     container.classList.add('fade-in'); // Adiciona a classe para o efeito de fade in
 };
     </script>
+    
 </body>
 
 </html>

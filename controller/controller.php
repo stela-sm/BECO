@@ -22,7 +22,7 @@ if(isset($_REQUEST["login"])){
 require_once "../model/ferramentas.class.php";
 $ferramentas = new Ferramentas();
 $resp[0] = $ferramentas->antiInjection($_REQUEST["emailLogin"]);
-$resp[1] = $ferramentas->antiInjection($_REQUEST["senhaLogin"]);;
+$resp[1] = $ferramentas->antiInjection($_REQUEST["senhaLogin"]);
 
 for($i = 0;$i < 2;$i++){
 if($resp[$i] == 0){
@@ -321,4 +321,63 @@ if(isset($_REQUEST["verificar"])){
             echo json_encode($posts);
            
         }
+
+
+        if(isset($_REQUEST["editar_user"])){
+            
+    
+require_once "../model/ferramentas.class.php";
+$ferramentas = new Ferramentas();
+$resp[0] = $ferramentas->antiInjection($_REQUEST["username_edit"]);
+$resp[1] = $ferramentas->antiInjection($_REQUEST["nickname_edit"]);
+$resp[2] = $ferramentas->antiInjection($_REQUEST["bio_edit"]);
+for($i = 0;$i < 3;$i++){
+    if($resp[$i] == 0){
+    ?>
+     <form action="../view/login.php" name="form" id="myForm" method="get">
+    <input type="hidden" name="erro" value="Comandos não permitidos">
+    </form> 
+    <script>
+    document.getElementById('myForm').submit();
+    </script>   
+    <?php
+    exit();
+    }
+    }
+            $dados["id"] = $_SESSION["USER_ID"];
+            $dados["username"] = !empty($_REQUEST["username_edit"]) ? $_REQUEST["username_edit"] : $_SESSION["USER_USERNAME"];
+            $dados["nickname"] = !empty($_REQUEST["nickname_edit"]) ? $_REQUEST["nickname_edit"] : $_SESSION["USER_NOME"];
+            $dados["biografia"] = !empty($_REQUEST["bio_edit"]) ? $_REQUEST["bio_edit"] : $_SESSION["USER_BIOGRAFIA"];
+            var_dump($dados);
+            require_once "../model/manager.class.php";
+            $manager = new Manager();
+            $edit = $manager->editUser($dados);
+            require_once "../model/log.class.php";
+            if($edit["result"]==1){
+                $_SESSION["USER_USERNAME"] = $dados["username"];
+                $_SESSION["USER_NOME"] = $dados["nickname"];
+                $_SESSION["USER_BIOGRAFIA"] = $dados["biografia"];
+                $log = new Log();    
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $log->setTexto("{$ip} -Alteração dos dados do do usuário ". $_SESSION["USER_EMAIL"]);
+            $log->fileWriter();
+            ?>
+           <form action="../view/configuracoes.php" name="return" id="return" method="get">
+            <input type="hidden" name="success" value="Dados alterados com sucesso!">
+            <input type="hidden" name="configperfil" value="1">
+            </form>
+            <script>
+
+                document.getElementById("return").submit();
+            </script>  
+        <?php
+            }}
+            if(isset($_REQUEST["checkUsername"])){
+                header('Content-Type: application/json');
+                require_once "../model/manager.class.php";
+                $manager = new Manager();
+                $check = $manager->checkUsername($_REQUEST["checkUsername"]);
+                // echo json_encode($check);
+            }
+        
 ?>
