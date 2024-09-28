@@ -206,16 +206,7 @@ if ($concurso["result"]==0){
     let SecurityTamR__isOn = false
     let SecurityTamG__isOn = false
     window.addEventListener('message', function(event) {
-        if (event.data === 'modalClicked') {
-    console.log('Mensagem recebida do iframe:', id);
-            var modal = document.getElementById('myModal');
-            var isVisible = $(modal).hasClass('show');
-            if (isVisible) {
-                $(modal).modal('hide');
-            } else {
-                $(modal).modal('show');
-            }
-        } else if (event.data === 'confirmReset') {
+     if (event.data === 'confirmReset') {
             console.log('JSAJDAS')
             Swal.fire({
                 title: 'Tem certeza?',
@@ -1891,6 +1882,7 @@ if ($data_atual < $data_fim) {
             </div>
     </div>
     </main>
+<!--PORTIFOLIO MODAL-->
     <div class="modal fade portifolio-modal" id="portifolio-modal" tabindex="-1" role="dialog"
         aria-labelledby="portifolio-modal_label" aria-hidden="true">
         <div class="container-totalincrement">
@@ -1925,24 +1917,24 @@ if ($data_atual < $data_fim) {
                             </svg>
                         </button>
                         <div class="ContainerAuthorProfileNamePic d-flex flex-row">
-                            <img width="25%" src="assets/media/logo/4.png" alt="">
+                            <img width="25%" src="assets/media/logo/4.png" id="pfp_modal_portifolio"  alt="">
                             <div class="containerProfileNam d-flex flex-column">
-                                <div class="nomeRealAutorTotal">Nome do Autor</div>
-                                <div class="usernameAutorTotal">@username</div>
+                                <div id="nickname_modal_portifolio" class="nomeRealAutorTotal">Nome do Autor</div>
+                                <div id="username_modal_portifolio"  class="usernameAutorTotal">@username</div>
                             </div>
                     </section>
                     <section id="ModalDesc_PortifHeader" class="pTop0">
-                        <div class="Container__portfolioName ">
+                        <div  id="titulo_modal_portifolio" class="Container__portfolioName ">
                             <h3>Nome do Portifolio</h3>
                         </div>
-                        <div class="descricaoPORTfolio">
+                        <div id="descricao_modal_porifolio"class="descricaoPORTfolio">
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis similique illum
                             harum nam sequi est, eaque nisi a, praesentium optio quidem. </div><br>
 
 
-                        <div class="containerContratarPerfilButton">
-                            <h3 class="valorPortifolio_cCPB"><span>R$</span>00.00</h3>
-                            <a href="#" class="btn btn-primary">Comprar</a>
+                        <div id="valor_modal_portifolio" class="containerContratarPerfilButton">
+                            <h3  class="valorPortifolio_cCPB"><span>R$</span>00.00</h3>
+                            <a href="#" id="link_modal_portifolio"class="btn btn-primary">Comprar</a>
                         </div>
                         <!-- <div class="containerButtonsLikeShareSave">
                                 <a href="">Like</a>
@@ -1954,14 +1946,14 @@ if ($data_atual < $data_fim) {
                         <div class="Container__softwareUsado">
                             <h5>Software utilizado</h5>
                         </div>
-                        <div class="containerSoftwaresUtilizadosThumb">
+                        <div id="softwares_modal_portifolio" class="containerSoftwaresUtilizadosThumb">
                             <span>Adobe</span>
                             <span>Adobe</span>
                         </div><br>
                         <div class="Container__softwareUsado">
                             <h5>Tags</h5>
                         </div>
-                        <div class="containerTagsUtilizadas">
+                        <div id="tags_modal_portifolio" class="containerTagsUtilizadas">
                             <span>#PixelArt</span>
                             <span>#Animacao</span>
                             <span>#ArteVetorial</span>
@@ -2127,6 +2119,8 @@ if ($data_atual < $data_fim) {
 
                             }
                         </style>
+
+
                         <div class="comment">
                             <div class="comment-body">
                                 <span class="name">@username</span>
@@ -2134,6 +2128,9 @@ if ($data_atual < $data_fim) {
                                 blanditiis
                             </div>
                         </div>
+
+
+                        
                         <div class="adicionarComentario">
                             <form class="grid-comentario">
                                 <textarea placeholder="Escreva um comentário" name="" id=""></textarea>
@@ -2222,11 +2219,11 @@ if ($data_atual < $data_fim) {
                             <h3 class="valorPortifolio_cCPB"><span>R$</span>00.00</h3>
                             <a href="#" class="btn btn-primary">Comprar</a>
                         </div>
-                        <!-- <div class="containerButtonsLikeShareSave">
+                         <div class="containerButtonsLikeShareSave">
                                 <a href="">Like</a>
                                 <a href="">dsadsa</a>
                                 <a href="">dsadsa</a>
-                            </div> -->
+                            </div> 
                     </section>
                     <section id="ModalDesc_Tags" class="pTop0">
                         <div class="Container__softwareUsado">
@@ -2880,9 +2877,12 @@ for (let i = 0; i < countdowns.length; i++) {
     }
 </script>
     <script>
-        //recepção de mensagem -> verificar se não é o mesmo de lá de cima
+        //recepção de mensagem -> verificar se não é o mesmo de lá de cima ERA O MESMO CARALHO KASJDHKAJSHD
         function receiveMessage(event) {
-            if (event.data === 'modalClicked') {
+            if (event.data.action === 'modalClicked') {
+                console.log(event.data.id)
+                makeModalAjax(event.data.id)
+                // makeComentarios(event.data.id)
                 var modal = document.getElementById('portifolio-modal');
                 var isVisible = $(modal).hasClass('show');
                 if (isVisible) {
@@ -2894,6 +2894,48 @@ for (let i = 0; i < countdowns.length; i++) {
         }
 
         window.addEventListener("message", receiveMessage, false);
+    </script>
+    <script>
+        const nickname = document.getElementById("nickname_modal_portifolio");
+        const username = document.getElementById("username_modal_portifolio");
+        const titulo = document.getElementById("titulo_modal_portifolio");
+        const descricao = document.getElementById("descricao_modal_porifolio");
+        const valor = document.getElementById("valor_modal_portifolio");
+        const softwares = document.getElementById("softwares_modal_portifolio");
+        const tags = document.getElementById("tags_modal_portifolio");
+        const div_comentarios = document.getElementById("ModalDesc_Comentarios");
+        const div_midia = document.getElementById("portifolio-completo");
+        
+        function makeModalAjax(id) {
+    $.ajax({
+        url: 'controller/controller.php?getpost=1', 
+        type: 'POST', 
+        data: { id: id }, 
+        success: function(response) {
+            console.log(response);
+            nickname.innerHTML = response.user.nickname;
+            username.innerHTML = response.user.username;
+
+            titulo.innerHTML = "<h3>"+response.postagem.titulo+"</h3>";
+            descricao.innerHTML = response.postagem.descricao;
+            
+            if(response.produtos.valor == null){
+                console.log("de graça")
+                valor.innerHTML = " <h3  class='valorPortifolio_cCPB'> GRATUITO </h3> <a href='#' id='link_modal_portifolio'class='btn btn-primary'>Download</a>" ;
+               
+            }else{
+                valor.innerHTML = " <h3  class='valorPortifolio_cCPB'><span>R$</span>"+response.produtos.valor+"</h3> <a href='view/pagamento.php' id='link_modal_portifolio'class='btn btn-primary'>Download</a>" ;
+              
+            }
+        },
+        error: function(xhr, status, error) {
+            
+            console.error('Erro na requisição AJAX:', error);
+            alert('Ocorreu um erro ao carregar os dados.'); 
+        }
+    });
+}
+
     </script>
     <script>
         //calculo de menu provisorio -> ver se isso ainda precisa

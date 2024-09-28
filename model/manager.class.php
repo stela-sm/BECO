@@ -652,7 +652,7 @@ public function concursosPostagens($hashtag) {
 FROM `postagem` p
 LEFT JOIN `midia` m ON p.`ID_POST` = m.`id_postagem`
 LEFT JOIN `usuario` u ON p.`id_user` = u.`ID_USER`
-WHERE p.`descricao` LIKE '%{$hashtag}%'";
+WHERE p.`descricao` LIKE '%{$hashtag}%' AND p.status = 1";
  $conn = $this->connect();
  $res = $conn->query($sql);
  if ($res->num_rows > 0) {
@@ -696,8 +696,12 @@ public function getAllPosts($limit, $offset) {
     $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
     FROM postagem p 
     JOIN usuario u ON p.id_user = u.ID_USER 
+    WHERE p.status = 1 
     ORDER BY p.datahora DESC 
-    LIMIT {$limit} OFFSET {$offset}";
+    LIMIT {$limit} OFFSET {$offset}
+    
+    ;
+    ";
 
     $conn = $this->connect();
     $res = $conn->query($sql);
@@ -753,6 +757,114 @@ public function editUser($dados){
 public function checkUsername($username){
     
 }
+public function getPost($id){
+    $conn = $this->connect();
+
+    $sql = "
+   SELECT 
+    p.ID_POST, p.id_user, p.thumbnail, p.titulo, p.descricao, 
+    p.tipo AS postagem_tipo, p.datahora AS postagem_datahora, p.status AS postagem_status,
+    
+    -- Campos da tabela produtos
+    pr.ID_PROD, pr.licenca, pr.valor, pr.banco, 
+    pr.agencia, pr.conta, pr.datahora AS produto_datahora, pr.status AS produto_status,
+
+    -- Campos da tabela midia
+    m.ID_MIDIA, m.arquivo, m.tipo AS midia_tipo, m.datahora AS midia_datahora,
+
+    -- Campos da tabela usuario
+    u.nome, u.username, u.pfp
+
+FROM 
+    postagem AS p
+
+-- Join com a tabela produtos
+LEFT JOIN 
+    produtos AS pr ON pr.id_postagem = p.ID_POST
+
+-- Join com a tabela midia
+LEFT JOIN 
+    midia AS m ON m.id_postagem = p.ID_POST
+
+-- Join com a tabela usuario 
+LEFT JOIN 
+    usuario AS u ON u.ID_USER = p.id_user
+
+WHERE 
+    p.ID_POST = $id;
+";
+
+$res = $conn->query($sql);
+$dados = $res->fetch_all(MYSQLI_ASSOC);
+
+        // Array para armazenar os dados
+        if ($dados) {
+            // Criar array para armazenar os dados organizados
+            $result = [
+                'postagem' => null,
+                'produtos' => [],
+                'midia' => [],
+                'user' => []
+            ];
+
+            // Percorrer os dados e organizar em 'postagem', 'produtos' e 'midia'
+            foreach ($dados as $row) {
+                // Preencher os dados da postagem, caso ainda não esteja preenchido
+                if ($result['postagem'] === null) {
+                    $result['postagem'] = [
+                        'ID_POSTAGEM' => $row['ID_POST'],
+                        'id_user' => $row['id_user'],
+                        'thumbnail' => $row['thumbnail'],
+                        'titulo' => $row['titulo'],
+                        'descricao' => $row['descricao'],
+                        'postagem_tipo' => $row['postagem_tipo'],
+                        'postagem_datahora' => $row['postagem_datahora'],
+                        'postagem_status' => $row['postagem_status'],
+                    ];
+                    $result['user'] = [
+                        'ID_USER' => $id,
+                        'nickname' => $row['nome'],
+                        'username' => $row['username'],
+                        'pfp' => $row['pfp']];
+                }
+
+               
+                   
+                    
+                // Adicionar produtos ao array de produtos
+                if ($row['ID_PROD'] !== null) {
+                    $result['produtos'] = [
+                        'ID_PROD' => $row['ID_PROD'],
+                        'licenca' => $row['licenca'],
+                        'valor' => $row['valor'],
+                        'banco' => $row['banco'],
+                        'agencia' => $row['agencia'],
+                        'conta' => $row['conta'],
+                        'produto_datahora' => $row['produto_datahora'],
+                        'produto_status' => $row['produto_status'],
+                    ];
+                }
+
+                // Adicionar midia ao array de midia
+                if ($row['ID_MIDIA'] !== null) {
+                    $result['midia'][] = [
+                        'ID_MIDIA' => $row['ID_MIDIA'],
+                        'arquivo' => $row['arquivo'],
+                        'midia_tipo' => $row['midia_tipo'],
+                        'midia_datahora' => $row['midia_datahora'],
+                    ];
+                }
+            }
+
+            return $result; // Retornar os dados organizados
+        } else {
+            return false; // Nenhuma postagem encontrada
+        }
+
+
 }
+}
+
+
 
 ?>

@@ -321,8 +321,13 @@ $r = $manager-> banner();
     <script>
         //ESSA FUNCAO AQUI MANDA O INDEX ABRIR O MODAL DE PORTIFOLIO
         function Card__clickDetector(id) {
-            window.parent.postMessage('modalClicked', '*');
-            enviarVariavel();
+            const message = {
+        action: 'modalClicked',
+        id: id
+    };
+    
+    // Envia o objeto como mensagem
+    window.parent.postMessage(message, '*');
         }
       
     </script>

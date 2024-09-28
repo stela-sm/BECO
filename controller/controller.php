@@ -321,7 +321,13 @@ if(isset($_REQUEST["verificar"])){
             echo json_encode($posts);
            
         }
-
+if(isset($_REQUEST["getpost"])){
+    header('Content-Type: application/json');
+    require_once "../model/manager.class.php";
+    $manager = new Manager();
+    $posts = $manager->getPost($_REQUEST["id"]);
+    echo json_encode($posts);
+}
 
         if(isset($_REQUEST["editar_user"])){
             
