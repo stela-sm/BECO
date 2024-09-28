@@ -263,23 +263,24 @@ $r = $manager-> banner();
         </div>
         <br><br></div>
     <script>
-        function adjustCardHeight() {
-            const cards = document.querySelectorAll('.card-portifolio');
-            cards.forEach(card => {
-                const width = card.offsetWidth
-                const height = width * 0.99
-                card.style.height = `${height}px`
-            });
-            const firstCard = cards[0];
-            if (firstCard) {
-                const bannerHeight = firstCard.offsetWidth * 0.99
-                window.parent.postMessage({
-                    type: 'com.beco?bannerOffset/new',
-                    bannerNOffsetH: bannerHeight
-                }, '*');
-                document.querySelector('#banner-central').style.height = `${bannerHeight}px`
-            }
-        }
+        //TIREI ISSO PQ TAVA DEIXANDO O CARD DO INDEX MAIOR DO QUE O DO CONCURSO, TAVA MUITO ESTRANHO
+        // function adjustCardHeight() {
+        //     const cards = document.querySelectorAll('.card-portifolio');
+        //     cards.forEach(card => {
+        //         const width = card.offsetWidth
+        //         const height = width * 0.98
+        //         card.style.height = `${height}px`
+        //     });
+        //     const firstCard = cards[0];
+        //     if (firstCard) {
+        //         const bannerHeight = firstCard.offsetWidth * 0.99
+        //         window.parent.postMessage({
+        //             type: 'com.beco?bannerOffset/new',
+        //             bannerNOffsetH: bannerHeight
+        //         }, '*');
+        //         document.querySelector('#banner-central').style.height = `${bannerHeight}px`
+        //     }
+        // }
 
         document.addEventListener('DOMContentLoaded', adjustCardHeight);
         window.addEventListener('resize', adjustCardHeight);
