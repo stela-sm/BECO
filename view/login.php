@@ -34,6 +34,11 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id"
         content="155963378942-3pas3aooivev6m0sl1a7qkgdlgfotuub.apps.googleusercontent.com">
+        <script>
+    pageId = "right-menu_JScontainer"
+   localStorage.setItem('com.beco_ultPag_localData', pageId);
+    console.log("OH BOSTA")
+</script>
     <script>
         function attachSignin(element) {
             console.log(element.id);

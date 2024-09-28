@@ -173,10 +173,12 @@ if ($concurso["result"]==0){
                             break;
                     }
 
-                    if (pageId) {
+                    if(pageId){
                         localStorage.setItem('com.beco_ultPag_localData', pageId);
                         showPage(pageId);
+
                     }
+                  
                 });
             });
 
@@ -1665,7 +1667,7 @@ if ($concurso["result"]==0){
                     <div class="firstContainer-info">
                         <div class="container-UserImg__name">
                             <div class="userProfileImg overflow-hidden" id="user_profPic">
-                                <img src="assets/media/pfp/<?php echo $_SESSION["USER_PFP"]?>" alt="Nome do usuario">
+                                <img style="width:100%"src="assets/media/pfp/<?php echo $_SESSION["USER_PFP"]?>" alt="Nome do usuario">
                             </div>
                             <span class="user_profNam" id="username"><?PHP echo $_SESSION["USER_USERNAME"]?></span>
                         </div>
