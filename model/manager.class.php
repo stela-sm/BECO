@@ -739,6 +739,44 @@ public function getAllPosts($limit, $offset) {
 }
 
 
+public function showComent($id){
+    $sql = "SELECT comentario.*, usuario.pfp, usuario.username AS nome_usuario
+    FROM comentario
+    JOIN usuario ON comentario.id_user = usuario.ID_USER
+    WHERE comentario.id_post = $id
+    ORDER BY datahora DESC
+    ";
+     $conn = $this->connect();
+     $res = $conn->query($sql);
+
+     $comentarios = [];
+     $i = 0;
+
+     if ($res->num_rows > 0) {
+         while($row = $res->fetch_assoc()) {
+           
+                $comentarios[$i] = [
+                    'ID_COMENTARIO' => $row['ID_COMENTARIO'],
+                    'id_user' => $row['id_user'],
+                    'id_post' => $row['id_post'],
+                    'texto' => $row['texto'],
+                    'datahora' => $row['datahora'],
+                    'username' => $row['nome_usuario'],
+                    'pfp' => $row['pfp']
+                 ];
+
+                $i++;
+                
+         $comentarios["number"] = $i;
+            
+         }
+         
+     }
+
+     $conn->close();
+     return $comentarios;
+ }
+
 public function editUser($dados){
     $sql = "UPDATE usuario SET username = '{$dados['username']}' , nome = '{$dados['nickname']}', biografia = '{$dados['biografia']}' WHERE ID_USER = '{$dados['id']}';";
  $conn = $this->connect();
@@ -856,6 +894,10 @@ $dados = $res->fetch_all(MYSQLI_ASSOC);
                 }
             }
 
+            $tags = $this -> getTags($id);
+            
+            $result["tags"]= $tags;
+           
             return $result; // Retornar os dados organizados
         } else {
             return false; // Nenhuma postagem encontrada
@@ -863,6 +905,33 @@ $dados = $res->fetch_all(MYSQLI_ASSOC);
 
 
 }
+
+public function getTags($id){
+    $sql = "SELECT * FROM `tags` WHERE id_post = $id";
+    $conn = $this->connect();
+    $res = $conn->query($sql);
+    $i = 0;
+    if ($res->num_rows > 0) {
+        while($row = $res->fetch_assoc()) {
+            $tags[$i] = [
+                $row['tag'], // Supondo que você tenha uma coluna 'usuario'
+                 ];
+            $i++; // Incrementar o contador
+            
+            $tags["result"] = $i;
+        }
+    }else{
+        $tags["result"] = 0;
+    }
+
+    return $tags; // Retornar o array de comentários
+}
+public function inserirComent($dados){
+    $sql = "INSERT INTO `comentario`(`id_user`,  `id_post`, `texto`, `datahora`) VALUES ('{$dados['user']}','{$dados['post']}','{$dados['texto']}',now());";
+    $conn =$this->connect();
+    $res = $conn->query($sql);
+}
+
 }
 
 

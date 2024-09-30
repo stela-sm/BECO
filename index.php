@@ -1964,8 +1964,28 @@ if ($data_atual < $data_fim) {
                         </div>
                     </section>
                     <section id="ModalDesc_Comentarios" class="pTop0">
-                        <div class="Container__portfolioName ">
-                            <h3>Comentários</h3>
+                        
+                    <h3 style="font-size: 16px; font-weight:bold;">Comentários</h3>
+                    <div class="adicionarComentario">
+                            <form id="formcomment" class="grid-comentario">
+                                <textarea placeholder="Escreva um comentário" name="" id="textarea_comment"></textarea>
+                                <div class="containerSubmitComment">
+                                    <svg xmlns="http://www.w3.org/2000/svg" alt="enviar" width="20" height="20"
+                                        viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-send-2">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M4.698 4.034l16.302 7.966l-16.302 7.966a.503 .503 0 0 1 -.546 -.124a.555 .555 0 0 1 -.12 -.568l2.468 -7.274l-2.468 -7.274a.555 .555 0 0 1 .12 -.568a.503 .503 0 0 1 .546 -.124z" />
+                                        <path d="M6.5 12h14.5" />
+                                    </svg>
+                                    <input class="btn btn-primary" type="button" onclick="new_comment()" id="comment" value="">
+                                </div>
+                            </form>
+                        </div><br>
+                        
+                        <div id="div_comentarios" class="Container__portfolioName ">
+                           
                         </div>
                         <style>
                             .comment {
@@ -2131,23 +2151,7 @@ if ($data_atual < $data_fim) {
 
 
                         
-                        <div class="adicionarComentario">
-                            <form class="grid-comentario">
-                                <textarea placeholder="Escreva um comentário" name="" id=""></textarea>
-                                <div class="containerSubmitComment">
-                                    <svg xmlns="http://www.w3.org/2000/svg" alt="enviar" width="20" height="20"
-                                        viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-send-2">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M4.698 4.034l16.302 7.966l-16.302 7.966a.503 .503 0 0 1 -.546 -.124a.555 .555 0 0 1 -.12 -.568l2.468 -7.274l-2.468 -7.274a.555 .555 0 0 1 .12 -.568a.503 .503 0 0 1 .546 -.124z" />
-                                        <path d="M6.5 12h14.5" />
-                                    </svg>
-                                    <input class="btn btn-primary" type="submit" value="">
-                                </div>
-                            </form>
-                        </div>
+                      
                     </section>
                     <section id="reportUserSec " class="pTop0">
                         <a href="#" ajudaCenter="ligado" id="reportUser">
@@ -2878,6 +2882,7 @@ for (let i = 0; i < countdowns.length; i++) {
 </script>
     <script>
         //recepção de mensagem -> verificar se não é o mesmo de lá de cima ERA O MESMO CARALHO KASJDHKAJSHD
+         id_post = ""
         function receiveMessage(event) {
             if (event.data.action === 'modalClicked') {
                 console.log(event.data.id)
@@ -2890,6 +2895,7 @@ for (let i = 0; i < countdowns.length; i++) {
                 } else {
                     $(modal).modal('show');
                 }
+                id_post = event.data.id
             }
         }
 
@@ -2903,15 +2909,16 @@ for (let i = 0; i < countdowns.length; i++) {
         const valor = document.getElementById("valor_modal_portifolio");
         const softwares = document.getElementById("softwares_modal_portifolio");
         const tags = document.getElementById("tags_modal_portifolio");
-        const div_comentarios = document.getElementById("ModalDesc_Comentarios");
+        const div_comentarios = document.getElementById("div_comentarios");
         const div_midia = document.getElementById("portifolio-completo");
-        
+        //função pra alterar os dados do modal
         function makeModalAjax(id) {
     $.ajax({
         url: 'controller/controller.php?getpost=1', 
         type: 'POST', 
         data: { id: id }, 
         success: function(response) {
+            loadComments(id)
             console.log(response);
             nickname.innerHTML = response.user.nickname;
             username.innerHTML = response.user.username;
@@ -2919,6 +2926,9 @@ for (let i = 0; i < countdowns.length; i++) {
             titulo.innerHTML = "<h3>"+response.postagem.titulo+"</h3>";
             descricao.innerHTML = response.postagem.descricao;
             
+                console.log("Tag: " + response.tags[1])
+
+
             if(response.produtos.valor == null){
                 console.log("de graça")
                 valor.innerHTML = " <h3  class='valorPortifolio_cCPB'> GRATUITO </h3> <a href='#' id='link_modal_portifolio'class='btn btn-primary'>Download</a>" ;
@@ -2927,6 +2937,7 @@ for (let i = 0; i < countdowns.length; i++) {
                 valor.innerHTML = " <h3  class='valorPortifolio_cCPB'><span>R$</span>"+response.produtos.valor+"</h3> <a href='view/pagamento.php' id='link_modal_portifolio'class='btn btn-primary'>Download</a>" ;
               
             }
+
         },
         error: function(xhr, status, error) {
             
@@ -2937,6 +2948,69 @@ for (let i = 0; i < countdowns.length; i++) {
 }
 
     </script>
+    
+<script>
+//carregar comentários
+function loadComments(id) {
+            $.ajax({
+                type: 'POST',
+                url: 'controller/controller.php?selectComent=1&id_post='+id, 
+                dataType: 'json', // Espera uma resposta JSON
+                success: function(response) {
+                        if (response && response.comentarios) {
+                            var comentariosHTML = ''; // Variável para acumular os comentários
+                            for (var i = 0; i <= response.number; i++) {
+                                console.log("ok");
+                                var comment = response.comentarios[i];
+                                console.log(comment);
+                                
+                                // Acumular o HTML de cada comentário
+                                comentariosHTML += 
+                                '<div class="comment">' +
+                                '<div class="comment-body">' +
+                                '<span class="name">' + comment.username + ' </span>' +
+                                comment.texto +
+                                '</div></div>';
+                                div_comentarios.innerHTML = comentariosHTML;
+                            }
+
+                            
+                        } else {
+                            console.log('Nenhum comentário encontrado.');
+                        }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erro na requisição:', error);
+                }
+            });
+        }
+        loadComments();
+        
+function new_comment(){
+        
+        console.log(id_post)
+        var comment = $('#textarea_comment').val();
+        console.log(comment);
+        $.ajax({
+            type: 'POST',
+            url: 'controller/controller.php?coment=1',
+            data: {
+                coment: comment,
+                id_user: <?php echo $_SESSION["USER_ID"]; ?>,
+                id_post: id_post,
+            }, 
+            success: function(response) {
+                console.log("aaaaa");
+                 loadComments(id_post);
+                $('#textarea_comment').val(''); // Limpa o campo de comentário
+                // selectComent();
+            },
+            error: function() {
+                alert('Houve um erro ao enviar o comentário.');
+            }
+        });
+    };
+</script>
     <script>
         //calculo de menu provisorio -> ver se isso ainda precisa
 

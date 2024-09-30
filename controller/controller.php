@@ -386,4 +386,29 @@ for($i = 0;$i < 3;$i++){
                 // echo json_encode($check);
             }
         
+if(isset($_REQUEST["selectComent"])){
+
+    header('Content-Type: application/json');
+        $id=$_REQUEST["id_post"];
+     
+    require_once "../model/manager.class.php";
+    $manager = new Manager();
+    $comentarios = $manager-> showComent($id);
+    $response = [
+        'number' => count($comentarios),
+        'comentarios' => $comentarios
+    ];
+    echo json_encode($response);
+    }
+    
+if(isset($_REQUEST["coment"])){
+    $dados["user"]=$_REQUEST["id_user"];
+    $dados["post"]=$_REQUEST["id_post"];
+    $dados["texto"]=$_REQUEST["coment"];
+    
+require_once "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> inserirComent($dados);
+}
+    
 ?>
