@@ -381,7 +381,7 @@ echo "
 
   <!--EXEMPLO DE CARD:-->
       <!-- <div class="card-portifolio">
-        <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector()">
+        <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector(id)">
           <div class="portifolio-curtain absolute w100 h100"></div>
           <img ondrag="return false" src="https://via.placeholder.com/215x200" alt="" class="img_portFolio"
             onselect="return false" dragstart="return false">
@@ -454,9 +454,11 @@ echo "
   </script>
 
   <script>
-    function Card__clickDetector(id) {
-      window.parent.postMessage('modalClicked', '*');
-    }
+    function Card__clickDetector(id){
+            const message = {
+        action: 'modalClicked',
+        id: id
+    };     window.parent.postMessage(message, '*');}
   </script>
   <script>
 document.addEventListener('DOMContentLoaded', function() {

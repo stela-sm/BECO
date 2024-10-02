@@ -1697,11 +1697,10 @@ if ($concurso["result"]==0){
                         <a href="#" class="banner-concurso br-20 ovrflw-hidden relative" title="Concurso">
                             <!--vai pro perfil do ganhador ALTERAR CONCURSO-->
                             <div class="container-winnerAuthor">
-                                <span class="authorName" id="ConcursoAuthor-name">Nome do Autor</span>
-                                <span class="authorName__cargo">Primeiro colocado</span>
-                            </div>
+                                <span class="authorName" id="ConcursoAuthor-name">Participe do Concurso</span>
+                               </div>
                             <div class="background-darken-curtain bdcV2"></div>
-                            <img id="concurso-vencedor_img" src="https://via.placeholder.com/215x200">
+                            <img id="concurso-vencedor_img" src="assets/media/concursos/<?php echo$concurso['img_anuncio']?>">
                             <!--arte do ganhador-->
                         </a>
                         <div class="data-concurso br-20 ovrflw-hidden relative">
@@ -1954,13 +1953,13 @@ if ($data_atual < $data_fim) {
                             <h5>Tags</h5>
                         </div>
                         <div id="tags_modal_portifolio" class="containerTagsUtilizadas">
-                            <span>#PixelArt</span>
+                            <!-- <span>#PixelArt</span>
                             <span>#Animacao</span>
                             <span>#ArteVetorial</span>
                             <span>#IlustracaoDigital</span>
                             <span>#Fotografia</span>
                             <span>#ArteDigital</span>
-                            <span>#ArteEm3d</span>
+                            <span>#ArteEm3d</span> -->
                         </div>
                     </section>
                     <section id="ModalDesc_Comentarios" class="pTop0">
@@ -2496,6 +2495,7 @@ if ($data_atual < $data_fim) {
     
     var diferenca = <?php echo $diferenca; ?>;
         function atualizarTemporizador() {
+            console.log(diferenca+"cu")
             if (diferenca > 0) {
                 diferenca--;
                 var dias = Math.floor(diferenca / (24 * 60 * 60));
@@ -2516,10 +2516,12 @@ for (let i = 0; i < countdowns.length; i++) {
             } else {
                 let countdowns = document.getElementsByClassName('temporizador');
 for (let i = 0; i < countdowns.length; i++) {
-    countdowns[i].innerHTML = "";
+    countdowns[i].innerHTML = "TIMEOUT";
+
 }
   clearInterval(intervalo);
             }
+            
         }
 
         // Atualiza o temporizador a cada segundo
@@ -2657,7 +2659,8 @@ for (let i = 0; i < countdowns.length; i++) {
         });
     </script>
     <script>
-        const links = document.querySelectorAll('.a-conversa');
+       document.addEventListener('DOMContentLoaded',()=>{
+            const links = document.querySelectorAll('.a-conversa');
         links.forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault();
@@ -2682,6 +2685,8 @@ for (let i = 0; i < countdowns.length; i++) {
         servicoCheckbox.addEventListener('change', checkCheckboxes);
 
         checkCheckboxes();
+        })
+
 
         document.addEventListener('DOMContentLoaded', function() {
             const gratuitoCheckbox = document.getElementById('gratuito_produtoCheckbox');
@@ -2808,7 +2813,11 @@ for (let i = 0; i < countdowns.length; i++) {
 
                 document.getElementById('PortTitle__official').value = titleValue;
                 document.getElementById('tituloModal_Port').value = titleValue;
-            }
+            }else if(event.data.type === 'alterarTituloPubli?criar'){
+            console.log('o titulo chegou aq')
+            document.querySelector('#tituloPubli__jsDirect').value = event.data.oqtaescrito
+        }
+
         });
         document.addEventListener('DOMContentLoaded', function() {
             const textarea = document.getElementById('descricaoPortifolio');
@@ -2926,9 +2935,10 @@ for (let i = 0; i < countdowns.length; i++) {
             titulo.innerHTML = "<h3>"+response.postagem.titulo+"</h3>";
             descricao.innerHTML = response.postagem.descricao;
             
-                console.log("Tag: " + response.tags[1])
-
-
+            for (i = 0; i < response.tags.result; i++) {
+                 console.log("Tag: " + response.tags[i]);
+                 tags.innerHTML += "<span>" + response.tags[i] + "</span>";
+}
             if(response.produtos.valor == null){
                 console.log("de graça")
                 valor.innerHTML = " <h3  class='valorPortifolio_cCPB'> GRATUITO </h3> <a href='#' id='link_modal_portifolio'class='btn btn-primary'>Download</a>" ;
@@ -3162,6 +3172,7 @@ function new_comment(){
 
 
         //=====--==--==--==--==--==--==--==--==--SCRIPT DO MENU DE CRIAR PUBLICAÇÃO
+        document.addEventListener('DOMContentLoaded', ()=>{
         document.getElementById('add-image').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
@@ -3223,6 +3234,7 @@ function new_comment(){
                 }
             })
         })
+        });
         //aqui é pra colocar como background a img escolhida
         document.querySelector('.thumbnailUploader').addEventListener('change', function(event) {
             const file = event.target.files[0]

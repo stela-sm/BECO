@@ -195,7 +195,7 @@
 <!--OS CARDS DEVEM APARECER AQUI DENTRO!!-->
             <!--essa div "card-portifolio é toda a estrutura do portifolio!"-->
             <div class="card-portifolio">
-                <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector()">
+                <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector(id)">
                     <div class="portifolio-curtain absolute w100 h100"></div>
                     <img ondrag="return false" src="https://via.placeholder.com/215x200" alt="" class="img_portFolio"
                         onselect="return false" dragstart="return false">

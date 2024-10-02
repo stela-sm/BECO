@@ -897,6 +897,7 @@ $dados = $res->fetch_all(MYSQLI_ASSOC);
             $tags = $this -> getTags($id);
             
             $result["tags"]= $tags;
+            $result["tags"]["result"]= $tags["result"];
            
             return $result; // Retornar os dados organizados
         } else {
@@ -914,8 +915,9 @@ public function getTags($id){
     if ($res->num_rows > 0) {
         while($row = $res->fetch_assoc()) {
             $tags[$i] = [
-                $row['tag'], // Supondo que você tenha uma coluna 'usuario'
+                $row['tag'], 
                  ];
+
             $i++; // Incrementar o contador
             
             $tags["result"] = $i;

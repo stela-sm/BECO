@@ -678,6 +678,18 @@
         if (inputElement) {
             inputElement.addEventListener('input', checkInput);
         }
+
+        if (inputElement) {
+            inputElement.addEventListener('input', ()=>{
+                console.log('to mandando titulo')
+                window.parent.postMessage({
+                    type: 'alterarTituloPubli?criar',
+                    oqtaescrito: inputElement.value
+                }, '*');
+            })
+        }
+
+
     });
 </script>
 </body>
