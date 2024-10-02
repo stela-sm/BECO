@@ -410,5 +410,27 @@ require_once "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> inserirComent($dados);
 }
+
+
+    if (isset($_REQUEST['checkLike']) && isset($_SESSION['USER_ID'])) {
+        
+    $id_post = $_POST['id_post'];
+    $id_user = $_SESSION['USER_ID']; // Pega o ID do usuário a partir da sessão
+
+    require_once "../model/manager.class.php";
+    $manager = new Manager();
+    $result = $manager->checkLike($id_user, $id_post);
+    if($result == 0){$result="no-liked";}
+    else{$result="liked";};
+    echo json_encode($result);
+}
+
+if(isset($_REQUEST["like"])){
+    $dados["id_user"]=$_REQUEST["id_user"];
+    $dados["id_post"]=$_REQUEST["id_post"];
     
+require_once "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> like($dados);
+}
 ?>

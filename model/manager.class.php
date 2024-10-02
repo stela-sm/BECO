@@ -934,6 +934,56 @@ public function inserirComent($dados){
     $res = $conn->query($sql);
 }
 
+public function checkLike ($idUser, $idPost){
+    $sql = "SELECT * FROM likes WHERE id_user = '$idUser' AND id_post = '$idPost'";
+   
+    $result = $this -> connect() -> query($sql);
+    if ($result->num_rows > 0) {
+        $this->connect()->close();
+        return '1';
+        } else {
+            $this->connect()->close();
+            return '0';
+            }
+}
+
+public function like($dados){
+    $id_post = $dados["id_post"];
+    $id_user = $dados["id_user"];
+        $conn = $this->connect();
+
+        $sqlCheck = "SELECT COUNT(*) AS count FROM likes WHERE id_user = $id_user AND id_post = $id_post";
+        $resultCheck = $conn->query($sqlCheck);
+
+        if ($resultCheck === FALSE) {
+            die("Erro na verificação: " . $conn->error);
+        }
+
+        $row = $resultCheck->fetch_assoc();
+        $exists = $row['count'] > 0;
+
+        if ($exists) {
+            // Se o like existe, removê-lo
+            $sqlDelete = "DELETE FROM likes WHERE id_user = $id_user AND id_post = $id_post";
+            if ($conn->query($sqlDelete) === TRUE) {
+                $action = 'removed';
+            } else {
+                die("Erro na remoção do like: " . $conn->error);
+            }
+        } else {
+            // Se o like não existe, adicioná-lo
+            $sqlInsert = "INSERT INTO likes (id_user, id_post, datahora) VALUES ($id_user, $id_post, now())";
+            if ($conn->query($sqlInsert) === TRUE) {
+                $action = 'added';
+            } else {
+                die("Erro na adição do like: " . $conn->error);
+            }
+        }
+
+        $conn->close();
+
+        return $action;
+    }
 }
 
 

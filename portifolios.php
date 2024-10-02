@@ -89,6 +89,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet">
     <style>
+        .liked svg{
+            
+  fill: #fff;
+        }
         .banner-curtain,
         .portifolio-curtain {
             background-blend-mode: darken;
@@ -340,6 +344,10 @@ $(document).ready(function () {
     });
 
         </script>
+        <script>
+    var isLiked;
+
+</script>
 <script>
      //ESSA FUNÇÃO É O AJAX PRO SCROLL INFINITO NO SCROLL
 let page = 0; 
@@ -375,6 +383,7 @@ console.log("page=" + page)
              $.each(data, function(key, postsArray) {
             if (Array.isArray(postsArray)) {
                 $.each(postsArray, function(index, post) { // Itera sobre cada post no array
+                
                     adicionarPost(post.ID_POST, post.titulo, post.username, post.thumbnail);
                     page++;
                 });
@@ -397,7 +406,21 @@ console.log("page=" + page)
 
 <script>
     //esse bloco é o append dos posts, decidi fazer separado pra não carregar a função ajax e agilizar o carregamento da página
+   
     function adicionarPost(id,portfolioName, artistName, imageUrl) {
+ var isLiked;
+        $.ajax({
+    url: 'controller/controller.php?checkLike=1', 
+    type: 'POST',
+    data: { id_post: id },  
+    dataType: 'json',  
+    success: function(data) {
+        
+        if (data) {
+            // console.log("Offset:", data.offset);  
+             isLiked = data;               
+             console.log("Resposta do servidor:", isLiked);  
+                   
     const postHtml = `
         <div class="card-portifolio fade-in-css">
             <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector(${id})">
@@ -415,7 +438,7 @@ console.log("page=" + page)
                                 </span>
                             </div>
                             <div class="LikeSalvar__thumbContainer">
-                                <button id="salvarPublicacao" class="botaoContainer_thumbInterativo">
+                                <button id="salvarPublicacao"  class="botaoContainer_thumbInterativo" >
                                     <svg id="salvarPubli_btn" xmlns="http://www.w3.org/2000/svg" width="18"
                                         height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"
                                         stroke-linecap="round" stroke-linejoin="round"
@@ -424,7 +447,7 @@ console.log("page=" + page)
                                         <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z" />
                                     </svg>
                                 </button>
-                                <button id="darLikePublicacao" class="botaoContainer_thumbInterativo">
+                                <button id="darLikePublicacao" class="botaoContainer_thumbInterativo  ${isLiked}" >
                                     <svg id="likePubli_btn" xmlns="http://www.w3.org/2000/svg" width="18"
                                         height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"
                                         stroke-linecap="round" stroke-linejoin="round"
@@ -441,13 +464,77 @@ console.log("page=" + page)
             </a>
         </div>
     `;
-
-    // Adiciona o HTML ao feed
     $('.container-portifolios').append(postHtml);
     setTimeout(function() {
         $('.fade-in-css').addClass('fade-in'); // Adiciona a classe após 1 segundo
     }, 100); // 1000 milissegundos = 1 segundo
+} else {
+            console.log("Nenhum dado retornado ou erro na resposta.");
+        }
+    },
+    error: function(xhr, status, error) {
+        console.error('Erro na requisição AJAX:', error);
+        console.log('Status:', status);
+        console.log('Resposta completa:', xhr.responseText);
+    }
+});
+
+    // Adiciona o HTML ao feed
+    
 }
+</script>
+
+<script>
+     $(document).ready(function() {
+            $('.button-like').click(function() {
+                var button = $(this);
+                var idUser = button.data('id-user');
+                var idPost = button.data('id-post');
+                var action = button.hasClass('liked') ? 'remove_like' : 'like';
+                $.ajax({
+                    url: '../controller/controller.php?like=1', 
+                    type: 'POST',
+                    data: {
+                        action: action,
+                        id_user: idUser,
+                        id_post: idPost
+                    },
+                    success: function(response) {
+                        // Lida com a resposta do servidor
+                        console.log('Requisição bem-sucedida:', response);
+                    },
+                    error: function(xhr, status, error) {
+                        // Lida com erros
+                        console.error('Erro na requisição:', status, error);
+                    }
+                });
+                checkLikeStatus(idUser, idPost, button);
+            });
+            
+        });
+        function checkLikeStatus(idUser, idPost, button) {
+        
+                $.ajax({
+                    url: '../controller/controller.php?checklike=1', // Substitua com a URL do seu controller
+                    type: 'POST',
+                    data: {
+                        action: 'check_like',
+                        id_user: idUser,
+                        id_post: idPost
+                    },
+                    success: function(response) {
+                        console.log(response);
+                if (response.liked) {
+                    button.addClass('liked').removeClass('no-like');
+                } else {
+                    button.addClass('no-like').removeClass('liked');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro na requisição:', status, error);
+            }
+        });
+            }
 </script>
 </body>
 

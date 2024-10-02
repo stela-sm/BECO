@@ -1712,18 +1712,16 @@ if ($concurso["result"]==0){
                                 </div>
                                 <?PHP
                                 
-                                if(isset($concurso["data_fim"])){
-                                    $data_inicio = $concurso['data_inicio'];
-                                    $data_fim = $concurso['data_fim'];
-                                    $data_inicio = new DateTime($data_inicio); 
-                                    $data_fim = new DateTime($data_fim);
-                                 }else{
-                                     $data_inicio = new DateTime(); 
-                                     $data_fim = new DateTime();
-                                 }
+if(isset($concurso["data_fim"])){
+    $data_inicio = $concurso['data_inicio'];
+    $data_fim = $concurso['data_fim'];
+    $data_inicio = new DateTime($data_inicio); 
+    $data_fim = new DateTime($data_fim);
+ }else{
+     $data_inicio = new DateTime(); 
+     $data_fim = new DateTime();
+ }
                                  
-$data_inicio = new DateTime('2024-08-01');
-$data_fim = new DateTime('2024-09-30');
 
 $data_atual = new DateTime();
 if ($data_atual < $data_fim) {
