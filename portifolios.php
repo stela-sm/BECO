@@ -268,27 +268,26 @@ $r = $manager-> banner();
         <br><br></div>
     <script>
         //TIREI ISSO PQ TAVA DEIXANDO O CARD DO INDEX MAIOR DO QUE O DO CONCURSO, TAVA MUITO ESTRANHO
-        // function adjustCardHeight() {
-        //     const cards = document.querySelectorAll('.card-portifolio');
-        //     cards.forEach(card => {
-        //         const width = card.offsetWidth
-        //         const height = width * 0.98
-        //         card.style.height = `${height}px`
-        //     });
-        //     const firstCard = cards[0];
-        //     if (firstCard) {
-        //         const bannerHeight = firstCard.offsetWidth * 0.99
-        //         window.parent.postMessage({
-        //             type: 'com.beco?bannerOffset/new',
-        //             bannerNOffsetH: bannerHeight
-        //         }, '*');
-        //         document.querySelector('#banner-central').style.height = `${bannerHeight}px`
-        //     }
-        // }
-
-        // document.addEventListener('DOMContentLoaded', adjustCardHeight);
-        // window.addEventListener('resize', adjustCardHeight);
-        // window.addEventListener('load', adjustCardHeight);
+         function adjustCardHeight() {
+             const cards = document.querySelectorAll('.card-portifolio');
+             cards.forEach(card => {
+                 const width = card.offsetWidth
+                 const height = width * 0.98
+                 card.style.height = `${height}px`
+             });
+             const firstCard = cards[0];
+             if (firstCard) {
+                 const bannerHeight = firstCard.offsetWidth * 0.99
+                 window.parent.postMessage({
+                     type: 'com.beco?bannerOffset/new',
+                     bannerNOffsetH: bannerHeight
+                 }, '*');
+                 document.querySelector('#banner-central').style.height = `${bannerHeight}px`
+             }
+         }
+         document.addEventListener('DOMContentLoaded', adjustCardHeight);
+         window.addEventListener('resize', adjustCardHeight);
+         window.addEventListener('load', adjustCardHeight);
 
         document.addEventListener('contextmenu', function (event) {
             event.preventDefault();
@@ -340,7 +339,7 @@ $r = $manager-> banner();
         <script>
 //essa função chama o ajax logo que  apágina carrega
 $(document).ready(function () {
-    carregarPosts();
+    carregarPosts(search);
     });
 
         </script>
@@ -353,53 +352,52 @@ $(document).ready(function () {
 let page = 0; 
 let loading = false; 
 let debounceTimer;
-
+let search = "none";
 $(window).scroll(function() {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(function() {
         if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
-            carregarPosts(); // Chama a função para carregar mais posts
+            carregarPosts(search); // Chama a função para carregar mais posts
         }
     }, 200); // 200 ms de delay
 });
 
 
-function carregarPosts() {
+function carregarPosts(search) {
     // Evita que a função seja chamada várias vezes ao mesmo tempo
    
 console.log("page=" + page)
     console.log("caralho")
     loading = true;
     $.ajax({
-        url: 'controller/controller.php?loadposts=1', 
+        url: 'controller/controller.php?loadposts=1&search='+search, 
         type: 'POST',
-        data: { page: page },
+        data: { page: page            },
         dataType: 'json',
         success: function(data) {
             console.log(data.offset)
-            console.log("Resposta do servidor:", data);
+            console.log("Resposta do servidor:", data)
             if (data.result > 0){
 
              $.each(data, function(key, postsArray) {
             if (Array.isArray(postsArray)) {
                 $.each(postsArray, function(index, post) { // Itera sobre cada post no array
                 
-                    adicionarPost(post.ID_POST, post.titulo, post.username, post.thumbnail);
-                    page++;
-                });
+                    adicionarPost(post.ID_POST, post.titulo, post.username, post.thumbnail)
+                    page++
+                })
             }
           
-        });
+        })
         
         }else{
            
             loading = false; 
         }},
         error: function() {
-            
-            loading = false;
+            loading = false
         }
-    });
+    })
 }
 
 </script>
@@ -426,7 +424,9 @@ console.log("page=" + page)
             <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector(${id})">
                 <div class="portifolio-curtain absolute w100 h100"></div>
                 <img ondrag="return false" src="assets/media/thumbnail/${imageUrl}" alt="" class="img_portFolio" onselect="return false" dragstart="return false">
-                <div class="portifolio-info pgfdKksa">
+               
+            </a>
+             <div class="portifolio-info pgfdKksa">
                     <div class="containerTranslate">
                         <div class="container-pictureInfoMinor relative">
                             <div class="author-portName">
@@ -461,7 +461,6 @@ console.log("page=" + page)
                         </div>
                     </div>
                 </div>
-            </a>
         </div>
     `;
     $('.container-portifolios').append(postHtml);
@@ -587,6 +586,11 @@ console.log("page=" + page)
             }
         });
             }
+</script>
+<script>
+      window.addEventListener('message', function(event) {
+        console.log("AAAAAAAAAAAAAAAAAAAAA"+event.data)
+    });
 </script>
 </body>
 

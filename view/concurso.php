@@ -338,7 +338,9 @@ echo "
   <a class='portifImg-container' style='position: relative;' onclick='Card__clickDetector(".$postagens[$i]['ID_POST'].")'>
     <div class='portifolio-curtain absolute w100 h100'></div>
     <img ondrag='return false' src='../assets/media/thumbnail/".$postagens[$i]['thumbnail']."' alt='' class='img_portFolio' onselect='return false' dragstart='return false'>
-    <div class='portifolio-info pgfdKksa'>
+   
+  </a>
+   <div class='portifolio-info pgfdKksa'>
       <div class='containerTranslate'>
         <div class='container-pictureInfoMinor relative'>
           <div class='author-portName'>
@@ -366,7 +368,6 @@ echo "
         </div>
       </div>
     </div>
-  </a>
 </div>
 
 

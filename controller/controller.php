@@ -313,9 +313,10 @@ if(isset($_REQUEST["verificar"])){
             require_once "../model/manager.class.php";
             $manager = new Manager();
             $page = isset($_REQUEST['page']) ? (int)$_REQUEST['page'] : 0;
+            $search = $_REQUEST['search'];
             $limit = 8;  // Define quantos posts serão carregados por vez
             $offset = $page;
-            $posts = $manager->getAllPosts($limit, $offset);
+            $posts = $manager->getAllPosts($limit, $offset, $search);
             $posts["offset"] = "essa porra".$page;
 
             echo json_encode($posts);

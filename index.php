@@ -19,6 +19,8 @@ if ($concurso["result"]==0){
 
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>BECO - Portifólios</title>
     <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -654,7 +656,7 @@ if ($concurso["result"]==0){
                         </a>
                     </div>
                     <div class="container__inputSearch relative" style="position: relative !important;">
-                        <input placeholder="Pesquise com criatividade" type="search" name="searchInput" id="searchInput"
+                        <input placeholder="Pesquise com criatividade" type="search" name="searchInput" id="searchInput searchPostsJS"
                             autocapitalize="false" class="inputSearch_navM" aria-expanded="false" role="combobox"
                             maxlength="100" autocomplete="off" tabindex="0">
                         <label for="searchInput" class="searchInput_label">
@@ -1600,7 +1602,7 @@ if ($concurso["result"]==0){
                                     </div>
 
                                     <div class="modal-footer modalPortFooter">
-                                        <input type="submit" class="btn btn-primary postarSubmitBtn" value="Postar">
+                                        <input type="submit" class="btn btn-primary postarSubmitBtn" value="Postar" style="    margin: 0;">
                                     </div>
                                 </div>
                             </div>
@@ -2613,7 +2615,7 @@ for (let i = 0; i < countdowns.length; i++) {
                 method: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    console.log('chegou aqui')
+                    console.log(response)
                     var chatList = $('.ul-conversa');
                     chatList.empty();
                     // Itera sobre as propriedades numéricas da resposta
@@ -3171,6 +3173,7 @@ function new_comment(){
 
         //=====--==--==--==--==--==--==--==--==--SCRIPT DO MENU DE CRIAR PUBLICAÇÃO
         document.addEventListener('DOMContentLoaded', ()=>{
+            
         document.getElementById('add-image').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
@@ -3338,6 +3341,21 @@ function new_comment(){
 };
     </script>
     
+<script>
+     document.addEventListener('DOMContentLoaded', function() {
+        
+        const searchInput = document.getElementById('searchPostsJS');
+        const myIframe = document.getElementById('containerIframe');
+
+        searchInput.addEventListener('input', function() {
+            myIframe.contentWindow.postMessage(this.value, '*');  
+            console.log("BBBBBBBBBBBBB");
+        });
+    });
+  
+   
+</script>
+
 </body>
 
 </html>

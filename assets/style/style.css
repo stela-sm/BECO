@@ -2137,6 +2137,7 @@ label.thumbBox {
   .inputSearch_navM, .searchInput_label {
     position: unset;
 }
+
 }.highlight {
   box-shadow: rgba(202, 228, 237, 0.5) 2px 0px 0px 0px, rgba(202, 228, 237, 0.5) -2px 0px 0px 0px;
   background-color: rgba(202, 228, 237, 0.5);
@@ -2311,4 +2312,9 @@ label.thumbBox {
 }
 .containerDirectNOTI__link>*{
   cursor: pointer;
+}
+@media(min-width: 1366px){
+  body{
+    zoom: 100%;
+  }
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajuste de Zoom</title>
+    <style>
+        body {
+            transition: transform 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teste de Ajuste de Zoom</h1>
+    <p>Para melhor leitura, pressione Ctrl + + (Windows) ou Command + + (Mac) para aumentar o zoom.</p>
+    <button id="suggestZoom">Sugira Zoom</button>
+
+    <script>
+        const suggestZoom = () => {
+            alert("Pressione Ctrl + + (Windows) ou Command + + (Mac) para aumentar o zoom do navegador.");
+        };
+
+        document.getElementById('suggestZoom').addEventListener('click', suggestZoom);
+    </script>
+</body>
+</html>

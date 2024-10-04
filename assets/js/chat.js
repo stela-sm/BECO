@@ -31,7 +31,7 @@ enviarMensagem(idconv,idsession,msg)
 function enviarMensagem(idConversa, idRemetente, textoMensagem) {
     
     $.ajax({
-        url: 'controller/controller_chat.php?inserir=1',
+        url: '../controller/controller_chat.php?inserir=1',
         method: 'POST',
         data: {
             id_conversa: idConversa,
@@ -54,7 +54,7 @@ senChatBtn.addEventListener("click", handleChat) // ao clicar, chama a função 
 
 function inserirConversa(idUser1, idUser2, pfp) {
     $.ajax({
-        url: 'controller/controller_chat.php?inserir_conv=1',
+        url: '../controller/controller_chat.php?inserir_conv=1',
         method: 'POST',
         dataType: 'json',
         data: {
@@ -65,7 +65,7 @@ function inserirConversa(idUser1, idUser2, pfp) {
             if (response.result === 1) {
                 var room = response.room.room; 
                 
-                var url = 'index.php?room=' + encodeURIComponent(room) + "&pfp=" + encodeURIComponent(pfp);
+                var url = 'chat.php?room=' + encodeURIComponent(room) + "&pfp=" + encodeURIComponent(pfp);
 
 
                 

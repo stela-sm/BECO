@@ -294,9 +294,10 @@ public function getPostagensUser($id){
 
         public function showConversas($idRemetente){
 
-            $sql= "SELECT * FROM conversas where id_user1 = {$idRemetente} or id_user2 = {$idRemetente} AND tabela = 'user' ";  
+            $sql= "SELECT * FROM conversas where id_user1 = {$idRemetente} or id_user2 = {$idRemetente} AND tabela = 'usuario' ";  
             $res = $this->connect()->query($sql);
             $dados = [];
+            $dados["query"] = $sql;
             $i = 0;
             while($row=$res->fetch_assoc()){
                 if ($row["id_user1"]==$idRemetente){
@@ -354,8 +355,8 @@ public function getPostagensUser($id){
 
         public function verificarConversa($id_user1, $id_user2){
             $sql = "SELECT * FROM conversas WHERE id_user1 = '$id_user1'
-            AND id_user2 = '$id_user2' OR id_user1 = '$id_user2'
-            AND id_user2 = '$id_user1'";
+            AND id_user2 = '$id_user2' AND tabela = 'usuario' OR id_user1 = '$id_user2'
+            AND id_user2 = '$id_user1' AND tabela = 'usuario'";
             $res = $this->connect()->query($sql);
             if (!$res) {
                 return ['result' => -1, 'error' => $this->connect()->error];
@@ -372,8 +373,7 @@ public function getPostagensUser($id){
             
            $verif = $this-> verificarConversa($id_user1,$id_user2);
            if($verif['result'] == 0){
-            $sql = "INSERT INTO conversas (id_user1, id_user2, tabela, datahora) VALUES ({$id_user1}, {$id_user2}, 'user', NOW())";
-            $res = $this->connect()->query($sql);
+            $sql = "INSERT INTO conversas (id_user1, id_user2, tabela, datahora) VALUES ({$id_user1}, {$id_user2}, 'usuario', NOW())";          $res = $this->connect()->query($sql);
            }
            $room = $this-> pegarRoom($id_user1,$id_user2);
             $this->connect()->close();
@@ -692,7 +692,8 @@ WHERE p.`descricao` LIKE '%{$hashtag}%' AND p.status = 1";
 }
 
 
-public function getAllPosts($limit, $offset) {
+public function getAllPosts($limit, $offset, $search) {
+    if($search == "none"){
     $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
     FROM postagem p 
     JOIN usuario u ON p.id_user = u.ID_USER 
@@ -702,7 +703,17 @@ public function getAllPosts($limit, $offset) {
     
     ;
     ";
-
+    }else{
+           $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
+            FROM postagem p 
+            JOIN usuario u ON p.id_user = u.ID_USER 
+            WHERE p.status = 1 AND p.titulo LIKE '%{$search}%' 
+            ORDER BY p.datahora DESC 
+            LIMIT {$limit} OFFSET {$offset}
+            
+            ;
+            ";
+    }
     $conn = $this->connect();
     $res = $conn->query($sql);
 

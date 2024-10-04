@@ -1,0 +1,6 @@
+2024-10-04 13:27:23 - ::1 - Erro no login do usuario srmoraisilva@gmail.com pelo dispositivo de ip ::1.
+2024-10-04 13:28:14 - ::1 - Criação do usuario srmoraisilva@gmail.com pelo dispositivo de ip ::1.
+2024-10-04 14:03:29 - ::1 - Erro no login do usuario srmoraisilva@gmail.com pelo dispositivo de ip ::1.
+2024-10-04 14:03:55 - ::1 - Login do usuario srmoraisilva@gmail.com pelo dispositivo de ip ::1.
+2024-10-04 14:04:16 - ::1 -Alteração dos dados do do usuário srmoraisilva@gmail.com2024-10-04 15:39:01 - ::1 - Login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-10-04 15:53:10 - ::1 -Alteração dos dados do do usuário stelamontenegro21@gmail.com2024-10-04 15:57:52 - ::1 -Alteração dos dados do do usuário stelamontenegro21@gmail.com2024-10-04 15:58:08 - ::1 -Alteração dos dados do do usuário stelamontenegro21@gmail.com
