@@ -447,7 +447,7 @@ console.log("page=" + page)
                                         <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z" />
                                     </svg>
                                 </button>
-                                <button id="darLikePublicacao" class="botaoContainer_thumbInterativo  ${isLiked}" >
+                                <button id="darLikePublicacao" class="botaoContainer_thumbInterativo  ${isLiked}"  data-id-post="${id}">
                                     <svg id="likePubli_btn" xmlns="http://www.w3.org/2000/svg" width="18"
                                         height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"
                                         stroke-linecap="round" stroke-linejoin="round"
@@ -484,6 +484,58 @@ console.log("page=" + page)
 }
 </script>
 
+<script>
+     $(document).ready(function() {
+            $('.button-like').click(function() {
+                var button = $(this);
+                var idUser = button.data('id-user');
+                var idPost = button.data('id-post');
+                var action = button.hasClass('liked') ? 'remove_like' : 'like';
+                $.ajax({
+                    url: '../controller/controller.php?like=1', 
+                    type: 'POST',
+                    data: {
+                        action: action,
+                        id_user: idUser,
+                        id_post: idPost
+                    },
+                    success: function(response) {
+                        // Lida com a resposta do servidor
+                        console.log('Requisição bem-sucedida:', response);
+                    },
+                    error: function(xhr, status, error) {
+                        // Lida com erros
+                        console.error('Erro na requisição:', status, error);
+                    }
+                });
+                checkLikeStatus(idUser, idPost, button);
+            });
+            
+        });
+        function checkLikeStatus(idUser, idPost, button) {
+        
+                $.ajax({
+                    url: '../controller/controller.php?checklike=1', // Substitua com a URL do seu controller
+                    type: 'POST',
+                    data: {
+                        action: 'check_like',
+                        id_user: idUser,
+                        id_post: idPost
+                    },
+                    success: function(response) {
+                        console.log(response);
+                if (response.liked) {
+                    button.addClass('liked').removeClass('no-like');
+                } else {
+                    button.addClass('no-like').removeClass('liked');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro na requisição:', status, error);
+            }
+        });
+            }
+</script>
 <script>
      $(document).ready(function() {
             $('.button-like').click(function() {
