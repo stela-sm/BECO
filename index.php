@@ -1978,7 +1978,8 @@ if ($data_atual < $data_fim) {
                                             d="M4.698 4.034l16.302 7.966l-16.302 7.966a.503 .503 0 0 1 -.546 -.124a.555 .555 0 0 1 -.12 -.568l2.468 -7.274l-2.468 -7.274a.555 .555 0 0 1 .12 -.568a.503 .503 0 0 1 .546 -.124z" />
                                         <path d="M6.5 12h14.5" />
                                     </svg>
-                                    <input class="btn btn-primary" type="button" onclick="new_comment()" id="comment" value="">
+                                    <input class="btn btn-primary" type="button" onclick="<?php echo isset($_SESSION['USER_ID']) ? 'new_comment()' : 'login()'; ?>"
+ id="comment" value="">
                                 </div>
                             </form>
                         </div><br>
@@ -2140,13 +2141,13 @@ if ($data_atual < $data_fim) {
                         </style>
 
 
-                        <div class="comment">
+                        <!-- <div class="comment">
                             <div class="comment-body">
                                 <span class="name">@username</span>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga doloribus ullam ut
                                 blanditiis
                             </div>
-                        </div>
+                        </div> -->
 
 
                         
@@ -2404,13 +2405,13 @@ if ($data_atual < $data_fim) {
 
                             }
                         </style>
-                        <div class="comment">
+                        <!-- <div class="comment">
                             <div class="comment-body">
                                 <span class="name">@username</span>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga doloribus ullam ut
                                 blanditiis
                             </div>
-                        </div>
+                        </div> -->
                         <div class="adicionarComentario">
                             <form class="grid-comentario">
                                 <textarea placeholder="Escreva um comentário" name="" id=""></textarea>
@@ -2490,6 +2491,74 @@ if ($data_atual < $data_fim) {
         }
     </style>
     <script src="assets/js/conversas.js"></script>
+      
+    <?php if (isset($_SESSION['USER_ID']) || !isset($_SESSION['USER_ID'])) { ?>
+<script>
+//carregar comentários
+ 
+function loadComentsFunction(id) {
+            $.ajax({
+                type: 'POST',
+                url: 'controller/controller.php?selectComent=1&id_post='+id, 
+                dataType: 'json', // Espera uma resposta JSON
+                success: function(response) {
+                    div_comentarios.innerHTML = '';
+                        if (response && response.comentarios) {
+                            var comentariosHTML = ''; // Variável para acumular os comentários
+                            for (var i = 0; i <= response.number; i++) {
+                                console.log("ok");
+                                var comment = response.comentarios[i];
+                                console.log(comment);
+                                
+                                // Acumular o HTML de cada comentário
+                                comentariosHTML += 
+                                '<div class="comment">' +
+                                '<div class="comment-body">' +
+                                '<span class="name">' + comment.username + ' </span>' +
+                                comment.texto +
+                                '</div></div>';
+                                div_comentarios.innerHTML = comentariosHTML;
+                            }
+
+                            
+                        } else {
+                            console.log('Nenhum comentário encontrado.');
+                        }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erro na requisição:', error);
+                }
+            });
+        }
+        
+</script>
+<?php } ?>
+<script>
+function new_comment(){
+        
+        console.log(id_post)
+        var comment = $('#textarea_comment').val();
+        console.log(comment);
+        $.ajax({
+            type: 'POST',
+            url: 'controller/controller.php?coment=1',
+            data: {
+                coment: comment,
+                id_user: <?php echo $_SESSION["USER_ID"]; ?>,
+                id_post: id_post,
+            }, 
+            success: function(response) {
+                console.log("aaaaa");
+                 loadComentsFunction(id_post);
+                $('#textarea_comment').val(''); // Limpa o campo de comentário
+                // selectComent();
+            },
+            error: function() {
+                alert('Houve um erro ao enviar o comentário.');
+            }
+        });
+    };
+</script>
     <script>
     // Função que atualiza o temporizador
     
@@ -2637,7 +2706,7 @@ for (let i = 0; i < countdowns.length; i++) {
                     });
                 },
                 error: function(xhr, status, error) {
-                    console.error('Erro na requisição:', error);
+                    // console.error('Erro na requisição:', error);
                 }
             });
         }
@@ -2933,7 +3002,7 @@ for (let i = 0; i < countdowns.length; i++) {
         type: 'POST', 
         data: { id: id }, 
         success: function(response) {
-            loadComments(id)
+            loadComentsFunction(id)
             console.log(response);
             nickname.innerHTML = response.user.nickname;
             username.innerHTML = response.user.username;
@@ -2964,69 +3033,7 @@ for (let i = 0; i < countdowns.length; i++) {
 }
 
     </script>
-    
-<script>
-//carregar comentários
-function loadComments(id) {
-            $.ajax({
-                type: 'POST',
-                url: 'controller/controller.php?selectComent=1&id_post='+id, 
-                dataType: 'json', // Espera uma resposta JSON
-                success: function(response) {
-                        if (response && response.comentarios) {
-                            var comentariosHTML = ''; // Variável para acumular os comentários
-                            for (var i = 0; i <= response.number; i++) {
-                                console.log("ok");
-                                var comment = response.comentarios[i];
-                                console.log(comment);
-                                
-                                // Acumular o HTML de cada comentário
-                                comentariosHTML += 
-                                '<div class="comment">' +
-                                '<div class="comment-body">' +
-                                '<span class="name">' + comment.username + ' </span>' +
-                                comment.texto +
-                                '</div></div>';
-                                div_comentarios.innerHTML = comentariosHTML;
-                            }
-
-                            
-                        } else {
-                            console.log('Nenhum comentário encontrado.');
-                        }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Erro na requisição:', error);
-                }
-            });
-        }
-        loadComments();
-        
-function new_comment(){
-        
-        console.log(id_post)
-        var comment = $('#textarea_comment').val();
-        console.log(comment);
-        $.ajax({
-            type: 'POST',
-            url: 'controller/controller.php?coment=1',
-            data: {
-                coment: comment,
-                id_user: <?php echo $_SESSION["USER_ID"]; ?>,
-                id_post: id_post,
-            }, 
-            success: function(response) {
-                console.log("aaaaa");
-                 loadComments(id_post);
-                $('#textarea_comment').val(''); // Limpa o campo de comentário
-                // selectComent();
-            },
-            error: function() {
-                alert('Houve um erro ao enviar o comentário.');
-            }
-        });
-    };
-</script>
+  
     <script>
         //calculo de menu provisorio -> ver se isso ainda precisa
 

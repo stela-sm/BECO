@@ -774,7 +774,8 @@ public function showComent($id){
                     'username' => $row['nome_usuario'],
                     'pfp' => $row['pfp']
                  ];
-
+                 
+                 $comentarios[$i]['query'] = $sql;
                 $i++;
                 
          $comentarios["number"] = $i;
