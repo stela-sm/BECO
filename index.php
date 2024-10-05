@@ -656,7 +656,7 @@ if ($concurso["result"]==0){
                         </a>
                     </div>
                     <div class="container__inputSearch relative" style="position: relative !important;">
-                        <input placeholder="Pesquise com criatividade" type="search" name="searchInput" id="searchInput searchPostsJS"
+                        <input placeholder="Pesquise com criatividade" type="search" name="searchInput" id="searchInput"
                             autocapitalize="false" class="inputSearch_navM" aria-expanded="false" role="combobox"
                             maxlength="100" autocomplete="off" tabindex="0">
                         <label for="searchInput" class="searchInput_label">
@@ -2784,7 +2784,7 @@ for (let i = 0; i < countdowns.length; i++) {
         //menu de filtros
         document.querySelector('.container__inputSearch').style.position = 'relative !important'
         document.getElementById('searchInput').addEventListener('click', function() {
-            const container = document.querySelector('#filtro__menuNAV');
+             const container = document.querySelector('#filtro__menuNAV');
 
             if (window.innerWidth > 750) {
                 console.log(window.innerWidth, 'aqui é responsivo')
@@ -2807,6 +2807,12 @@ for (let i = 0; i < countdowns.length; i++) {
             }
         })
 
+        document.getElementById('searchInput').addEventListener('input', function() {
+    console.log("O usuário começou a digitar: " + this.value);
+        const myIframe = document.getElementById('containerIframe');
+            myIframe.contentWindow.postMessage(this.value, '*');  
+            console.log("BBBBBBBBBBBBB");
+        });
         window.addEventListener('message', function(event) {
             if (event.data.type === 'updateTitle') {
                 const titleValue = event.data.value;
@@ -3342,16 +3348,16 @@ function new_comment(){
     </script>
     
 <script>
-     document.addEventListener('DOMContentLoaded', function() {
+    //  document.addEventListener('DOMContentLoaded', function() {
         
-        const searchInput = document.getElementById('searchPostsJS');
-        const myIframe = document.getElementById('containerIframe');
+    //     const searchInput = document.getElementById('searchPostsJS');
+    //     const myIframe = document.getElementById('containerIframe');
 
-        searchInput.addEventListener('input', function() {
-            myIframe.contentWindow.postMessage(this.value, '*');  
-            console.log("BBBBBBBBBBBBB");
-        });
-    });
+    //     searchInput.addEventListener('input', function() {
+    //         myIframe.contentWindow.postMessage(this.value, '*');  
+    //         console.log("BBBBBBBBBBBBB");
+    //     });
+    // });
   
    
 </script>

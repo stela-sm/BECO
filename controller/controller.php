@@ -424,6 +424,9 @@ $r = $manager-> inserirComent($dados);
     if($result == 0){$result="no-liked";}
     else{$result="liked";};
     echo json_encode($result);
+}elseif (isset($_REQUEST['checkLike']) && !isset($_SESSION['USER_ID'])) {
+    $result = "no-liked";
+    echo json_encode($result);
 }
 
 if(isset($_REQUEST["like"])){

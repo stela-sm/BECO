@@ -709,8 +709,7 @@ public function getAllPosts($limit, $offset, $search) {
             JOIN usuario u ON p.id_user = u.ID_USER 
             WHERE p.status = 1 AND p.titulo LIKE '%{$search}%' 
             ORDER BY p.datahora DESC 
-            LIMIT {$limit} OFFSET {$offset}
-            
+            LIMIT {$limit}
             ;
             ";
     }

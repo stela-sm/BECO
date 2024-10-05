@@ -588,8 +588,13 @@ console.log("page=" + page)
             }
 </script>
 <script>
+    function limpar(){
+        $('.container-portifolios').empty()
+    }
       window.addEventListener('message', function(event) {
         console.log("AAAAAAAAAAAAAAAAAAAAA"+event.data)
+        limpar();
+        carregarPosts(event.data)
     });
 </script>
 </body>
