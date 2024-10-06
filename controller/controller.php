@@ -421,9 +421,13 @@ $r = $manager-> inserirComent($dados);
     require_once "../model/manager.class.php";
     $manager = new Manager();
     $result = $manager->checkLike($id_user, $id_post);
+    $result2= $manager -> checkSave($id_user, $id_post);
     if($result == 0){$result="no-liked";}
     else{$result="liked";};
-    echo json_encode($result);
+    if($result2 == 0){$result2="no-saved";}else{$result2="saved";}
+        $r["like"] = $result;
+        $r["save"] = $result2;
+    echo json_encode($r);
 }elseif (isset($_REQUEST['checkLike']) && !isset($_SESSION['USER_ID'])) {
     $result = "no-liked";
     echo json_encode($result);
@@ -436,6 +440,16 @@ if(isset($_REQUEST["like"])){
 require_once "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> like($dados);
+
+echo json_encode($r);
+}
+if(isset($_REQUEST["save"])){
+    $dados["id_user"]=$_REQUEST["id_user"];
+    $dados["id_post"]=$_REQUEST["id_post"];
+    
+require_once "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> save($dados);
 
 echo json_encode($r);
 }

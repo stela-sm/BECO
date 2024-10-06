@@ -958,6 +958,19 @@ public function checkLike ($idUser, $idPost){
             }
 }
 
+public function checkSave($idUser, $idPost) {
+    $sql = "SELECT * FROM salvos WHERE id_user = '$idUser' AND id_post = '$idPost'";
+
+    $result = $this->connect()->query($sql);
+    if ($result->num_rows > 0) {
+        $this->connect()->close();
+        return '1'; // O post está salvo
+    } else {
+        $this->connect()->close();
+        return '0'; // O post não está salvo
+    }
+}
+
 public function like($dados){
     $id_post = $dados["id_post"];
     $id_user = $dados["id_user"];
@@ -995,8 +1008,46 @@ public function like($dados){
 
         return $action;
     }
+
+
+public function save($dados) {
+    $id_post = $dados["id_post"];
+    $id_user = $dados["id_user"];
+    $conn = $this->connect();
+
+    // Verifica se o post já está salvo
+    $sqlCheck = "SELECT COUNT(*) AS count FROM salvos WHERE id_user = $id_user AND id_post = $id_post";
+    $resultCheck = $conn->query($sqlCheck);
+
+    if ($resultCheck === FALSE) {
+        die("Erro na verificação: " . $conn->error);
+    }
+
+    $row = $resultCheck->fetch_assoc();
+    $exists = $row['count'] > 0;
+
+    if ($exists) {
+        // Se o post já está salvo, removê-lo
+        $sqlDelete = "DELETE FROM salvos WHERE id_user = $id_user AND id_post = $id_post";
+        if ($conn->query($sqlDelete) === TRUE) {
+            $action = 'removed';
+        } else {
+            die("Erro na remoção do salvamento: " . $conn->error);
+        }
+    } else {
+        // Se o post não está salvo, adicioná-lo
+        $sqlInsert = "INSERT INTO salvos (id_user, id_post, satahora) VALUES ($id_user, $id_post, NOW())";
+        if ($conn->query($sqlInsert) === TRUE) {
+            $action = 'added';
+        } else {
+            die("Erro na adição do salvamento: " . $conn->error);
+        }
+    }
+
+    $conn->close();
+
+    return $action;
 }
 
-
-
+}
 ?>

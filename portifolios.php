@@ -93,7 +93,15 @@
             
   fill: #fff;
         }
+        .saved svg{
+            
+            fill: #fff;
+                  }
         .no-liked svg{
+            
+            fill: transparent;
+                  }
+                  .no-saved svg{
             
             fill: transparent;
                   }
@@ -417,11 +425,11 @@ console.log("page=" + page)
     data: { id_post: id },  
     dataType: 'json',  
     success: function(data) {
-        
-        if (data) {
+        if (data.like) {
             // console.log("Offset:", data.offset);  
-             isLiked = data;               
-             console.log("Resposta do servidor:", isLiked);  
+             isLiked = data.like;
+             isSave = data.save;               
+             console.log("Resposta do servidor:", isLiked + data.save);  
                    
     const postHtml = `
         <div class="card-portifolio fade-in-css">
@@ -442,7 +450,7 @@ console.log("page=" + page)
                                 </span>
                             </div>
                             <div class="LikeSalvar__thumbContainer">
-                                <button id="salvarPublicacao"  class="botaoContainer_thumbInterativo" >
+                                <button id="salvarPublicacao"  class="botaoContainer_thumbInterativo saveButton ${isSave}" data-id-post="${id}">
                                     <svg id="salvarPubli_btn" xmlns="http://www.w3.org/2000/svg" width="18"
                                         height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"
                                         stroke-linecap="round" stroke-linejoin="round"
@@ -490,6 +498,37 @@ console.log("page=" + page)
 ?>
 <script>
     $(document).on('click', '.likeButton', function() {    
+                var button = $(this);
+                var idPost = button.data('id-post');        
+                var idUser = <?php echo $id ?>;
+                var action = button.hasClass('saved') ? 'remove_save' : 'save';
+                $.ajax({
+                    url: 'controller/controller.php?save=1', 
+                    type: 'POST',
+                    data: {
+                        action: action,
+                        id_user: idUser,
+                        id_post: idPost
+                    },
+                    success: function(response) {
+                        // Lida com a resposta do servidor
+                       
+                        console.log('Requisição bem-sucedida:', response);
+                        if(response!='"added"'){
+                            button.addClass('no-saved').removeClass('saved');
+                        }else{
+                            button.addClass('saved').removeClass('no-saved');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Lida com erros
+                        console.error('Erro na requisição:', status, error);
+                        
+                    }
+                });
+                // checkLikeStatus(idUser, idPost, button); essa função não precisa, já que o like já está sendo manipulado pelo ajax
+            });
+            $(document).on('click', '.saveButton', function() {    
                 var button = $(this);
                 var idPost = button.data('id-post');        
                 var idUser = <?php echo $id ?>;
