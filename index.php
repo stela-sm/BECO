@@ -2138,6 +2138,42 @@ if ($data_atual < $data_fim) {
                                 box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .5);
 
                             }
+                            .fixedFooterModal {
+                                position: absolute;
+                                bottom: 0;
+                                left: 0;
+                                right: 0;
+                                height: auto; 
+                                width: 100%;
+                                background-color: white; 
+                                text-align: center;
+                                line-height: 60px; 
+                            border:none;
+                            border-radius: 6px;
+                            box-shadow: rgba(0, 0, 0, 0.15) 0px -15px 20px -10px;
+
+                            }
+                            .tableFixedFooter{
+                                width: 100%;
+                                
+                            background-color: transparent !important;
+                            }
+                            
+                            .botaoContainer_thumbInterativo {
+                            border: none !important;
+                            outline: none !important;
+                            cursor: pointer;
+                            box-shadow: none !important;
+                            background-color: transparent !important;
+                            }
+
+                            .botaoContainer_thumbInterativo svg {
+                            fill: none;
+                            transition: fill 0.3s ease;
+                            }
+                            .botaoContainer_thumbInterativo:hover svg {
+                            fill: #212529;
+                            }
                         </style>
 
 
@@ -2153,7 +2189,7 @@ if ($data_atual < $data_fim) {
                         
                       
                     </section>
-                    <section id="reportUserSec " class="pTop0">
+                    <section id="reportUserSec " class="pTop0" style="padding-bottom:70px;">
                         <a href="#" ajudaCenter="ligado" id="reportUser">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -2166,9 +2202,31 @@ if ($data_atual < $data_fim) {
                         </a>
                     </section>
                 </div>
+                <div class="fixedFooterModal">
+                    <table class="tableFixedFooter">
+                        <tr class="trFixedFooter">
+                        <td class="tdFixerFooter">
+                            <button class="botaoContainer_thumbInterativo likeButton">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-thumb-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 11v8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3" /></svg>
+                        </td>
+                        </button>
+                        <td class="tdFixerFooter">
+                        <button class="botaoContainer_thumbInterativo ">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-bookmark"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z" /></svg>                        
+                    </button>
+                        </td>
+                        <td class="tdFixerFooter">
+                        <button class="botaoContainer_thumbInterativo ">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-share"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M8.7 10.7l6.6 -3.4" /><path d="M8.7 13.3l6.6 3.4" /></svg>
+                        </td>
+                    </tr>
+                    </table>
+    </div>
             </div>
+        
         </div>
 
+    
     </div>
     <div class="modal fade portifolio-modal" id="portifolio-modal" tabindex="-1" role="dialog"
         aria-labelledby="portifolio-modal_label" aria-hidden="true">

@@ -436,5 +436,7 @@ if(isset($_REQUEST["like"])){
 require_once "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> like($dados);
+
+echo json_encode($r);
 }
 ?>

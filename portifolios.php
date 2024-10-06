@@ -1,4 +1,4 @@
-
+<?php session_start()?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -93,6 +93,10 @@
             
   fill: #fff;
         }
+        .no-liked svg{
+            
+            fill: transparent;
+                  }
         .banner-curtain,
         .portifolio-curtain {
             background-blend-mode: darken;
@@ -482,12 +486,12 @@ console.log("page=" + page)
     
 }
 </script>
-<?php $id = isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : '0'; ?>
+<?php $id = isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : '0'; 
+?>
 <script>
     $(document).on('click', '.likeButton', function() {    
                 var button = $(this);
-                var idPost = button.data('id-post');                
-                console.log(idPost)
+                var idPost = button.data('id-post');        
                 var idUser = <?php echo $id ?>;
                 var action = button.hasClass('liked') ? 'remove_like' : 'like';
                 $.ajax({
@@ -500,39 +504,24 @@ console.log("page=" + page)
                     },
                     success: function(response) {
                         // Lida com a resposta do servidor
+                       
                         console.log('Requisição bem-sucedida:', response);
+                        if(response!='"added"'){
+                            button.addClass('no-like').removeClass('liked');
+                        }else{
+                            button.addClass('liked').removeClass('no-liked');
+                        }
                     },
                     error: function(xhr, status, error) {
                         // Lida com erros
                         console.error('Erro na requisição:', status, error);
+                        
                     }
                 });
-                checkLikeStatus(idUser, idPost, button);
+                // checkLikeStatus(idUser, idPost, button); essa função não precisa, já que o like já está sendo manipulado pelo ajax
             });
            
-        function checkLikeStatus(idUser, idPost, button) {
-        
-                $.ajax({
-                    url: '../controller/controller.php?checklike=1', // Substitua com a URL do seu controller
-                    type: 'POST',
-                    data: {
-                        action: 'check_like',
-                        id_user: idUser,
-                        id_post: idPost
-                    },
-                    success: function(response) {
-                        console.log(response);
-                if (response.liked) {
-                    button.addClass('liked').removeClass('no-like');
-                } else {
-                    button.addClass('no-like').removeClass('liked');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Erro na requisição:', status, error);
-            }
-        });
-            }
+      
 </script>
 <script>
     function limpar(){
