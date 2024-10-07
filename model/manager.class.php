@@ -976,19 +976,15 @@ public function like($dados){
     $id_user = $dados["id_user"];
         $conn = $this->connect();
 
-        $sqlCheck = "SELECT COUNT(*) AS count FROM likes WHERE id_user = $id_user AND id_post = $id_post";
+        $sqlCheck = "SELECT COUNT(*) AS count FROM likes WHERE id_user = '$id_user' AND id_post = '$id_post'";
         $resultCheck = $conn->query($sqlCheck);
 
-        if ($resultCheck === FALSE) {
-            die("Erro na verificação: " . $conn->error);
-        }
-
         $row = $resultCheck->fetch_assoc();
-        $exists = $row['count'] > 0;
+   
 
-        if ($exists) {
+        if ($row['count'] > 0) {
             // Se o like existe, removê-lo
-            $sqlDelete = "DELETE FROM likes WHERE id_user = $id_user AND id_post = $id_post";
+            $sqlDelete = "DELETE FROM likes WHERE id_user = '$id_user' AND id_post = '$id_post'";
             if ($conn->query($sqlDelete) === TRUE) {
                 $action = 'removed';
             } else {
@@ -996,7 +992,7 @@ public function like($dados){
             }
         } else {
             // Se o like não existe, adicioná-lo
-            $sqlInsert = "INSERT INTO likes (id_user, id_post, datahora) VALUES ($id_user, $id_post, now())";
+            $sqlInsert = "INSERT INTO likes (id_user, id_post, datahora) VALUES ('$id_user', '$id_post', now())";
             if ($conn->query($sqlInsert) === TRUE) {
                 $action = 'added';
             } else {
@@ -1016,19 +1012,16 @@ public function save($dados) {
     $conn = $this->connect();
 
     // Verifica se o post já está salvo
-    $sqlCheck = "SELECT COUNT(*) AS count FROM salvos WHERE id_user = $id_user AND id_post = $id_post";
+    $sqlCheck = "SELECT COUNT(*) AS count FROM salvos WHERE id_user = '$id_user' AND id_post = '$id_post'";
     $resultCheck = $conn->query($sqlCheck);
 
-    if ($resultCheck === FALSE) {
-        die("Erro na verificação: " . $conn->error);
-    }
 
     $row = $resultCheck->fetch_assoc();
-    $exists = $row['count'] > 0;
+   
 
-    if ($exists) {
+    if ($row['count'] > 0) {
         // Se o post já está salvo, removê-lo
-        $sqlDelete = "DELETE FROM salvos WHERE id_user = $id_user AND id_post = $id_post";
+        $sqlDelete = "DELETE FROM salvos WHERE id_user = '$id_user' AND id_post = '$id_post'";
         if ($conn->query($sqlDelete) === TRUE) {
             $action = 'removed';
         } else {
@@ -1036,7 +1029,7 @@ public function save($dados) {
         }
     } else {
         // Se o post não está salvo, adicioná-lo
-        $sqlInsert = "INSERT INTO salvos (id_user, id_post, satahora) VALUES ($id_user, $id_post, NOW())";
+        $sqlInsert = "INSERT INTO salvos (id_user, id_post, datahora) VALUES ('$id_user', '$id_post', NOW())";
         if ($conn->query($sqlInsert) === TRUE) {
             $action = 'added';
         } else {

@@ -443,6 +443,7 @@ $r = $manager-> like($dados);
 
 echo json_encode($r);
 }
+
 if(isset($_REQUEST["save"])){
     $dados["id_user"]=$_REQUEST["id_user"];
     $dados["id_post"]=$_REQUEST["id_post"];

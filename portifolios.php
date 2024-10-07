@@ -501,37 +501,6 @@ console.log("page=" + page)
                 var button = $(this);
                 var idPost = button.data('id-post');        
                 var idUser = <?php echo $id ?>;
-                var action = button.hasClass('saved') ? 'remove_save' : 'save';
-                $.ajax({
-                    url: 'controller/controller.php?save=1', 
-                    type: 'POST',
-                    data: {
-                        action: action,
-                        id_user: idUser,
-                        id_post: idPost
-                    },
-                    success: function(response) {
-                        // Lida com a resposta do servidor
-                       
-                        console.log('Requisição bem-sucedida:', response);
-                        if(response!='"added"'){
-                            button.addClass('no-saved').removeClass('saved');
-                        }else{
-                            button.addClass('saved').removeClass('no-saved');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        // Lida com erros
-                        console.error('Erro na requisição:', status, error);
-                        
-                    }
-                });
-                // checkLikeStatus(idUser, idPost, button); essa função não precisa, já que o like já está sendo manipulado pelo ajax
-            });
-            $(document).on('click', '.saveButton', function() {    
-                var button = $(this);
-                var idPost = button.data('id-post');        
-                var idUser = <?php echo $id ?>;
                 var action = button.hasClass('liked') ? 'remove_like' : 'like';
                 $.ajax({
                     url: 'controller/controller.php?like=1', 
@@ -550,6 +519,38 @@ console.log("page=" + page)
                         }else{
                             button.addClass('liked').removeClass('no-liked');
                         }
+                    },
+                    error: function(xhr, status, error) {
+                        // Lida com erros
+                        console.error('Erro na requisição:', status, error);
+                        
+                    }
+                });
+                // checkLikeStatus(idUser, idPost, button); essa função não precisa, já que o like já está sendo manipulado pelo ajax
+            });
+            $(document).on('click', '.saveButton', function() {    
+                var button = $(this);
+                var idPost = button.data('id-post');        
+                var idUser = <?php echo $id ?>;
+                var action =  button.hasClass('saved') ? 'remove_save' : 'save';
+                $.ajax({
+                    url: 'controller/controller.php?save=1', 
+                    type: 'POST',
+                    data: {
+                        action: action,
+                        id_user: idUser,
+                        id_post: idPost
+                    },
+                    success: function(response) {
+                        // Lida com a resposta do servidor
+                       
+                        console.log('Requisição bem-sucedida:', response);
+                        if(response!='"added"'){
+                            button.addClass('no-saved').removeClass('saved');
+                        }else{
+                            button.addClass('saved').removeClass('no-saved');
+                        }
+                        
                     },
                     error: function(xhr, status, error) {
                         // Lida com erros
