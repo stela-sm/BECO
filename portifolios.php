@@ -568,10 +568,15 @@ console.log("page=" + page)
         $('.container-portifolios').empty()
     }
       window.addEventListener('message', function(event) {
+        if (event.data.startsWith('#')) {
+                console.log('Mensagem recebida: ' + event.data)
+                
+            } else{
         console.log("AAAAAAAAAAAAAAAAAAAAA"+event.data)
         limpar();
         carregarPosts(event.data)
-    });
+    }});
+
 </script>
 </body>
 

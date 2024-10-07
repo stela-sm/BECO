@@ -674,7 +674,7 @@ if ($concurso["result"]==0){
                             <div class="container_filtro paddingFilterIn">
                                 <span class="uppercase filterVtitle">classificar e filtrar:</span>
                                 <div class="Content_filtro paddingTitle_top">
-                                    <a class="card_filtro">
+                                    <a class="card_filtro" onclick=filtrarPosts(this)>
                                         <div class="filter_name">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="#858585" stroke-width="1.75"
@@ -698,7 +698,7 @@ if ($concurso["result"]==0){
                                         </span>
                                     </a>
 
-                                    <a class="card_filtro">
+                                    <a class="card_filtro" onclick=filtrarPosts(this)>
                                         <div class="filter_name">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="#858585" stroke-width="1.75"
@@ -709,7 +709,7 @@ if ($concurso["result"]==0){
                                                 <path d="M21 3a16 16 0 0 0 -12.8 10.2" />
                                                 <path d="M21 3a16 16 0 0 1 -10.2 12.8" />
                                                 <path d="M10.6 9a9 9 0 0 1 4.4 4.4" />
-                                            </svg> <span class="filter__name capitalize">Ilustração Digital
+                                            </svg> <span class="filter__name capitalize">Ilustração
                                             </span>
                                         </div>
                                         <span class="arrowChevron">
@@ -723,7 +723,7 @@ if ($concurso["result"]==0){
                                         </span>
                                     </a>
 
-                                    <a class="card_filtro">
+                                    <a class="card_filtro" onclick=filtrarPosts(this)>
                                         <div class="filter_name">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="#858585" stroke-width="1.75"
@@ -748,7 +748,7 @@ if ($concurso["result"]==0){
                                         </span>
                                     </a>
 
-                                    <a class="card_filtro">
+                                    <a class="card_filtro" onclick=filtrarPosts(this)>
                                         <div class="filter_name">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="#858585" stroke-width="1.75"
@@ -773,7 +773,7 @@ if ($concurso["result"]==0){
                                         </span>
                                     </a>
 
-                                    <a class="card_filtro">
+                                    <a class="card_filtro" onclick=filtrarPosts(this)>
                                         <div class="filter_name">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="#858585" stroke-width="1.75"
@@ -796,7 +796,7 @@ if ($concurso["result"]==0){
                                         </span>
                                     </a>
 
-                                    <a class="card_filtro">
+                                    <a class="card_filtro" onclick=filtrarPosts(this)>
                                         <div class="filter_name">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="#858585" stroke-width="1.75"
@@ -820,7 +820,7 @@ if ($concurso["result"]==0){
                                             </svg>
                                         </span>
                                     </a>
-                                    <a class="card_filtro">
+                                    <a class="card_filtro" onclick=filtrarPosts(this)>
                                         <div class="filter_name">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="#858585" stroke-width="1.75"
@@ -3413,17 +3413,14 @@ for (let i = 0; i < countdowns.length; i++) {
     </script>
     
 <script>
-    //  document.addEventListener('DOMContentLoaded', function() {
-        
-    //     const searchInput = document.getElementById('searchPostsJS');
-    //     const myIframe = document.getElementById('containerIframe');
+function filtrarPosts(link) {
+    const filterName = link.querySelector('.filter__name').textContent;
+    const formattedFilterName = '#' + filterName.trim().replace(/\s+/g, '');
+    console.log(formattedFilterName);
+    const iframe = document.getElementById('containerIframe');
+    iframe.contentWindow.postMessage(formattedFilterName, '*');
+}
 
-    //     searchInput.addEventListener('input', function() {
-    //         myIframe.contentWindow.postMessage(this.value, '*');  
-    //         console.log("BBBBBBBBBBBBB");
-    //     });
-    // });
-  
    
 </script>
 
