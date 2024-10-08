@@ -454,4 +454,63 @@ $r = $manager-> save($dados);
 
 echo json_encode($r);
 }
+
+if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
+    $dados["id_user"] = $_SESSION['USER_ID'];
+    $dados["titulo"] = $_REQUEST['ttlPortifolio'];
+    if(isset($_REQUEST['store'])){
+        $dados['direcionamento'] = 'store';
+        $dados['preco'] = 'precoPost';
+        $dados['banco'] = 'banco_produto';
+        $dados['agencia'] = 'agencia_produto';
+        $dados['conta'] = 'conta_produto';
+    }elseif(isset($_REQUEST['service'])){
+        $dados['direcionamento'] = 'service';
+        $dados['ETA'] = 'tempoEntrega';
+        $dados['precoInicial'] = 'precoInicial';
+    }
+    $dados["descricao"] = $_REQUEST['descricaoPortifolio'];
+    $dados["software"] = $_REQUEST['software'];
+    $dados["thumbnail"] = $_FILES['thumbnail']['name'];;
+
+    $inputs = $_REQUEST['imagemPort'];
+    if (!empty($inputs)) {
+        $i = 0;
+        foreach ($inputs as $input) {
+            $dados['imagens'][$i] = $input; 
+            $i++;
+        }
+    } else {
+        echo "Nenhum input foi enviado.";
+    }
+
+
+    $inputs = $_REQUEST['videoPort'];
+    if (!empty($inputs)) {
+        $i = 0;
+        foreach ($inputs as $input) {
+            $dados['videos'][$i] = $input; 
+            $i++;
+        }
+    } else {
+        echo "Nenhum input foi enviado.";
+    }
+
+
+
+    $inputs = $_REQUEST['tagsCheck'];
+    if (!empty($inputs)) {
+        $i = 0;
+        foreach ($inputs as $input) {
+            $dados['tags'][$i] = $input; 
+            $i++;
+        }
+    } else {
+        echo "Nenhum input foi enviado.";
+    }
+
+    var_dump($dados);
+    echo "cuuuuu";
+}
+
 ?>

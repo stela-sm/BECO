@@ -1445,7 +1445,7 @@ span#atHeader {
   display: grid;
   overflow: hidden;
   max-height: 130px;
-  grid-template-columns: 2fr 4fr;
+  grid-template-columns: 2fr 2fr;
 }
 
 .container_ativosNome {

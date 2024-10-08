@@ -433,6 +433,7 @@ if ($concurso["result"]==0){
     .inpGroupModal textarea,
     .inpGroupModal select {
         font-size: 16px;
+        width: 100%;
         font-weight: 500;
         border-radius: 7px;
         min-height: 36px;
@@ -507,8 +508,9 @@ if ($concurso["result"]==0){
 
     /*do modal de produto*/
     .containerGrid_pix-produto {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display: grid;        
+    grid-template-columns: 180px 150px 150px;
+    gap: 10px;
     }
 
     .containerGrid_licenPreco,
@@ -1270,7 +1272,7 @@ if ($concurso["result"]==0){
                     </div>
                 </div>
                 <!--right-side do criarPublicação-->
-                <form action="#" method="POST" id="mainForm-CriarPubli">
+                <form action="controller/controller.php?criarPost=1" method="POST" id="mainForm-CriarPubli" enctype="multipart/form-data">
                     <div class="right-side criarPubli_right-menu" style="display:none;" style="background-color:var(--default_backgroundDSAD);padding: 1.5;"
                         id="right-menu_JScontainer-cPubli">
 
@@ -1325,8 +1327,9 @@ if ($concurso["result"]==0){
                             <div class="containerSelects__FcP">
                                 <div class="software__select d-column jumboContainer">
                                     <span class="Subsection__Title">Software</span>
-                                    <select name="#" id="#">
+                                    <select name="software" id="#">
                                         <option value="0" disabled selected>Selecione</option>
+<!--aqui vai o select do php-->
                                     </select>
                                 </div>
                                 <div class="tags__checkboxes d-column jumboContainer">
@@ -1334,55 +1337,55 @@ if ($concurso["result"]==0){
                                     <div class="inputs_container1">
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
-                                                <input class="checkbox__personal-css" type="checkbox" name="#" id="#">
+                                                <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox" name="#" id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Pixel Art</span>
                                         </div>
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
-                                                <input class="checkbox__personal-css" type="checkbox"
-                                                    name="pixelArt_check" id="#">
+                                                <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
+                                                     id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Animação</span>
                                         </div>
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
-                                                <input class="checkbox__personal-css" type="checkbox"
-                                                    name="animacao_check" id="#">
+                                                <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
+                                                     id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Arte Vetorial</span>
                                         </div>
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
-                                                <input class="checkbox__personal-css" type="checkbox"
-                                                    name="arteVetorial_check" id="#">
+                                                <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
+                                                    id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Ilustração</span>
                                         </div>
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
-                                                <input class="checkbox__personal-css" type="checkbox"
-                                                    name="ilustracao_check" id="#">
+                                                <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
+                                                   id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Fotografia</span>
                                         </div>
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
-                                                <input class="checkbox__personal-css" type="checkbox"
-                                                    name="fotografia_check" id="#">
+                                                <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
+                                                     id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Arte Digital</span>
                                         </div>
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
-                                                <input class="checkbox__personal-css" type="checkbox"
-                                                    name="arteDigital_check" id="#">
+                                                <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
+                                                     id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Concurso</span>
@@ -1428,7 +1431,7 @@ if ($concurso["result"]==0){
                                         </svg>
                                         <span>Thumbnail</span>
                                     </div>
-                                    <input class="thumbnailUploader" type="file" accept="image/*">
+                                    <input class="thumbnailUploader" name="thumbnail" type="file" accept="image/*">
                                 </label>
                             </div>
                         </div>
@@ -1467,11 +1470,11 @@ if ($concurso["result"]==0){
                                             </select>
                                         </div>
                                         <div class="input-container d-flex flex-column">
-                                            <label for="precoInicial_modalPort " class="precoIniPORT">Preço
+                                            <label for="precoInicial_modalPort2 " class="precoIniPORT">Preço
                                                 Inicial</label>
                                             <div class="inpGroupModal d-flex flex-row inGroupDiferente">
-                                                <label for="precoInicial_modalPort" class="realSimbolo">R$</label>
-                                                <input type="number" id="precoInicial_modalPort" name="precoInicial"
+                                                <label for="precoInicial_modalPort2" class="realSimbolo">R$</label>
+                                                <input type="number" id="precoInicial_modalPort2" name="precoInicial"
                                                     step="0.01" min="0">
                                             </div>
                                         </div><br>
@@ -1486,7 +1489,7 @@ if ($concurso["result"]==0){
                                                 <div class="checkboxLicenca-container">
                                                     <div class="container-input_checkbox d-flex flex-row relative">
                                                         <label class="checkbox">
-                                                            <input class="checkbox__personal-css" type="checkbox"
+                                                            <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
                                                                 name="#" id="pago_produtoCheckbox">
                                                             <span class="checkmark"></span>
                                                         </label>
@@ -1494,7 +1497,7 @@ if ($concurso["result"]==0){
                                                     </div>
                                                     <div class="container-input_checkbox relative">
                                                         <label class="checkbox">
-                                                            <input class="checkbox__personal-css" type="checkbox"
+                                                            <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
                                                                 name="#" id="gratuito_produtoCheckbox">
                                                             <span class="checkmark"></span>
                                                         </label>
@@ -1506,12 +1509,12 @@ if ($concurso["result"]==0){
                                             <div class="preco-container inpGroupModal d-flex flex-column">
                                                 <div class="input-container d-flex flex-column">
                                                     <label for="precoInicial_modalPort " class="precoIniPORT">Preço
-                                                        Inicial</label>
+                                                        </label>
                                                     <div class="inpGroupModal d-flex flex-row inGroupDiferente">
                                                         <label for="precoInicial_modalPort"
                                                             class="realSimbolo">R$</label>
                                                         <input type="number" id="precoInicial_modalPort"
-                                                            name="precoInicial" step="0.01" min="0">
+                                                            name="precoPost" step="0.01" min="0">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1609,7 +1612,7 @@ if ($concurso["result"]==0){
                         </div>
                         <input type="hidden" id="PortTitle__official" name="TituloPortifolio">
                     </div>
-                </form>
+                </form><!--fim do form criarpost-->
                 <!--right-side do configuracoes-->
                 <div class="right-side configuracoes_right-menu" style="display:block;padding-left: 0.5%;"
                     id="right-menu_JScontainer-configProf">
@@ -3260,12 +3263,12 @@ for (let i = 0; i < countdowns.length; i++) {
                     // Add input:hidden pra img
                     const inputImage = document.createElement('input');
                     inputImage.type = 'hidden';
-                    inputImage.name = 'imagemPort' + (document.querySelectorAll('.inputFormImg_inp')
-                        .length +
-                        1);
+                    inputImage.name = 'imagemPort[]';
                     inputImage.className = 'inputFormImg_inp';
                     inputImage.value = e.target.result;
                     document.getElementById('mainForm-CriarPubli').appendChild(inputImage);
+                    console.log(inputImage)
+               
                 };
                 reader.readAsDataURL(file);
             }
@@ -3285,11 +3288,11 @@ for (let i = 0; i < countdowns.length; i++) {
                     // Add input:hidden pro vid
                     const inputVideo = document.createElement('input');
                     inputVideo.type = 'hidden';
-                    inputVideo.name = 'videoPort' + (document.querySelectorAll('.inputFormMid_inp').length +
-                        1);
+                    inputVideo.name = 'videoPort[]';
                     inputVideo.className = 'inputFormMid_inp';
                     inputVideo.value = e.target.result;
                     document.getElementById('mainForm-CriarPubli').appendChild(inputVideo);
+                    console.log(inputVideo)
                 };
                 reader.readAsDataURL(file);
             }
@@ -3321,6 +3324,8 @@ for (let i = 0; i < countdowns.length; i++) {
             }
         })
         // AQUI É O MODAL DE CRIAR PUBLICAÇÃO -> FALTA VERIFICAR INPUTS DE TIPO -> NÃO MEXER
+       
+document.addEventListener('DOMContentLoaded', ()=>{
         document.querySelector('#submitBtn_cPubli').addEventListener('click', function() {
             const servicoCheckbox = document.getElementById('servico__checkbox');
             const produtoCheckbox = document.getElementById('produto__checkbox');
@@ -3349,7 +3354,8 @@ for (let i = 0; i < countdowns.length; i++) {
                 modalServico.style.display = 'none';
                 modalProduto.style.display = 'none';
             }
-        });
+        });
+       })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.13.1/dist/sweetalert2.all.min.js
     "></script>
