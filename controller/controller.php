@@ -433,6 +433,9 @@ $r = $manager-> inserirComent($dados);
     echo json_encode($result);
 }
 
+
+
+
 if(isset($_REQUEST["like"])){
     $dados["id_user"]=$_REQUEST["id_user"];
     $dados["id_post"]=$_REQUEST["id_post"];
@@ -443,6 +446,9 @@ $r = $manager-> like($dados);
 
 echo json_encode($r);
 }
+
+
+
 
 if(isset($_REQUEST["save"])){
     $dados["id_user"]=$_REQUEST["id_user"];
@@ -455,6 +461,23 @@ $r = $manager-> save($dados);
 echo json_encode($r);
 }
 
+//função pra mídia temporária
+if (isset($_REQUEST['temp_midia'])) {
+        $img = $_FILES['file'];        
+        // Mova o arquivo para a pasta desejada
+        if (move_uploaded_file($img['tmp_name'], "../assets/media/temp_midia/" . $img['name'])) {
+            echo "Arquivo enviado com sucesso: " . $img['name'];
+        } else {
+            echo "Falha ao mover o arquivo.";
+        }
+    } else {
+        echo "Erro no upload do arquivo.";
+    }
+
+
+
+
+//função de criar post
 if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
     $dados["id_user"] = $_SESSION['USER_ID'];
     $dados["titulo"] = $_REQUEST['ttlPortifolio'];
@@ -473,33 +496,10 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
     $dados["software"] = $_REQUEST['software'];
     $dados["thumbnail"] = $_FILES['thumbnail']['name'];;
 
-    $inputs = $_REQUEST['imagemPort'];
-    if (!empty($inputs)) {
-        $i = 0;
-        foreach ($inputs as $input) {
-            $dados['imagens'][$i] = $input; 
-            $i++;
-        }
-    } else {
-        echo "Nenhum input foi enviado.";
-    }
-
-
-    $inputs = $_REQUEST['videoPort'];
-    if (!empty($inputs)) {
-        $i = 0;
-        foreach ($inputs as $input) {
-            $dados['videos'][$i] = $input; 
-            $i++;
-        }
-    } else {
-        echo "Nenhum input foi enviado.";
-    }
-
-
-
-    $inputs = $_REQUEST['tagsCheck'];
-    if (!empty($inputs)) {
+   
+    
+    if (!empty($_REQUEST['tagsCheck'])) {
+        $inputs = $_REQUEST['tagsCheck'];
         $i = 0;
         foreach ($inputs as $input) {
             $dados['tags'][$i] = $input; 
@@ -509,8 +509,39 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
         echo "Nenhum input foi enviado.";
     }
 
+
+    if (!empty($_REQUEST['imagemPort'])) {
+        $inputs = $_REQUEST['imagemPort'];
+        $i = 0;
+        foreach ($inputs as $input) {
+            $dados['img'][$i] = $input; 
+            $file = $input; // Nome do arquivo que você salvou
+            $sourcePath = '../assets/media/temp_midia/' . $file; // Caminho original
+            $destinationPath = '../assets/media/port_midia/' . $file; // Caminho de destino
+            rename($sourcePath, $destinationPath);
+            $i++;
+        }
+    } else {
+        echo "Nenhum input foi enviado.";
+    }
+
+    if (!empty($_REQUEST['videoPort'])) {
+        $inputs = $_REQUEST['videoPort'];
+        $i = 0;
+        foreach ($inputs as $input) {
+            $dados['video'][$i] = $input; 
+            $file = $input; // Nome do arquivo que você salvou
+            $sourcePath = '../assets/media/temp_midia/' . $file; // Caminho original
+            $destinationPath = '../assets/media/port_midia/' . $file; // Caminho de destino
+            rename($sourcePath, $destinationPath);
+            $i++;
+        }
+    } else {
+        echo "Nenhum input foi enviado.";
+    }
+
     var_dump($dados);
-    echo "cuuuuu";
+    var_dump($_REQUEST);
 }
 
 ?>

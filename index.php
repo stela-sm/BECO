@@ -3265,14 +3265,32 @@ for (let i = 0; i < countdowns.length; i++) {
                     inputImage.type = 'hidden';
                     inputImage.name = 'imagemPort[]';
                     inputImage.className = 'inputFormImg_inp';
-                    inputImage.value = e.target.result;
+                    inputImage.value = file.name;
                     document.getElementById('mainForm-CriarPubli').appendChild(inputImage);
                     console.log(inputImage)
                
                 };
                 reader.readAsDataURL(file);
             }
+
+        const formData = new FormData();
+
+        formData.append('file', file);
+
+        $.ajax({
+            url: 'controller/controller.php?temp_midia=1', // O arquivo PHP que processará o upload
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+               console.log(response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error(textStatus, errorThrown);
+            }
         });
+    });
 
         document.getElementById('add-video').addEventListener('change', function(event) {
             const file = event.target.files[0];
@@ -3295,6 +3313,23 @@ for (let i = 0; i < countdowns.length; i++) {
                     console.log(inputVideo)
                 };
                 reader.readAsDataURL(file);
+                const formData = new FormData();
+
+        formData.append('file', file);
+
+        $.ajax({
+            url: 'controller/controller.php?temp_midia=1', // O arquivo PHP que processará o upload
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+               console.log(response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error(textStatus, errorThrown);
+            }
+        });
             }
         });
 
