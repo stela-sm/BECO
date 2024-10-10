@@ -4,6 +4,7 @@ session_start();
 require_once "model/manager.class.php";
 $manager = new Manager();
 $concurso= $manager -> getConcursoAtual();
+$softwares = $manager -> selectSoftwares();
 if ($concurso["result"]==0){
 // set the values if there isnt anyone at the actual time
 
@@ -1329,7 +1330,13 @@ if ($concurso["result"]==0){
                                     <span class="Subsection__Title">Software</span>
                                     <select name="software" id="#">
                                         <option value="0" disabled selected>Selecione</option>
-<!--aqui vai o select do php-->
+<?PHP
+                                   
+                                    foreach ($softwares as $software) {
+                                        echo '<option value="' . $software['ID_SOFTWARE'] . '">' . $software['software']
+                                        . '</option>';
+                                        }
+                                ?>
                                     </select>
                                 </div>
                                 <div class="tags__checkboxes d-column jumboContainer">
@@ -1489,16 +1496,16 @@ if ($concurso["result"]==0){
                                                 <div class="checkboxLicenca-container">
                                                     <div class="container-input_checkbox d-flex flex-row relative">
                                                         <label class="checkbox">
-                                                            <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
-                                                                name="#" id="pago_produtoCheckbox">
+                                                            <input class="checkbox__personal-css" type="checkbox"
+                                                                name="licenca" value="Pago" id="pago_produtoCheckbox">
                                                             <span class="checkmark"></span>
                                                         </label>
                                                         <span for="#" class="checkbox__informationN">Para Venda</span>
                                                     </div>
                                                     <div class="container-input_checkbox relative">
                                                         <label class="checkbox">
-                                                            <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
-                                                                name="#" id="gratuito_produtoCheckbox">
+                                                            <input class="checkbox__personal-css" type="checkbox"
+                                                                name="licenca" value="Gratuito" id="gratuito_produtoCheckbox">
                                                             <span class="checkmark"></span>
                                                         </label>
                                                         <span for="#" class="checkbox__informationN">Gratuito</span>
@@ -1597,7 +1604,7 @@ if ($concurso["result"]==0){
                                                         </span>
                                                         <input class="thumbnailUploader" required type="file"
                                                             name="ativosPort" id="ativosPort_uploader" multiple
-                                                            onchange="javascript:anexActive()">
+                                                            >
                                                     </label>
                                                 </div>
                                             </div><br>
@@ -2911,6 +2918,13 @@ for (let i = 0; i < countdowns.length; i++) {
                 checkScreenSize();
             }
         })
+        window.addEventListener('message', function(event) {
+            if(event.data.type === 'alterarTituloPubli?criar'){
+            // console.log('o titulo chegou aq')
+            document.querySelector('#tituloModal_Port').value = event.data.oqtaescrito
+        }
+
+        })
         //menu de filtros
         document.querySelector('.container__inputSearch').style.position = 'relative !important'
         document.getElementById('searchInput').addEventListener('click', function() {
@@ -3308,7 +3322,7 @@ for (let i = 0; i < countdowns.length; i++) {
                     inputVideo.type = 'hidden';
                     inputVideo.name = 'videoPort[]';
                     inputVideo.className = 'inputFormMid_inp';
-                    inputVideo.value = e.target.result;
+                    inputVideo.value = file.name;
                     document.getElementById('mainForm-CriarPubli').appendChild(inputVideo);
                     console.log(inputVideo)
                 };
@@ -3420,18 +3434,49 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
 
         const anexActive = function(event) {
-            const input = document.getElementById('ativosPort_uploader')
-            const output = document.getElementById('ativosPort_list')
+            const input = document.getElementById('ativosPort_uploader');
+    const output = document.getElementById('ativosPort_list');
 
-            const ul = document.createElement('ul')
-            for (let i = 0; i < input.files.length; ++i) {
-                const file = input.files.item(i)
-                const truncatedFileName = sprdNom_Ext(file)
+    let ul = output.querySelector('ul');
+    if (!ul) {
+        ul = document.createElement('ul');
+        output.appendChild(ul);
+    }
 
-                const li = document.createElement('li')
-                li.textContent = truncatedFileName
-                ul.appendChild(li)
-            }
+    for (let i = 0; i <= input.files.length; i++) {
+        const file = input.files.item(i);
+        const inputImage = document.createElement('input');
+                    inputImage.type = 'hidden';
+                    inputImage.name = 'ativos[]';
+                    inputImage.className = 'ativos_input';
+                    inputImage.value = file.name;
+                    document.getElementById('mainForm-CriarPubli').appendChild(inputImage);
+                    console.log(inputImage)
+               
+        const truncatedFileName = sprdNom_Ext(file);
+
+        const li = document.createElement('li');
+        li.textContent = truncatedFileName;
+        ul.appendChild(li);
+    
+                const formData = new FormData();
+
+            formData.append('file', file);
+
+            $.ajax({
+                url: 'controller/controller.php?temp_ativos=1', // O arquivo PHP que processará o upload
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                console.log(response);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus, errorThrown);
+                }
+            });
+                        }
             output.innerHTML = ''
             output.appendChild(ul)
         }

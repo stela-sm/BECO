@@ -1042,5 +1042,106 @@ public function save($dados) {
     return $action;
 }
 
+public function selectSoftwares(){
+    $conn = $this->connect();
+    $sql = "SELECT * FROM softwares";
+    $result = $conn->query($sql);
+    $softwares = array();
+    while($row = $result->fetch_assoc()){
+        $softwares[] = $row;
+        }
+        $conn->close();
+        return $softwares;
 }
+
+
+
+
+
+
+
+
+
+public function criarPublicacao($dados){
+    $conn = $this->connect();
+    $query = "INSERT INTO `postagem` (`id_user`, `thumbnail`, `titulo`, `descricao`, `tipo`, `datahora`, `status`) VALUES (
+        '{$dados['id_user']}', 
+        '{$dados['thumbnail']}', 
+        '{$dados['titulo']}', 
+        '{$dados['descricao']}', 
+        '{$dados['direcionamento']}', 
+        NOW(), 
+        '1'
+    )";
+if ($conn->query($query)) {
+     $lastId = $conn->insert_id;
+     
+     $query = "INSERT INTO `produtos` (`id_postagem`, `licenca`, `valor`, `banco`, `agencia`, `conta`, `datahora`, `status`) VALUES (
+        '{$lastId}', 
+        '{$dados['licenca']}', 
+        '{$dados['valor']}', 
+        '{$dados['banco']}', 
+        '{$dados['agencia']}', 
+        '{$dados['conta']}', 
+        NOW(), 
+        '1'
+    )";
+    
+    if ($conn->query($query) && (isset($dados['img']))) {
+        foreach ($dados['img'] as $img) {
+            $midia = $conn->real_escape_string($img);
+    
+            // Construindo a consulta
+            $query = "INSERT INTO `midia` (`id_postagem`,`arquivo`, `tipo`, `datahora`) VALUES (
+                '{$lastId}',
+                '{$midia}', 
+                'imagem',
+                NOW()
+            )";
+    $conn->query($query);    
+
+
+    if ($conn->query($query) && (isset($dados['video']))){
+        foreach ($dados['video'] as $video) {
+            $midia = $conn->real_escape_string($video);
+    
+            // Construindo a consulta
+            $query = "INSERT INTO `midia` (`id_postagem`,`arquivo`, `tipo`, `datahora`) VALUES (
+                '{$lastId}',
+                '{$midia}', 
+                'video',
+                NOW()
+            )";
+    $conn->query($query);    
+    }
+     if ($conn->query($query)) {
+        foreach ($dados['ativos'] as $ativo) {
+            $midia = $conn->real_escape_string($ativo);
+    
+            // Construindo a consulta
+            $query = "INSERT INTO `ativos` (`id_post`,`arquivo`, `datahora`) VALUES (
+                '{$lastId}',
+                '{$midia}', 
+                NOW()
+            )";
+    $conn->query($query);   
+}
+
+if ($conn->query($query) && (isset($dados['tags']))) {
+    foreach ($dados['tags'] as $tags) {
+               // Construindo a consulta
+        $query = "INSERT INTO `tags` (`id_post`,`tag`, `datahora`) VALUES (
+            '{$lastId}',
+            '{$tags}', 
+            NOW()
+        )";
+$conn->query($query);  }}}
+
+
+
+}}} else {
+    echo "Erro ao inserir postagem.";
+}}
+
+}}
 ?>

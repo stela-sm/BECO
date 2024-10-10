@@ -463,16 +463,29 @@ echo json_encode($r);
 
 //função pra mídia temporária
 if (isset($_REQUEST['temp_midia'])) {
-        $img = $_FILES['file'];        
-        // Mova o arquivo para a pasta desejada
-        if (move_uploaded_file($img['tmp_name'], "../assets/media/temp_midia/" . $img['name'])) {
-            echo "Arquivo enviado com sucesso: " . $img['name'];
-        } else {
-            echo "Falha ao mover o arquivo.";
-        }
+    $img = $_FILES['file'];        
+    // Mova o arquivo para a pasta desejada
+    if (move_uploaded_file($img['tmp_name'], "../assets/media/temp_midia/" . $img['name'])) {
+        echo "Arquivo enviado com sucesso: " . $img['name'];
     } else {
-        echo "Erro no upload do arquivo.";
+        echo "Falha ao mover o arquivo.";
     }
+} 
+
+if (isset($_REQUEST['temp_ativos'])) {
+    $img = $_FILES['file'];        
+    // Mova o arquivo para a pasta desejada
+    if (move_uploaded_file($img['tmp_name'], "../assets/media/temp_ativos/" . $img['name'])) {
+        echo "Arquivo enviado com sucesso: " . $img['name'];
+    } else {
+        echo "Falha ao mover o arquivo.";
+    }
+}
+
+
+
+
+
 
 
 
@@ -482,20 +495,21 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
     $dados["id_user"] = $_SESSION['USER_ID'];
     $dados["titulo"] = $_REQUEST['ttlPortifolio'];
     if(isset($_REQUEST['store'])){
-        $dados['direcionamento'] = 'store';
-        $dados['preco'] = 'precoPost';
+        $dados['direcionamento'] = '1';
+        $dados['valor'] = 'precoPost';
+        $dados['licenca'] = 'licenca';
         $dados['banco'] = 'banco_produto';
         $dados['agencia'] = 'agencia_produto';
         $dados['conta'] = 'conta_produto';
     }elseif(isset($_REQUEST['service'])){
-        $dados['direcionamento'] = 'service';
+        $dados['direcionamento'] = '2';
         $dados['ETA'] = 'tempoEntrega';
         $dados['precoInicial'] = 'precoInicial';
     }
     $dados["descricao"] = $_REQUEST['descricaoPortifolio'];
     $dados["software"] = $_REQUEST['software'];
-    $dados["thumbnail"] = $_FILES['thumbnail']['name'];;
-
+    $dados["thumbnail"] = $_FILES['thumbnail']['name'];
+    move_uploaded_file($_FILES['thumbnail']['tmp_name'], "../assets/media/thumbnail/" . $_FILES['thumbnail']['name']);
    
     
     if (!empty($_REQUEST['tagsCheck'])) {
@@ -539,8 +553,26 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
     } else {
         echo "Nenhum input foi enviado.";
     }
+    if (!empty($_REQUEST['ativos'])) {
+        $inputs = $_REQUEST['ativos'];
+        $i = 0;
+        foreach ($inputs as $input) {
+            $dados['ativos'][$i] = $input; 
+            $file = $input; // Nome do arquivo que você salvou
+            $sourcePath = '../assets/media/temp_ativos/' . $file; // Caminho original
+            $destinationPath = '../assets/media/port_ativos/' . $file; // Caminho de destino
+            rename($sourcePath, $destinationPath);
+            $i++;
+        }
+    } else {
+        echo "Nenhum input foi enviado.";
+    }
 
-    var_dump($dados);
+        
+require_once "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> criarPublicacao($dados);
+
     var_dump($_REQUEST);
 }
 
