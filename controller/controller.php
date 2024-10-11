@@ -496,11 +496,11 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
     $dados["titulo"] = $_REQUEST['ttlPortifolio'];
     if(isset($_REQUEST['store'])){
         $dados['direcionamento'] = '1';
-        $dados['valor'] = 'precoPost';
-        $dados['licenca'] = 'licenca';
-        $dados['banco'] = 'banco_produto';
-        $dados['agencia'] = 'agencia_produto';
-        $dados['conta'] = 'conta_produto';
+        $dados['valor'] = $_REQUEST['precoPost'];
+        $dados['licenca'] = $_REQUEST['licenca'];
+        $dados['banco'] = $_REQUEST['banco_produto'];
+        $dados['agencia'] = $_REQUEST['agencia_produto'];
+        $dados['conta'] = $_REQUEST['conta_produto'];
     }elseif(isset($_REQUEST['service'])){
         $dados['direcionamento'] = '2';
         $dados['ETA'] = 'tempoEntrega';
@@ -572,7 +572,8 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
 require_once "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> criarPublicacao($dados);
-
+var_dump($dados);
+echo "<br><br>";
     var_dump($_REQUEST);
 }
 

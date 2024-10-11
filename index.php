@@ -1344,7 +1344,7 @@ if ($concurso["result"]==0){
                                     <div class="inputs_container1">
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
-                                                <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox" name="#" id="#">
+                                                <input class="checkbox__personal-css" name="tagsCheck[]"  value ="#PixelArt"type="checkbox" name="#" id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Pixel Art</span>
@@ -1352,7 +1352,7 @@ if ($concurso["result"]==0){
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
                                                 <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
-                                                     id="#">
+                                                value ="#Animação" id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Animação</span>
@@ -1360,7 +1360,7 @@ if ($concurso["result"]==0){
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
                                                 <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
-                                                     id="#">
+                                                value ="#ArteVetorial"  id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Arte Vetorial</span>
@@ -1368,7 +1368,7 @@ if ($concurso["result"]==0){
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
                                                 <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
-                                                    id="#">
+                                                value ="#Ilustração" id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Ilustração</span>
@@ -1376,7 +1376,7 @@ if ($concurso["result"]==0){
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
                                                 <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
-                                                   id="#">
+                                                value ="#Fotografia"  id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Fotografia</span>
@@ -1384,7 +1384,7 @@ if ($concurso["result"]==0){
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
                                                 <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
-                                                     id="#">
+                                                     value ="#ArteDigital" id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Arte Digital</span>
@@ -1392,7 +1392,7 @@ if ($concurso["result"]==0){
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
                                                 <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
-                                                     id="#">
+                                                value ="#Concurso" id="#">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <span for="#" class="checkbox__informationN">Concurso</span>
@@ -1554,7 +1554,7 @@ if ($concurso["result"]==0){
                                                         <div class="containerGrid_pix-produto">
                                                             <div class="inpGroupModal d-flex flex-row inGroupDiferente">
                                                                 <select name="banco_produto" id="banco_produto">
-                                                                    <option selected disabled value="null">Banco</option>
+                                                                    <option selected value="null">Banco</option>
                                                                     <!--colocar outros bancos aq-->
                                                                 </select>
 

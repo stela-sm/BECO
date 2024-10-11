@@ -1100,8 +1100,9 @@ if ($conn->query($query)) {
             )";
     $conn->query($query);    
 
+        }}
 
-    if ($conn->query($query) && (isset($dados['video']))){
+    if (isset($dados['video'])){
         foreach ($dados['video'] as $video) {
             $midia = $conn->real_escape_string($video);
     
@@ -1112,9 +1113,12 @@ if ($conn->query($query)) {
                 'video',
                 NOW()
             )";
-    $conn->query($query);    
-    }
-     if ($conn->query($query)) {
+    $conn->query($query);  
+        }}  
+
+
+    
+     if (isset($dados['ativos'])) {
         foreach ($dados['ativos'] as $ativo) {
             $midia = $conn->real_escape_string($ativo);
     
@@ -1135,7 +1139,9 @@ if ($conn->query($query) && (isset($dados['tags']))) {
             '{$tags}', 
             NOW()
         )";
-$conn->query($query);  }}}
+$conn->query($query);  
+
+}
 
 
 
@@ -1143,5 +1149,5 @@ $conn->query($query);  }}}
     echo "Erro ao inserir postagem.";
 }}
 
-}}
+}
 ?>
