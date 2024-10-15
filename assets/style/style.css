@@ -1470,7 +1470,7 @@ span#atHeader {
 .portifolio-content {
   overflow-y: scroll;
   display: flex;
-  padding: 3%;
+  /* padding: 3%; */
   scrollbar-width: thin;
   flex-direction: column;
   flex-wrap: nowrap;

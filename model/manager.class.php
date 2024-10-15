@@ -812,7 +812,7 @@ public function getPost($id){
     $sql = "
    SELECT 
     p.ID_POST, p.id_user, p.thumbnail, p.titulo, p.descricao, 
-    p.tipo AS postagem_tipo, p.datahora AS postagem_datahora, p.status AS postagem_status,
+    p.tipo AS postagem_tipo, p.datahora AS postagem_datahora, p.status AS postagem_status, p.software,
     
     -- Campos da tabela produtos
     pr.ID_PROD, pr.licenca, pr.valor, pr.banco, 
@@ -869,6 +869,7 @@ $dados = $res->fetch_all(MYSQLI_ASSOC);
                         'postagem_tipo' => $row['postagem_tipo'],
                         'postagem_datahora' => $row['postagem_datahora'],
                         'postagem_status' => $row['postagem_status'],
+                         'software' => $row['software'],
                     ];
                     $result['user'] = [
                         'ID_USER' => $id,
@@ -906,9 +907,13 @@ $dados = $res->fetch_all(MYSQLI_ASSOC);
             }
 
             $tags = $this -> getTags($id);
-            
             $result["tags"]= $tags;
             $result["tags"]["result"]= $tags["result"];
+
+           
+            $midia = $this -> getMedia($id);
+            $result["media"]= $midia;
+            $result["media"]["result"]= $midia["result"];
            
             return $result; // Retornar os dados organizados
         } else {
@@ -939,6 +944,47 @@ public function getTags($id){
 
     return $tags; // Retornar o array de comentários
 }
+
+public function getMedia($id){
+    $sql = "SELECT * FROM `midia` WHERE id_postagem = $id";
+    $conn = $this->connect();
+    $res = $conn->query($sql);
+    $i = 0;
+    if ($res->num_rows > 0) {
+        while($row = $res->fetch_assoc()) {
+            $midia[$i] = [
+                $row['arquivo'], 
+                $row['tipo'], 
+                 ];
+
+            $i++; // Incrementar o contador
+            
+            $midia["result"] = $i;
+        }
+    }else{
+        $midia["result"] = 0;
+    }
+
+    return $midia; // Retornar o array de comentários
+}
+
+
+public function getSoftware($id) {
+    $software = null; 
+
+    $conn = $this->connect();
+    $sql = "SELECT software FROM softwares WHERE ID_SOFTWARE = '$id'";
+    $res = $conn->query($sql);
+
+    if ($res->num_rows > 0) {
+        $row = $res->fetch_assoc();
+        $software = $row['software'];
+    }
+
+    return $software; // Retorna o software ou null
+}
+
+
 public function inserirComent($dados){
     $sql = "INSERT INTO `comentario`(`id_user`,  `id_post`, `texto`, `datahora`) VALUES ('{$dados['user']}','{$dados['post']}','{$dados['texto']}',now());";
     $conn =$this->connect();
@@ -1062,11 +1108,12 @@ public function selectSoftwares(){
 
 
 
-public function criarPublicacao($dados){
+     public function criarPublicacao($dados){
     $conn = $this->connect();
-    $query = "INSERT INTO `postagem` (`id_user`, `thumbnail`, `titulo`, `descricao`, `tipo`, `datahora`, `status`) VALUES (
+    $query = "INSERT INTO `postagem` (`id_user`, `thumbnail`,`software`, `titulo`, `descricao`, `tipo`, `datahora`, `status`) VALUES (
         '{$dados['id_user']}', 
         '{$dados['thumbnail']}', 
+        '{$dados['software']}', 
         '{$dados['titulo']}', 
         '{$dados['descricao']}', 
         '{$dados['direcionamento']}', 

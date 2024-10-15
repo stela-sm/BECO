@@ -1906,9 +1906,9 @@ if ($data_atual < $data_fim) {
             </button>
             <div class="noMargin modal-dialog modal-container_portifolio" id="portifolio-completo" role="document">
 
-                <div class="modal-content portifolio-content w100">
+                <!-- <div class="modal-content portifolio-content w100">
                     Aqui fica o portifólio
-                </div>
+                </div> -->
             </div>
             <div class="noMargin modal-dialog rightShow-menu-infoPortifolio" id="info-modalportifolio"
                 style="background-color: #fff;border-radius:.6rem" role="document">
@@ -2255,6 +2255,8 @@ if ($data_atual < $data_fim) {
                 <div class="modal-content portifolio-content w100">
                     CMJAISFJHWSWKSFKDJSJ
                 </div>
+
+
             </div>
             <div class="noMargin modal-dialog rightShow-menu-infoPortifolio" id="info-modalportifolio"
                 style="background-color: #fff;border-radius:.6rem" role="document">
@@ -3077,6 +3079,10 @@ for (let i = 0; i < countdowns.length; i++) {
         type: 'POST', 
         data: { id: id }, 
         success: function(response) {
+            div_midia.innerHTML = '';
+            tags.innerHTML = '';
+            softwares.innerHTML = '';
+            
             loadComentsFunction(id)
             console.log(response);
             nickname.innerHTML = response.user.nickname;
@@ -3089,6 +3095,20 @@ for (let i = 0; i < countdowns.length; i++) {
                  console.log("Tag: " + response.tags[i]);
                  tags.innerHTML += "<span>" + response.tags[i] + "</span>";
 }
+for (i = 0; i < response.media.result; i++) {
+                 console.log("midia: " + response.media[i][1]);
+                 if(response.media[i][1] == "imagem"){
+                 div_midia.innerHTML += "<div class=\"modal-content portifolio-content w100\"><img src=\"assets/media/port_midia/" + response.media[i][0] + "\"></div>";
+                  }else{
+                  div_midia.innerHTML += `
+                <div class="modal-content portifolio-content w100">
+                       <video width="100%" controls>
+                        <source src="assets/media/port_midia/${response.media[i][0]}" type="video/mp4">
+                         </video>
+                        </div>
+`;;
+
+                        }}
             if(response.produtos.valor == null){
                 console.log("de graça")
                 valor.innerHTML = " <h3  class='valorPortifolio_cCPB'> GRATUITO </h3> <a href='#' id='link_modal_portifolio'class='btn btn-primary'>Download</a>" ;

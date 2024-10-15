@@ -327,10 +327,13 @@ if(isset($_REQUEST["getpost"])){
     require_once "../model/manager.class.php";
     $manager = new Manager();
     $posts = $manager->getPost($_REQUEST["id"]);
+    $posts["software"] = $manager->getSoftware($posts["software"]);
     echo json_encode($posts);
 }
 
-        if(isset($_REQUEST["editar_user"])){
+
+
+if(isset($_REQUEST["editar_user"])){
             
     
 require_once "../model/ferramentas.class.php";
@@ -575,6 +578,15 @@ $r = $manager-> criarPublicacao($dados);
 var_dump($dados);
 echo "<br><br>";
     var_dump($_REQUEST);
+    ?>
+    <form action="../index.php" name="return" id="return" method="get">
+     <input type="hidden" name="success" value="Publicado com sucesso!">
+     </form>
+     <script>
+
+         document.getElementById("return").submit();
+     </script>  
+ <?php
 }
 
 ?>
