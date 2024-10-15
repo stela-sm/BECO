@@ -1640,7 +1640,7 @@ if ($concurso["result"]==0){
                         <a ChangeIframe="permi_frame" class="reDirectConfigFrame__link">
                             Permissões
                         </a>
-                        <a ChangeIframe="hisCo_frame" class="reDirectConfigFrame__link">
+                        <a <?php echo isset($_SESSION['USER_ID']) ? 'ChangeIframe="inCon_frame"' : 'onclick="login()"'; ?> class="reDirectConfigFrame__link">
                             Histórico de compras
                         </a>
                         <a href="assets/media/terms/termos_de_uso.pdf" target="_blank"

@@ -1110,63 +1110,57 @@ setInterval(checkMemoryUsage, checkInterval);
             <div id="infoConta_container" style="border: none;">
                 <h1 class="titulo-publi">Compras efetuadas</h1>
                 <div class="container-inpCheckbox d-flex flex-column">
-                    <div class="grid_tableMajorContent">
-                        <div class="row">
-                            <div class="cell photo">
-                                <img src="https://via.placeholder.com/20" alt="Foto">
-                            </div>
-                            <div class="cell vend_cell">
-                                <span class="vend_Name">Nome do vendedor</span>
-                                <span class="vend_Nickname">@nickname</span>
-                            </div>
-                            <div class="cell">00/00/00</div>
-                            <div class="cell">R$ 00,00</div>
-                            <div class="cell">
-                                <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-download">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-                                        <path d="M7 11l5 5l5 -5" />
-                                        <path d="M12 4l0 12" />
-                                    </svg>
-                                    <span>Download</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid_tableMajorContent">
-                        <div class="row">
-                            <div class="cell photo">
-                                <img src="https://via.placeholder.com/20" alt="Foto">
-                            </div>
-                            <div class="cell vend_cell">
-                                <span class="vend_Name">Nome do vendedor</span>
-                                <span class="vend_Nickname">@nickname</span>
-                            </div>
-                            <div class="cell">00/00/00</div>
-                            <div class="cell">R$ 00,00</div>
-                            <div class="cell">
-                                <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-download">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-                                        <path d="M7 11l5 5l5 -5" />
-                                        <path d="M12 4l0 12" />
-                                    </svg>
-                                    <span>Download</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+<?php
+
+require_once "../model/manager.class.php";
+$manager = new Manager();
+$compras= $manager -> getCompras($_SESSION["USER_ID"]);
+
+    echo '<div class="grid_tableMajorContent">';
+    // var_dump($compras);
+    foreach ($compras as $compra){
+        $postNome = $compra['titulo'];
+        $thumb = $compra['thumbnail'];
+        $vendedorNickname = $compra['nome'];
+        $data = $compra['datahora'];
+        $preco = htmlspecialchars(number_format($compra['valor'], 2, ',', '.'));
+
+        echo "
+            <div class='row'>
+                <div class='cell photo'>
+                    <img src='../assets/media/thumbnail/{$thumb}' style='width: 50px; height:50px;'alt='Foto'>
+                </div>
+                <div class='cell vend_cell'>
+                    <span class='vend_Name'>{$postNome}</span>
+                    <span class='vend_Nickname'>@{$vendedorNickname}</span>
+                </div>
+                <div class='cell'>{$data}</div>
+                <div class='cell'>R$ {$preco}</div>
+                <div class='cell'>
+                    <button>
+                        <svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-download'>
+                            <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+                            <path d='M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2' />
+                            <path d='M7 11l5 5l5 -5' />
+                            <path d='M12 4l0 12' />
+                        </svg>
+                        <span>Download</span>
+                    </button>
+                </div>
+            </div>
+        ";
+    }
+    
+    echo '</div>'; // Fecha a div.grid_tableMajorContent
+?>
+
+
+              
                 </div>
             </div>
         </div>
+
+
     </div>
     <script src="../assets/js/font.js"></script>
     <script src="../assets/js/ferramentas.js"></script>

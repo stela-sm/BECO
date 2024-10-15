@@ -1215,12 +1215,9 @@ public function getAtivos($id){
 
      if ($res->num_rows > 0) {
          while($row = $res->fetch_assoc()) {
-           
                 $ativos[$i] = [
                     'arquivo' => $row['arquivo']
-                 ];
-                 
-                 
+                 ];                
                  $i++;
                 
          $ativos["number"] = $i;
@@ -1233,5 +1230,25 @@ public function getAtivos($id){
      return $ativos;
  }
 
+
+ public function getCompras($userId) {
+    $sql = "
+        SELECT c.ID_COMPRA, c.datahora, c.valor, u.nome, p.titulo, p.thumbnail
+        FROM compras c
+        JOIN usuario u ON c.vendedor = u.ID_USER
+        JOIN postagem p ON c.id_prod =  p.ID_POST
+        WHERE c.comprador = '{$userId}' AND c.status = 2
+    ";
+    $conn = $this->connect();
+    $res = $conn->query($sql);
+
+    $compras = array();
+    while ($row = $res->fetch_assoc()) {
+        $compras[] = $row;
+    }
+
+    return $compras;
+
+ }
 }
 ?>

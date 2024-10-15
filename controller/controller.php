@@ -416,11 +416,10 @@ $r = $manager-> inserirComent($dados);
 }
 
 
-    if (isset($_REQUEST['checkLike']) && isset($_SESSION['USER_ID'])) {
+    if (isset($_REQUEST['checkLike'])) {
         
     $id_post = $_POST['id_post'];
-    $id_user = $_SESSION['USER_ID']; // Pega o ID do usuário a partir da sessão
-
+    $id_user = isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : 0;
     require_once "../model/manager.class.php";
     $manager = new Manager();
     $result = $manager->checkLike($id_user, $id_post);
