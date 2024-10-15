@@ -1196,5 +1196,42 @@ $conn->query($query);
     echo "Erro ao inserir postagem.";
 }}
 
+
+
+
+public function newCompra($dados){
+    $conn = $this->connect();
+    $sql = "INSERT INTO `compras`(`id_prod`, `valor`, `comprador`, `vendedor`, `metodo`, `cod_card_num`, `codigo`, `datahora`, `status`) VALUES ('{$dados['id_post']}','{$dados['valor']}','{$dados['id_user']}','{$dados['vendedor']}',null,null,null,now(),1)";
+    $conn->query($sql);  
+}
+
+public function getAtivos($id){
+    $sql = "SELECT arquivo FROM ativos WHERE id_post = {$id}  ";
+     $conn = $this->connect();
+     $res = $conn->query($sql);
+
+     $ativos = [];
+     $i = 0;
+
+     if ($res->num_rows > 0) {
+         while($row = $res->fetch_assoc()) {
+           
+                $ativos[$i] = [
+                    'arquivo' => $row['arquivo']
+                 ];
+                 
+                 
+                 $i++;
+                
+         $ativos["number"] = $i;
+            
+         }
+         
+     }
+
+     $conn->close();
+     return $ativos;
+ }
+
 }
 ?>

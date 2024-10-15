@@ -3082,39 +3082,42 @@ for (let i = 0; i < countdowns.length; i++) {
             div_midia.innerHTML = '';
             tags.innerHTML = '';
             softwares.innerHTML = '';
-            
+          
             loadComentsFunction(id)
-            console.log(response);
             nickname.innerHTML = response.user.nickname;
             username.innerHTML = response.user.username;
-
+            softwares.innerHTML = "<span>"+response.postagem.software+"</span>";
             titulo.innerHTML = "<h3>"+response.postagem.titulo+"</h3>";
             descricao.innerHTML = response.postagem.descricao;
+            document.getElementById('pfp_modal_portifolio').src = 'assets/media/pfp/'+response.user.pfp;
             
             for (i = 0; i < response.tags.result; i++) {
                  console.log("Tag: " + response.tags[i]);
                  tags.innerHTML += "<span>" + response.tags[i] + "</span>";
 }
-for (i = 0; i < response.media.result; i++) {
-                 console.log("midia: " + response.media[i][1]);
-                 if(response.media[i][1] == "imagem"){
-                 div_midia.innerHTML += "<div class=\"modal-content portifolio-content w100\"><img src=\"assets/media/port_midia/" + response.media[i][0] + "\"></div>";
-                  }else{
-                  div_midia.innerHTML += `
-                <div class="modal-content portifolio-content w100">
-                       <video width="100%" controls>
-                        <source src="assets/media/port_midia/${response.media[i][0]}" type="video/mp4">
-                         </video>
-                        </div>
-`;;
+                        
+                    for (i = 0; i < response.media.result; i++) {
+                                    console.log("midia: " + response.media[i][1]);
+                                    if(response.media[i][1] == "imagem"){
+                                    div_midia.innerHTML += "<div class=\"modal-content portifolio-content w100\"><img src=\"assets/media/port_midia/" + response.media[i][0] + "\"></div>";
+                                    }else{
+                                    div_midia.innerHTML += `
+                                    <div class="modal-content portifolio-content w100">
+                                        <video width="100%" controls>
+                                            <source src="assets/media/port_midia/${response.media[i][0]}" type="video/mp4">
+                                            </video>
+                                            </div>
+                    `;;
 
-                        }}
+                                            }}
+            valor.innerHTML="";
             if(response.produtos.valor == null){
                 console.log("de graça")
                 valor.innerHTML = " <h3  class='valorPortifolio_cCPB'> GRATUITO </h3> <a href='#' id='link_modal_portifolio'class='btn btn-primary'>Download</a>" ;
                
             }else{
-                valor.innerHTML = " <h3  class='valorPortifolio_cCPB'><span>R$</span>"+response.produtos.valor+"</h3> <a href='view/pagamento.php' id='link_modal_portifolio'class='btn btn-primary'>Download</a>" ;
+               
+                valor.innerHTML = ` <h3  class='valorPortifolio_cCPB'><span>R$</span>${response.produtos.valor}</h3> <a href='controller/controller.php?payment=1&id_post=${id}&valor=${response.produtos.valor}&id_vend=${response.user.ID_USER}' id='link_modal_portifolio'class='btn btn-primary'>Comprar</a> `;
               
             }
 

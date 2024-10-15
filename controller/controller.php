@@ -327,7 +327,7 @@ if(isset($_REQUEST["getpost"])){
     require_once "../model/manager.class.php";
     $manager = new Manager();
     $posts = $manager->getPost($_REQUEST["id"]);
-    $posts["software"] = $manager->getSoftware($posts["software"]);
+     $posts["postagem"]["software"] = $manager->getSoftware($posts["postagem"]["software"]);
     echo json_encode($posts);
 }
 
@@ -588,5 +588,23 @@ echo "<br><br>";
      </script>  
  <?php
 }
+if(isset($_REQUEST["payment"])){
+require_once "../model/manager.class.php";
+$manager = new Manager();
+$dados["id_post"] = $_REQUEST["id_post"];
+$dados["vendedor"] = $_REQUEST["id_vend"];
+$dados["valor"] = $_REQUEST["valor"];
+$dados["id_user"] = $_SESSION["USER_ID"];
+$res = $manager-> newCompra($dados);
+$r = $manager-> getAtivos($dados["id_post"]);
+$_SESSION['ativos'] = $r; // Armazena o array na sessão
+?>
+    <form action="../view/payment.php?amount=<?php echo $dados["valor"] ?>" name="return" id="return" method="post">
+     </form>
+     <script>
 
+         document.getElementById("return").submit();
+     </script>   
+ <?php
+}
 ?>
