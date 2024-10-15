@@ -169,7 +169,7 @@ if(isset($_REQUEST["cadastro"])){
     
     
     ?>
-    <form action="../view/login.php" name="return" id="return" method="get">
+     <form action="../view/login.php" name="return" id="return" method="get">
     <input type="hidden" name="erro" value="As informações são pertencentes a um usuário já existente, por favor tente novamente">
     </form>
     <script>
@@ -180,20 +180,23 @@ if(isset($_REQUEST["cadastro"])){
     $ip = $_SERVER['REMOTE_ADDR'];
     $log->setTexto("{$ip} - Criação do usuario {$dados['email']} pelo dispositivo de ip {$ip}.\n");    $log->fileWriter();
     
-    setcookie("USER_ID", $r["ID_USER"], time() + (86400 * 30), "/", "", false, true); 
+    setcookie("USER_ID", $r['id'], time() + (86400 * 30), "/", "", false, true); 
     // gravar log de acesso
-    $_SESSION["USER_ID"] = $r["result"];
+    $_SESSION["USER_ID"] = $r["id"];
     $_SESSION["USER_USERNAME"] = $dados["username"];
     $_SESSION["USER_CPF"] = $dados["cpf"];
     $_SESSION["USER_EMAIL"] = $dados["email"];
+    $_SESSION["USER_PFP"] = "nopfp.jpg";
+    $_SESSION["USER_BIOGRAFIA"] = "Olá!";
+    $_SESSION["USER_NOME"] = "beco_user";
     
     ?>
-      <form action="../index.php" id="return" method="post">
+ <form action="../index.php" id="return" method="post">
      <input type="hidden" name="msg" value="FR52">
     </form>
     <script>
      document.getElementById("return").submit();
-    </script> 
+    </script>   
     <?php 
     }
     }

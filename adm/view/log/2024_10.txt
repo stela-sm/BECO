@@ -10,3 +10,28 @@
 2024-10-15 16:17:22 - ::1 - Login do administrador 1, via cookies, pelo dispositivo de ip ::1.
 2024-10-15 16:17:38 - ::1 - Erro no login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
 2024-10-15 16:18:18 - ::1 - Criação do administrador 2024-10-15 16:18:25 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-10-16 00:48:13 - ::1 - Criação do usuario isi@gmail.com pelo dispositivo de ip ::1.
+2024-10-16 00:54:12 - ::1 - Criação do usuario gege@gmail.com pelo dispositivo de ip ::1.
+2024-10-16 00:55:22 - ::1 -Alteração dos dados do do usuário gege@gmail.com2024-10-16 00:58:56 - ::1 - Erro na Criação do usuario kaka@gmail.com pelo dispositivo de ip ::1.
+2024-10-16 00:59:39 - ::1 - Erro na Criação do usuario AA@GMASIL.COM pelo dispositivo de ip ::1.
+2024-10-16 01:00:28 - ::1 - Erro na Criação do usuario erer@erer.com pelo dispositivo de ip ::1.
+2024-10-16 01:01:19 - ::1 - Erro na Criação do usuario erer@erer.com pelo dispositivo de ip ::1.
+2024-10-16 01:01:38 - ::1 - Erro na Criação do usuario erer@erer.com pelo dispositivo de ip ::1.
+2024-10-16 01:01:39 - ::1 - Erro na Criação do usuario erer@erer.com pelo dispositivo de ip ::1.
+2024-10-16 01:01:47 - ::1 - Erro na Criação do usuario erer@erer.com pelo dispositivo de ip ::1.
+2024-10-16 01:01:54 - ::1 - Erro na Criação do usuario erer@erer.com pelo dispositivo de ip ::1.
+2024-10-16 01:02:00 - ::1 - Erro na Criação do usuario erer@erer.com pelo dispositivo de ip ::1.
+2024-10-16 01:02:14 - ::1 - Erro na Criação do usuario erer@erer.com pelo dispositivo de ip ::1.
+2024-10-16 01:02:16 - ::1 - Erro na Criação do usuario erer@erer.com pelo dispositivo de ip ::1.
+2024-10-16 01:02:16 - ::1 - Erro na Criação do usuario erer@erer.com pelo dispositivo de ip ::1.
+2024-10-16 01:02:16 - ::1 - Erro na Criação do usuario erer@erer.com pelo dispositivo de ip ::1.
+2024-10-16 01:02:31 - ::1 - Erro na Criação do usuario erer@erer.com pelo dispositivo de ip ::1.
+2024-10-16 01:03:25 - ::1 - Criação do usuario fefefefef@gmail.com pelo dispositivo de ip ::1.
+2024-10-16 01:06:51 - ::1 - Criação do usuario frfrf@frfr.com pelo dispositivo de ip ::1.
+2024-10-16 01:07:07 - ::1 -Alteração dos dados do do usuário frfrf@frfr.com2024-10-16 01:07:19 - ::1 -Alteração dos dados do do usuário frfrf@frfr.com2024-10-16 01:08:30 - ::1 - Criação do usuario tetet@tete.com pelo dispositivo de ip ::1.
+2024-10-16 01:08:41 - ::1 -Alteração dos dados do do usuário tetet@tete.com2024-10-16 01:14:30 - ::1 - Criação do usuario rere@rere.com pelo dispositivo de ip ::1.
+2024-10-16 01:14:52 - ::1 - Erro na Criação do usuario rere@rere.com pelo dispositivo de ip ::1.
+2024-10-16 01:15:46 - ::1 - Criação do usuario gtgtg@gtg.com pelo dispositivo de ip ::1.
+2024-10-16 01:17:05 - ::1 - Erro na Criação do usuario gtgtg@gtg.com pelo dispositivo de ip ::1.
+2024-10-16 01:17:30 - ::1 - Criação do usuario kikiik@kikik.bom pelo dispositivo de ip ::1.
+2024-10-16 01:18:10 - ::1 - Erro na Criação do usuario kikiik@kikik.bom pelo dispositivo de ip ::1.

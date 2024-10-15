@@ -74,23 +74,22 @@ public function userCadastro($dados){
     $resultQuery = $conn->query("SELECT @result AS resultado;");
     $row = $resultQuery->fetch_assoc();
     
-    if ($row['resultado'] == 1) {
+    if ($row['resultado'] == 1){
         $conn->close();
         $data['result'] = 0;
         return $data;
+        exit;
     }else{
-        $sql = "INSERT INTO `usuario` (`username`,  `cpf`, `email`, `senha`, `datahora`, `pfp`, `biografia`,`status`) 
-        VALUES ('{$dados["username"]}', '{$dados["cpf"]}', '{$dados["email"]}',  '{$dados["senha"]}', NOW(), 'nopfp.png', 'Olá, estou usando o BECO!','1');";
-        $res = $this->connect()->query($sql);
+        $sql = "INSERT INTO `usuario` (`username`, `nome`, `cpf`, `email`, `senha`, `datahora`, `pfp`, `biografia`,`status`) 
+        VALUES ('{$dados["username"]}', 'beco_user','{$dados["cpf"]}', '{$dados["email"]}',  '{$dados["senha"]}', NOW(), 'nopfp.jpg', 'Olá!','1');";
+        $res = $conn->query($sql);
 
     if($res){
-        $sqlObterUltimoID = "CALL ObterUltimoIDUsuario(@p_id_user);";
-        $conn->query($sqlObterUltimoID);
-        $resultQuery = $conn->query("SELECT @p_id_user AS p_id_user;");
-        $row = $resultQuery->fetch_assoc();
-        echo $row['p_id_user'];
-        $this->connect()->close();
-        $data['result'] = $row['p_id_user'];
+        $lastId = $conn->insert_id;
+        echo $lastId;
+        $data['result'] = 1;
+        $data['id'] = $lastId;
+        
         return $data;
     }else{
         $this->connect()->close();
