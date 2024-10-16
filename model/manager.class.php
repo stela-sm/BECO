@@ -1164,20 +1164,31 @@ if ($conn->query($query)) {
 
 
     
+
+
      if (isset($dados['ativos'])) {
+        
+        $arquivosInseridos = [];
         foreach ($dados['ativos'] as $ativo) {
             $midia = $conn->real_escape_string($ativo);
-    
+            if (!in_array($midia, $arquivosInseridos)) {
+            $arquivosInseridos[] = $midia;
+
             // Construindo a consulta
-            $query = "INSERT INTO `ativos` (`id_post`,`arquivo`, `datahora`) VALUES (
+            $query = "INSERT INTO `ativos` (`id_post`, `arquivo`, `datahora`) VALUES (
                 '{$lastId}',
                 '{$midia}', 
                 NOW()
             )";
-    $conn->query($query);   
-}
+            $conn->query($query);
+        }
+}}
 
-if ($conn->query($query) && (isset($dados['tags']))) {
+
+
+
+
+if ((isset($dados['tags']))) {
     foreach ($dados['tags'] as $tags) {
                // Construindo a consulta
         $query = "INSERT INTO `tags` (`id_post`,`tag`, `datahora`) VALUES (
@@ -1191,7 +1202,7 @@ $conn->query($query);
 
 
 
-}}} else {
+}} else {
     echo "Erro ao inserir postagem.";
 }}
 
@@ -1210,7 +1221,7 @@ public function getAtivos($id){
      $res = $conn->query($sql);
 
      $ativos = [];
-     $i = 0;
+     $i = 1;
 
      if ($res->num_rows > 0) {
          while($row = $res->fetch_assoc()) {
@@ -1249,5 +1260,9 @@ public function getAtivos($id){
     return $compras;
 
  }
+
+
+
+ 
 }
 ?>

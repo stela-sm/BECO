@@ -378,8 +378,8 @@ $(window).scroll(function() {
 function carregarPosts(search) {
     // Evita que a função seja chamada várias vezes ao mesmo tempo
    
-console.log("page=" + page)
-    console.log("caralho")
+// console.log("page=" + page)
+    // console.log("caralho")
     loading = true;
     $.ajax({
         url: 'controller/controller.php?loadposts=1&search='+search, 
@@ -429,7 +429,7 @@ console.log("page=" + page)
             // console.log("Offset:", data.offset);  
              isLiked = data.like;
              isSave = data.save;               
-             console.log("Resposta do servidor:", isLiked + data.save);  
+            //  console.log("Resposta do servidor:", isLiked + data.save);  
                    
     const postHtml = `
         <div class="card-portifolio fade-in-css">

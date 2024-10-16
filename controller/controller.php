@@ -541,7 +541,7 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
             $i++;
         }
     } else {
-        echo "Nenhum input foi enviado.";
+        // echo "Nenhum input foi enviado.";
     }
 
     if (!empty($_REQUEST['videoPort'])) {
@@ -556,7 +556,7 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
             $i++;
         }
     } else {
-        echo "Nenhum input foi enviado.";
+        // echo "Nenhum input foi enviado.";
     }
     if (!empty($_REQUEST['ativos'])) {
         $inputs = $_REQUEST['ativos'];
@@ -570,7 +570,7 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
             $i++;
         }
     } else {
-        echo "Nenhum input foi enviado.";
+        // echo "Nenhum input foi enviado.";
     }
 
         
@@ -581,13 +581,13 @@ var_dump($dados);
 echo "<br><br>";
     var_dump($_REQUEST);
     ?>
-    <form action="../index.php" name="return" id="return" method="get">
+     <form action="../index.php" name="return" id="return" method="get">
      <input type="hidden" name="success" value="Publicado com sucesso!">
      </form>
      <script>
 
          document.getElementById("return").submit();
-     </script>  
+     </script>   
  <?php
 }
 if(isset($_REQUEST["payment"])){
@@ -608,5 +608,17 @@ $_SESSION['ativos'] = $r; // Armazena o array na sessão
          document.getElementById("return").submit();
      </script>   
  <?php
+}
+if(isset($_REQUEST['download'])){
+    $id= $_REQUEST['id'];
+    require_once "../model/manager.class.php";
+    $manager = new Manager();
+    $res = $manager-> getAtivos($id);
+    if (is_array($res)) {
+        echo json_encode($res);
+    } else {
+        echo json_encode(['error' => 'Não foi possível obter os dados.']);
+    }
+    
 }
 ?>

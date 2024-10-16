@@ -2634,7 +2634,7 @@ function new_comment(){
     
     var diferenca = <?php echo $diferenca; ?>;
         function atualizarTemporizador() {
-            console.log(diferenca+"cu")
+            // console.log(diferenca+"cu")
             if (diferenca > 0) {
                 diferenca--;
                 var dias = Math.floor(diferenca / (24 * 60 * 60));
@@ -2646,7 +2646,7 @@ function new_comment(){
                 horas = horas < 10 ? "0" + horas : horas;
                 minutos = minutos < 10 ? "0" + minutos : minutos;
                 segundos = segundos < 10 ? "0" + segundos : segundos; // ta calculando os segundos mas fds
-                console.log("porra")
+                // console.log("porra")
                 let countdowns = document.getElementsByClassName('temporizador');
 for (let i = 0; i < countdowns.length; i++) {
     countdowns[i].innerHTML = dias + ": " + horas + ": " + minutos;
@@ -3073,6 +3073,30 @@ for (let i = 0; i < countdowns.length; i++) {
         const div_comentarios = document.getElementById("div_comentarios");
         const div_midia = document.getElementById("portifolio-completo");
         //função pra alterar os dados do modal
+        function downloadA(id) {
+    $.ajax({
+        url: 'controller/controller.php?download=1', 
+        type: 'POST', 
+        data: { id: id }, 
+        dataType: 'json',
+        success: function(response) {
+            console.log(response);
+            const fileUrl = 'assets/media/port_ativos/'; 
+            for(i=1;i<response.number;i++){
+            const fileName = response[i].arquivo; 
+
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.download = fileName; 
+
+    document.body.appendChild(link);
+    
+    link.click();
+    
+    document.body.removeChild(link);
+            }
+        }})}
+
         function makeModalAjax(id) {
     $.ajax({
         url: 'controller/controller.php?getpost=1', 
@@ -3111,9 +3135,9 @@ for (let i = 0; i < countdowns.length; i++) {
 
                                             }}
             valor.innerHTML="";
-            if(response.produtos.valor == null){
+            if(response.produtos.valor == null || response.produtos.valor == 0.00){
                 console.log("de graça")
-                valor.innerHTML = " <h3  class='valorPortifolio_cCPB'> GRATUITO </h3> <a href='#' id='link_modal_portifolio'class='btn btn-primary'>Download</a>" ;
+                valor.innerHTML = ` <h3  class='valorPortifolio_cCPB'> GRATUITO </h3> <a href='#' onclick='downloadA(${id})' id='link_modal_portifolio'class='btn btn-primary'>Download</a>` ;
                
             }else{
                

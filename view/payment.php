@@ -376,6 +376,33 @@ function cancelar(event){
 
 }
 
+
+function isValidCardNumber(cardNumber) {
+    const cleanCardNumber = cardNumber.replace(/\D/g, '');
+
+    let sum = 0;
+    const len = cleanCardNumber.length;
+    const isEvenLength = len % 2 === 0;
+
+    for (let i = 0; i < len; i++) {
+        let digit = parseInt(cleanCardNumber.charAt(i), 10);
+
+        // dobra os dígitos em posições ímpares
+        if ((i % 2 === (isEvenLength ? 0 : 1))) {
+            digit *= 2;
+            if (digit > 9) {
+                digit -= 9; // subtrai 9 se o resultado for maior que 9
+            }
+        }
+
+        sum += digit; 
+    }
+
+    // verifica se a soma é um múltiplo de 10
+    return sum % 10 === 0;
+}
+
+
 </script>
 </body>
 </html>
