@@ -831,7 +831,7 @@ setInterval(checkMemoryUsage, checkInterval);
 
 <body>
     <div class="portifolios-viewport">
-        <form id="inCon_frame" inFrame="inCon_frame" action="../controller/controller.php?editar_user=1" method="post" style="display:none;">
+        <form id="inCon_frame" inFrame="inCon_frame" action="../controller/controller.php?editar_user=1" method="post" style="display:none;" enctype="multipart/form-data" >
             <!--formulario de edição de informações-->
             <button class="voltarBTN__voltar vltrPMenuConfig" id="vltrPMenuConfig">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -1209,16 +1209,25 @@ $compras= $manager -> getCompras($_SESSION["USER_ID"]);
         document.getElementById('changeProfilePhoto').addEventListener('change', function () {
             const file = this.files[0];
             if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader()
-                reader.onload = function (e) {
-                    document.getElementById('pfpImageContainer').style.backgroundImage =
-                        `url(${e.target.result})`
-                };
+                const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('pfpImageContainer').src = e.target.result;
+                    }
+
+                    if (file) {
+                        reader.readAsDataURL(file);
+                    }
                 document.querySelector('.trocarFoto__btn').style.opacity = '1'
 
                 reader.readAsDataURL(file)
             } else {
-                alert('Por favor, selecione uma imagem.')
+                     Swal.fire({
+                    title: 'Atenção!',
+                    text: 'Por favor, selecione uma imagem.',
+                    icon: 'warning',
+                    backdrop: false // Remove o backdrop
+                });
+
                 this.value = ''
             }
             checkFormChanges();

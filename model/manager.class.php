@@ -788,7 +788,9 @@ public function showComent($id){
  }
 
 public function editUser($dados){
-    $sql = "UPDATE usuario SET username = '{$dados['username']}' , nome = '{$dados['nickname']}', biografia = '{$dados['biografia']}' WHERE ID_USER = '{$dados['id']}';";
+   
+   if(!isset($dados['pfp'])){ $sql = "UPDATE usuario SET username = '{$dados['username']}' , nome = '{$dados['nickname']}', biografia = '{$dados['biografia']}' WHERE ID_USER = '{$dados['id']}';";}
+   else{ $sql = "UPDATE usuario SET username = '{$dados['username']}' , nome ='{$dados['nickname']}', biografia = '{$dados['biografia']}', pfp ='{$dados['pfp']}' WHERE ID_USER = '{$dados['id']}';";}
  $conn = $this->connect();
     $res = $conn->query($sql);
     if($res){

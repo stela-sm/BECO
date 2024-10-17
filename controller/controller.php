@@ -337,7 +337,8 @@ if(isset($_REQUEST["getpost"])){
 
 
 if(isset($_REQUEST["editar_user"])){
-            
+   
+
     
 require_once "../model/ferramentas.class.php";
 $ferramentas = new Ferramentas();
@@ -356,12 +357,19 @@ for($i = 0;$i < 3;$i++){
     <?php
     exit();
     }
-    }
+}
+if(isset($_FILES["changeProfilePhoto"])){
+    $img = $_FILES["changeProfilePhoto"];
+    move_uploaded_file($img['tmp_name'], "../assets/media/pfp/" . $img['name']);
+    if($_SESSION["USER_PFP"]!== "nopfp.jpg"){$antigo = "../assets/media/pfp/".$_SESSION["USER_PFP"];
+    unlink($antigo);}
+    $dados["pfp"] = $img['name'];
+}
             $dados["id"] = $_SESSION["USER_ID"];
             $dados["username"] = !empty($_REQUEST["username_edit"]) ? $_REQUEST["username_edit"] : $_SESSION["USER_USERNAME"];
             $dados["nickname"] = !empty($_REQUEST["nickname_edit"]) ? $_REQUEST["nickname_edit"] : $_SESSION["USER_NOME"];
             $dados["biografia"] = !empty($_REQUEST["bio_edit"]) ? $_REQUEST["bio_edit"] : $_SESSION["USER_BIOGRAFIA"];
-            var_dump($dados);
+             var_dump($dados);
             require_once "../model/manager.class.php";
             $manager = new Manager();
             $edit = $manager->editUser($dados);
@@ -370,21 +378,24 @@ for($i = 0;$i < 3;$i++){
                 $_SESSION["USER_USERNAME"] = $dados["username"];
                 $_SESSION["USER_NOME"] = $dados["nickname"];
                 $_SESSION["USER_BIOGRAFIA"] = $dados["biografia"];
+                $_SESSION["USER_PFP"] = $dados["pfp"];
                 $log = new Log();    
             $ip = $_SERVER['REMOTE_ADDR'];
             $log->setTexto("{$ip} -Alteração dos dados do do usuário ". $_SESSION["USER_EMAIL"]);
             $log->fileWriter();
             ?>
-           <form action="../view/configuracoes.php" name="return" id="return" method="get">
+            <form action="../view/configuracoes.php" name="return" id="return" method="get">
             <input type="hidden" name="success" value="Dados alterados com sucesso!">
             <input type="hidden" name="configperfil" value="1">
             </form>
             <script>
 
                 document.getElementById("return").submit();
-            </script>  
+            </script>   
         <?php
             }}
+
+
             if(isset($_REQUEST["checkUsername"])){
                 header('Content-Type: application/json');
                 require_once "../model/manager.class.php";
@@ -392,6 +403,7 @@ for($i = 0;$i < 3;$i++){
                 $check = $manager->checkUsername($_REQUEST["checkUsername"]);
                 // echo json_encode($check);
             }
+
         
 if(isset($_REQUEST["selectComent"])){
 
