@@ -1263,6 +1263,25 @@ public function getAtivos($id){
 
  }
 
+ public function getSalvos($id) {
+    $sql = "SELECT * FROM salvos WHERE id_user = {$id}";
+    $conn = $this->connect();
+    $res = $conn->query($sql);
+    
+    $salvos = array();
+    $contador = 0; 
+
+    while ($row = $res->fetch_assoc()) {
+        $salvos[] = $row;
+        $contador++; 
+    }
+
+    return [
+        'salvos' => $salvos,
+        'contador' => $contador 
+    ];
+}
+
 
 
  
