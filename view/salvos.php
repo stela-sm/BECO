@@ -206,12 +206,12 @@ $salvos= $manager -> getSalvos($_SESSION['USER_ID']);
             <?php
 
 for ($i=0;$i<$salvos['contador'];$i++){
-    
+    var_dump($salvos);
 echo "
            <div class='card-portifolio'>
     <a class='portifImg-container' style='position: relative;' onclick='Card__clickDetector(id)'>
         <div class='portifolio-curtain absolute w100 h100'></div>
-        <img ondrag='return false' src='https://via.placeholder.com/215x200' alt='' class='img_portFolio'
+        <img ondrag='return false' src='../assets/media/thumbnail/{$salvos[$i]['thumbnail']}' alt='' class='img_portFolio'
             onselect='return false' dragstart='return false'>
         <div class='portifolio-info pgfdKksa'>
             <div class='containerTranslate'>
@@ -219,7 +219,7 @@ echo "
                     <div class='author-portName'>
                         <span class='portifolio-name truncate-text' id='portifolio-name'
                             style='font-size: 12.5px;color: #fff;'>
-                            Nome do portifólio
+                            {$salvos[$i]['titulo']}
                         </span>
                         <span class='user-name truncate-text' style='color: #fff;' id='username-card'>
                             Nome do artista

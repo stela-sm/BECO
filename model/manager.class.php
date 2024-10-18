@@ -1264,22 +1264,26 @@ public function getAtivos($id){
  }
 
  public function getSalvos($id) {
-    $sql = "SELECT * FROM salvos WHERE id_user = {$id}";
+    $sql = "
+    SELECT s.id_post, p.id_user, p.thumbnail, p.ID_POST, p.titulo, u.username
+    FROM salvos s
+    JOIN postagem p ON s.id_post = p.ID_POST
+    JOIN usuario u ON p.id_user = u.ID_USER
+    WHERE s.id_user = {$id}";
     $conn = $this->connect();
     $res = $conn->query($sql);
     
-    $salvos = array();
-    $contador = 0; 
-
+    $salvos = []; // Inicializa o array
+    $contador = 0; // Inicializa o contador
+    
     while ($row = $res->fetch_assoc()) {
-        $salvos[] = $row;
+        $salvos[$contador] = $row; 
         $contador++; 
     }
-
-    return [
-        'salvos' => $salvos,
-        'contador' => $contador 
-    ];
+    
+    // Adiciona o contador ao arra
+    $salvos['contador'] = $contador;
+    return $salvos;
 }
 
 
