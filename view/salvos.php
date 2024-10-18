@@ -206,10 +206,9 @@ $salvos= $manager -> getSalvos($_SESSION['USER_ID']);
             <?php
 
 for ($i=0;$i<$salvos['contador'];$i++){
-    var_dump($salvos);
 echo "
            <div class='card-portifolio'>
-    <a class='portifImg-container' style='position: relative;' onclick='Card__clickDetector(id)'>
+    <a class='portifImg-container' style='position: relative;' onclick='Card__clickDetector({$salvos[$i]["ID_POST"]})'>
         <div class='portifolio-curtain absolute w100 h100'></div>
         <img ondrag='return false' src='../assets/media/thumbnail/{$salvos[$i]['thumbnail']}' alt='' class='img_portFolio'
             onselect='return false' dragstart='return false'>
@@ -252,6 +251,7 @@ echo "
     </a>
 </div>
 ";}?>
+ 
 <!--FIM DA DIV CARD PORTIFOLIO-->
         </div>
     </div>
@@ -312,6 +312,14 @@ echo "
         })
     </script>
     <script>
+    function Card__clickDetector(id){
+        console.log("buceta")
+            const message = {
+        action: 'modalClicked',
+        id: id
+    };     window.parent.postMessage(message, '*');}
+  </script>
+    <script>
         document.querySelector('#vltrPMenuConfig').addEventListener('click',()=>{
             window.parent.postMessage('vltrPMenuConfig', '*');
         })
@@ -332,9 +340,7 @@ echo "
 
 
              //ESSA FUNCAO AQUI MANDA O INDEX ABRIR O MODAL DE PORTIFOLIO
-        function Card__clickDetector(id) {
-            window.parent.postMessage('modalClicked', '*');
-        }
+     
     </script>
 </body>
 
