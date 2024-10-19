@@ -5,6 +5,7 @@ require_once "model/manager.class.php";
 $manager = new Manager();
 $concurso= $manager -> getConcursoAtual();
 $softwares = $manager -> selectSoftwares();
+$artistas = $manager -> selectArtistas();
 if ($concurso["result"]==0){
 // set the values if there isnt anyone at the actual time
 
@@ -1169,106 +1170,52 @@ if ($concurso["result"]==0){
                     </div>
                     <hr class="noHr">
                     <div class="autores-famosos">
-                        <h3>Artistas em alta</h3>
-                        <div class="container-trendingCards_t">
-                            <div class="card trending-card relative">
-                                <span class="number-order">
-                                    <span class="number-order__visual">1</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" stroke="#192648" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"
-                                        viewBox="0 0 24 24" fill="#f9f9f9"
-                                        class="icon icon-tabler icons-tabler-filled icon-tabler-rosette">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944z" />
-                                    </svg>
-                                </span>
-                                <a class="card-body" href="#">
-                                    <!--aqui leva pro usuario da pessoa-->
-                                    <div class="container-authorUserImg">
-                                        <svg class="icone-thumb" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none" stroke="#000000"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                                        </svg>
+                        
+                    <h3>Artistas em alta</h3>
+                    <div class="container-trendingCards_t">
+                       
+                        
+                        <?php
+                        for($i=0;$i<3;$i++){
+                        
+                        $dados =   $manager -> getUserInfo($artistas[$i]['vendedor']);
+                        $num = $i+1;
+                        echo "  <div class='card trending-card relative'>
+        <span class='number-order'>
+            <span class='number-order__visual'>{$num}</span>
+            <svg xmlns='http://www.w3.org/2000/svg' stroke='#192648' stroke-width='1.5'
+                stroke-linecap='round' stroke-linejoin='round' width='100%' height='100%'
+                viewBox='0 0 24 24' fill='#f9f9f9'
+                class='icon icon-tabler icons-tabler-filled icon-tabler-rosette'>
+                <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+                <path
+                    d='M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944z' />
+            </svg>
+        </span>
+        <a class='card-body' href='#'>
+    <!--aqui leva pro usuario da pessoa-->
+    <div class='container-authorUserImg'>
+        <svg class='icone-thumb' xmlns='http://www.w3.org/2000/svg' width='24'
+            height='24' viewBox='0 0 24 24' fill='none' stroke='#000000'
+            stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'
+            class='icon icon-tabler icons-tabler-outline icon-tabler-user'>
+            <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+            <path d='M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0'></path>
+            <path d='M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2'></path>
+        </svg> 
+    </div>
+    <div class='authorName'>
+        <span class='authorNick'>{$dados['nome']}</span>
+        <span class='authorUser'>{$artistas[$i]['total_compras']} materiais vendidos</span>
+    </div>
+</a>
+</div>
+";
+                        }
+                        ?>
 
-                                    </div>
-                                    <div class="authorName">
-                                        <span class="authorNick">Nome do Autor</span>
-                                        <span class="authorUser">Alguma descrição</span>
-                                    </div>
-
-                                </a>
-                            </div>
-                            <div class="card trending-card relative">
-                                <span class="number-order">
-                                    <span class="number-order__visual">2</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" stroke="#192648" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"
-                                        viewBox="0 0 24 24" fill="#f9f9f9"
-                                        class="icon icon-tabler icons-tabler-filled icon-tabler-rosette">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944z" />
-                                    </svg>
-                                </span>
-                                <a class="card-body" href="#">
-                                    <!--aqui leva pro usuario da pessoa-->
-
-                                    <div class="container-authorUserImg">
-                                        <svg class="icone-thumb" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none" stroke="#000000"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                                        </svg>
-
-                                    </div>
-                                    <div class="authorName">
-                                        <span class="authorNick">Nome do Autor</span>
-                                        <span class="authorUser">Alguma descrição</span>
-                                    </div>
-
-                                </a>
-                            </div>
-                            <div class="card trending-card relative">
-                                <span class="number-order">
-                                    <span class="number-order__visual">3</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" stroke="#192648" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"
-                                        viewBox="0 0 24 24" fill="#f9f9f9"
-                                        class="icon icon-tabler icons-tabler-filled icon-tabler-rosette">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944z" />
-                                    </svg>
-                                </span>
-                                <a class="card-body" href="#">
-                                    <!--aqui leva pro usuario da pessoa-->
-
-                                    <div class="container-authorUserImg">
-                                        <svg class="icone-thumb" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none" stroke="#000000"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                                        </svg>
-
-                                    </div>
-                                    <div class="authorName">
-                                        <span class="authorNick">Nome do Autor</span>
-                                        <span class="authorUser">Alguma descrição</span>
-                                    </div>
-
-                                </a>
-                            </div>
+                    
+                           
                         </div>
                     </div>
                 </div>
@@ -1755,104 +1702,45 @@ if ($data_atual < $data_fim) {
                     <div class="autores-famosos">
                         <h3>Artistas em alta</h3>
                         <div class="container-trendingCards_t">
-                            <div class="card trending-card relative">
-                                <span class="number-order">
-                                    <span class="number-order__visual">1</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" stroke="#9c9c9c" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"
-                                        viewBox="0 0 24 24" fill="#f9f9f9"
-                                        class="icon icon-tabler icons-tabler-filled icon-tabler-rosette">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944z" />
-                                    </svg>
-                                </span>
-                                <a class="card-body" href="#">
-                                    <!--aqui leva pro usuario da pessoa-->
-                                    <div class="container-authorUserImg">
-                                        <svg class="icone-thumb" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none" stroke="#000000"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                                        </svg>
-
-                                    </div>
-                                    <div class="authorName">
-                                        <span class="authorNick">Nome do Autor</span>
-                                        <span class="authorUser">Alguma descrição</span>
-                                    </div>
-
-                                </a>
-                            </div>
-                            <div class="card trending-card relative">
-                                <span class="number-order">
-                                    <span class="number-order__visual">2</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" stroke="#9c9c9c" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"
-                                        viewBox="0 0 24 24" fill="#f9f9f9"
-                                        class="icon icon-tabler icons-tabler-filled icon-tabler-rosette">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944z" />
-                                    </svg>
-                                </span>
-                                <a class="card-body" href="#">
-                                    <!--aqui leva pro usuario da pessoa-->
-
-                                    <div class="container-authorUserImg">
-                                        <svg class="icone-thumb" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none" stroke="#000000"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                                        </svg>
-
-                                    </div>
-                                    <div class="authorName">
-                                        <span class="authorNick">Nome do Autor</span>
-                                        <span class="authorUser">Alguma descrição</span>
-                                    </div>
-
-                                </a>
-                            </div>
-                            <div class="card trending-card relative">
-                                <span class="number-order">
-                                    <span class="number-order__visual">3</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" stroke="#9c9c9c" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"
-                                        viewBox="0 0 24 24" fill="#f9f9f9"
-                                        class="icon icon-tabler icons-tabler-filled icon-tabler-rosette">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944z" />
-                                    </svg>
-                                </span>
-                                <a class="card-body" href="#">
-                                    <!--aqui leva pro usuario da pessoa-->
-
-                                    <div class="container-authorUserImg">
-                                        <svg class="icone-thumb" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none" stroke="#000000"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                                        </svg>
-
-                                    </div>
-                                    <div class="authorName">
-                                        <span class="authorNick">Nome do Autor</span>
-                                        <span class="authorUser">Alguma descrição</span>
-                                    </div>
-
-                                </a>
-                            </div>
+                        <?php
+                        for($i=0;$i<3;$i++){
+                        
+                        $dados =   $manager -> getUserInfo($artistas[$i]['vendedor']);
+                        $num = $i+1;
+                        echo "  <div class='card trending-card relative'>
+        <span class='number-order'>
+            <span class='number-order__visual'>{$num}</span>
+            <svg xmlns='http://www.w3.org/2000/svg' stroke='#192648' stroke-width='1.5'
+                stroke-linecap='round' stroke-linejoin='round' width='100%' height='100%'
+                viewBox='0 0 24 24' fill='#f9f9f9'
+                class='icon icon-tabler icons-tabler-filled icon-tabler-rosette'>
+                <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+                <path
+                    d='M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944z' />
+            </svg>
+        </span>
+        <a class='card-body' href='#'>
+    <!--aqui leva pro usuario da pessoa-->
+    <div class='container-authorUserImg'>
+        <svg class='icone-thumb' xmlns='http://www.w3.org/2000/svg' width='24'
+            height='24' viewBox='0 0 24 24' fill='none' stroke='#000000'
+            stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'
+            class='icon icon-tabler icons-tabler-outline icon-tabler-user'>
+            <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+            <path d='M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0'></path>
+            <path d='M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2'></path>
+        </svg>
+    </div>
+    <div class='authorName'>
+        <span class='authorNick'>{$dados['nome']}</span>
+        <span class='authorUser'>{$artistas[$i]['total_compras']} materiais baixados</span>
+    </div>
+</a>
+</div>
+";
+                        }
+                        ?>
+                           
                         </div>
                     </div>
                 </div>

@@ -291,6 +291,21 @@ public function getPostagensUser($id){
             return $dados;
          }
 
+         
+        public function getUser($id_user){
+            $sql= "SELECT * FROM usuario where ID_USER = '{$id_user}'";              
+            $res = $this->connect()->query($sql);
+            $dados = [];
+            while($row=$res->fetch_assoc()){
+                $dados["nome"] = $row["username"];
+                $dados["pfp"] = $row["pfp"];
+            }
+            
+            $this->connect()->close();
+            return $dados;
+         }
+
+
         public function showConversas($idRemetente){
 
             $sql= "SELECT * FROM conversas where id_user1 = {$idRemetente} or id_user2 = {$idRemetente} AND tabela = 'usuario' ";  
@@ -1286,7 +1301,27 @@ public function getAtivos($id){
     return $salvos;
 }
 
+public function selectArtistas(){
+    $sql = "SELECT vendedor, COUNT(*) AS total_compras
+FROM compras
+WHERE status = 2
+GROUP BY vendedor
+ORDER BY total_compras DESC
+LIMIT 3;";
+  $conn = $this->connect();
+  $res = $conn->query($sql);
+  if ($res) {
+    $artistas = []; 
+    while ($row = $res->fetch_assoc()) {
+        $artistas[] = $row; 
+    }
 
+    return $artistas; 
+} else {
+    return []; 
+}
+
+}
 
  
 }
