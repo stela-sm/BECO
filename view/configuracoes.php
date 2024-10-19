@@ -15,6 +15,8 @@ session_start();
     <meta property="og:url" content="https://www.example.com">
     <link rel="stylesheet" href="../assets/style/style.css">
     <meta property="og:type" content="website">
+    <script src="../assets/js/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/jquery-3.7.1.min.map"></script>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script src="../assets/js/texto_audio.js"></script><script src="../assets/js/teste.js"></script>
     <script>
@@ -890,7 +892,7 @@ setInterval(checkMemoryUsage, checkInterval);
                         <!--aqui é para o nome @ do usuario - o value do input é o username atual do usuario, o mesmo se aplica aos inputs abaixo-->
                         <label for="username_edit">Nome de usuario</label>
                         <input type="text" name="username_edit" id="username_edit" value="<?php echo $_SESSION["USER_USERNAME"]?>">
-                        <small id="username_error" style="color: red; display: none;">Nome de usuário já existe!</small>
+                        <small id="username_error" style="color: red; display: none; font-size:12px">Nome de usuário já existe!</small>
 
                     </div>
                     
@@ -1542,30 +1544,45 @@ $compras= $manager -> getCompras($_SESSION["USER_ID"]);
         };
     </script>
         <script>
-  $(document).ready(function() {
+  document.addEventListener('DOMContentLoaded', function () {
+  const usernameInput = document.getElementById('username_edit');
+  const buttonSubmit = document.getElementById('editForm_submit');
+  const usernameError = document.getElementById('username_error');
 
-    $('#username_edit').on('input', function() {
-      var username = $(this).val();
+  usernameInput.addEventListener('input', function() {
+   
+            if (!this.value.startsWith('@')) {
+                this.value = '@' + this.value.replace(/^@*/, ''); // Adiciona '@' no início
+            }
 
-      $.ajax({
-        url: '../controller/controller.php?checkUsername=1', 
-        type: 'POST',
-        data: { username: username },
-        success: function(response) {
-          // Se o nome de usuário já existir
-          if (response == 'exists') {
-            $('#username_edit').css('border-color', 'red');  // Muda a borda do input para vermelho
-            $('#username_error').show();  // Mostra a mensagem de erro
-            $('form').find(':input[type=submit]').prop('disabled', true);  // Desabilita o botão de submit
-          } else {
-            $('#username_edit').css('border-color', '');  // Reseta a cor da borda
-            $('#username_error').hide();  // Esconde a mensagem de erro
-            $('form').find(':input[type=submit]').prop('disabled', false);  // Habilita o botão de submit
-          }
-        }
-      });
-    });
-  });
+      this.value = this.value.replace(/\s+/g, '_');
+    
+
+    user = usernameInput.value
+    $.ajax({
+            type: 'POST',
+            url: '../controller/controller.php?checkUsername=1',
+            data: {
+                user: user}, 
+            success: function(response) {
+                console.log(response)
+                if(response == "existe"){
+                console.log("aaaaa");
+            usernameError.style.display = "block";
+            buttonSubmit.disabled = true;
+
+            } else{  usernameError.style.display = "none";
+                buttonSubmit.disabled = false;
+                }
+
+            },
+            error: function() {
+                alert('Houve um erro');
+            }
+        });
+
+});});
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../assets/js/texto_audio.js"></script>

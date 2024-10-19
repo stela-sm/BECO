@@ -400,8 +400,8 @@ if(isset($_FILES["changeProfilePhoto"])){
                 header('Content-Type: application/json');
                 require_once "../model/manager.class.php";
                 $manager = new Manager();
-                $check = $manager->checkUsername($_REQUEST["checkUsername"]);
-                // echo json_encode($check);
+                $check = $manager->checkUsername($_REQUEST["user"]);
+                 echo json_encode($check);
             }
 
         

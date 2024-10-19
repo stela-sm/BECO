@@ -819,9 +819,20 @@ public function editUser($dados){
     }
 }
 
-public function checkUsername($username){
-    
+public function checkUsername($username) {
+    $conn = $this->connect();
+    $stmt = $conn->prepare("SELECT * FROM usuario WHERE username = ?");
+    $stmt->bind_param("s", $username); 
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        return "existe"; 
+    } else {
+        return "não existe"; 
+    }
 }
+
 public function getPost($id){
     $conn = $this->connect();
 
