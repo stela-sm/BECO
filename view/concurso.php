@@ -4,6 +4,7 @@
 require_once "../model/manager.class.php";
 $manager = new Manager();
 $concurso= $manager -> getConcursoAtual();
+session_start();
 if ($concurso["result"]==0){
 // set the values if there isnt anyone at the actual time
 
@@ -567,7 +568,7 @@ function carregarPosts(search) {
     $('.container-portifolios').append(postHtml);
     setTimeout(function() {
         $('.fade-in-css').addClass('fade-in'); // Adiciona a classe após 1 segundo
-    }, 100); // 1000 milissegundos = 1 segundo
+    }, 50); // 1000 milissegundos = 1 segundo
 } else {
             console.log("Nenhum dado retornado ou erro na resposta.");
         }

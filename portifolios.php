@@ -478,7 +478,7 @@ function carregarPosts(search) {
     $('.container-portifolios').append(postHtml);
     setTimeout(function() {
         $('.fade-in-css').addClass('fade-in'); // Adiciona a classe após 1 segundo
-    }, 100); // 1000 milissegundos = 1 segundo
+    }, 50); 
 } else {
             console.log("Nenhum dado retornado ou erro na resposta.");
         }
