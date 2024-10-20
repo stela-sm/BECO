@@ -319,13 +319,30 @@ if(isset($_REQUEST["verificar"])){
             $search = $_REQUEST['search'];
             $limit = 8;  // Define quantos posts serão carregados por vez
             $offset = $page;
-            $posts = $manager->getAllPosts($limit, $offset, $search);
+            $con = "none";
+            $posts = $manager->getAllPosts($limit, $offset, $search, $con);
             $posts["offset"] = "essa porra".$page;
 
             echo json_encode($posts);
            
         }
-if(isset($_REQUEST["getpost"])){
+
+        if(isset($_REQUEST["loadconcurso"])){
+            header('Content-Type: application/json');
+            require_once "../model/manager.class.php";
+            $manager = new Manager();
+            $page = isset($_REQUEST['page']) ? (int)$_REQUEST['page'] : 0;
+            $search = $_REQUEST['search'];
+            $limit = 8;  // Define quantos posts serão carregados por vez
+            $offset = $page;
+            $con = $_REQUEST["concurso"];
+            $posts = $manager->getAllPosts($limit, $offset, $search, $con);
+            $posts["offset"] = "essa porra".$page;
+
+            echo json_encode($posts);
+           
+        }
+        if(isset($_REQUEST["getpost"])){
     header('Content-Type: application/json');
     require_once "../model/manager.class.php";
     $manager = new Manager();

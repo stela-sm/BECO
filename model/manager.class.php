@@ -706,8 +706,29 @@ WHERE p.`descricao` LIKE '%{$hashtag}%' AND p.status = 1";
 }
 
 
-public function getAllPosts($limit, $offset, $search) {
-    if($search == "none"){
+public function getAllPosts($limit, $offset, $search, $con) {
+    //tem concurso e busca
+    if($con !== "none" && $search !== "none"){
+        $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
+        FROM postagem p 
+        JOIN usuario u ON p.id_user = u.ID_USER 
+        WHERE p.status = 1 AND p.titulo LIKE '%{$search}%' AND p.descricao LIKE '%{$con}%' 
+        ORDER BY p.datahora DESC 
+        LIMIT {$limit};"
+        ;
+    }
+    //tem concurso sem busca
+    if($con !== "none" && $search == "none"){
+        $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
+        FROM postagem p 
+        JOIN usuario u ON p.id_user = u.ID_USER 
+        WHERE p.status = 1 AND p.descricao LIKE '%{$con}%' 
+        ORDER BY p.datahora DESC 
+        LIMIT {$limit}  OFFSET {$offset}; "
+        ;
+    }
+    //nem concurso nem busca
+    if($search == "none" && $con == "none"){
     $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
     FROM postagem p 
     JOIN usuario u ON p.id_user = u.ID_USER 
@@ -717,7 +738,8 @@ public function getAllPosts($limit, $offset, $search) {
     
     ;
     ";
-    }else{
+    //só busca
+    }else if($search !== "none" && $con == "none"){
            $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
             FROM postagem p 
             JOIN usuario u ON p.id_user = u.ID_USER 

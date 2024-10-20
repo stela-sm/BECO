@@ -4,12 +4,12 @@
 require_once "../model/manager.class.php";
 $manager = new Manager();
 $concurso= $manager -> getConcursoAtual();
-$postagens= $manager -> concursosPostagens($concurso['tag']);
 if ($concurso["result"]==0){
 // set the values if there isnt anyone at the actual time
 
 }
 ?>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +22,8 @@ if ($concurso["result"]==0){
   <link rel="stylesheet" href="../assets/style/portifolios.css">
   <script src="../assets/js/texto_audio.js"></script>
   <script src="../assets/js/teste.js"></script>
+  <script src="../assets/js/jquery-3.7.1.min.js"></script>
+  <script src="../assets/js/jquery-3.7.1.min.map"></script>
 
   <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -33,6 +35,9 @@ if ($concurso["result"]==0){
     }
 });
 
+</script>
+<script>
+  const concurso = '<?php echo $concurso['tag'] ?>'
 </script>
   <script>
     window.addEventListener('message', function (event) {
@@ -91,6 +96,22 @@ if ($concurso["result"]==0){
   <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap"
     rel="stylesheet">
   <style>
+      .liked svg{
+            
+            fill: #fff;
+                  }
+                  .saved svg{
+                      
+                      fill: #fff;
+                            }
+                  .no-liked svg{
+                      
+                      fill: transparent;
+                            }
+                            .no-saved svg{
+                      
+                      fill: transparent;
+                            }
     /*CSS do banner*/
     .banner-central {
       display: flex;
@@ -329,56 +350,6 @@ if ($concurso["result"]==0){
     <h1 class="titulo-publi" style="font-size: 42.5px;padding-top: 3%;">Publicações</h1>
     <div class="container-portifolios" id="container-portifolios">
   <!--OS CARDS DEVEM SER COLOCADOS AQUI DENTRO!-->
-<?php
-
-for ($i=0;$i<$postagens['result'];$i++){
-echo "
-
-<div class='card-portifolio fade-in-css'>
-  <a class='portifImg-container' style='position: relative;' onclick='Card__clickDetector(".$postagens[$i]['ID_POST'].")'>
-    <div class='portifolio-curtain absolute w100 h100'></div>
-    <img ondrag='return false' src='../assets/media/thumbnail/".$postagens[$i]['thumbnail']."' alt='' class='img_portFolio' onselect='return false' dragstart='return false'>
-   
-  </a>
-   <div class='portifolio-info pgfdKksa'>
-      <div class='containerTranslate'>
-        <div class='container-pictureInfoMinor relative'>
-          <div class='author-portName'>
-            <span class='portifolio-name truncate-text' id='portifolio-name' style='font-size: 12.5px;color: #fff;'>
-              ".$postagens[$i]['titulo']."
-            </span>
-            <span class='user-name truncate-text' style='color: #fff;' id='username-card'>
-             @".$postagens[$i]['username']."
-            </span>
-          </div>
-          <div class='LikeSalvar__thumbContainer'>
-            <button id='salvarPublicacao' class='botaoContainer_thumbInterativo'>
-              <svg id='salvarPubli_btn' xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-bookmark'>
-                <path stroke='none' d='M0 0h24v24H0z' fill='none' />
-                <path d='M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z' />
-              </svg>
-            </button>
-            <button id='darLikePublicacao' class='botaoContainer_thumbInterativo'>
-              <svg id='likePubli_btn' xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-thumb-up'>
-                <path stroke='none' d='M0 0h24v24H0z' fill='none' />
-                <path d='M7 11v8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3' />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
-
-
-";
-
-
-
-}
-
-
-?>
 
   <!--EXEMPLO DE CARD:-->
       <!-- <div class="card-portifolio">
@@ -476,6 +447,233 @@ document.addEventListener('DOMContentLoaded', function() {
 
   </script>
   
+<script>
+     //ESSA FUNÇÃO É O AJAX PRO SCROLL INFINITO NO SCROLL
+let page = 0; 
+let loading = false; 
+let debounceTimer;
+let search = "none";
+$(window).scroll(function() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function() {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+            carregarPosts(search); // Chama a função para carregar mais posts
+        }
+    }, 200); // 200 ms de delay
+});
+
+
+function carregarPosts(search) {
+    
+ //console.log("page=" + page)
+    // console.log("caralho")
+    loading = true;
+    $.ajax({
+        url: '../controller/controller.php?loadconcurso=1&search='+search, 
+        type: 'POST',
+        data: { page: page,
+             concurso: concurso
+                    },
+        dataType: 'json',
+        success: function(data) {
+            console.log(data.offset)
+            console.log("Resposta do servidor:", data)
+            if (data.result > 0){
+
+             $.each(data, function(key, postsArray) {
+            if (Array.isArray(postsArray)) {
+                $.each(postsArray, function(index, post) { // Itera sobre cada post no array
+                
+                    adicionarPost(post.ID_POST, post.titulo, post.username, post.thumbnail)
+                    page++
+                })
+            }
+          
+        })
+        
+        }else{
+           
+            loading = false; 
+        }},
+        error: function() {
+            loading = false
+        }
+    })
+}
+
+</script>
+
+<script>
+    //esse bloco é o append dos posts, decidi fazer separado pra não carregar a função ajax e agilizar o carregamento da página
+   
+    function adicionarPost(id,portfolioName, artistName, imageUrl) {
+ var isLiked;
+        $.ajax({
+    url: '../controller/controller.php?checkLike=1', 
+    type: 'POST',
+    data: { id_post: id },  
+    dataType: 'json',  
+    success: function(data) {
+        if (data.like) {
+            // console.log("Offset:", data.offset);  
+             isLiked = data.like;
+             isSave = data.save;               
+            //  console.log("Resposta do servidor:", isLiked + data.save);  
+                   
+    const postHtml = `
+        <div class="card-portifolio fade-in-css">
+            <a class="portifImg-container" style="position: relative;" onclick="Card__clickDetector(${id})">
+                <div class="portifolio-curtain absolute w100 h100"></div>
+                <img ondrag="return false" src="../assets/media/thumbnail/${imageUrl}" alt="" class="img_portFolio" onselect="return false" dragstart="return false">
+               
+            </a>
+             <div class="portifolio-info pgfdKksa">
+                    <div class="containerTranslate">
+                        <div class="container-pictureInfoMinor relative">
+                            <div class="author-portName">
+                                <span class="portifolio-name truncate-text" id="portifolio-name" style="font-size: 12.5px;color: #fff;">
+                                    ${portfolioName}
+                                </span>
+                                <span class="user-name truncate-text" style="color: #fff;" id="username-card">
+                                    ${artistName}
+                                </span>
+                            </div>
+                            <div class="LikeSalvar__thumbContainer">
+                                <button id="salvarPublicacao"  class="botaoContainer_thumbInterativo saveButton ${isSave}" data-id-post="${id}">
+                                    <svg id="salvarPubli_btn" xmlns="http://www.w3.org/2000/svg" width="18"
+                                        height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-bookmark">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z" />
+                                    </svg>
+                                </button>
+                                <button id="darLikePublicacao" class="botaoContainer_thumbInterativo  likeButton ${isLiked}"  data-id-post="${id}" >
+                                    <svg id="likePubli_btn" xmlns="http://www.w3.org/2000/svg" width="18"
+                                        height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-thumb-up">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M7 11v8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    `;
+    $('.container-portifolios').append(postHtml);
+    setTimeout(function() {
+        $('.fade-in-css').addClass('fade-in'); // Adiciona a classe após 1 segundo
+    }, 100); // 1000 milissegundos = 1 segundo
+} else {
+            console.log("Nenhum dado retornado ou erro na resposta.");
+        }
+    },
+    error: function(xhr, status, error) {
+        console.error('Erro na requisição AJAX:', error);
+        console.log('Status:', status);
+        console.log('Resposta completa:', xhr.responseText);
+    }
+   });
+
+    // Adiciona o HTML ao feed
+    
+}
+</script>
+<?php $id = isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : '0'; 
+?>
+<script>
+    $(document).on('click', '.likeButton', function() {    
+                var button = $(this);
+                var idPost = button.data('id-post');        
+                var idUser = <?php echo $id ?>;
+                var action = button.hasClass('liked') ? 'remove_like' : 'like';
+                $.ajax({
+                    url: '../controller/controller.php?like=1', 
+                    type: 'POST',
+                    data: {
+                        action: action,
+                        id_user: idUser,
+                        id_post: idPost
+                    },
+                    success: function(response) {
+                        // Lida com a resposta do servidor
+                       
+                        console.log('Requisição bem-sucedida:', response);
+                        if(response!='"added"'){
+                            button.addClass('no-like').removeClass('liked');
+                        }else{
+                            button.addClass('liked').removeClass('no-liked');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Lida com erros
+                        console.error('Erro na requisição:', status, error);
+                        
+                    }
+                });
+                // checkLikeStatus(idUser, idPost, button); essa função não precisa, já que o like já está sendo manipulado pelo ajax
+            });
+            $(document).on('click', '.saveButton', function() {    
+                var button = $(this);
+                var idPost = button.data('id-post');        
+                var idUser = <?php echo $id ?>;
+                var action =  button.hasClass('saved') ? 'remove_save' : 'save';
+                $.ajax({
+                    url: '../controller/controller.php?save=1', 
+                    type: 'POST',
+                    data: {
+                        action: action,
+                        id_user: idUser,
+                        id_post: idPost
+                    },
+                    success: function(response) {
+                        // Lida com a resposta do servidor
+                       
+                        console.log('Requisição bem-sucedida:', response);
+                        if(response!='"added"'){
+                            button.addClass('no-saved').removeClass('saved');
+                        }else{
+                            button.addClass('saved').removeClass('no-saved');
+                        }
+                        
+                    },
+                    error: function(xhr, status, error) {
+                        // Lida com erros
+                        console.error('Erro na requisição:', status, error);
+                        
+                    }
+                });
+                // checkLikeStatus(idUser, idPost, button); essa função não precisa, já que o like já está sendo manipulado pelo ajax
+            });
+           
+      
+</script>
+<script>
+    function limpar(){
+        $('.container-portifolios').empty()
+    }
+      window.addEventListener('message', function(event) {
+        if (event.data.startsWith('#')) {
+                console.log('Mensagem recebida: ' + event.data)
+                
+            } else{
+        console.log("AAAAAAAAAAAAAAAAAAAAA"+event.data)
+        limpar();
+        carregarPosts(event.data)
+    }});
+
+</script>
+  <script>
+//essa função chama o ajax logo que  apágina carrega
+$(document).ready(function () {
+    carregarPosts(search);
+    });
+
+        </script>
 </body>
 
 </html>
