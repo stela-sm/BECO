@@ -64,7 +64,7 @@ body.swal2-shown, body.swal2-height-auto{
 .main-container{
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
     background-color: white;
-    height: 70%;
+    height: 82%;
 border-radius: 6px;
 padding: 15px 25px;
     color: var(--text-color)
@@ -172,6 +172,35 @@ background-repeat: no-repeat;
     align-items: center;
 
   }
+  .cancelButton{
+    text-align: center;
+    font-family: Raleway;
+    border: none;
+    height: auto;
+    padding: 20px;
+    justify-content: center;
+    width: 100%;
+color: #D9544D;
+    background-color: transparent;
+    
+    transition: 0.2s ease;
+  }
+  .cancelButton:hover, .confirm:hover{
+ 
+    font-weight: 800;
+    transition: 0.2s ease;
+    
+  }
+  .confirm{
+    font-family: Raleway;
+    border: none;
+    height: auto;
+    text-align: left;
+    padding: 10px;
+    color: #609040;     
+    transition: 0.2s ease;
+    background-color: transparent;
+  }
 </style>
 <body style=" height: 100vh !important;">
     <div class="container main-container">
@@ -249,9 +278,11 @@ background-repeat: no-repeat;
                     <label for="" class="label-padrao" style="width: 40%;">CVV</label><br>
                     <input type="month" name="dueDate" id="" class="input-padrao-date">
                     <input type="text" maxlength="3" name="cvv" id="" class="input-padrao-cvv">
+                    <br><br>
+                    <button class="confirm" type="button"onclick="confirm(event)">Confirmar</button>
                   </div>
                     <div class="col-6 card-col-center">
-                      <button class="confirm" type="button"onclick="confirm(event)">Confirmar</button>
+                      
 
 
                     </div>
@@ -284,7 +315,9 @@ background-repeat: no-repeat;
                     <label for="" class="label-padrao" style="width: 45%;">Data de Vencimento</label> 
                     <label for="" class="label-padrao" style="width: 40%;">CVV</label><br>
                     <input type="month" name="dueDate" id="" class="input-padrao-date">
-                    <input type="text" maxlength="3" name="cvv" id="" class="input-padrao-cvv">
+                    <input type="text" maxlength="3" name="cvv" id="" class="input-padrao-cvv"><br><br>
+                    <button class="confirm" type="button"onclick="confirm(event)">Confirmar</button>
+               
                   </div>
                     <div class="col-6 card-col-center">
                    </div>
@@ -297,12 +330,13 @@ background-repeat: no-repeat;
         </div>
     </div>
 
-    <button onclick="cancelar(event)"> cancelar </button>
+   
 </form>
-    
+<button class="cancelButton" onclick="cancelar(event)"> Cancelar </button>
+
     
    <?php
-for ($i = 0; $i < $_SESSION['ativos']['number']; $i++) {
+for ($i = 1; $i < $_SESSION['ativos']['number']; $i++) {
         echo '<a id="file" href="../assets/media/port_ativos/' . $_SESSION['ativos'][$i]['arquivo'] . '" download style="display: none;"></a>';
   } 
 ?>
