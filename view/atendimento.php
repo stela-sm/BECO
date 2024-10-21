@@ -163,18 +163,18 @@
             </div>
         </div>
 
-        <form id="chamadoForm">
+        <form id="chamadoForm" method="post"action="../controller/controller.php?chamado=1">
             <!-- Input para Nome de Usuario caso ele n esteja logado tendeu-->
-            <!-- 
+            
             <div class="mb-3">
-                <label for="username" class="form-label">Nome de Usuário</label>
-                <input type="text" class="form-control" id="username" placeholder="Digite seu nome de usuário">
+                <label for="username" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="username" placeholder="Digite seu email">
             </div>
-            -->
+        
 
             <div class="mb-3">
                 <label for="textareaChamado" class="form-label">Descreva seu problema</label>
-                <textarea class="form-control" id="textareaChamado" rows="4" maxlength="500" placeholder="Descreva seu problema aqui..."></textarea>
+                <textarea class="form-control" name="text" id="textareaChamado" rows="4" maxlength="500" placeholder="Descreva seu problema aqui..."></textarea>
                 <div class="character-counter" id="charCount">500/500</div>
             </div>
             <div class="containerButtons">
@@ -197,8 +197,31 @@
             </div>
         </form>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <?php
+    if(isset($_REQUEST['finalizado'])){
+        echo "
+        <script>
+
+ Swal.fire({
+                    icon: 'success',
+                    title: 'Chamado registrado!',
+                    text: 'Muito obrigado, entraremos em contato com você!',
+                    confirmButtonText: 'Ok'
+                });
+
+                setTimeout(() => {
+  swal.close();
+  window.close();
+}, 3000);
+        </script>
+        
+        
+        ";
+    }
+    
+    ?>
+   
     <script>
         const textarea = document.getElementById('textareaChamado');
         const charCount = document.getElementById('charCount');

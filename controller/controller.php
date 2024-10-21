@@ -660,4 +660,22 @@ if(isset($_REQUEST['download'])){
     }
     
 }
+
+if(isset($_REQUEST['chamado'])){
+    $dados['email'] = $_REQUEST['email'];
+    $dados['text'] = $_REQUEST['text'];
+    var_dump($dados);
+require_once "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> newChamado($dados);
+if($r==true){
+    ?>
+    <form action="../view/atendimento.php?finalizado=1" name="return" id="return" method="post">
+    </form>
+    <script>
+
+        document.getElementById("return").submit();
+    </script>
+    <?php
+}}
 ?>

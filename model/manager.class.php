@@ -1356,6 +1356,19 @@ LIMIT 3;";
 
 }
 
+//function newChamado() to insert into table chamados
+public function newChamado($dados){
+    $sql = "INSERT INTO chamados (email, mensagem, datahora, status)
+    VALUES ('{$dados['email']}','{$dados['text']}',now()
+    ,'Em Análise')";
+    $conn = $this->connect();
+    $res = $conn->query($sql);
+    if ($res) {
+        return true;
+        } else {
+            return false;
+            }
+}
  
 }
 ?>

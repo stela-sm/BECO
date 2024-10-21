@@ -642,6 +642,28 @@ public function admLoginID($dados){
 
 
     public function chamadosTable(){
+        $sql = "SELECT * FROM chamados";
+        $res = $this->connect()->query($sql);
+        if (!$res) {
+            return ['result' => 0, 'error' => $this->connect()->error];
+            }
+            if ($res->num_rows > 0) {
+                $chamados = array();
+                $i = 0;
+                while ($row = $res->fetch_assoc()) {
+                    $chamados[$i] = [
+                        'ID_CHAMADO' => $row['ID_CHAMADO'],
+                        'email' => $row['email'],
+                        'mensagem' => $row['mensagem'],
+                        'datahora' => $row['datahora'],
+                        'status' => $row['status'],                       
+                        ];
+                        $i++;
+                        }
+                        return ['result' => 1, 'chamados' => $chamados];
+                        }else{
+                            return 2;
+                        }
 
     }
 

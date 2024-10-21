@@ -121,28 +121,25 @@
 <?php
 require "../model/manager.class.php";
 $manager = new Manager();
-$r = $manager-> chamadosTable("0","0");
-
+$r = $manager-> chamadosTable();
+var_dump($r);
 for($i=0;$i<$r["result"];$i++){
       echo "<tr class='table-content-row'>
           <td>
-            ".$r[$i]["ID_USER"]."
-          </td>
-          <td>
-           ".$r[$i]["username"]."
+            ".$r[$i]["ID_CHAMADO"]."
           </td>
           <td>
            ".$r[$i]["email"]."
           </td>
           <td>
-            ".$r[$i]["celular"]."
+            ".$r[$i]["mensagem"]."
           </td>
           
           <td>
-            ".$r[$i]["status"]."
+            ".$r[$i]["datahora"]."
           </td>
           <td>
-            ".$r[$i]["data"]."
+            ".$r[$i]["status"]."
           </td>
           
          
