@@ -855,7 +855,15 @@ if ($concurso["result"]==0){
                                                 <path d="M9 6l6 6l-6 6" />
                                             </svg>
                                         </span>
-                                    </a><br><br>
+                                    </a>
+                                    <a class="card_filtro" style="border-color: #D9544D;"onclick=filtrarPosts(this)>
+                                        <div class="filter_name">
+                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#D9544D"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+                                            </svg> <span style="color:#D9544D;" class="filter__name capitalize">Limpar</span>
+                                        </div>
+                                      
+                                    </a>
+                                    <br><br>
                                 </div>
                             </div>
                         </div>

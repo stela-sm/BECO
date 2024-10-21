@@ -375,19 +375,16 @@ $(window).scroll(function() {
 });
 
 
-function carregarPosts(search) {
-    // Evita que a função seja chamada várias vezes ao mesmo tempo
-   
-// console.log("page=" + page)
-    // console.log("caralho")
+function carregarPosts(busca) {
+  
     loading = true;
     $.ajax({
-        url: 'controller/controller.php?loadposts=1&search='+search, 
+        url: 'controller/controller.php?loadposts=1&search='+busca, 
         type: 'POST',
         data: { page: page            },
         dataType: 'json',
         success: function(data) {
-            console.log(data.offset)
+            console.log('controller/controller.php?loadposts=1&search='+busca)
             console.log("Resposta do servidor:", data)
             if (data.result > 0){
 
@@ -564,13 +561,26 @@ function carregarPosts(search) {
       
 </script>
 <script>
+    function encodeHash(filtro) {
+    return filtro.replace(/#/g, '%23');
+}
+
     function limpar(){
         $('.container-portifolios').empty()
     }
       window.addEventListener('message', function(event) {
         if (event.data.startsWith('#')) {
+            if(event.data !== "#Limpar"){
                 console.log('Mensagem recebida: ' + event.data)
-                
+                filtro = event.data              
+                const encodedFiltro = encodeHash(filtro);
+                console.log(encodedFiltro);
+                limpar()
+                carregarPosts(encodedFiltro)
+            }else{
+                location.reload();
+
+            }
             } else{
         console.log("AAAAAAAAAAAAAAAAAAAAA"+event.data)
         limpar();

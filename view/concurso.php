@@ -675,6 +675,35 @@ $(document).ready(function () {
     });
 
         </script>
+
+<script>
+    function encodeHash(filtro) {
+    return filtro.replace(/#/g, '%23');
+}
+
+    function limpar(){
+        $('.container-portifolios').empty()
+    }
+      window.addEventListener('message', function(event) {
+        if (event.data.startsWith('#')) {
+            if(event.data !== "#Limpar"){
+                console.log('Mensagem recebida: ' + event.data)
+                filtro = event.data              
+                const encodedFiltro = encodeHash(filtro);
+                console.log(encodedFiltro);
+                limpar()
+                carregarPosts(encodedFiltro)
+            }else{
+                location.reload();
+
+            }
+            } else{
+        console.log("AAAAAAAAAAAAAAAAAAAAA"+event.data)
+        limpar();
+        carregarPosts(event.data)
+    }});
+
+</script>
 </body>
 
 </html>

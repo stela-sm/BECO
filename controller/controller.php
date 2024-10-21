@@ -323,6 +323,7 @@ if(isset($_REQUEST["verificar"])){
             $posts = $manager->getAllPosts($limit, $offset, $search, $con);
             $posts["offset"] = "essa porra".$page;
 
+            $posts['search'] =  $_REQUEST['search'];;
             echo json_encode($posts);
            
         }
@@ -375,12 +376,15 @@ for($i = 0;$i < 3;$i++){
     exit();
     }
 }
-if(isset($_FILES["changeProfilePhoto"])){
+if(isset($_FILES["changeProfilePhoto"]['name']) && !empty($_FILES["changeProfilePhoto"]['name'])){
+    var_dump($_FILES);
+    var_dump($_SESSION);
     $img = $_FILES["changeProfilePhoto"];
     move_uploaded_file($img['tmp_name'], "../assets/media/pfp/" . $img['name']);
     if($_SESSION["USER_PFP"]!== "nopfp.jpg"){$antigo = "../assets/media/pfp/".$_SESSION["USER_PFP"];
     unlink($antigo);}
     $dados["pfp"] = $img['name'];
+    $_SESSION["USER_PFP"] = $dados["pfp"];
 }
             $dados["id"] = $_SESSION["USER_ID"];
             $dados["username"] = !empty($_REQUEST["username_edit"]) ? $_REQUEST["username_edit"] : $_SESSION["USER_USERNAME"];
@@ -395,7 +399,7 @@ if(isset($_FILES["changeProfilePhoto"])){
                 $_SESSION["USER_USERNAME"] = $dados["username"];
                 $_SESSION["USER_NOME"] = $dados["nickname"];
                 $_SESSION["USER_BIOGRAFIA"] = $dados["biografia"];
-                $_SESSION["USER_PFP"] = $dados["pfp"];
+                
                 $log = new Log();    
             $ip = $_SERVER['REMOTE_ADDR'];
             $log->setTexto("{$ip} -Alteração dos dados do do usuário ". $_SESSION["USER_EMAIL"]);
@@ -408,7 +412,7 @@ if(isset($_FILES["changeProfilePhoto"])){
             <script>
 
                 document.getElementById("return").submit();
-            </script>   
+            </script>    
         <?php
             }}
 
@@ -549,10 +553,16 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
     if (!empty($_REQUEST['tagsCheck'])) {
         $inputs = $_REQUEST['tagsCheck'];
         $i = 0;
-        foreach ($inputs as $input) {
-            $dados['tags'][$i] = $input; 
-            $i++;
-        }
+        $tagsString = '';
+                                 foreach ($inputs as $input) {
+                                     $tagsString .= $input . ' ';
+                                     $dados['tags'][$i] = $input; 
+                                     $i++;
+                                }
+                                $tagsString = trim($tagsString);
+                                $dados["descricao"] = $dados["descricao"] .' '. $tagsString;
+
+      
     } else {
         echo "Nenhum input foi enviado.";
     }
@@ -610,13 +620,13 @@ var_dump($dados);
 echo "<br><br>";
     var_dump($_REQUEST);
     ?>
-     <form action="../index.php" name="return" id="return" method="get">
+     <!-- <form action="../index.php" name="return" id="return" method="get">
      <input type="hidden" name="success" value="Publicado com sucesso!">
      </form>
      <script>
 
          document.getElementById("return").submit();
-     </script>   
+     </script>    -->
  <?php
 }
 if(isset($_REQUEST["payment"])){
