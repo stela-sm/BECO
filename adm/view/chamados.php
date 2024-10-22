@@ -88,21 +88,18 @@
           ID 
         </th>
         <th class="table-header-th">
-          Setor
+          Email
         </th>
         <th class="table-header-th">
-          Usuário
-        </th>
-        <th class="table-header-th">
-          Mensagem
+         Mensagem
         </th>
         <th class="table-header-th">
           Data
-        </th>        
+        </th>
         <th class="table-header-th">
           Status
-        </th>
-        <th></th>
+        </th>        
+       
         <th class="table-header-th">
          <a href="user_new.html"> <svg xmlns="http://www.w3.org/2000/svg" class=" add icon icon-tabler icon-tabler-circle-plus" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="green"fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -122,7 +119,6 @@
 require "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> chamadosTable();
-var_dump($r);
 for($i=0;$i<$r["result"];$i++){
       echo "<tr class='table-content-row'>
           <td>
@@ -139,24 +135,21 @@ for($i=0;$i<$r["result"];$i++){
             ".$r[$i]["datahora"]."
           </td>
           <td>
-            ".$r[$i]["status"]."
-          </td>
+          <select disabled onclick='enableSelect(this)'>
+            <option>".$r[$i]["status"]."</option>
+            <option>Em análise</option>
+            <option>Aguardando Retorno</option>
+            <option>Rejeitada</option>
+            <option>Finalizada</option>
+          </select>
+          
+            </td>
           
          
-<td class='eye-td'>
-  <a class='btn btn-eye' href='user_view.php?id=".$r[$i]['ID_USER']."'>
-   <svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-pencil' width='26' height='26' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'>
-  <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
-  <path d='M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4' />
-  <path d='M13.5 6.5l4 4' />
-</svg>
-
-  </a>
-</td>
 
 <td class='eye-td'>
-  <a class='btn btn-eye' href='user_view.php?id=".$r[$i]['ID_USER']."'>
-<svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-messages' width='26' height='26' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+  <a class='btn btn-eye' >
+<svg xmlns='http://www.w3.org/2000/svg' href='mailto:destinatario@example.com?subject=Assunto%20do%20Email&body=Olá,%0D%0AEste%20é%20um%20email%20pré-definido.%0D%0AObrigado!' class='icon icon-tabler icon-tabler-messages' width='26' height='26' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'>
   <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
   <path d='M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10' />
   <path d='M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2' />
@@ -166,11 +159,9 @@ for($i=0;$i<$r["result"];$i++){
 </td>
       </tr>";}?>
     </table>
+    
   </div>
 </section>
-<script>
- 
-</script>
 
 </body>
 </html>

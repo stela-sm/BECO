@@ -324,7 +324,8 @@
           datasets: [{
             label: '# of Votes',
             data: [data['jan'], data['feb'], data['mar'], data['jun'], data['jul'], data['aug'], data['sep'], data['oct'],data['nov'],data['dec']],
-            borderWidth: 1
+            borderWidth: 3,
+            borderColor: 'rgb(95, 232, 92)',
           }]
         },
         
@@ -368,14 +369,14 @@
                     label: 'Pagamentos',
                     data: [data['debito'], data['credito'], data['pix']],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)'
+                        'rgb(154, 154, 154)',
+            'rgb(102, 102, 102)',
+            'rgb(0, 0, 0)'
                     ],
                     borderColor: [
-                       'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)'
+                       'rgb(154, 154, 154)',
+            'rgb(102, 102, 102)',
+            'rgb(0, 0, 0)'
                     ],
                     borderWidth: 2
                 }]
@@ -435,7 +436,8 @@
           datasets: [{
             label: '# of Votes',
             data: [data['jan'], data['feb'], data['mar'], data['jun'], data['jul'], data['aug'], data['sep'], data['oct'],data['nov'],data['dec']],
-            borderWidth: 1
+            borderWidth: 3,
+            borderColor: 'rgb(95, 232, 92)',
           }]
         },
         
@@ -468,16 +470,16 @@ const datab = {
         label: 'Likes',
         data: [120, 90, 80],
         backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)'
+            'rgb(95, 232, 92)',
+            'rgb(95, 232, 92)',
+            'rgb(95, 232, 92)'
         ],
         borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)'
+            'rgb(95, 232, 92)',
+            'rgb(95, 232, 92)',
+            'rgb(95, 232, 92)'
         ],
-        borderWidth: 1
+        borderWidth: 2
     }]
 };
 

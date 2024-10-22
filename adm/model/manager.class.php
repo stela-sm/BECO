@@ -659,8 +659,9 @@ public function admLoginID($dados){
                         'status' => $row['status'],                       
                         ];
                         $i++;
+                        $chamados['result'] = $i;
                         }
-                        return ['result' => 1, 'chamados' => $chamados];
+                        return   $chamados;
                         }else{
                             return 2;
                         }

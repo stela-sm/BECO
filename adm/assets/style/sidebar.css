@@ -12,8 +12,8 @@
   }
 :root{
     /*****  cores  *****/
-    --body-color: #E4E9F7;
-    --sidebar-color: #FFF;
+    --body-color: #ffffff;
+    --sidebar-color: #f1f1f1;
      --primary-color: lightblue;
     /*--secondary-color:;
     --toogle-color:; */
@@ -77,13 +77,13 @@ body{
     transition: var(--tran-04);
 }
 .sidebar li:hover{
-    background-color: var(--primary-color);
-    color: #f6f7fa !important;
+    background-color: #000000;
+    color: #5fe85c !important;
 }
 
 .sidebar li:hover a, .sidebar li:hover .icon{
-   stroke: #f6f7fa;
-   color: #f6f7fa ;
+   stroke: #5fe85c;
+   color: #5fe85c ;
 }
 .sidebar li a{
     font-family: radikal-medium;
@@ -167,7 +167,7 @@ header .image-text .header-text{
     font-family: radikal-light;
     border-radius: 6px;
     border:none;
-   
+   background-color: var(--sidebar-color);
     
 }
 .top-content .nav-link-profile-dropdown, .nav-link-notifications{

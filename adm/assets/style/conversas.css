@@ -12,8 +12,8 @@
   }
 :root{
     /*****  cores  *****/
-    --body-color: #E4E9F7;
-    --sidebar-color: #FFF;
+    --body-color: #ffffff;
+    --sidebar-color: #f1f1f1;
      --primary-color: lightblue;
     /*--secondary-color:;
     --toogle-color:; */
@@ -45,7 +45,7 @@ padding: 16px;
 }
 .col-lateral .searchbar-div{
     padding: 10px 15px;
-    background-color: #dddddd;
+    background-color: var(--sidebar-color);
     border-radius: 6px;
 }
 .col-lateral .searchbar-div input{

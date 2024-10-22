@@ -39,7 +39,7 @@ setcookie("ADM_ID", $_SESSION["ADM_ID"], time() + (86400 * 30), "/", "", false, 
   ?>
 
             <li class="nav-link">
-                    <a href="dashboard.php" target="iframe">
+                    <a href="dashboard.php" onclick='changeClass(this)' target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chart-pie" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <path d="M10 3.2a9 9 0 1 0 10.8 10.8a1 1 0 0 0 -1 -1h-6.8a2 2 0 0 1 -2 -2v-7a.9 .9 0 0 0 -1 -.8" />
@@ -50,7 +50,7 @@ setcookie("ADM_ID", $_SESSION["ADM_ID"], time() + (86400 * 30), "/", "", false, 
                 </li>
 
                 <li class="nav-link">
-                    <a href="adm.php" target="iframe">
+                    <a href="adm.php" onclick='changeClass(this)' target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-shield" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h2" />
@@ -62,7 +62,7 @@ setcookie("ADM_ID", $_SESSION["ADM_ID"], time() + (86400 * 30), "/", "", false, 
                 </li>
 
                 <li class="nav-link">
-                    <a href="users.php" target="iframe">
+                    <a href="users.php" onclick='changeClass(this)' target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -78,7 +78,7 @@ if($_SESSION["ADM_PODER"] >= 3){
    
 
                 <li class="nav-link">
-                    <a href="transacoes.php" target="iframe">
+                    <a href="transacoes.php" onclick='changeClass(this)' target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
@@ -94,7 +94,7 @@ if($_SESSION["ADM_PODER"] >= 3){
 if($_SESSION["ADM_PODER"] >= 4){
               ?>
                 <li class="nav-link">
-                    <a href="developers.php" target="iframe">
+                    <a href="developers.php" onclick='changeClass(this)' target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code-circle" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M10 14l-2 -2l2 -2" />
@@ -108,13 +108,13 @@ if($_SESSION["ADM_PODER"] >= 4){
 }
 ?>
                 <li class="nav-link">
-                    <a href="chamados.php" target="iframe">
+                    <a href="chamados.php" onclick='changeClass(this)' target="iframe">
                        <span><svg  xmlns="http://www.w3.org/2000/svg"  width="26"  height="26"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-message-circle-exclamation"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15.02 19.52c-2.34 .736 -5 .606 -7.32 -.52l-4.7 1l1.3 -3.9c-2.324 -3.437 -1.426 -7.872 2.1 -10.374c3.526 -2.501 8.59 -2.296 11.845 .48c1.96 1.671 2.898 3.963 2.755 6.227" /><path d="M19 16v3" /><path d="M19 22v.01" /></svg></span>
                           <span class="text nav-text">Chamados</span>
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="registros.php" target="iframe">
+                    <a href="registros.php" onclick='changeClass(this)' target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-databricks" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M3 17l9 5l9 -5v-3l-9 5l-9 -5v-3l9 5l9 -5v-3l-9 5l-9 -5l9 -5l5.418 3.01" />
@@ -124,7 +124,7 @@ if($_SESSION["ADM_PODER"] >= 4){
                 </li>
 
                 <li class="nav-link">
-                    <a href="conversas.php" target="iframe">
+                    <a href="conversas.php" onclick='changeClass(this)' target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
