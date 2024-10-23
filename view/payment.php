@@ -28,8 +28,8 @@ session_start();
   }
 :root{
     /*****  cores  *****/
-    --body-color: #ffffff;
-    --sidebar-color: #f1f1f1;
+    --body-color: #edebfa;
+    --sidebar-color: #ffffff;
      --primary-color: lightblue;
     /*--secondary-color:;
     --toogle-color:; */

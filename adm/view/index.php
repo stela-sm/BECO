@@ -14,10 +14,18 @@ setcookie("ADM_ID", $_SESSION["ADM_ID"], time() + (86400 * 30), "/", "", false, 
     <link rel="stylesheet" href="../assets/style/sidebar.css">
     <title>BECO | Administração</title>
 </head>
+<style>
+  .active, .active .icon{
+    color: #9c9bff !important;
+    stroke: #9c9bff;
+   color: #9c9bff ;
+    }
+
+</style>
 <body>
     <nav class="sidebar">
         <header>
-            <div class="image-text">
+            <div onclick="site()" class="image-text">
         <span class="image">
             <img src="../assets/media/logo.png" alt="logo BECO">
         </span>
@@ -39,7 +47,7 @@ setcookie("ADM_ID", $_SESSION["ADM_ID"], time() + (86400 * 30), "/", "", false, 
   ?>
 
             <li class="nav-link">
-                    <a href="dashboard.php" onclick='changeClass(this)' target="iframe">
+                    <a href="dashboard.php" id='firstLink' onclick='changeClass(this)' target="iframe">
                        <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chart-pie" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <path d="M10 3.2a9 9 0 1 0 10.8 10.8a1 1 0 0 0 -1 -1h-6.8a2 2 0 0 1 -2 -2v-7a.9 .9 0 0 0 -1 -.8" />
@@ -182,7 +190,7 @@ if($_SESSION["ADM_PODER"] >= 4){
             <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
             <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
           </svg>
-          <a  href="#" class="profile-name">Bem Vindo, <?php echo  strtok($_SESSION['ADM_NOME'], " ,.!"); ?></a>
+          <a  href="#" style="color:#9c9bff;"class="profile-name">Bem Vindo, <?php echo  strtok($_SESSION['ADM_NOME'], " ,.!"); ?></a>
           
         </li>
     </div>
@@ -305,6 +313,18 @@ if($_SESSION["ADM_PODER"] >= 4){
             // Exiba a URL atualizada no console
             console.log('Link do iFrame:', iframe.src);
         });
+        function changeClass(selectedLink) {
+        const links = document.querySelectorAll('.nav-link a');
+        links.forEach(link => {
+            link.classList.remove('active');
+        });
+        selectedLink.classList.add('active');
+    }
+   
+        document.getElementById("firstLink").click();
+    function site(){
+      window.location.href = "../../index.php";
+    }
 </script>
 </body>
 </html>

@@ -325,7 +325,7 @@
             label: '# of Votes',
             data: [data['jan'], data['feb'], data['mar'], data['jun'], data['jul'], data['aug'], data['sep'], data['oct'],data['nov'],data['dec']],
             borderWidth: 3,
-            borderColor: 'rgb(95, 232, 92)',
+            borderColor: 'rgb(156, 155, 255)',
           }]
         },
         
@@ -369,14 +369,14 @@
                     label: 'Pagamentos',
                     data: [data['debito'], data['credito'], data['pix']],
                     backgroundColor: [
-                        'rgb(154, 154, 154)',
-            'rgb(102, 102, 102)',
-            'rgb(0, 0, 0)'
+                        '#e7e6fb',
+            '#b8b4ce',
+            '#9c9bff'
                     ],
                     borderColor: [
-                       'rgb(154, 154, 154)',
-            'rgb(102, 102, 102)',
-            'rgb(0, 0, 0)'
+                       '#e7e6fb',
+            '#b8b4ce',
+            '#9c9bff'
                     ],
                     borderWidth: 2
                 }]
@@ -437,7 +437,7 @@
             label: '# of Votes',
             data: [data['jan'], data['feb'], data['mar'], data['jun'], data['jul'], data['aug'], data['sep'], data['oct'],data['nov'],data['dec']],
             borderWidth: 3,
-            borderColor: 'rgb(95, 232, 92)',
+            borderColor: 'rgb(156, 155, 255)',
           }]
         },
         
@@ -470,14 +470,14 @@ const datab = {
         label: 'Likes',
         data: [120, 90, 80],
         backgroundColor: [
-            'rgb(95, 232, 92)',
-            'rgb(95, 232, 92)',
-            'rgb(95, 232, 92)'
+            'rgb(156, 155, 255)',
+            'rgb(156, 155, 255)',
+            'rgb(156, 155, 255)'
         ],
         borderColor: [
-            'rgb(95, 232, 92)',
-            'rgb(95, 232, 92)',
-            'rgb(95, 232, 92)'
+            'rgb(156, 155, 255)',
+            'rgb(156, 155, 255)',
+            'rgb(156, 155, 255)'
         ],
         borderWidth: 2
     }]

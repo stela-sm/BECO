@@ -12,8 +12,8 @@
   }
 :root{
     /*****  cores  *****/
-    --body-color: #ffffff;
-    --sidebar-color: #f1f1f1;
+    --body-color: #edebfa;
+    --sidebar-color: #ffffff;
      --primary-color: lightblue;
     /*--secondary-color:;
     --toogle-color:; */
@@ -48,7 +48,7 @@ body{
   background-color: var(--sidebar-color);
 }
 .header-col{
-    background-color: #575757;
+    background-color: #9c9bff;
     border-radius: 6px;
     color: var(--sidebar-color);
     padding: 20px;

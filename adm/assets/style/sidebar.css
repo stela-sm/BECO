@@ -12,8 +12,8 @@
   }
 :root{
     /*****  cores  *****/
-    --body-color: #ffffff;
-    --sidebar-color: #f1f1f1;
+    --body-color: #eeedf7;
+    --sidebar-color: #ffffff;
      --primary-color: lightblue;
     /*--secondary-color:;
     --toogle-color:; */
@@ -55,6 +55,7 @@ body{
     border-radius: 6px;
 }
 .sidebar header .image-text{
+    
     display: flex;
     padding: 15px;
     align-items: center ;
@@ -62,7 +63,9 @@ body{
     color: var(--text-color);
     margin-bottom: 15px;
 }
-
+.image-text:hover{
+ cursor:pointer;
+}
 .sidebar .text{
     font-size: 1.2em;
 }
@@ -77,13 +80,16 @@ body{
     transition: var(--tran-04);
 }
 .sidebar li:hover{
-    background-color: #000000;
-    color: #5fe85c !important;
+    background-color: transparent;
+    color: #9c9bff !important;
+    
+   transition: 0.2s ease;
 }
 
 .sidebar li:hover a, .sidebar li:hover .icon{
-   stroke: #5fe85c;
-   color: #5fe85c ;
+   stroke: #9c9bff;
+   color: #9c9bff ;
+   transition: 0.2s ease;
 }
 .sidebar li a{
     font-family: radikal-medium;
@@ -94,6 +100,8 @@ body{
     height: 100%;
     align-items: center;
     font-size: 100%;
+    
+   transition: 0.2s ease;
 }
 
 .sidebar li .icon{
@@ -101,6 +109,8 @@ body{
     justify-content: center;
     align-items: center;
     min-width: 60px;
+    
+   transition: 0.2s ease;
 }
 .sidebar .image{
     min-width:60px;

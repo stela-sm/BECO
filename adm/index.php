@@ -11,7 +11,13 @@
       header("Location: controller/controller.php?cookie=1");
     }
     ?>
-    
+    <style>
+      body{
+        background-image: url('assets/media/bglogin.png');
+        background-size: 100% 100%;
+        background-attachment: fixed;
+        }
+    </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -21,12 +27,12 @@
     <div class="container-flex container-center">
         <div class="col-12 div-form">
     <form method="post" action="controller/controller.php">
-        <h2>Olá, administrador!</h2><br/>
+        <h2 >Olá, administrador!</h2><br/>
         <h6>Por Favor, insira seu email e senha</h6>
         <input type="hidden"  name="login_adm" value="1">
         <input type="text" placeholder="Email..." id="adm" name="adm"><br/>
         <input type="password" placeholder="Senha..." id="" name="senha"><br/><br/>
-        <input type="submit" value="Entrar"/>
+        <input type="submit" style="background-color:#9c9bff;"value="Entrar"/>
         <button type="button" class="button-password" data-toggle="modal" data-target="#modalExemplo">Esqueci minha senha
 </button>   
     </form>

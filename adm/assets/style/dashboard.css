@@ -12,8 +12,8 @@
   }
 :root{
     /*****  cores  *****/
-    --body-color: #ffffff;
-    --sidebar-color: #f1f1f1;
+    --body-color: #edebfa;
+    --sidebar-color: #ffffff;
      --primary-color: lightblue;
     /*--secondary-color:;
     --toogle-color:; */
@@ -85,12 +85,12 @@ font-size: 1.6em;
 
 }
 .icon-card{
-  background-color: #000000;
+  background-color: var(--body-color);
   padding: 15px 15px;
   border-radius: 50%;
 }
 .icon-card svg{
-  stroke:#5fe85c;
+  stroke:#9c9bff;
 }
 
 
@@ -245,8 +245,8 @@ padding-top: -5px;}
 }
 
 .today {
-  background-color:  rgb(95, 232, 92);
-  color:rgb(0, 0, 0);
+  background-color:  rgb(156, 155, 255);
+  color:#ffffff;
 
   font-family:radikal-medium;
   border-radius: 6px;
