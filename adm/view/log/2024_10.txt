@@ -50,3 +50,7 @@
 2024-10-23 02:13:58 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
 2024-10-23 02:15:52 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
 2024-10-23 02:15:59 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
+2024-10-23 02:38:25 - ::1 - Erro no login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-10-23 02:39:09 - ::1 - Erro no login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-10-23 02:39:29 - ::1 - Erro no login do usuario stelamontenegro2@gmail.com pelo dispositivo de ip ::1.
+2024-10-23 02:39:39 - ::1 - Erro no login do usuario stelamontenegro2@gmail.com pelo dispositivo de ip ::1.

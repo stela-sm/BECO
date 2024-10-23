@@ -1,4 +1,5 @@
-<?php session_start()?>
+<?php session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -491,7 +492,8 @@ function carregarPosts(busca) {
     
 }
 </script>
-<?php $id = isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : '0'; 
+<?php
+$id = isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : ''; 
 ?>
 <script>
     $(document).on('click', '.likeButton', function() {    
