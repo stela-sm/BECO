@@ -871,7 +871,7 @@ public function getPost($id){
     m.ID_MIDIA, m.arquivo, m.tipo AS midia_tipo, m.datahora AS midia_datahora,
 
     -- Campos da tabela usuario
-    u.nome, u.username, u.pfp
+    u.ID_USER, u.nome, u.username, u.pfp
 
 FROM 
     postagem AS p
@@ -921,7 +921,7 @@ $dados = $res->fetch_all(MYSQLI_ASSOC);
                          'software' => $row['software'],
                     ];
                     $result['user'] = [
-                        'ID_USER' => $id,
+                        'ID_USER' => $row['ID_USER'],
                         'nickname' => $row['nome'],
                         'username' => $row['username'],
                         'pfp' => $row['pfp']];
@@ -1263,8 +1263,21 @@ public function newCompra($dados){
     $conn = $this->connect();
     $sql = "INSERT INTO `compras`(`id_prod`, `valor`, `comprador`, `vendedor`, `metodo`, `cod_card_num`, `codigo`, `datahora`, `status`) VALUES ('{$dados['id_post']}','{$dados['valor']}','{$dados['id_user']}','{$dados['vendedor']}',null,null,null,now(),1)";
     $conn->query($sql);  
+    $lastId = $conn->insert_id;
+    return $lastId;
 }
-
+//updateCompra() para mudar o status para "Pago"
+public function updateCompra($id){
+    $conn = $this->connect();
+    $sql = "UPDATE `compras` SET `status` = '2' WHERE `ID_COMPRA` = '{$id}'";
+    $conn->query($sql);
+    }
+    //updateCompra() para mudar o status para "Cancelado"
+    public function cancelarCompra($id){
+        $conn = $this->connect();
+        $sql = "UPDATE `compras` SET `status` = '3' WHERE `ID_COMPRA` = '{$id}'";
+        $conn->query($sql);
+        }
 public function getAtivos($id){
     $sql = "SELECT arquivo FROM ativos WHERE id_post = {$id}  ";
      $conn = $this->connect();

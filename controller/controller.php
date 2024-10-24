@@ -638,6 +638,8 @@ $dados["valor"] = $_REQUEST["valor"];
 $dados["id_user"] = $_SESSION["USER_ID"];
 $res = $manager-> newCompra($dados);
 $r = $manager-> getAtivos($dados["id_post"]);
+$_SESSION['id_compra'] = $res;
+$_SESSION['id_vend'] = $dados['vendedor'];
 $_SESSION['ativos'] = $r; // Armazena o array na sessão
 ?>
     <form action="../view/payment.php?amount=<?php echo $dados["valor"] ?>" name="return" id="return" method="post">
@@ -677,5 +679,34 @@ if($r==true){
         document.getElementById("return").submit();
     </script>
     <?php
-}}
+}} 
+
+if(isset($_REQUEST['payed'])){
+    $id = $_REQUEST['id'];
+    require_once "../model/manager.class.php";
+$manager = new Manager();
+$r = $manager-> updateCompra($id);
+?>
+    <form action="../index.php" name="return" id="return" method="post">
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+    <?php
+}
+if(isset($_REQUEST['cancelar'])){
+    $id = $_REQUEST['id'];
+    require_once "../model/manager.class.php";
+    $manager = new Manager();
+    $r = $manager-> cancelarCompra($id);
+    ?>
+    <form action="../index.php" name="return" id="return" method="post">
+        </form>
+        <script>
+            document.getElementById("return").submit();
+            </script>
+            <?php
+            
+}
+
 ?>

@@ -3002,7 +3002,7 @@ for (let i = 0; i < countdowns.length; i++) {
             div_midia.innerHTML = '';
             tags.innerHTML = '';
             softwares.innerHTML = '';
-          
+            console.log(response);
             loadComentsFunction(id)
             nickname.innerHTML = response.user.nickname;
             username.innerHTML = response.user.username;
@@ -3037,7 +3037,7 @@ for (let i = 0; i < countdowns.length; i++) {
                
             }else{
                
-                valor.innerHTML = ` <h3  class='valorPortifolio_cCPB'><span>R$</span>${response.produtos.valor}</h3> <a href='controller/controller.php?payment=1&id_post=${id}&valor=${response.produtos.valor}&id_vend=${response.user.ID_USER}' id='link_modal_portifolio'class='btn btn-primary'>Comprar</a> `;
+                valor.innerHTML = ` <h3  class='valorPortifolio_cCPB'><span>R$</span>${response.produtos.valor}</h3> <a target='_blank' href='controller/controller.php?payment=1&id_post=${id}&valor=${response.produtos.valor}&id_vend=${response.user.ID_USER}' id='link_modal_portifolio'class='btn btn-primary'>Comprar</a> `;
               
             }
 
@@ -3050,6 +3050,21 @@ for (let i = 0; i < countdowns.length; i++) {
     });
 }
 
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+    const links = document.querySelectorAll('a.link[ajudaCenter="ligado"]');
+    links.forEach(link => {
+        link.addEventListener('click', function (event) {
+            console.log("carai")
+            event.preventDefault();
+            window.open('view/atendimento.php', '_blank',
+                "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=800,width=431,height=585"
+            )
+        })
+    })
+})
     </script>
   
     <script>

@@ -85,7 +85,7 @@ padding: 15px 25px;
     text-align: right;
     
     font-weight: 600;
-    color: rgb(129, 209, 9);
+    color: #9c9bff;
 }
 .accordion{
     height: 100%;
@@ -268,18 +268,18 @@ color: #D9544D;
                   <div class="row card-row">
                     <div class="col-6 card-col">
                       <label for="" class="label-padrao">Nome do Titular</label><br>
-                    <input type="text" name="name" id="" class="input-padrao"><br><br>
+                    <input type="text" name="name" id="" class="input-padrao input-cred"><br><br>
 
                     
                     <label for="" class="label-padrao">Número do Cartão</label><br>
-                    <input type="text" name="name" id="" class="input-padrao"><br><br>
+                    <input type="text" name="name" id="cartao1" maxlength="19" class="input-padrao input-cred"><br><br>
                     
                     <label for="" class="label-padrao" style="width: 45%;">Data de Vencimento</label> 
                     <label for="" class="label-padrao" style="width: 40%;">CVV</label><br>
-                    <input type="month" name="dueDate" id="" class="input-padrao-date">
-                    <input type="text" maxlength="3" name="cvv" id="" class="input-padrao-cvv">
+                    <input type="month" name="dueDate" id="" class="input-padrao-date input-cred">
+                    <input type="text" maxlength="3" name="cvv" id="" class="input-padrao-cvv input-cred">
                     <br><br>
-                    <button class="confirm" type="button"onclick="confirm(event)">Confirmar</button>
+                    <button class="confirm" type="button"onclick="confirm(event, 'input-cred')">Confirmar</button>
                   </div>
                     <div class="col-6 card-col-center">
                       
@@ -306,17 +306,17 @@ color: #D9544D;
                   <div class="row card-row">
                     <div class="col-6 card-col">
                       <label for="" class="label-padrao">Nome do Titular</label><br>
-                    <input type="text" name="name" id="" class="input-padrao"><br><br>
+                    <input type="text" name="name" id="" class="input-padrao input-deb"><br><br>
 
                     
                     <label for="" class="label-padrao">Número do Cartão</label><br>
-                    <input type="text" name="name" id="" class="input-padrao"><br><br>
+                    <input type="text" name="name" id="cartao2" maxlength="19" class="input-padrao input-deb"><br><br>
                     
-                    <label for="" class="label-padrao" style="width: 45%;">Data de Vencimento</label> 
-                    <label for="" class="label-padrao" style="width: 40%;">CVV</label><br>
-                    <input type="month" name="dueDate" id="" class="input-padrao-date">
-                    <input type="text" maxlength="3" name="cvv" id="" class="input-padrao-cvv"><br><br>
-                    <button class="confirm" type="button"onclick="confirm(event)">Confirmar</button>
+                    <label for="" class="label-padrao " style="width: 45%;">Data de Vencimento</label> 
+                    <label for="" class="label-padrao " style="width: 40%;">CVV</label><br>
+                    <input type="month" name="dueDate" id="" class="input-padrao-date input-deb">
+                    <input type="text" maxlength="3" name="cvv" id="" class="input-padrao-cvv input-deb"><br><br>
+                    <button class="confirm" type="button"onclick="confirm(event, 'input-deb')">Confirmar</button>
                
                   </div>
                     <div class="col-6 card-col-center">
@@ -339,10 +339,42 @@ color: #D9544D;
 for ($i = 1; $i < $_SESSION['ativos']['number']; $i++) {
         echo '<a id="file" href="../assets/media/port_ativos/' . $_SESSION['ativos'][$i]['arquivo'] . '" download style="display: none;"></a>';
   } 
+  var_dump($_SESSION);
+  echo "
+  <script>
+  
+  
+  const id = ".$_SESSION['id_compra']."
+  
+  
+  
+  
+  
+  
+  
+  </script>
+  
+  "
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    function aplicarMascara(input) {
+        input.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+
+            this.value = value.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+        });
+    }
+
+    const input1 = document.getElementById('cartao1');
+    const input2 = document.getElementById('cartao2');
+
+    aplicarMascara(input1);
+    aplicarMascara(input2);
+
+
+
     function copyText(event) {
             event.preventDefault(); 
 
@@ -364,7 +396,29 @@ for ($i = 1; $i < $_SESSION['ativos']['number']; $i++) {
                     console.error('Erro ao copiar: ', err);
                 });
         }
-    function confirm(event){
+    //function vrif(type) to check if the inputs of the card are lenght > 0 , the inputs have to me gotten by de element class
+    function verif(type) {
+      var inputs = document.getElementsByClassName(type);
+      for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].value.length == 0) {
+          Swal.fire({
+            title: "Preencha todos os campos",
+            text: "Por favor, preencha todos os campos",
+            icon: "error",
+            allowOutsideClick: false,
+            })
+            return false;
+            }
+            }
+            return true;
+            }
+    
+    function confirm(event, type){
+
+      verif(type)
+      if(verif(type)){
+
+      console.log(id)
       event.preventDefault(); 
 
       var links = document.querySelectorAll('a[id^="file"]');
@@ -372,7 +426,7 @@ for ($i = 1; $i < $_SESSION['ativos']['number']; $i++) {
         link.click();
     });
       
-      
+     
       Swal.fire({
   title: "Compra confirmada",
   text: "Parabéns, seu material já está sendo baixado!",
@@ -382,9 +436,9 @@ for ($i = 1; $i < $_SESSION['ativos']['number']; $i++) {
   confirmButtonText: "Ok",
     }).then((result) => {
   if (result.isConfirmed) {
-    window.location.href = "index.php";
-  } 
-  });
+    window.location.href = "../controller/controller.php?payed=1&id="+id;
+  }
+  })};
 
 
 }
@@ -403,7 +457,7 @@ function cancelar(event){
   cancelButtonText: "Não", 
     }).then((result) => {
   if (result.isConfirmed) {
-    window.location.href = "../controller/controller.php?cancelar=1";
+    window.location.href = "../controller/controller.php?cancelar=1&id="+id;
   } 
   });
 
