@@ -66,3 +66,4 @@
 2024-10-24 00:44:04 - ::1 - Erro no login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
 2024-10-24 00:44:39 - ::1 - Criação do administrador 2024-10-24 00:44:48 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
 2024-10-24 01:05:11 - ::1 - Login do usuario stelamontenegro2@gmail.com pelo dispositivo de ip ::1.
+2024-10-25 00:32:29 - ::1 - Login do usuario stelamontenegro2@gmail.com pelo dispositivo de ip ::1.

@@ -1116,18 +1116,20 @@ setInterval(checkMemoryUsage, checkInterval);
 
 require_once "../model/manager.class.php";
 $manager = new Manager();
-$compras= $manager -> getCompras($_SESSION["USER_ID"]);
-
+$compra= $manager -> getCompras($_SESSION["USER_ID"]);
+var_dump($compra);
     echo '<div class="grid_tableMajorContent">';
     // var_dump($compras);
-    foreach ($compras as $compra){
-        $postNome = $compra['titulo'];
-        $thumb = $compra['thumbnail'];
-        $vendedorNickname = $compra['nome'];
-        $data = $compra['datahora'];
-        $preco = htmlspecialchars(number_format($compra['valor'], 2, ',', '.'));
+    for($i=1;$i<=count($compra);$i++){
+        $id = $compra[$i]['dados']['ID_COMPRA'];
+        $postNome = $compra[$i]['dados']['titulo'];
+        $thumb = $compra[$i]['dados']['thumbnail'];
+        $vendedorNickname = $compra[$i]['dados']['nome'];
+        $data = $compra[$i]['dados']['datahora'];
+        $preco = htmlspecialchars(number_format($compra[$i]['dados']['valor'], 2, ',', '.'));
 
         echo "
+
             <div class='row'>
                 <div class='cell photo'>
                     <img src='../assets/media/thumbnail/{$thumb}' style='width: 50px; height:50px;'alt='Foto'>
@@ -1146,7 +1148,7 @@ $compras= $manager -> getCompras($_SESSION["USER_ID"]);
                             <path d='M7 11l5 5l5 -5' />
                             <path d='M12 4l0 12' />
                         </svg>
-                        <span>Download</span>
+                        <span onclick:'download('link{$id}')'>Download</span>
                     </button>
                 </div>
             </div>

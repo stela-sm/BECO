@@ -1306,7 +1306,7 @@ public function getAtivos($id){
 
  public function getCompras($userId) {
     $sql = "
-        SELECT c.ID_COMPRA, c.datahora, c.valor, u.nome, p.titulo, p.thumbnail
+        SELECT c.ID_COMPRA, c.datahora, c.id_prod, c.valor, u.nome, p.titulo, p.thumbnail
         FROM compras c
         JOIN usuario u ON c.vendedor = u.ID_USER
         JOIN postagem p ON c.id_prod =  p.ID_POST
@@ -1314,12 +1314,15 @@ public function getAtivos($id){
     ";
     $conn = $this->connect();
     $res = $conn->query($sql);
-
     $compras = array();
-    while ($row = $res->fetch_assoc()) {
-        $compras[] = $row;
-    }
+    $numRows = $res->num_rows;
 
+for ($i = 0; $i < $numRows; $i++) {
+    $row = $res->fetch_assoc(); 
+    $i++;
+    $compras[$i]['ativos'] = $this->getAtivos($row['id_prod']);
+    $compras[$i]['dados'] = $row;
+}
     return $compras;
 
  }
