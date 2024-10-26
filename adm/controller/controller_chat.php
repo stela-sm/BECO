@@ -69,6 +69,7 @@ if (isset($_REQUEST["inserir_file"])) {
 
 if(isset($_REQUEST["select"])){
 
+    header('Content-Type: application/json');
     require "../model/manager.class.php";
 
     $manager = new Manager();
@@ -77,17 +78,20 @@ if(isset($_REQUEST["select"])){
 $r = $manager->showMessages($idConversa,$key);
 
 echo json_encode($r);
+exit; 
 }
 
 
 if(isset($_REQUEST["conversas"])){
 
+    header('Content-Type: application/json');
 require "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> showConversas($_SESSION["ADM_ID"]);
 
 
 echo json_encode($r);
+exit; 
 }
 
 

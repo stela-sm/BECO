@@ -1121,6 +1121,10 @@ var_dump($compra);
     echo '<div class="grid_tableMajorContent">';
     // var_dump($compras);
     for($i=1;$i<=count($compra);$i++){
+        for($ii=1;$ii<$compra[$i]['ativos']['number'];$ii++){
+            echo "<a class='link{$compra[$i]['dados']['ID_COMPRA']}' href='../assets/port_ativos/{$compra[$i]['ativos'][$ii]['arquivo']}' download='{$compra[$i]['ativos'][$ii]['arquivo']}' style='display: none;'></a>
+";
+        }
         $id = $compra[$i]['dados']['ID_COMPRA'];
         $postNome = $compra[$i]['dados']['titulo'];
         $thumb = $compra[$i]['dados']['thumbnail'];
@@ -1148,7 +1152,7 @@ var_dump($compra);
                             <path d='M7 11l5 5l5 -5' />
                             <path d='M12 4l0 12' />
                         </svg>
-                        <span onclick:'download('link{$id}')'>Download</span>
+                        <span onclick=\"download('link{$id}')\">Download</span>
                     </button>
                 </div>
             </div>
@@ -1169,6 +1173,14 @@ var_dump($compra);
     <script src="../assets/js/font.js"></script>
     <script src="../assets/js/ferramentas.js"></script>
     <script>
+        //function download(classe) to click all the links with de class link+classe
+        function download(classe) {
+            console.log('e')
+            var links = document.querySelectorAll('.'+ classe);
+            links.forEach(function(link) {
+                link.click();
+                });
+            }
         var checkboxV22 = document.querySelector('#audioRecurso_site')
         checkboxV22.addEventListener('change', inicializar);
 
@@ -1618,5 +1630,4 @@ document.getElementById('acess_frame').style.display = 'none';
     ?>
     
 </body>
-
 </html>

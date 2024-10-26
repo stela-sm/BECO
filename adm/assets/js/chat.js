@@ -76,7 +76,7 @@ function inserirConversa(idUser1, idUser2, pfp) {
             }
         },
         error: function(xhr, status, error) {
-            console.error('Erro na requisição AJAX:', error);
+            console.error('Erro na requisição AJAX:', xhr.responseTex);
         }
     });
 }
