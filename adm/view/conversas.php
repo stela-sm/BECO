@@ -95,36 +95,33 @@ function searchConversations(query) {
 function atualizarConversas() {
     
     $.ajax({
-        url: '../controller/controller_chat.php?conversas=1',
-        method: 'GET',
-        dataType: 'json',
-        success: function(response) {
-            var chatList = $('.ul-conversa');
-            chatList.empty();
+    url: '../controller/controller_chat.php?conversas=1',
+    method: 'GET',
+    dataType: 'json',
+    success: function(response) {
+        var chatList = $('.ul-conversa');
+        chatList.empty();
 
-            // Itera sobre as propriedades numéricas da resposta
-            Object.keys(response).forEach(function(key) {
-                // Verifica se a chave é um número e não é "result"
-                if (!isNaN(key)) {
-                    var conversa = response[key];
-                    var listItem = '<li class="li-conversa" onclick="list()" ><a href="chat.php?room=' + conversa.id_conversa + '&pfp='+conversa.pfp2+'" target="iframe_chat" class="a-conversa">' +
-                        '<div class="img-pfp">' +
-                        '<img src="../assets/media/pfp/' + conversa.pfp2 + '" alt="" srcset="">' +
-                        '</div>' +
-                        '<p class="name">' +
-                        conversa.nome2 +
-                        '<span class="demotext">demo texto</span>' +
-                        '</p>' +
-                        '</a></li>';
+        // Itera diretamente sobre o array de conversas na resposta
+        response.forEach(function(conversa) {
+            var listItem = '<li class="li-conversa" onclick="list()" ><a href="chat.php?room=' + conversa.id_conversa + '&pfp=' + conversa.pfp2 + '" target="iframe_chat" class="a-conversa">' +
+                '<div class="img-pfp">' +
+                '<img src="../assets/media/pfp/' + conversa.pfp2 + '" alt="" srcset="">' +
+                '</div>' +
+                '<p class="name">' +
+                conversa.nome2 +
+                '<span class="demotext">demo texto</span>' +
+                '</p>' +
+                '</a></li>';
 
-                    chatList.append(listItem);
-                }
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error('Erro na requisição:', error);
-        }
-    });
+            chatList.append(listItem);
+        });
+    },
+    error: function(xhr, status, error) { 
+        console.error("Erro na requisição:", error); // Log para erro
+        console.log("Resposta do servidor:", xhr.responseText); // Log para a resposta do servidor em caso de erro
+    }
+});
 }
 
 

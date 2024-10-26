@@ -522,7 +522,7 @@ public function admLoginID($dados){
         }
 
         public function getUserInfo($id_user){
-            $sql= "SELECT * FROM administradores where ID_ADM = {$id_user}";              
+            $sql= "SELECT * FROM administradores WHERE ID_ADM = '{$id_user}'";              
             $res = $this->connect()->query($sql);
             $dados = [];
             while($row=$res->fetch_assoc()){
@@ -532,15 +532,17 @@ public function admLoginID($dados){
             
             $this->connect()->close();
             return $dados;
+            
          }
 
         public function showConversas($idRemetente){
-
-            $sql= "SELECT * FROM conversas where id_user1 = {$idRemetente} or id_user2 = {$idRemetente}";  
+            
+            $sql= "SELECT * FROM conversas where tabela = 'administradores' AND id_user1 = {$idRemetente} or id_user2 = {$idRemetente} ";  
             $res = $this->connect()->query($sql);
             $dados = [];
             $i = 0;
             while($row=$res->fetch_assoc()){
+                var_dump($row);
                 if ($row["id_user1"]==$idRemetente){
                 $infoUsuario = $this->getUserInfo($row["id_user2"]);
                 $dados[$i]["id_user"] = $row["id_user2"];
@@ -596,8 +598,8 @@ public function admLoginID($dados){
 
         public function verificarConversa($id_user1, $id_user2){
             $sql = "SELECT * FROM conversas WHERE id_user1 = '$id_user1'
-            AND id_user2 = '$id_user2' OR id_user1 = '$id_user2'
-            AND id_user2 = '$id_user1'";
+            AND id_user2 = '$id_user2' AND tabela = 'administradores' OR id_user1 = '$id_user2'
+            AND id_user2 = '$id_user1' AND tabela = 'administradores'";
             $res = $this->connect()->query($sql);
             if (!$res) {
                 return ['result' => -1, 'error' => $this->connect()->error];
@@ -614,7 +616,7 @@ public function admLoginID($dados){
             
            $verif = $this-> verificarConversa($id_user1,$id_user2);
            if($verif['result'] == 0){
-            $sql = "INSERT INTO conversas (id_user1, id_user2, datahora, tabela) VALUES ({$id_user1}, {$id_user2}, NOW(), 'administradores')";
+            $sql = "INSERT INTO conversas (id_user1, id_user2, datahora, tabela) VALUES ('{$id_user1}', '{$id_user2}', NOW(), 'administradores')";
            //ver se essa PORRA dessa BUCETA de campo de TABELA tá setado na PORRA do front end
             $res = $this->connect()->query($sql);
            }
@@ -624,7 +626,7 @@ public function admLoginID($dados){
         }
 
         public function pegarRoom($id_user1, $id_user2) {
-            $sql = "SELECT * FROM conversas WHERE id_user1 = {$id_user1}
+            $sql = "SELECT * FROM conversas WHERE id_user1 = '{$id_user1}'
             AND id_user2 = {$id_user2}";
             $res = $this->connect()->query($sql);
 

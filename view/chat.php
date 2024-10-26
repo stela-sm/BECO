@@ -161,10 +161,13 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
                           } else {
                               chatList.append(
                                 "<li class='chat file incoming'>"+
-    
-    "<p>"+
-    "<a href='../assets/media/chat/"+mensagem.file+"' style='color:white !important;' download='"+mensagem.file+"'>"+
-    "<svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-file-download' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='white' fill='none' stroke-linecap='round' stroke-linejoin='round'>"+
+                                "<div class='img'>" +
+                                                "<img class='img-src img-incoming' src='../assets/media/pfp/"+imgI+"' alt=''>" +
+                                            "</div>" +
+    "</a>"+    
+    "<p>"+    
+    "<a href='../assets/media/chat/"+mensagem.file+"' style='color:black !important;' download='"+mensagem.file+"'>"+
+    "<svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-file-download' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='black' fill='none' stroke-linecap='round' stroke-linejoin='round'>"+
       "<path stroke='none' d='M0 0h24v24H0z' fill='none'/>"+
       "<path d='M14 3v4a1 1 0 0 0 1 1h4' />"+
       "<path d='M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z' />"+
@@ -173,10 +176,7 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
     +"</svg> "+
         mensagem.file
     + "</p>"+
-    "<div class='img'>" +
-                                                "<img class='img-src img-outgoing' src='../assets/media/pfp/"+imgI+"' alt=''>" +
-                                            "</div>" +
-    "</a>"+
+    
            "</li>"
                               );
                           }
