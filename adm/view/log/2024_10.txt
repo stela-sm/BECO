@@ -67,3 +67,5 @@
 2024-10-24 00:44:39 - ::1 - Criação do administrador 2024-10-24 00:44:48 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
 2024-10-24 01:05:11 - ::1 - Login do usuario stelamontenegro2@gmail.com pelo dispositivo de ip ::1.
 2024-10-25 00:32:29 - ::1 - Login do usuario stelamontenegro2@gmail.com pelo dispositivo de ip ::1.
+2024-10-26 15:42:03 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
+2024-10-26 15:43:14 - ::1 - Novo concurso criado por stelamontenegro21@gmail.com2024-10-26 15:46:12 - ::1 - Novo banner adicionado por stelamontenegro21@gmail.com2024-10-26 16:09:56 - ::1 -Alteração dos dados do do usuário stelamontenegro2@gmail.com2024-10-26 16:40:07 - ::1 - Login do usuario stelamontenegro2@gmail.com pelo dispositivo de ip ::1.

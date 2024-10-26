@@ -43,7 +43,7 @@ if($r[0]['pfp']==""){
         <div class="col-2 coluna-lateral">
             <div class="pfp-circle">
             <form action="../controller/controller.php?user_update=<?php echo $r[0]["ID_USER"]?>" name="form_user_update" enctype="multipart/form-data" enctype="multipart/form-data" id="form_user_update" method="post">
-            <img src="../assets/media/pfp/<?php echo $r[0]['pfp'];  ?>" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
+            <img src="../../assets/media/pfp/<?php echo $r[0]['pfp'];  ?>" id="botao_imagem" alt="Selecionar Imagem" style="cursor: pointer;">
             </div>
             
             <input type="hidden" name="old_pfp" value="<?php echo $r[0]['pfp'];  ?>">

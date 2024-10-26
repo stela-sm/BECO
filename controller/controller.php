@@ -620,13 +620,13 @@ var_dump($dados);
 echo "<br><br>";
     var_dump($_REQUEST);
     ?>
-     <!-- <form action="../index.php" name="return" id="return" method="get">
+     <form action="../index.php" name="return" id="return" method="get">
      <input type="hidden" name="success" value="Publicado com sucesso!">
      </form>
      <script>
 
          document.getElementById("return").submit();
-     </script>    -->
+     </script>   
  <?php
 }
 if(isset($_REQUEST["payment"])){

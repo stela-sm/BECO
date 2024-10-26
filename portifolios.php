@@ -217,6 +217,8 @@ require_once "model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> banner();
 
+$concurso= $manager -> getConcursoAtual();
+
 ?>
 <body style="background-color:rgba(0,0,0,0);">
     <div class="portifolios-viewport">
@@ -224,8 +226,9 @@ $r = $manager-> banner();
             <div class="banner-curtain absolute w100 h100"></div>
             <div class="container-slogan absolute zIndex-3">
                 <h3 class="slogan-visibleMajor  wht-txt" style="font-size: 50px;">CRIATIVIDADE SEM LIMITES</h3>
+                
             </div>
-            <img ondrag="return false" src="assets/media/banner/<?php echo $r;?>" alt="" class="img-curtain"
+            <img ondrag="return false" src="adm/assets/media/banner/<?php echo $r;?>" alt="" class="img-curtain"
                 id="img-bannerCurtain">
         </div>
         <h1 class="titulo-publi" style="font-size: 42.5px;padding-top: 3%;">Publicações</h1>

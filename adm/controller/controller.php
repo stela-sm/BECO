@@ -430,9 +430,9 @@ $log->fileWriter();
 }else{
 
     if(isset($_FILES["pfp"]["name"]) and $_FILES["pfp"]["name"]!="" ){
-    $resp = move_uploaded_file($img["tmp_name"],"../assets/media/pfp/".$newName);
-    $old_pfp = "../assets/media/pfp/".$_REQUEST["old_pfp"];
-    unlink($old_pfp);
+    $resp = move_uploaded_file($img["tmp_name"],"../../assets/media/pfp/".$newName);
+    $old_pfp = "../../assets/media/pfp/".$_REQUEST["old_pfp"];
+
     }
 }
 

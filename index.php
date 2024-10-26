@@ -6,6 +6,7 @@ $manager = new Manager();
 $concurso= $manager -> getConcursoAtual();
 $softwares = $manager -> selectSoftwares();
 $artistas = $manager -> selectArtistas();
+$tag = str_replace("#", "", $concurso['tag']);
 if ($concurso["result"]==0){
 // set the values if there isnt anyone at the actual time
 
@@ -1158,7 +1159,7 @@ if ($concurso["result"]==0){
                                 <span class="authorName" id="Concurso">Participe do Concurso</span>
                             </div>
                             <div class="background-darken-curtain bdcV2"></div>
-                            <img id="concurso-vencedor_img" src="assets/media/concursos/<?php echo$concurso['img_anuncio']?>">
+                            <img id="concurso-vencedor_img" src="adm/assets/media/concursos/<?php echo$concurso['img_anuncio']?>">
                             <!--arte do ganhador-->
                         </a>
                         <div class="data-concurso br-20 ovrflw-hidden relative">
@@ -1172,7 +1173,7 @@ if ($concurso["result"]==0){
                             </div>
                             <div class="background-darken-curtain"></div>
                             <div class="image-curtain">
-                                <img src="assets/media/concursos/<?php echo$concurso['img_anuncio']?>" alt="">
+                                <img src="adm/assets/media/concursos/<?php echo$concurso['img_anuncio']?>" alt="">
                             </div>
                         </div>
                     </div>
@@ -1290,11 +1291,13 @@ if ($concurso["result"]==0){
                                     foreach ($softwares as $software) {
                                         echo '<option value="' . $software['ID_SOFTWARE'] . '">' . $software['software']
                                         . '</option>';
+                                        
                                         }
                                 ?>
                                     </select>
                                 </div>
                                 <div class="tags__checkboxes d-column jumboContainer">
+                               
                                     <span class="Subsection__Title">Tags</span>
                                     <div class="inputs_container1">
                                         <div class="container-input_checkbox relative">
@@ -1347,10 +1350,10 @@ if ($concurso["result"]==0){
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
                                                 <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
-                                                value ="#Concurso" id="#">
+                                                value ="#<?php echo $tag?>" id="#">
                                                 <span class="checkmark"></span>
                                             </label>
-                                            <span for="#" class="checkbox__informationN">Concurso</span>
+                                            <span for="#" class="checkbox__informationN"><?php echo $tag?></span>
                                         </div>
 
                                     </div>
@@ -1667,7 +1670,7 @@ if ($concurso["result"]==0){
                                 <span class="authorName" id="ConcursoAuthor-name">Participe do Concurso</span>
                                </div>
                             <div class="background-darken-curtain bdcV2"></div>
-                            <img id="concurso-vencedor_img" src="assets/media/concursos/<?php echo$concurso['img_anuncio']?>">
+                            <img id="concurso-vencedor_img" src="adm/assets/media/concursos/<?php echo$concurso['img_anuncio']?>">
                             <!--arte do ganhador-->
                         </a>
                         <div class="data-concurso br-20 ovrflw-hidden relative">
@@ -1701,7 +1704,7 @@ if ($data_atual < $data_fim) {
                             </div>
                             <div class="background-darken-curtain"></div>
                             <div class="image-curtain">
-                                <img src="assets/media/concursos/<?php echo$concurso['img_anuncio']?>"
+                                <img src="adm/assets/media/concursos/<?php echo$concurso['img_anuncio']?>"
                                     alt="">
                             </div>
                         </div>

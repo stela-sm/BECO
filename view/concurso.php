@@ -313,6 +313,12 @@ if ($concurso["result"]==0){
 .fade-in {
     opacity: 1; 
 }
+.nothingText{
+  text-align: center;
+  width: 100vw;
+  margin-top:20px;
+  font-weight: bold;
+}
   </style>
 </head>
 
@@ -326,7 +332,7 @@ if ($concurso["result"]==0){
           <h3 class="slogan-visibleMajor  wht-txt" style="font-size: 50px; text-transform:uppercase;"><?php echo $concurso["titulo"]?></h3>
           <p><?php echo $concurso["descricao"]?></p>
         </div>
-        <img ondrag="return false" src="../assets/media/concursos/<?php echo $concurso["img_banner"]?>" alt="" class="img-curtain"
+        <img ondrag="return false" src="../adm/assets/media/concursos/<?php echo $concurso["img_banner"]?>" alt="" class="img-curtain"
           id="img-bannerCurtain">
       </div>
       <div class="bannerMobile__hashtagTimer">
@@ -477,6 +483,7 @@ function carregarPosts(search) {
                     },
         dataType: 'json',
         success: function(data) {
+         
             console.log(data.offset)
             console.log("Resposta do servidor:", data)
             if (data.result > 0){
@@ -493,7 +500,8 @@ function carregarPosts(search) {
         })
         
         }else{
-           
+          nothing = "<p class='nothingText'>Ainda nenhuma publicação, seja o primeiro a participar!</p>"
+          $('.container-portifolios').append(nothing);
             loading = false; 
         }},
         error: function() {
@@ -508,6 +516,7 @@ function carregarPosts(search) {
     //esse bloco é o append dos posts, decidi fazer separado pra não carregar a função ajax e agilizar o carregamento da página
    
     function adicionarPost(id,portfolioName, artistName, imageUrl) {
+
  var isLiked;
         $.ajax({
     url: '../controller/controller.php?checkLike=1', 
