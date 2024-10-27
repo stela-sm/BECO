@@ -1171,7 +1171,7 @@ if ($concurso["result"]==0){
                                     <span class="temp__number" id="temporada-number"
                                         style="font-size: 21px;"><?php echo $concurso['tag']?></span>
                                 </div>
-                                <span   class="temporizador time-remaining__countdown">00:00:00</span>
+                                <span class="temporizador time-remaining__countdown"  id="temporizador2" >00:00:00</span>
                             </div>
                             <div class="background-darken-curtain"></div>
                             <div class="image-curtain">
@@ -1707,7 +1707,7 @@ if ($data_atual < $data_fim) {
     $diferenca = 0;
 }
                                 ?>
-                                <span  class="temporizador time-remaining__countdown">00:00:00</span>
+                                <span id='temporizador' class="temporizador time-remaining__countdown">00:00:00</span>
                             </div>
                             <div class="background-darken-curtain"></div>
                             <div class="image-curtain">
@@ -2598,6 +2598,9 @@ function new_comment(){
                 minutos = minutos < 10 ? "0" + minutos : minutos;
                 segundos = segundos < 10 ? "0" + segundos : segundos; // ta calculando os segundos mas fds
                 // console.log("porra")
+                document.getElementById('temporizador2').innerHTML = dias + ": " + horas + ": " + minutos;
+                document.getElementById('temporizador').innerHTML = dias + ": " + horas + ": " + minutos;
+
                 let countdowns = document.getElementsByClassName('temporizador');
 for (let i = 0; i < countdowns.length; i++) {
     countdowns[i].innerHTML = dias + ": " + horas + ": " + minutos;

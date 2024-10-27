@@ -347,12 +347,12 @@ if ($postagens["result"]==0){
         <div class="containerInform__resp">
           <div class="userImg_resp">
             <div class="imagemContainerRESP">
-              <img src="https://via.placeholder.com/120x120" alt="Imagem de perfil"><!--o alt deve ser o nome do usuario-->
+              <img src="../assets/media/pfp/<?php echo $_SESSION['USER_PFP']?>" alt="Imagem de perfil"><!--o alt deve ser o nome do usuario-->
             </div>
-            <span>Nome do usuario</span>
+            <span><?php echo $_SESSION['USER_USERNAME']?></span>
           </div>
           <div class="bioRespContainer">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga doloribus ullam ut blanditiis</p>
+            <p><?PHP echo $_SESSION['USER_BIOGRAFIA']?></p>
           </div>
           <div class="containerGrid_respButtons">
             
@@ -372,8 +372,7 @@ if ($postagens["result"]==0){
             <?PHP if(!isset($_SESSION['artista'])){ ?>
             <div class="container-othrAcessButtons">
               <a href="#" class="acss-btn Profeql_btn" id="Profbtn-goTo_">trabalhos</a>
-              <a href="#" class="acss-btn Profeql_btn" id="Profbtn-goTo_" style="border: none !important;">serviços</a>
-
+             
             </div>
           </header>
           <div class="container__madeCards-wkProfile">

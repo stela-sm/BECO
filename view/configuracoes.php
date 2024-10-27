@@ -1117,7 +1117,6 @@ setInterval(checkMemoryUsage, checkInterval);
 require_once "../model/manager.class.php";
 $manager = new Manager();
 $compra= $manager -> getCompras($_SESSION["USER_ID"]);
-var_dump($compra);
     echo '<div class="grid_tableMajorContent">';
     // var_dump($compras);
     for($i=1;$i<=count($compra);$i++){
