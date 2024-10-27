@@ -709,4 +709,19 @@ if(isset($_REQUEST['cancelar'])){
             
 }
 
+if(isset($_REQUEST['findUser'])){
+    
+    header('Content-Type: application/json');
+    
+    $id = $_REQUEST['findUser'];
+    require_once "../model/manager.class.php";
+    $manager = new Manager();
+    $r = $manager-> getUserData($id);
+    $_SESSION['artista'] = $r;    
+    echo json_encode($r);
+}
+if(isset($_REQUEST['destruirArtista'])){
+    //destroy de session artista
+    unset($_SESSION['artista']);
+}
 ?>

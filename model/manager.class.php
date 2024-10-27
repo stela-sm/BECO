@@ -284,6 +284,7 @@ public function getPostagensUser($id){
             $dados = [];
             while($row=$res->fetch_assoc()){
                 $dados["nome"] = $row["username"];
+                $dados["ID_USER"] = $row["ID_USER"];
                 $dados["pfp"] = $row["pfp"];
             }
             

@@ -75,7 +75,9 @@ if ($concurso["result"]==0){
                 '#right-menu_JScontainer-cPubli',
                 '#right-menu_JScontainer-configProf',
                 '#right-menu_JScontainer-concurso',
-                '#right-menu_JScontainer-conversas'
+                '#right-menu_JScontainer-conversas',
+                
+                
             ]
             rightSides.forEach(container => {
                 if (container == container[3]) {
@@ -908,7 +910,7 @@ if ($concurso["result"]==0){
                     </li>
 
                     <li class="nav-item ">
-                        <a class="btn d-flex linkCamin__menu flex-row justify-content-between align-items-center user_face"
+                        <a onclick="destroy()"class="btn d-flex linkCamin__menu flex-row justify-content-between align-items-center user_face"
                         <?php echo isset($_SESSION['USER_ID']) ? 'pgDirect="view/usuario.php"' : 'onclick="login()"'; ?>>
                             <span class="img round-img noProfThumb">
                                 <svg class="" xmlns="http://www.w3.org/2000/svg" width="19" height="19"
@@ -1189,6 +1191,7 @@ if ($concurso["result"]==0){
                         
                         $dados =   $manager -> getUserInfo($artistas[$i]['vendedor']);
                         $num = $i+1;
+
                         echo "  <div class='card trending-card relative'>
         <span class='number-order'>
             <span class='number-order__visual'>{$num}</span>
@@ -1201,9 +1204,9 @@ if ($concurso["result"]==0){
                     d='M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944z' />
             </svg>
         </span>
-        <a class='card-body' href='#'>
+        <a class='card-body linkCamin__menu' href='#' pgDirect='view/usuario.php' onclick='sendId({$dados['ID_USER']})' data-idUser='{$dados['ID_USER']}'>
     <!--aqui leva pro usuario da pessoa-->
-    <div class='container-authorUserImg'>
+    <div class='container-authorUserImg' >
         <svg class='icone-thumb' xmlns='http://www.w3.org/2000/svg' width='24'
             height='24' viewBox='0 0 24 24' fill='none' stroke='#000000'
             stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'
@@ -1610,7 +1613,7 @@ if ($concurso["result"]==0){
                             Política de privacidade
                         </a>
                     </div>
-                    <div class="linksSoltos-bottom0">
+                    <div class="linksSoltos-bottom0" id='displayNoneJS2'>
                         <a href="view/logout.php" id="SysLogout__confMenu">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-logout">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -1641,14 +1644,14 @@ if ($concurso["result"]==0){
                             </div>
                             <hr class="prof__divider">
                             <div class="container__profBtns" id="user-rmenuBtns">
-                                <div class="container-divideBtn">
+                                <div class="container-divideBtn" id="displayNoneJS">
                                     <a href="view/salvos.php" target="iframe_chat" class="equalBtn-profUser">Salvos</a>
                                     <a id="GoToConfig__fromUserpage" href="view/configuracoes.php?configperfil=1" target="iframe_chat" class="equalBtn-profUser">Configurações</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="linksSoltos-bottom0">
+                    <div class="linksSoltos-bottom0" id="displayNoneJS3">
                         <a href="view/logout.php" id="SysLogout__confMenu">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-logout">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -1661,6 +1664,10 @@ if ($concurso["result"]==0){
                         <a href="#" class="link ajudaCenterLink-bmenu" ajudaCenter="ligado">Precisa de ajuda?</a>
                     </div>
                 </div>
+
+
+
+
                 <!--right-side do concurso-->
                 <div class="right-side concurso_right-side" style="display:none;" id="right-menu_JScontainer-concurso">
                     <div class="main-banners_area" id="main-RMbanners_area">
@@ -1824,7 +1831,7 @@ if ($data_atual < $data_fim) {
                                 <path d="M6 6l12 12" />
                             </svg>
                         </button>
-                        <div class="ContainerAuthorProfileNamePic d-flex flex-row">
+                        <div class="ContainerAuthorProfileNamePic d-flex flex-row linkCamin__menu" id="divProfileLink" pgDirect='view/usuario.php'>
                             <img width="25%" src="assets/media/logo/4.png" id="pfp_modal_portifolio"  alt="">
                             <div class="containerProfileNam d-flex flex-column">
                                 <div id="nickname_modal_portifolio" class="nomeRealAutorTotal">Nome do Autor</div>
@@ -2463,6 +2470,51 @@ if ($data_atual < $data_fim) {
       
     <?php if (isset($_SESSION['USER_ID']) || !isset($_SESSION['USER_ID'])) { ?>
 <script>
+
+const iframe = document.getElementById('containerIframe');
+function destroy(){
+    window.location.reload();
+    fetch('controller/controller.php?destruirArtista=1', { method: 'POST' });
+   
+
+}
+function verificarIframe() {
+    if (iframe && !iframe.src.includes('usuario.php')) {
+        fetch('controller/controller.php?destruirArtista=1', { method: 'POST' });
+        console.log('EXPLODE')
+    }
+}
+
+const observer = new MutationObserver(() => verificarIframe());
+observer.observe(iframe, { attributes: true, attributeFilter: ['src'] });
+
+
+function sendId(valor) {
+    fetch('controller/controller.php?findUser='+valor, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: valor })  // Envia o valor como JSON
+    })
+    .then(response => response.json())
+    .then(data => {
+        art_bio = data[0]['bio']
+        art_pfp = data[0]['pfp']
+        art_username = data[0]['username']
+        document.getElementById("username").innerHTML = data[0]['username'];
+        document.getElementById("userP-bio").innerHTML = data[0]['bio'] ;
+        document.getElementById("displayNoneJS").style.display = 'none'; 
+        document.getElementById("displayNoneJS2").style.display = 'none'; 
+        document.getElementById("displayNoneJS3").style.display = 'none'; 
+        document.querySelector('#user_profPic img').src = 'assets/media/pfp/'+ data[0]['pfp']
+        
+    })
+    .catch(error => {
+        console.error("Erro ao enviar:", error);  // Exibe erro, se houver
+    });
+}
+
+</script>
+<script>
 //carregar comentários
  
 function loadComentsFunction(id) {
@@ -2970,6 +3022,7 @@ for (let i = 0; i < countdowns.length; i++) {
         const softwares = document.getElementById("softwares_modal_portifolio");
         const tags = document.getElementById("tags_modal_portifolio");
         const div_comentarios = document.getElementById("div_comentarios");
+        const link_user = document.getElementById('divProfileLink')
         const div_midia = document.getElementById("portifolio-completo");
         //função pra alterar os dados do modal
         function downloadA(id) {
@@ -3013,7 +3066,7 @@ for (let i = 0; i < countdowns.length; i++) {
             titulo.innerHTML = "<h3>"+response.postagem.titulo+"</h3>";
             descricao.innerHTML = response.postagem.descricao;
             document.getElementById('pfp_modal_portifolio').src = 'assets/media/pfp/'+response.user.pfp;
-            
+            link_user.setAttribute('onclick', 'sendId('+response.user.ID_USER+'); closeModal()');
             for (i = 0; i < response.tags.result; i++) {
                  console.log("Tag: " + response.tags[i]);
                  tags.innerHTML += "<span>" + response.tags[i] + "</span>";

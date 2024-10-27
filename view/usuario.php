@@ -5,13 +5,18 @@ session_start();
 
 require_once "../model/manager.class.php";
 $manager = new Manager();
-$postagens= $manager -> getPostagensUser($_SESSION["USER_ID"]);
+if(isset($_SESSION['artista'])){
 
+  $postagens= $manager -> getPostagensUser($_SESSION["artista"][0]["ID_USER"]);
+}else{
+  $postagens= $manager -> getPostagensUser($_SESSION["USER_ID"]);
+
+}
 if ($postagens["result"]==0){
 
 }
 ?>
-<head>
+<head> 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>@username | BECO</title>
@@ -350,6 +355,7 @@ if ($postagens["result"]==0){
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga doloribus ullam ut blanditiis</p>
           </div>
           <div class="containerGrid_respButtons">
+            
             <button id="salvosRespBTN" class="normanEqualBTN">Salvos</button>
             <button id="configRespBTN" class="normanEqualBTN">Configurações</button>
             <button id="notifRespBTN" class="normanEqualBTN">Notificações</button>
@@ -362,6 +368,8 @@ if ($postagens["result"]==0){
         <!--FIM DA AREA DE INFORMAÇÕES RESPONSIVA-->
           <header class="container-title__buttonsHeader">
             <h1 style="font-size: 3rem; font-family: 'Raleway' !important;">Publicações</h1>
+            
+            <?PHP if(!isset($_SESSION['artista'])){ ?>
             <div class="container-othrAcessButtons">
               <a href="#" class="acss-btn Profeql_btn" id="Profbtn-goTo_">trabalhos</a>
               <a href="#" class="acss-btn Profeql_btn" id="Profbtn-goTo_" style="border: none !important;">serviços</a>
@@ -386,7 +394,12 @@ if ($postagens["result"]==0){
 
               </div>
             </a>
-
+<?php }else{
+  echo '
+          </header>
+          <div class="container__madeCards-wkProfile">
+          ';
+} ?>
 <!--CARD POSTAGENS-->
 
 <?php
@@ -554,6 +567,12 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'hidden') {
+        CONSOLE.LOG("FECHOU")
+    }
+});
+
 
 
 </script>

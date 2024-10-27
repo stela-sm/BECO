@@ -1122,7 +1122,7 @@ var_dump($compra);
     // var_dump($compras);
     for($i=1;$i<=count($compra);$i++){
         for($ii=1;$ii<$compra[$i]['ativos']['number'];$ii++){
-            echo "<a class='link{$compra[$i]['dados']['ID_COMPRA']}' href='../assets/port_ativos/{$compra[$i]['ativos'][$ii]['arquivo']}' download='{$compra[$i]['ativos'][$ii]['arquivo']}' style='display: none;'></a>
+            echo "<a class='link{$compra[$i]['dados']['ID_COMPRA']}' href='../assets/media/port_ativos/{$compra[$i]['ativos'][$ii]['arquivo']}' download='{$compra[$i]['ativos'][$ii]['arquivo']}' style='display: none;'></a>
 ";
         }
         $id = $compra[$i]['dados']['ID_COMPRA'];
