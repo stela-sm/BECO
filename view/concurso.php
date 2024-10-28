@@ -321,7 +321,24 @@ if ($concurso["result"]==0){
 }
   </style>
 </head>
-
+<?PHP
+                                if(isset($concurso["data_fim"])){
+                                    $data_inicio = $concurso['data_inicio'];
+                                    $data_fim = $concurso['data_fim'];
+                                    $data_inicio = new DateTime($data_inicio); 
+                                    $data_fim = new DateTime($data_fim);
+                                 }else{
+                                     $data_inicio = new DateTime(); 
+                                     $data_fim = new DateTime();
+                                 }
+                                                                 
+                                
+                                $data_atual = new DateTime();
+                                if ($data_atual < $data_fim) {
+                                    $diferenca = $data_fim->getTimestamp() - $data_atual->getTimestamp();
+                                } else {
+                                    $diferenca = 0;
+                                } ?>
 <body style="background-color:rgba(0,0,0,0);">
   <div class="portifolios-viewport">
 
@@ -339,7 +356,7 @@ if ($concurso["result"]==0){
         <div class="temp_name">
 
           <span class="temp__number" id="temporada-number" style="font-size: 21px;"><?php echo $concurso['tag']?></span>
-          <span class="time-remaining__countdown temporizador"  >00d00h00m</span>
+          <span class="time-remaining__countdown temporizador" id="temporizador"  >00d00h00m</span>
         </div>
       </div>
       <button id="shareButtonIncorp" class="containerLinkBanner">
@@ -408,6 +425,42 @@ if ($concurso["result"]==0){
     </div>
     <br><br></div>
   <script>
+    // Função que atualiza o temporizador
+    
+    var diferenca = <?php echo $diferenca; ?>;
+    console.log(diferenca)
+        function atualizarTemporizador() {
+            // console.log(diferenca+"cu")
+            if (diferenca > 0) {
+                diferenca--;
+                var dias = Math.floor(diferenca / (24 * 60 * 60));
+                var horas = Math.floor((diferenca % (24 * 60 * 60)) / (60 * 60));
+                var minutos = Math.floor((diferenca % (60 * 60)) / 60);
+                var segundos = diferenca % 60;
+
+                // Formata a saída para sempre ter dois dígitos
+                horas = horas < 10 ? "0" + horas : horas;
+                minutos = minutos < 10 ? "0" + minutos : minutos;
+                segundos = segundos < 10 ? "0" + segundos : segundos; // ta calculando os segundos mas fds
+                // console.log("porra")
+               
+                let countdowns = document.getElementsByClassName('temporizador');
+for (let i = 0; i < countdowns.length; i++) {
+    countdowns[i].innerHTML = dias + "d: " + horas + "h: " + minutos +'m';
+}
+
+            } else {
+                let countdowns = document.getElementsByClassName('temporizador');
+for (let i = 0; i < countdowns.length; i++) {
+    countdowns[i].innerHTML = "TIMEOUT";
+
+}
+  clearInterval(intervalo);
+            }
+            
+        }
+        
+        var intervalo = setInterval(atualizarTemporizador, 1000);
     document.getElementById('shareButtonIncorp').addEventListener('click', event => {
       if (navigator.share) {
         navigator.share({
@@ -441,6 +494,7 @@ if ($concurso["result"]==0){
   </script>
   <script>
 document.addEventListener('DOMContentLoaded', function() {
+  atualizarTemporizador()
     setTimeout(function() {
         // Seleciona todos os elementos com a classe 'fade-in-css'
         const elements = document.querySelectorAll('.fade-in-css');
