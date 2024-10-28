@@ -683,9 +683,11 @@ if($r==true){
 
 if(isset($_REQUEST['payed'])){
     $id = $_REQUEST['id'];
+    $method= $_REQUEST['type'];
+    $card= $_REQUEST['card'];
     require_once "../model/manager.class.php";
 $manager = new Manager();
-$r = $manager-> updateCompra($id);
+$r = $manager-> updateCompra($id,$card,$method);
 ?>
     <form action="../index.php" name="return" id="return" method="post">
     </form>

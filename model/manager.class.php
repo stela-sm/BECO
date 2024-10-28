@@ -1268,9 +1268,9 @@ public function newCompra($dados){
     return $lastId;
 }
 //updateCompra() para mudar o status para "Pago"
-public function updateCompra($id){
+public function updateCompra($id,$card,$type){
     $conn = $this->connect();
-    $sql = "UPDATE `compras` SET `status` = '2' WHERE `ID_COMPRA` = '{$id}'";
+    $sql = "UPDATE `compras` SET `status` = '2',`cod_card_num` = '{$card}', `metodo` = '{$type}' WHERE `ID_COMPRA` = '{$id}'";
     $conn->query($sql);
     }
     //updateCompra() para mudar o status para "Cancelado"

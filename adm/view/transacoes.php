@@ -127,7 +127,7 @@
 
 </section>
 
-<section>
+<section >
 <?php
 require "../model/manager.class.php";
 $manager = new Manager();

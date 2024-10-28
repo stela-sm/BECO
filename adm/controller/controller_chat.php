@@ -84,12 +84,11 @@ exit;
 
 if(isset($_REQUEST["conversas"])){
 
-    header('Content-Type: application/json');
 require "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> showConversas($_SESSION["ADM_ID"]);
-
-
+header('Content-Type: application/json');
+ob_clean();
 echo json_encode($r);
 exit; 
 }

@@ -75,3 +75,11 @@
 2024-10-26 16:48:09 - ::1 - Login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
 2024-10-26 17:07:00 - ::1 - Login do administrador lucas@g.com pelo dispositivo de ip ::1.
 2024-10-26 18:49:38 - ::1 - Login do usuario stelamontenegro2@gmail.com pelo dispositivo de ip ::1.
+2024-10-28 13:55:17 - ::1 - Login do administrador 1, via cookies, pelo dispositivo de ip ::1.
+2024-10-28 14:50:15 - ::1 - Erro no login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-10-28 14:50:24 - ::1 - Erro no login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-10-28 14:50:34 - ::1 - Erro no login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-10-28 14:50:40 - ::1 - Erro no login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-10-28 14:52:10 - ::1 - Criação do administrador 2024-10-28 14:52:16 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-10-28 15:11:13 - ::1 - Erro no login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-10-28 15:12:07 - ::1 -Alteração de senha do usuário stelamontenegro21@gmail.com2024-10-28 15:12:22 - ::1 - Login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.

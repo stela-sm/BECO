@@ -147,7 +147,7 @@ function isSelected($status, $valorComparacao) {
 
 </section>
 
-<section>
+<section class='section'>
 <?php
 require "../model/manager.class.php";
 

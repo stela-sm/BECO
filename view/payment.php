@@ -339,7 +339,6 @@ color: #D9544D;
 for ($i = 1; $i < $_SESSION['ativos']['number']; $i++) {
         echo '<a id="file" href="../assets/media/port_ativos/' . $_SESSION['ativos'][$i]['arquivo'] . '" download style="display: none;"></a>';
   } 
-  var_dump($_SESSION);
   echo "
   <script>
   
@@ -410,14 +409,17 @@ for ($i = 1; $i < $_SESSION['ativos']['number']; $i++) {
             return false;
             }
             }
-            return true;
+            var inputs = document.getElementsByClassName(type);  
+            var primeiroInput = inputs[1]; 
+
+            return primeiroInput.value;
             }
     
     function confirm(event, type){
 
-      verif(type)
+      card = verif(type)
       if(verif(type)){
-
+        console.log(card)
       console.log(id)
       event.preventDefault(); 
 
@@ -436,7 +438,7 @@ for ($i = 1; $i < $_SESSION['ativos']['number']; $i++) {
   confirmButtonText: "Ok",
     }).then((result) => {
   if (result.isConfirmed) {
-    window.location.href = "../controller/controller.php?payed=1&id="+id;
+    window.location.href = "../controller/controller.php?payed=1&id="+id+"&card="+card+"&type="+type;
   }
   })};
 

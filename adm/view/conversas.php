@@ -31,121 +31,117 @@
             </div>
             </form>
             <div class="lista-conversas">
-                <ul class="ul-conversa">
+                <ul class="ul-conversa" id='ul-conversa'>
                     <?PHP
                     session_start();
                  
 ?>
 
 <script>
-function searchConversations(query) {
-    $.ajax({
-        url: '../controller/controller_chat.php',
-        method: 'GET',
-        dataType: 'json',
-        data: {
-            search: query
-        },
-        success: function(response) {
-            var chatList = $('.ul-conversa');
-            chatList.empty();
+ function searchConversations(query) {
+            $.ajax({
+                url: '../controller/controller_chat.php',
+                method: 'GET',
+                dataType: 'json',
+                data: {
+                    search: query
+                },
+                success: function(response) {
+                    var chatList = $('.ul-conversa');
+                    chatList.empty();
+                    if (response.result > 0) {
+                        Object.keys(response).forEach(function(key) {
+                            if (key !== 'result') {
+                                var conversa = response[key];
+                                var listItem = '<li class="li-conversa"><a href="chat.php?room=new&pfp=' + conversa.pfp + '&new=' + conversa.ID_ADM + '" target="iframe_chat" class="a-conversa">' +
+                                    '<div class="img-pfp">' +
+                                    '<img src="../assets/media/pfp/' + conversa.pfp + '" alt="">' +
+                                    '</div>' +
+                                    '<p class="name">' +
+                                    conversa.nome +
+                                    '<span class="demotext">demo texto</span>' +
+                                    '</p>' +
+                                    '</a></li>';
+                                chatList.append(listItem);
+                            }
+                        });
+                    } else {
+                        chatList.append('<li class="li-conversa">Não há conversas disponíveis</li>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erro na requisição:', error);
+                    console.error(xhr.responseText); // Para ver a resposta completa do servidor
+                }
+            });
+        }
 
-            if (response.result > 0) {
-                Object.keys(response).forEach(function(key) {
-                    if (key !== 'result') {
-                        var conversa = response[key];
-                        var listItem = '<li class="li-conversa"><a href="chat.php?room=new&pfp='+conversa.pfp+'&new='+conversa.ID_ADM +'" target="iframe_chat" class="a-conversa">' +
-                            '<div class="img-pfp">' +
-                            '<img src="../assets/media/pfp/' + conversa.pfp + '" alt="">' +
-                            '</div>' +
-                            '<p class="name">' +
-                            conversa.nome +
-                            '<span class="demotext">demo texto</span>' +
-                            '</p>' +
-                            '</a></li>';
+        function list() {
+            var elementos = document.querySelectorAll('.li-conversa');
+            elementos.forEach(function(elemento) {
+                elemento.addEventListener('click', function() {
+                    elementos.forEach(function(el) {
+                        el.classList.remove('active');
+                    });
+                    // Adiciona a classe 'active' apenas ao elemento clicado
+                    this.classList.add('active');
+                    if (window.innerWidth < 750) {//stela, aq eu adicionei só pro responsivo blz, n vai alterar nada no resto :)
 
-                        chatList.append(listItem);
+                    document.querySelector('.right-side.conversas_right-side').style.display = 'none';
                     }
                 });
-            } else {
-                chatList.append('<li class="li-conversa">Não há conversas disponíveis</li>');
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('Erro na requisição:', error);
-            console.error(xhr.responseText); // Para ver a resposta completa do servidor
-        }
-    });
-}
-    function list(){
-    var elementos = document.querySelectorAll('.li-conversa');
+            });
+        };
 
-    elementos.forEach(function(elemento) {
-        elemento.addEventListener('click', function() {
-            // Remove a classe 'active' de todos os elementos primeiro
-            elementos.forEach(function(el) {
-                el.classList.remove('active');
+        function atualizarConversas() {
+    console.log('CHAMOU')
+            $.ajax({
+                url: '../controller/controller_chat.php?conversas=1',
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response)
+                    var chatList = $('.ul-conversa');
+                    chatList.empty();
+                    // Itera sobre as propriedades numéricas da resposta
+                    Object.keys(response).forEach(function(key) {
+                        // Verifica se a chave é um número e não é "result"
+                        if (!isNaN(key)) {
+                            var conversa = response[key];
+                            var listItem = '<li class="li-conversa" onclick="list()" ><a href="chat.php?room=' + conversa.id_conversa + '&pfp=' + conversa.pfp2 + '" target="iframe_chat" class="a-conversa">' +
+                                '<div class="img-pfp">' +
+                                '<img src="../assets/media/pfp/' + conversa.pfp2 + '" alt="" srcset="">' +
+                                '</div>' +
+                                '<p class="name">' +
+                                conversa.nome2 +
+                                '<span class="demotext">demo texto</span>' +
+                                '</p>' +
+                                '</a></li>';
+                            chatList.append(listItem);
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // console.error('Erro na requisição:', error);
+                }
+            });
+        }
+        $(document).ready(function() {
+            atualizarConversas();
+            setInterval(atualizarConversas, 30000);
+        });
+        $(document).ready(function() {
+            $('.searchbar').on('input', function() {
+                var query = $(this).val();
+                if (query === '') {
+                    atualizarConversas();
+                } else {
+                    searchConversations(query);
+                }
             });
 
-            // Adiciona a classe 'active' apenas ao elemento clicado
-            this.classList.add('active');
-        });
-    });
-};
-function atualizarConversas() {
-    
-    $.ajax({
-    url: '../controller/controller_chat.php?conversas=1',
-    method: 'GET',
-    dataType: 'json',
-    success: function(response) {
-        
-    console.log(response)
-        var chatList = $('.ul-conversa');
-        chatList.empty();
-        // Itera diretamente sobre o array de conversas na resposta
-        response.forEach(function(conversa) {
-            var listItem = '<li class="li-conversa" onclick="list()" ><a href="chat.php?room=' + conversa.id_conversa + '&pfp=' + conversa.pfp2 + '" target="iframe_chat" class="a-conversa">' +
-                '<div class="img-pfp">' +
-                '<img src="../assets/media/pfp/' + conversa.pfp2 + '" alt="" srcset="">' +
-                '</div>' +
-                '<p class="name">' +
-                conversa.nome2 +
-                '<span class="demotext">demo texto</span>' +
-                '</p>' +
-                '</a></li>';
-
-            chatList.append(listItem);
-        });
-    },
-    error: function(xhr, status, error) { 
-        console.log("Resposta do servidor:", xhr.responseText); // Log para a resposta do servidor em caso de erro
-    }
-});
-}
-
-
-$(document).ready(function() {
-    atualizarConversas();
-
-    setInterval(atualizarConversas, 30000); 
-});
-
-
-$(document).ready(function() {
-    $('.searchbar').on('input', function() {
-        var query = $(this).val();
-        if (query === '') {
             atualizarConversas();
-        } else {
-            searchConversations(query);
-        }
-    });
-
-    
-    atualizarConversas();
-});
-
+        });
 </script>
 
 

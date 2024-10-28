@@ -101,7 +101,7 @@ background-color: var(--sidebar-color);
 
 /*----------ÍNDICES DA TABELA ----------------*/
 
-.table-header-col{
+.table-header-col{max-height:70vh;overflow:auto;
   margin-top: 2%;  
   background-color: var(--sidebar-color);
   border-radius: 6px;

@@ -537,7 +537,7 @@ public function admLoginID($dados){
 
         public function showConversas($idRemetente){
             
-            $sql= "SELECT * FROM conversas where tabela = 'administradores' AND id_user1 = {$idRemetente} or id_user2 = {$idRemetente} ";  
+            $sql= "SELECT * FROM conversas where tabela = 'administradores' AND id_user1 = '{$idRemetente}' or id_user2 = '{$idRemetente}' ";  
             $res = $this->connect()->query($sql);
             $dados = [];
             $i = 0;
