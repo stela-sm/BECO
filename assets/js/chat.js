@@ -5,18 +5,29 @@ const pfpO = document.querySelector(".pfp-outgoing").value
 const pfpI = document.querySelector(".pfp-incoming").value
 const idsession = document.querySelector(".ID_SESSION").value
 const idconv = document.querySelector(".ID_CONV").value
+
 let msg;
 
 
 
 
+const scrollToBottom = () => {
+    window.scroll({
+        top: document.documentElement.scrollHeight,
+        left: 0,
+        behavior: "smooth" // opcional: "auto" ou "smooth"
+    });
+    
+};
 
-const scrollToBottom = () =>{
-    window.scrollTo(0, document.body.scrollHeight);
+// Chama a função diretamente para forçar o scroll imediatamente
+scrollToBottom()
+
+
+const textClear = () =>{
+    input.value = "";     
     
 }
-
-
 
 
 const handleChat = () =>{
@@ -43,6 +54,7 @@ function enviarMensagem(idConversa, idRemetente, textoMensagem) {
         }
     });
     scrollToBottom()
+    textClear()
 }
 
 

@@ -1115,11 +1115,13 @@ setInterval(checkMemoryUsage, checkInterval);
 <?php
 
 require_once "../model/manager.class.php";
+
 $manager = new Manager();
 $compra= $manager -> getCompras($_SESSION["USER_ID"]);
+
     echo '<div class="grid_tableMajorContent">';
     // var_dump($compras);
-    for($i=1;$i<=count($compra);$i++){
+    for($i=0;$i<count($compra);$i++){
         for($ii=1;$ii<$compra[$i]['ativos']['number'];$ii++){
             echo "<a class='link{$compra[$i]['dados']['ID_COMPRA']}' href='../assets/media/port_ativos/{$compra[$i]['ativos'][$ii]['arquivo']}' download='{$compra[$i]['ativos'][$ii]['arquivo']}' style='display: none;'></a>
 ";

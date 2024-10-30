@@ -122,7 +122,7 @@ for($i=0;$i<$r["result"];$i++){
             ".$r[$i]["datahora"]."
           </td>
           <td>
-          <select disabled onclick='enableSelect(this)'>
+          <select disabled onclick='enableSelect(this, ".$r[$i]["ID_CHAMADO"]." )'>
             <option>".$r[$i]["status"]."</option>
             <option>Em análise</option>
             <option>Aguardando Retorno</option>
@@ -135,12 +135,13 @@ for($i=0;$i<$r["result"];$i++){
          
 
 <td class='eye-td'>
-  <a class='btn btn-eye' >
-<svg xmlns='http://www.w3.org/2000/svg' href='mailto:destinatario@example.com?subject=Assunto%20do%20Email&body=Olá,%0D%0AEste%20é%20um%20email%20pré-definido.%0D%0AObrigado!' class='icon icon-tabler icon-tabler-messages' width='26' height='26' viewBox='0 0 24 24' stroke-width='1.5' stroke='#2c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'>
-  <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
-  <path d='M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10' />
-  <path d='M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2' />
+  <a class='btn btn-eye'  >
+<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-pencil'>
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4' />
+    <path d='M13.5 6.5l4 4' />
 </svg>
+
 
   </a>
 </td>
@@ -149,6 +150,22 @@ for($i=0;$i<$r["result"];$i++){
     
   </div>
 </section>
+<script>
+  function enableSelect(select, id){
+    select.disabled = false;
+    select.addEventListener('change', function(){
+      var status = select.value;
+      var id = id;
+      $.ajax({
+        type: "POST",
+        url: "update_status.php",
+        data: {status: status, id: id},
+        success: function(){
+          alert("Status atualizado com sucesso!");
+          }
+          });
+        })}
+</script>
 
 </body>
 </html>

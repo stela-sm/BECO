@@ -1320,7 +1320,6 @@ public function getAtivos($id){
 
 for ($i = 0; $i < $numRows; $i++) {
     $row = $res->fetch_assoc(); 
-    $i++;
     $compras[$i]['ativos'] = $this->getAtivos($row['id_prod']);
     $compras[$i]['dados'] = $row;
 }

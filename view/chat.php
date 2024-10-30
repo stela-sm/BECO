@@ -205,7 +205,7 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
             <input type="file" name="arquivo" style="display:none;" id="arquivoInput">
         <svg class="inputArquivo" xmlns="http://www.w3.org/2000/svg" onclick="arquivoInput()" style="margin-right:10px;" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-paperclip"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" /></svg>
         </div>
-            <textarea name="" id="" class="msg" placeholder="Digite uma mensagem..."></textarea>
+            <textarea name="" id="textClear" class="msg" placeholder="Digite uma mensagem..."></textarea>
             <div class="send">
             
             <svg xmlns="http://www.w3.org/2000/svg" class=" icon icon-tabler icon-tabler-send-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">

@@ -683,17 +683,22 @@ if($r==true){
 
 if(isset($_REQUEST['payed'])){
     $id = $_REQUEST['id'];
-    $method= $_REQUEST['type'];
     $card= $_REQUEST['card'];
+    if($_REQUEST['type'] == 'input-cred'){
+        $method = 'credito';
+    }else{
+        $method = 'debito';
+    }
     require_once "../model/manager.class.php";
+    var_dump($_REQUEST);
 $manager = new Manager();
 $r = $manager-> updateCompra($id,$card,$method);
 ?>
-    <form action="../index.php" name="return" id="return" method="post">
+  <form action="../index.php" name="return" id="return" method="post">
     </form>
     <script>
         document.getElementById("return").submit();
-    </script>
+    </script> 
     <?php
 }
 if(isset($_REQUEST['cancelar'])){
