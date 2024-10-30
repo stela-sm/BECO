@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17/10/2024 às 03:12
+-- Tempo de geração: 30/10/2024 às 23:58
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -20,66 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `beco_bd`
 --
-
-DELIMITER $$
---
--- Procedimentos
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `gerar_novo_id` (OUT `p_novo_id` VARCHAR(20), IN `p_tabela` VARCHAR(30), IN `p_prefixo` VARCHAR(4))   BEGIN
-    DECLARE ultimo_id INT;
-    DECLARE query VARCHAR(255);
-
-    -- Construa a consulta dinâmica para obter o último número do ID
-    SET query = CONCAT(
-        'SELECT IFNULL(SUBSTRING(id, LENGTH(?)), 0) INTO @ultimo_id FROM ', 
-        p_tabela, 
-        ' ORDER BY id DESC LIMIT 1'
-    );
-    
-    -- Prepare e execute a consulta dinâmica
-    SET @query = query;
-    PREPARE stmt FROM @query;
-    EXECUTE stmt USING @p_prefixo;
-    DEALLOCATE PREPARE stmt;
-
-    -- Construa a nova consulta dinâmica para gerar o novo ID
-    SET p_novo_id = CONCAT(p_prefixo, (SELECT @ultimo_id + 1));
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `novoAcesso` (IN `ip` VARCHAR(45))   BEGIN DECLARE ipCount INT;
-    
-    SELECT COUNT(*) INTO ipCount
-    FROM acessos
-    WHERE acessos.ip = ip;
-    
-    -- Se o IP não existir, inserir um novo registro
-    IF ipCount =0 THEN INSERT INTO acessos (ip, datahora) VALUES (ip, NOW());
-    END IF;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ObterUltimoIDUsuario` (OUT `p_id_user` INT)   BEGIN
-    -- Obtém o ID do último usuário inserido
-    SELECT id_user INTO p_id_user 
-    FROM usuario 
-    ORDER BY id_user DESC 
-    LIMIT 1;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `VerificaDuplicadosUsuario` (IN `p_cpf` VARCHAR(11), IN `p_username` VARCHAR(255), IN `p_email` VARCHAR(255), OUT `p_result` INT)   BEGIN
-    -- Verifica se já existe algum registro com o mesmo CPF, username ou email
-    IF EXISTS (
-        SELECT 1 
-        FROM usuario 
-        WHERE cpf = p_cpf OR username = p_username OR email = p_email
-    ) THEN
-        SET p_result = 1; -- Duplicado encontrado
-    ELSE
-        SET p_result = 0; -- Não há duplicados
-    END IF;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -134,7 +74,7 @@ CREATE TABLE `administradores` (
 
 INSERT INTO `administradores` (`ID_ADM`, `nome`, `email`, `pfp`, `senha`, `celular`, `poder`, `status`, `rg`, `cpf`, `cep`, `numero`, `estado_civil`, `data_nascimento`, `obs`, `datahora`) VALUES
 (1, 'stela montenegro', 'lucas@g.com', '1722814570.jpeg', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '234324', 2, 1, '123345654', '40527617810', '23423423', 423423, 'Casado', '2024-06-05', 'observações', '2024-06-16 16:35:43'),
-(2, 'Lucas Xavier ', 'stelamontenegro21@gmail.com', '1721939593.jpg', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '234324', 5, 1, '123345654', '40527617810', '23423423', 423423, 'Casado', '2024-06-05', 'observações', '2024-06-16 16:35:43'),
+(2, 'Lucas Xavier ', 'stelamontenegro21@gmail.com', '1721939593.jpg', '1cf4ab4128362303ea634a0783d6c242a166ebe1f0cadbed5e49f821fdd55439', '234324', 5, 1, '123345654', '40527617810', '23423423', 423423, 'Casado', '2024-06-05', 'observações', '2024-06-16 16:35:43'),
 (6, 'Lucas Xavier ', 'stela@g.com', '1722814547.png', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '234324', 2, 1, '123345654', '40527617810', '23423423', 423423, 'Casado', '2024-06-05', 'observações', '2024-06-16 16:35:43');
 
 -- --------------------------------------------------------
@@ -158,8 +98,11 @@ INSERT INTO `ativos` (`ID_ATIVO`, `id_post`, `arquivo`, `datahora`) VALUES
 (1, 1, 'teste_atv.png', '2024-09-14 15:06:25'),
 (32, 48, 'BECO.rar', '2024-10-16 19:43:50'),
 (33, 48, 'Modelo-de-capa-e-folha-de-rosto.pdf', '2024-10-16 19:43:50'),
-(34, 49, 'BECO.rar', '2024-10-16 19:44:22'),
-(35, 49, 'Modelo-de-capa-e-folha-de-rosto.pdf', '2024-10-16 19:44:22');
+(36, 54, 'beco_bd (2).sql', '2024-10-21 09:47:44'),
+(37, 55, 'beco_bd (2).sql', '2024-10-21 09:49:44'),
+(39, 55, 'beco_bd (2).sql', '2024-10-21 09:49:44'),
+(40, 57, 'bglogin.png', '2024-10-26 11:07:59'),
+(41, 58, 'reposição 2410.docx', '2024-10-26 11:09:37');
 
 -- --------------------------------------------------------
 
@@ -179,9 +122,9 @@ CREATE TABLE `banner` (
 --
 
 INSERT INTO `banner` (`ID_BANNER`, `img`, `datahora`, `status`) VALUES
-(1, 'papap.png', '2024-08-23 11:12:02', 1),
-(7, '1725210069.png', '2024-09-01 14:01:09', 0),
-(8, 'oi.jpeg', '2024-09-01 14:03:09', 0);
+(8, 'oi.jpeg', '2024-09-01 14:03:09', 0),
+(11, '1729642241.jpeg', '2024-10-22 21:10:41', 0),
+(12, '1729950372.png', '2024-10-26 10:46:12', 1);
 
 -- --------------------------------------------------------
 
@@ -191,12 +134,21 @@ INSERT INTO `banner` (`ID_BANNER`, `img`, `datahora`, `status`) VALUES
 
 CREATE TABLE `chamados` (
   `ID_CHAMADO` int(11) NOT NULL,
-  `setor` varchar(30) NOT NULL,
-  `user` varchar(60) NOT NULL,
+  `email` varchar(120) NOT NULL,
   `mensagem` text NOT NULL,
   `datahora` datetime NOT NULL,
   `status` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `chamados`
+--
+
+INSERT INTO `chamados` (`ID_CHAMADO`, `email`, `mensagem`, `datahora`, `status`) VALUES
+(1, 'stelamontenegro21@gmail.com', 'aaaaa', '2024-10-21 20:37:52', 'Em Análise'),
+(2, 'stelamontenegro21@gmail.com', 'socorro', '2024-10-21 20:43:16', 'Em Análise'),
+(3, 'lucas@gmail.com', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '2024-10-21 20:43:54', 'Em Análise'),
+(4, 'lucas@gmail.com', 'hhfhgfffgfghhgfhfhgfhg', '2024-10-21 20:44:14', 'Em Análise');
 
 -- --------------------------------------------------------
 
@@ -215,7 +167,10 @@ CREATE TABLE `codigos` (
 --
 
 INSERT INTO `codigos` (`ID_COD`, `codigo`, `datahora`) VALUES
-(35, 'KSnVY1', '2024-10-15 11:17:48');
+(35, 'KSnVY1', '2024-10-15 11:17:48'),
+(36, 'G7F2QG', '2024-10-23 19:44:15'),
+(37, 'v6RoVQ', '2024-10-28 10:50:50'),
+(38, 'fcF6yG', '2024-10-28 11:11:24');
 
 -- --------------------------------------------------------
 
@@ -252,7 +207,9 @@ INSERT INTO `comentario` (`ID_COMENTARIO`, `id_user`, `id_post`, `texto`, `datah
 (21, 1, 1, 'dsdsd', '2024-10-05 14:33:02'),
 (22, 1, 37, 'niiice', '2024-10-11 14:26:03'),
 (23, 1, 38, 'hahaha', '2024-10-15 00:31:18'),
-(24, 1, 39, 'dfdfdf', '2024-10-15 00:56:02');
+(24, 1, 39, 'dfdfdf', '2024-10-15 00:56:02'),
+(25, 13, 56, 'que merda', '2024-10-23 21:33:20'),
+(26, 38, 57, 'que horror', '2024-10-26 14:12:41');
 
 -- --------------------------------------------------------
 
@@ -278,43 +235,47 @@ CREATE TABLE `compras` (
 --
 
 INSERT INTO `compras` (`ID_COMPRA`, `id_prod`, `valor`, `comprador`, `vendedor`, `metodo`, `cod_card_num`, `codigo`, `datahora`, `status`) VALUES
-(1, 2, 11, 'comprador_teste', 'vendedor_teste', 'pix', '11212121212', 'ABC123', '2024-09-15 12:34:56', 0),
-(2, 2, 11, 'comprador_teste', 'vendedor_teste', 'credito', '', 'ABC123', '2024-09-15 12:34:56', 0),
-(3, 2, 11, 'comprador_teste', 'vendedor_teste', 'debito', '', 'ABC123', '2024-09-15 12:34:56', 0),
-(5, 38, 12, '1', '1', NULL, NULL, NULL, '2024-10-15 09:34:29', 1),
-(6, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 09:43:42', 1),
-(7, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 09:43:46', 1),
+(1, 2, 11, 'comprador_teste', '13', 'pix', '11212121212', 'ABC123', '2024-09-15 12:34:56', 2),
+(2, 2, 11, 'comprador_teste', '13', 'credito', '', 'ABC123', '2024-09-15 12:34:56', 2),
+(3, 2, 11, 'comprador_teste', '13', 'debito', '', 'ABC123', '2024-09-15 12:34:56', 2),
+(5, 38, 12, '1', '1', NULL, NULL, NULL, '2024-10-15 09:34:29', 2),
+(6, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 09:43:42', 2),
+(7, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 09:43:46', 2),
 (8, 38, 12, '1', '1', NULL, NULL, NULL, '2024-10-15 09:44:29', 2),
-(9, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 09:56:07', 1),
-(10, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 09:58:26', 1),
-(11, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:01:05', 1),
-(12, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:02:43', 1),
-(13, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:06:44', 1),
-(14, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:21:25', 1),
-(15, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:22:14', 1),
-(16, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:22:23', 1),
-(17, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:22:39', 1),
-(18, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:22:53', 1),
-(19, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:23:27', 1),
-(20, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:23:48', 1),
-(21, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:24:55', 1),
-(22, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:25:08', 1),
-(23, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:25:17', 1),
-(24, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:25:26', 1),
-(25, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:25:43', 1),
-(26, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:26:25', 1),
-(27, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:26:42', 1),
-(28, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:27:05', 1),
-(29, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:27:13', 1),
-(30, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:27:30', 1),
-(31, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:27:31', 1),
-(32, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:27:39', 1),
-(33, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:27:48', 1),
-(34, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:29:19', 1),
-(35, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:49:05', 1),
-(36, 39, 12, '1', '39', NULL, NULL, NULL, '2024-10-15 10:49:25', 1),
-(37, 40, 10.5, '44', '40', NULL, NULL, NULL, '2024-10-16 18:49:37', 1),
-(38, 42, 1, '44', '42', NULL, NULL, NULL, '2024-10-16 18:55:07', 1);
+(9, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 09:56:07', 2),
+(10, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 09:58:26', 2),
+(11, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:01:05', 2),
+(12, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:02:43', 2),
+(13, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:06:44', 2),
+(14, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:21:25', 2),
+(15, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:22:14', 2),
+(16, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:22:23', 2),
+(17, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:22:39', 2),
+(18, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:22:53', 2),
+(19, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:23:27', 2),
+(20, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:23:48', 2),
+(21, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:24:55', 2),
+(22, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:25:08', 2),
+(23, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:25:17', 2),
+(24, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:25:26', 2),
+(25, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:25:43', 2),
+(26, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:26:25', 2),
+(27, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:26:42', 2),
+(28, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:27:05', 2),
+(29, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:27:13', 2),
+(30, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:27:30', 2),
+(31, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:27:31', 2),
+(32, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:27:39', 2),
+(33, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:27:48', 2),
+(34, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:29:19', 2),
+(35, 38, 12, '1', '38', NULL, NULL, NULL, '2024-10-15 10:49:05', 2),
+(36, 39, 12, '1', '39', NULL, NULL, NULL, '2024-10-15 10:49:25', 2),
+(37, 40, 10.5, '44', '40', NULL, NULL, NULL, '2024-10-16 18:49:37', 2),
+(38, 42, 1, '44', '42', NULL, NULL, NULL, '2024-10-16 18:55:07', 2),
+(55, 55, 123, '38', '13', NULL, NULL, NULL, '2024-10-23 20:51:00', 2),
+(56, 55, 23, '38', '13', NULL, NULL, NULL, '2024-10-26 10:35:09', 2),
+(60, 54, 23, '1', '13', 'input-cred', '3333 3333 3333 3333', NULL, '2024-10-28 11:18:51', 2),
+(61, 55, 23, '1', '13', 'credito', '1111 1111 1111 1111', NULL, '2024-10-29 20:53:51', 2);
 
 -- --------------------------------------------------------
 
@@ -341,7 +302,8 @@ CREATE TABLE `concursos` (
 INSERT INTO `concursos` (`ID_CONCURSO`, `titulo`, `tag`, `descricao`, `img_anuncio`, `img_banner`, `data_inicio`, `data_fim`, `status`) VALUES
 (1, 'Fotografia', 'fotografia', '#Pic', 'foto_anuncio.jpg', 'banner_fotografia.jpg', '2024-09-01', '2024-09-10', 1),
 (2, 'Purple', '#PurpleRain', 'Purple', '1726791405.png', '1726791405.png', '2024-09-01', '2024-09-30', 1),
-(3, 'Purple', '#Purple', 'Purple', '1726791405.png', '1726791405.png', '2024-09-29', '2024-10-19', 1);
+(3, 'Purple', '#Purple', 'Purple', '1726791405.png', '1726791405.png', '2024-09-29', '2024-10-24', 1),
+(15, 'Etec JRM', '#JRM', 'Artes da ETEC JRM', '1729950194.png', '1729950195.png', '2024-10-25', '2024-11-11', 1);
 
 -- --------------------------------------------------------
 
@@ -364,7 +326,9 @@ CREATE TABLE `conversas` (
 INSERT INTO `conversas` (`ID_CONVERSA`, `id_user1`, `id_user2`, `tabela`, `datahora`) VALUES
 (520, 6, 1, 'administradores', '2024-09-15 22:19:19'),
 (521, 2, 1, 'administradores', '2024-09-20 00:21:38'),
-(522, 1, 13, 'usuario', '2024-10-04 23:09:27');
+(522, 1, 13, 'usuario', '2024-10-04 23:09:27'),
+(523, 44, 13, 'usuario', '2024-10-19 13:38:13'),
+(525, 38, 13, 'usuario', '2024-10-26 14:47:51');
 
 -- --------------------------------------------------------
 
@@ -389,8 +353,10 @@ INSERT INTO `likes` (`ID_LIKE`, `id_user`, `id_post`, `datahora`) VALUES
 (117, 1, 7, '2024-10-07 00:18:40'),
 (118, 1, 26, '2024-10-10 00:05:02'),
 (121, 1, 38, '2024-10-15 23:05:28'),
-(122, 0, 38, '2024-10-15 23:08:48'),
-(123, 44, 3, '2024-10-15 23:22:48');
+(123, 44, 3, '2024-10-15 23:22:48'),
+(127, 13, 1, '2024-10-20 13:45:54'),
+(129, 13, 2, '2024-10-20 14:02:07'),
+(132, 38, 57, '2024-10-27 15:20:06');
 
 -- --------------------------------------------------------
 
@@ -415,7 +381,23 @@ INSERT INTO `mensagens` (`ID_MENSAGEM`, `id_conversa`, `id_remetente`, `texto_me
 (231, 520, 6, 'KTYnPEZDUklpSkhTMTM5Zkp2czkxZXVaQ2RWcW1nbWlDOEVL', NULL, '2024-09-15 22:19:25'),
 (232, 521, 2, 'KSpGQ1JJaUpIUzEzOWZKdnM5MWV1WkNkVnFtZ21pQzhFSw==', NULL, '2024-09-20 00:21:46'),
 (233, 521, 2, NULL, '1726791734.avif', '2024-09-20 00:22:14'),
-(234, 522, 1, 'KSo7IAAjITpYRkNSSWlKSFMxMzlmSnZzOTFldVpDZFZxbWdtaUM4RUs=', NULL, '2024-10-04 23:09:31');
+(234, 522, 1, 'KSo7IAAjITpYRkNSSWlKSFMxMzlmSnZzOTFldVpDZFZxbWdtaUM4RUs=', NULL, '2024-10-04 23:09:31'),
+(235, 523, 44, 'Lyo7IAAjRkNSSWlKSFMxMzlmSnZzOTFldVpDZFZxbWdtaUM4RUs=', NULL, '2024-10-19 13:38:17'),
+(236, 522, 1, 'MCByisBqJDxEUFhGJLXaGVwEGzVGQ1JJaUpIUzEzOWZKdnM5MWV1WkNkVnFtZ21pQzhFSw==', NULL, '2024-10-23 21:29:42'),
+(237, 522, 13, 'JzczaQQrJjwRUloOLx9TSEQAVT8wFzNRAQ4VBmNShupmNzM/CGorPFwTSRQlFB9cXARGQ1JJaUpIUzEzOWZKdnM5MWV1WkNkVnFtZ21pQzhFSw==', NULL, '2024-10-23 21:32:19'),
+(238, 522, 13, NULL, '1729719147.sql', '2024-10-23 21:32:27'),
+(239, 522, 13, 'RkNSSWlKSFMxMzlmSnZzOTFldVpDZFZxbWdtaUM4RUs=', NULL, '2024-10-23 21:32:28'),
+(240, 522, 13, NULL, '1729719159.png', '2024-10-23 21:32:39'),
+(241, 522, 13, 'RkNSSWlKSFMxMzlmSnZzOTFldVpDZFZxbWdtaUM4RUs=', NULL, '2024-10-23 21:32:56'),
+(242, 522, 13, 'NzY3aQo/RkNSSWlKSFMxMzlmSnZzOTFldVpDZFZxbWdtaUM4RUs=', NULL, '2024-10-23 21:33:01'),
+(245, 525, 38, 'KSo7IABGQ1JJaUpIUzEzOWZKdnM5MWV1WkNkVnFtZ21pQzhFSw==', NULL, '2024-10-26 14:47:54'),
+(246, 522, 1, 'MCIzKAgrKTJQUlhGORNTX0QBEChGQ1JJaUpIUzEzOWZKdnM5MWV1WkNkVnFtZ21pQzhFSw==', NULL, '2024-10-26 14:53:30'),
+(247, 522, 1, NULL, '1729954430.sql', '2024-10-26 14:53:50'),
+(249, 521, 1, 'AAwdBiYFBxx+fHYiCyU2RkNSSWlKSFMxMzlmSnZzOTFldVpDZFZxbWdtaUM4RUs=', NULL, '2024-10-28 13:31:44'),
+(250, 522, 1, 'KzA8RkNSSWlKSFMxMzlmSnZzOTFldVpDZFZxbWdtaUM4RUs=', NULL, '2024-10-30 00:19:02'),
+(251, 522, 1, 'MDA0LQ0uLEZDUklpSkhTMTM5Zkp2czkxZXVaQ2RWcW1nbWlDOEVL', NULL, '2024-10-30 00:23:42'),
+(252, 522, 1, 'JCEwK0ZDUklpSkhTMTM5Zkp2czkxZXVaQ2RWcW1nbWlDOEVL', NULL, '2024-10-30 00:24:28'),
+(253, 522, 1, 'FQ8ZRkNSSWlKSFMxMzlmSnZzOTFldVpDZFZxbWdtaUM4RUs=', NULL, '2024-10-30 00:38:33');
 
 -- --------------------------------------------------------
 
@@ -437,7 +419,11 @@ CREATE TABLE `midia` (
 
 INSERT INTO `midia` (`ID_MIDIA`, `id_postagem`, `arquivo`, `tipo`, `datahora`) VALUES
 (55, 48, 'QR_Code_Afinz.png', 'imagem', '2024-10-16 22:43:50'),
-(56, 49, 'QR_Code_Afinz.png', 'imagem', '2024-10-16 22:44:22');
+(57, 54, '1726791734.avif', 'imagem', '2024-10-21 12:47:44'),
+(58, 55, '1726791734.avif', 'imagem', '2024-10-21 12:49:44'),
+(59, 56, '1725219331.png', 'imagem', '2024-10-21 12:50:30'),
+(60, 57, 'bglogin.png', 'imagem', '2024-10-26 14:07:59'),
+(61, 58, 'Valorant 2023.03.05 - 20.09.59.03.DVR_Trim.mp4', 'video', '2024-10-26 14:09:37');
 
 -- --------------------------------------------------------
 
@@ -469,9 +455,17 @@ INSERT INTO `postagem` (`ID_POST`, `id_user`, `thumbnail`, `software`, `titulo`,
 (5, 1, 'thumb.png', 100, 'Mano', 'Piririri #Purpl', 1, '2024-09-14', 1),
 (6, 1, 'thumb.png', 100, 'Saco', 'Piririri #PurpleRain', 1, '2024-09-14', 1),
 (7, 1, 'thumb.png', 100, 'Porra', 'Piririri #PurpleRain', 1, '2024-09-14', 1),
-(8, 1, 'thumb.png', 100, 'Lixo', 'Piririri #PurpleRain', 1, '2024-09-14', 1),
+(8, 1, 'thumb.png', 100, 'Lixo', 'Piririri #JR', 1, '2024-09-14', 1),
 (48, 44, 'Remove-bg.ai_1726617120290.png', 100, 'testee', 'eeeee', 1, '2024-10-16', 1),
-(49, 44, 'Remove-bg.ai_1726617120290.png', 100, 'testee', 'eeeee', 1, '2024-10-16', 1);
+(50, 1, 'thumb.png', 100, 'Mano', 'Piririri #Purpl', 1, '2024-09-14', 1),
+(51, 1, 'thumb.png', 100, 'Saco', 'Piririri #PurpleRain', 1, '2024-09-14', 1),
+(52, 1, 'thumb.png', 100, 'Porra', 'Piririri #PurpleRain', 1, '2024-09-14', 1),
+(53, 1, 'thumb.png', 100, 'Lixo', 'Piririri #PurpleRain', 1, '2024-09-14', 1),
+(54, 13, '1726791734.avif', 99, 'teste', 'aaaaaa#ArteVetorial #Fotografia #ArteDigital', 1, '2024-10-21', 1),
+(55, 13, '1726791734.avif', 99, 'teste', 'aaaaaa #ArteVetorial #Fotografia #ArteDigital', 1, '2024-10-21', 1),
+(56, 13, '1725219331.png', 99, 'TESTE TAGS PORRA', 'TESTE #PixelArt #Animação #Ilustração #ArteDigital', 1, '2024-10-21', 1),
+(57, 38, 'bglogin.png', 98, 'Teste Tag ', 'Teste tag concurso #ArteVetorial #Concurso', 1, '2024-10-26', 1),
+(58, 38, 'bglogin.png', 104, 'teste2', 'llllll #JRM', 1, '2024-10-26', 1);
 
 -- --------------------------------------------------------
 
@@ -511,7 +505,12 @@ INSERT INTO `produtos` (`ID_PROD`, `id_postagem`, `licenca`, `valor`, `banco`, `
 (19, 37, 'Pago', 12.00, 'null', '111', '11', '2024-10-11', 1),
 (20, 38, 'Pago', 12.00, 'null', '111', '111111', '2024-10-14', 1),
 (30, 48, 'Gratuito', 0.00, 'null', '222', '222', '2024-10-16', 1),
-(31, 49, 'Gratuito', 0.00, 'null', '222', '222', '2024-10-16', 1);
+(31, 49, 'Gratuito', 0.00, 'null', '222', '222', '2024-10-16', 1),
+(32, 54, 'Pago', 23.00, 'null', '11', '11', '2024-10-21', 1),
+(33, 55, 'Pago', 23.00, 'null', '11', '11', '2024-10-21', 1),
+(34, 56, 'Pago', 123.00, 'null', '222', '222', '2024-10-21', 1),
+(35, 57, 'Gratuito', 0.00, 'null', '111', '11', '2024-10-26', 1),
+(36, 58, 'Gratuito', 0.00, 'null', '99999', '9999', '2024-10-26', 1);
 
 -- --------------------------------------------------------
 
@@ -889,7 +888,78 @@ INSERT INTO `registros` (`ID_REG`, `nome`, `datahora`) VALUES
 (357, '2024_10.txt', 2147483647),
 (358, '2024_10.txt', 2147483647),
 (359, '2024_10.txt', 2147483647),
-(360, '2024_10.txt', 2147483647);
+(360, '2024_10.txt', 2147483647),
+(361, '2024_10.txt', 2147483647),
+(362, '2024_10.txt', 2147483647),
+(363, '2024_10.txt', 2147483647),
+(364, '2024_10.txt', 2147483647),
+(365, '2024_10.txt', 2147483647),
+(366, '2024_10.txt', 2147483647),
+(367, '2024_10.txt', 2147483647),
+(368, '2024_10.txt', 2147483647),
+(369, '2024_10.txt', 2147483647),
+(370, '2024_10.txt', 2147483647),
+(371, '2024_10.txt', 2147483647),
+(372, '2024_10.txt', 2147483647),
+(373, '2024_10.txt', 2147483647),
+(374, '2024_10.txt', 2147483647),
+(375, '2024_10.txt', 2147483647),
+(376, '2024_10.txt', 2147483647),
+(377, '2024_10.txt', 2147483647),
+(378, '2024_10.txt', 2147483647),
+(379, '2024_10.txt', 2147483647),
+(380, '2024_10.txt', 2147483647),
+(381, '2024_10.txt', 2147483647),
+(382, '2024_10.txt', 2147483647),
+(383, '2024_10.txt', 2147483647),
+(384, '2024_10.txt', 2147483647),
+(385, '2024_10.txt', 2147483647),
+(386, '2024_10.txt', 2147483647),
+(387, '2024_10.txt', 2147483647),
+(388, '2024_10.txt', 2147483647),
+(389, '2024_10.txt', 2147483647),
+(390, '2024_10.txt', 2147483647),
+(391, '2024_10.txt', 2147483647),
+(392, '2024_10.txt', 2147483647),
+(393, '2024_10.txt', 2147483647),
+(394, '2024_10.txt', 2147483647),
+(395, '2024_10.txt', 2147483647),
+(396, '2024_10.txt', 2147483647),
+(397, '2024_10.txt', 2147483647),
+(398, '2024_10.txt', 2147483647),
+(399, '2024_10.txt', 2147483647),
+(400, '2024_10.txt', 2147483647),
+(401, '2024_10.txt', 2147483647),
+(402, '2024_10.txt', 2147483647),
+(403, '2024_10.txt', 2147483647),
+(404, '2024_10.txt', 2147483647),
+(405, '2024_10.txt', 2147483647),
+(406, '2024_10.txt', 2147483647),
+(407, '2024_10.txt', 2147483647),
+(408, '2024_10.txt', 2147483647),
+(409, '2024_10.txt', 2147483647),
+(410, '2024_10.txt', 2147483647),
+(411, '2024_10.txt', 2147483647),
+(412, '2024_10.txt', 2147483647),
+(413, '2024_10.txt', 2147483647),
+(414, '2024_10.txt', 2147483647),
+(415, '2024_10.txt', 2147483647),
+(416, '2024_10.txt', 2147483647),
+(417, '2024_10.txt', 2147483647),
+(418, '2024_10.txt', 2147483647),
+(419, '2024_10.txt', 2147483647),
+(420, '2024_10.txt', 2147483647),
+(421, '2024_10.txt', 2147483647),
+(422, '2024_10.txt', 2147483647),
+(423, '2024_10.txt', 2147483647),
+(424, '2024_10.txt', 2147483647),
+(425, '2024_10.txt', 2147483647),
+(426, '2024_10.txt', 2147483647),
+(427, '2024_10.txt', 2147483647),
+(428, '2024_10.txt', 2147483647),
+(429, '2024_10.txt', 2147483647),
+(430, '2024_10.txt', 2147483647),
+(431, '2024_10.txt', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -912,8 +982,14 @@ INSERT INTO `salvos` (`ID_SALVO`, `id_post`, `id_user`, `datahora`) VALUES
 (15, 2, 1, '2024-10-06 21:18:27'),
 (16, 7, 1, '2024-10-06 21:18:30'),
 (17, 26, 1, '2024-10-09 21:05:05'),
-(20, 49, 44, '2024-10-16 22:11:01'),
-(21, 48, 44, '2024-10-16 22:11:10');
+(21, 48, 44, '2024-10-16 22:11:10'),
+(22, 1, 44, '2024-10-19 11:09:12'),
+(27, 5, 44, '2024-10-20 00:44:32'),
+(28, 1, 13, '2024-10-20 10:45:59'),
+(30, 2, 13, '2024-10-21 10:14:19'),
+(31, 56, 13, '2024-10-23 18:33:08'),
+(32, 57, 38, '2024-10-27 12:20:08'),
+(33, 54, 1, '2024-10-28 11:14:20');
 
 -- --------------------------------------------------------
 
@@ -1026,38 +1102,26 @@ CREATE TABLE `tags` (
 --
 
 INSERT INTO `tags` (`ID_TAG`, `id_post`, `tag`, `datahora`) VALUES
-(1, 1, '#PixelArt', 2147483647),
-(2, 1, '#3D', 2147483647),
-(0, 30, 'on', 2147483647),
-(0, 30, 'on', 2147483647),
-(0, 30, 'on', 2147483647),
-(0, 31, 'on', 2147483647),
-(0, 33, 'on', 2147483647),
-(0, 33, 'on', 2147483647),
-(0, 34, 'on', 2147483647),
-(0, 34, 'on', 2147483647),
-(0, 35, 'on', 2147483647),
-(0, 35, 'on', 2147483647),
-(0, 37, '#ArteVetori', 2147483647),
-(0, 37, '#Fotografia', 2147483647),
-(0, 38, '#ArteDigital', 2147483647),
-(0, 39, '#ArteDigital', 2147483647),
-(0, 40, '#Fotografia', 2147483647),
-(0, 41, '#Fotografia', 2147483647),
-(0, 42, '#PixelArt', 2147483647),
-(0, 43, '#ArteVetorial', 2147483647),
-(0, 43, '#Concurso', 2147483647),
-(0, 44, '#PixelArt', 2147483647),
-(0, 45, '#ArteVetorial', 2147483647),
-(0, 45, '#Concurso', 2147483647),
-(0, 46, '#ArteVetorial', 2147483647),
-(0, 46, '#Concurso', 2147483647),
-(0, 47, '#ArteVetorial', 2147483647),
-(0, 47, '#Concurso', 2147483647),
-(0, 48, '#ArteVetorial', 2147483647),
-(0, 48, '#Fotografia', 2147483647),
-(0, 49, '#ArteVetorial', 2147483647),
-(0, 49, '#Fotografia', 2147483647);
+(26, 46, '#Concurso', 2147483647),
+(27, 47, '#ArteVetorial', 2147483647),
+(28, 47, '#Concurso', 2147483647),
+(29, 48, '#ArteVetorial', 2147483647),
+(30, 48, '#Fotografia', 2147483647),
+(31, 49, '#ArteVetorial', 2147483647),
+(32, 49, '#Fotografia', 2147483647),
+(33, 55, '#ArteVetorial', 2147483647),
+(34, 55, '#Fotografia', 2147483647),
+(35, 55, '#ArteDigital', 2147483647),
+(36, 55, '#ArteVetorial', 2147483647),
+(37, 55, '#Fotografia', 2147483647),
+(38, 55, '#ArteDigital', 2147483647),
+(39, 56, '#PixelArt', 2147483647),
+(40, 56, '#Animação', 2147483647),
+(41, 56, '#Ilustração', 2147483647),
+(42, 56, '#ArteDigital', 2147483647),
+(47, 57, '#ArteVetorial', 2147483647),
+(48, 57, '#Concurso', 2147483647),
+(49, 58, '#JRM', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -1107,10 +1171,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`ID_USER`, `username`, `nome`, `cpf`, `email`, `celular`, `senha`, `data_nascimento`, `estado`, `pais`, `pfp`, `biografia`, `datahora`, `status`, `obs`) VALUES
-(1, '@frfrfr', 'for real', '12345678901', 'stelamontenegro21@gmail.com', '2147483647', '1cf4ab4128362303ea634a0783d6c242a166ebe1f0cadbed5e49f821fdd55439', '0000-00-00', 'São Paulo', 'Brasil', '1718575205.png', 'for reallll', '2024-06-16 23:21:02', '1', ''),
-(9, 'stel', 'stelamontenegro2@gmail.com', '', 'stelamontenegro2@gmail.com', '12977878877', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '2024-09-03', 'São Paulo', 'Brasil', '1726704236.png', '', '2024-07-30 18:15:16', '1', ''),
-(13, 'stelasm0', 'lucas@gmail.com', '28278278278272', 'lucas@gmail.com', '2147483647', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '0000-00-00', '', '', '1718575205.png', 'oiiii', '2024-07-30 19:14:56', '1', ''),
-(44, '@kikikik', '', '310.770.454-76', 'kikiik@kikik.bom', NULL, '0aecdbdaba8c692381314cbeeeea4a0cebe7032cfe1bb2ffd8c1dc890bdc35d8', NULL, NULL, NULL, 'Mulan and Shang.jpeg', 'Olá!', '2024-10-15 23:17:30', '1', NULL);
+(1, '@frfrfr', 'for real', '12345678901', 'stelamontenegro21@gmail.com', '2147483647', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '0000-00-00', 'São Paulo', 'Brasil', '1730123240.png', 'for reallll', '2024-06-16 23:21:02', '1', ''),
+(13, '@stelasm0', 'STEEE', '28278278278272', 'lucas@gmail.com', '2147483647', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '0000-00-00', '', '', '1729952166.png', 'oiiii', '2024-07-30 19:14:56', '1', ''),
+(38, '@stel', 'otário', '', 'stelamontenegro2@gmail.com', '12977878877', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2024-09-03', 'São Paulo', 'Brasil', '1729953385.png', 'Olá', '2024-07-30 18:15:16', '1', ''),
+(44, '@kikikik', 'bexouser', '310.770.454-76', 'kikiik@kikik.bom', NULL, '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', NULL, NULL, NULL, 'Mulan and Shang.jpeg', 'Olá!', '2024-10-15 23:17:30', '1', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -1248,6 +1312,12 @@ ALTER TABLE `status`
   ADD PRIMARY KEY (`ID_STATUS`);
 
 --
+-- Índices de tabela `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`ID_TAG`);
+
+--
 -- Índices de tabela `temp_midia`
 --
 ALTER TABLE `temp_midia`
@@ -1281,91 +1351,91 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de tabela `ativos`
 --
 ALTER TABLE `ativos`
-  MODIFY `ID_ATIVO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `ID_ATIVO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de tabela `banner`
 --
 ALTER TABLE `banner`
-  MODIFY `ID_BANNER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID_BANNER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `chamados`
 --
 ALTER TABLE `chamados`
-  MODIFY `ID_CHAMADO` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_CHAMADO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `codigos`
 --
 ALTER TABLE `codigos`
-  MODIFY `ID_COD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `ID_COD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de tabela `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `ID_COMENTARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ID_COMENTARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de tabela `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `ID_COMPRA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `ID_COMPRA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de tabela `concursos`
 --
 ALTER TABLE `concursos`
-  MODIFY `ID_CONCURSO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID_CONCURSO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `conversas`
 --
 ALTER TABLE `conversas`
-  MODIFY `ID_CONVERSA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=523;
+  MODIFY `ID_CONVERSA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=528;
 
 --
 -- AUTO_INCREMENT de tabela `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `ID_LIKE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `ID_LIKE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
 -- AUTO_INCREMENT de tabela `mensagens`
 --
 ALTER TABLE `mensagens`
-  MODIFY `ID_MENSAGEM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
+  MODIFY `ID_MENSAGEM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=254;
 
 --
 -- AUTO_INCREMENT de tabela `midia`
 --
 ALTER TABLE `midia`
-  MODIFY `ID_MIDIA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `ID_MIDIA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de tabela `postagem`
 --
 ALTER TABLE `postagem`
-  MODIFY `ID_POST` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `ID_POST` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `ID_PROD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `ID_PROD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de tabela `registros`
 --
 ALTER TABLE `registros`
-  MODIFY `ID_REG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
+  MODIFY `ID_REG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=432;
 
 --
 -- AUTO_INCREMENT de tabela `salvos`
 --
 ALTER TABLE `salvos`
-  MODIFY `ID_SALVO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID_SALVO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de tabela `seguidores`
@@ -1390,6 +1460,12 @@ ALTER TABLE `softwares`
 --
 ALTER TABLE `status`
   MODIFY `ID_STATUS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `ID_TAG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de tabela `temp_midia`
@@ -1430,14 +1506,6 @@ ALTER TABLE `midia`
 --
 ALTER TABLE `servicos`
   ADD CONSTRAINT `id_postagem_fk` FOREIGN KEY (`id_postagem`) REFERENCES `postagem` (`ID_POST`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-DELIMITER $$
---
--- Eventos
---
-CREATE DEFINER=`root`@`localhost` EVENT `deletar_codigos_antigos` ON SCHEDULE EVERY 5 MINUTE STARTS '2024-09-24 21:32:55' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM codigos WHERE TIMESTAMPDIFF(MINUTE, datahora, NOW()) > 5$$
-
-DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

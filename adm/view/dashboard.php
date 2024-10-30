@@ -127,7 +127,28 @@
   $access = $manager -> getAccessesByMonth(); //não tenho mais criatividade pra nome de variável
 
   $months = $manager -> getUsersByMonth();
- 
+
+  $artistas = $manager -> selectArtistas();
+  $dados = array();
+  $ii = 0;
+  for($i = 0; $i < 3; $i++){
+    $dados[$i] = $manager->getUserInfoArtists($artistas[$i]['vendedor']);
+   
+}
+echo "
+<script>
+    let nome1 = " . json_encode($dados[0]['nome']) . ";
+    let nome2 = " . json_encode($dados[1]['nome']) . ";
+    let nome3 = " . json_encode($dados[2]['nome']) . ";
+    let val1 = " . json_encode($artistas[0]['total_compras']) . ";
+    let val2 = " . json_encode($artistas[1]['total_compras']) . ";
+    let val3 = " . json_encode($artistas[2]['total_compras']) . ";
+    
+    console.log(nome1, nome2, nome3);
+</script>
+";
+
+
   ?>
     <section>
         
@@ -251,7 +272,7 @@
 
               <div class="col-2 list-col" style="max-height:300px">
               <span class="graphic-one-title">
-              Top Criadores (Likes) 
+              Top Criadores (Vendas) 
             </span>
                 
               <canvas class="chart_bars" id="chart_bars"  style="padding-bottom:10px;"></canvas>
@@ -465,10 +486,10 @@
 const ctx_bars = document.getElementById('chart_bars').getContext('2d');
 
 const datab = {
-    labels: ['@smuch', '@brtype', '@clrs'],
+    labels: [nome1, nome2, nome3],
     datasets: [{
-        label: 'Likes',
-        data: [120, 90, 80],
+        label: 'Vendas',
+        data: [val1,val2, val3],
         backgroundColor: [
             'rgb(156, 155, 255)',
             'rgb(156, 155, 255)',
