@@ -932,18 +932,17 @@ public function novoAcesso($ip){
     }
 public function transacoesTable($busca){
     if($busca["data"] =="" && $busca["pesquisa"] == "" && $busca["metodo"] == ""){
-        $sql = "SELECT * FROM compras;";
-        }else if ($busca["pesquisa"] != ""){
+        $sql = "SELECT * FROM compras";
+        }else if ($busca["pesquisa"] !== ""){
             $pesquisa = $busca["pesquisa"];
             $sql = "SELECT * FROM compras WHERE comprador LIKE '%$pesquisa%'  OR vendedor LIKE '%$pesquisa%' ";
-        }else if($busca["data"] != "" && $busca["metodo"] != ""){
+        }else if($busca["data"] !== "" && $busca["metodo"] !== ""){
             $sql = "SELECT * FROM compras WHERE datahora > {$busca["data"]} AND metodo = {$busca["metodo"]}";
-        }else if($busca["data"] != "" && $busca["metodo"] == ""){
+        }else if($busca["data"] !== "" && $busca["metodo"] == ""){
             $sql = "SELECT * FROM compras WHERE datahora > '{$busca["data"]}'";
-        }else if ($busca["data"] == "" && $busca["medoto"] != ""){
-            $sql = "SELECT * FROM compras WHERE metodo = {$busca["metodo"]}";
-        }
-
+        }else if ($busca["data"] == "" && $busca["medoto"] !== ""){
+            $sql = "SELECT * FROM compras WHERE metodo = '{$busca["metodo"]}'";
+        };
         $res = $this->connect()->query($sql);
     
         if (!$res) {

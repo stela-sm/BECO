@@ -47,7 +47,7 @@
 
             <tr>
                 <td class="td-input select-wrapper">
-                  <div class="input-icon"><input type="date" value="2024-01-01"  name="data" id="dateInput" class="  input-search date">
+                  <div class="input-icon"><input type="date" value=""  name="data" id="dateInput" class="  input-search date">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-search" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M11.5 21h-5.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4.5" />
@@ -66,9 +66,9 @@
                     <div class="input-icon select-wrapper" style="margin-left:10px !important;">
                     <select name="metodo" class="input-search" id="">
                       <option value="" selected>Todos</option>
-                      <option value="1">Pix</option>
-                      <option value="0">Crédito</option>
-                      <option value="0">Boleto</option>
+                      <option value="pix">pix</option>
+                      <option value="credito">credito</option>
+                      <option value="debito">debito</option>
                     </select>
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-arrow-down" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -132,7 +132,6 @@
 require "../model/manager.class.php";
 $manager = new Manager();
 
-
 $pesquisa = [];
 
 if (isset($_GET["pesquisa"])){
@@ -151,7 +150,6 @@ if(isset($_GET["metodo"])){
   }else{
     $pesquisa["metodo"] = "";
     }
-
 $r = $manager-> transacoesTable($pesquisa);
 
 

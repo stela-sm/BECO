@@ -1,0 +1,4 @@
+2024-11-03 13:24:39 - ::1 - Erro na Criação do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-11-03 13:33:08 - ::1 - Erro na Criação do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-11-03 13:34:45 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
+2024-11-03 13:46:50 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.

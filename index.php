@@ -910,8 +910,8 @@ if ($concurso["result"]==0){
                     </li>
 
                     <li class="nav-item ">
-                        <a onclick="destroy()"class="btn d-flex linkCamin__menu flex-row justify-content-between align-items-center user_face"
-                        <?php echo isset($_SESSION['USER_ID']) ? 'pgDirect="view/usuario.php"' : 'onclick="login()"'; ?>>
+                        <a class="btn d-flex linkCamin__menu flex-row justify-content-between align-items-center user_face"
+                        <?php echo isset($_SESSION['USER_ID']) ? 'pgDirect="view/usuario.php" onclick="destroy()"' : 'onclick="login()"'; ?>>
                             <span class="img round-img noProfThumb">
                                 <svg class="" xmlns="http://www.w3.org/2000/svg" width="19" height="19"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -1516,7 +1516,38 @@ if ($concurso["result"]==0){
                                                             <div class="inpGroupModal d-flex flex-row inGroupDiferente">
                                                                 <select name="banco_produto" id="banco_produto">
                                                                     <option selected value="null">Banco</option>
-                                                                    <!--colocar outros bancos aq-->
+                                                                    <option value="Banco do Brasil">Banco do Brasil</option>
+    <option value="Banco da Amazônia">Banco da Amazônia</option>
+    <option value="Banco do Nordeste">Banco do Nordeste</option>
+    <option value="BNDES">Banco Nacional de Desenvolvimento Econômico e Social (BNDES)</option>
+    <option value="Credicoamo Crédito Rural Cooperativa">Credicoamo Crédito Rural Cooperativa</option>
+    <option value="Banestes">Banestes S.A. - Banco do Estado do Espírito Santo</option>
+    <option value="Banco de Pernambuco">Banco de Pernambuco (Bandepe)</option>
+    <option value="Banco Alfa">Banco Alfa</option>
+    <option value="Banco Itaú Consignado">Banco Itaú Consignado S.A.</option>
+    <option value="Banco Santander">Banco Santander (Brasil) S.A.</option>
+    <option value="Banco Bradesco BBI">Banco Bradesco BBI S.A.</option>
+    <option value="Banpará">Banco do Estado do Pará (Banpará)</option>
+    <option value="Banrisul">Banco do Estado do Rio Grande do Sul (Banrisul)</option>
+    <option value="Banese">Banco do Estado de Sergipe (Banese)</option>
+    <option value="BRB">BRB - Banco de Brasília S.A.</option>
+    <option value="Banco Inter">Banco Inter S.A.</option>
+    <option value="Ailos">Cooperativa Central de Crédito Urbano - Ailos</option>
+    <option value="Caixa Econômica Federal">Caixa Econômica Federal</option>
+    <option value="Banco Bradesco">Banco Bradesco S.A.</option>
+    <option value="Itaú Unibanco">Itaú Unibanco S.A.</option>
+    <option value="Banco Mercantil do Brasil">Banco Mercantil do Brasil S.A.</option>
+    <option value="Banco Safra">Banco Safra S.A.</option>
+    <option value="Banco ItauBank">Banco ItauBank S.A.</option>
+    <option value="Banco Pottencial">Banco Pottencial</option>
+    <option value="Banco Cetelem">Banco Cetelem S.A.</option>
+    <option value="Banco Citibank">Banco Citibank S.A.</option>
+    <option value="Banco Cooperativo do Brasil">Banco Cooperativo do Brasil (Sicoob)</option>
+    <option value="Nubank">Nu Pagamentos S.A. (Nubank)</option>
+    <option value="Pagseguro">Pagseguro Internet S.A.</option>
+    <option value="Mercado Pago">Mercado Pago</option>
+    <option value="Acesso Soluções de Pagamento">Acesso Soluções de Pagamento</option>
+    <option value="PicPay">PicPay Serviços S.A.</option>
                                                                 </select>
 
                                                             </div>
