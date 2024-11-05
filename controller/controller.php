@@ -630,6 +630,10 @@ echo "<br><br>";
  <?php
 }
 if(isset($_REQUEST["payment"])){
+    if(!isset($_SESSION['USER_ID'])){
+        header("Location: ../view/login.php");
+exit();
+    }
 require_once "../model/manager.class.php";
 $manager = new Manager();
 $dados["id_post"] = $_REQUEST["id_post"];

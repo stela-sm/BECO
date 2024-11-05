@@ -1375,11 +1375,11 @@ if ($concurso["result"]==0){
                                         </div>
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
-                                                <input class="checkbox__personal-css limited-checkbox" type="checkbox"
+                                                <input style="display:none;" class="checkbox__personal-css limited-checkbox" type="checkbox"
                                                     name="service" id="servico__checkbox">
-                                                <span class="checkmark"></span>
+                                                <span style="display:none;" class="checkmark"></span>
                                             </label>
-                                            <span for="servico__checkbox" class="checkbox__informationN">Serviço</span>
+                                            <span for="servico__checkbox" style="display:none;"class="checkbox__informationN">Serviço</span>
                                         </div>
                                     </div>
 
@@ -2137,7 +2137,7 @@ if ($data_atual < $data_fim) {
                       
                     </section>
                     <section id="reportUserSec " class="pTop0" style="padding-bottom:70px;">
-                        <a href="#" ajudaCenter="ligado" id="reportUser">
+                        <a href="#" onclick="window.open('view/atendimento.php', '_blank', 'width=800,height=600');" ajudaCenter="ligado" id="reportUser">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-flag">
