@@ -335,6 +335,7 @@ echo "
     "oct": <?php echo json_encode($months[10]); ?>,
     "nov": <?php echo json_encode($months[11]); ?>,
     "dec": <?php echo json_encode($months[12]); ?>
+  
 };
 
 

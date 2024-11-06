@@ -376,6 +376,7 @@ public function admLoginID($dados){
                         'pfp'     => $row['pfp'],
                         'nome'     => $row['nome'],
                         'email'    => $row['email'],
+                        'cpf'    => $row['cpf'],
                         'bio'    => $row['biografia'],
                         'celular'  => $row['celular'],
                         'status'   => $row['status'],

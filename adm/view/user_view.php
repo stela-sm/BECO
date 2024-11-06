@@ -30,7 +30,8 @@ session_start();
 require_once( "../model/manager.class.php");
 $manager = new Manager();
 $r = $manager-> getUserData("$_REQUEST[id]");
-
+$dataOriginal = $r[0]["datan"];
+$dataFormatada = date("Y-m-d", strtotime($dataOriginal));
 if($r[0]['pfp']==""){
   $r[0]['pfp'] == "nopfp.png";
   }
@@ -125,7 +126,7 @@ if($_SESSION["ADM_PODER"] >= 2){
                 </td>
                 <td>
                   <label for="nome" class="label-padrao">CPF</label><br>
-                  <input disabled  type="date" name="cpf" class="input-padrao" value="<?php echo $r[0]["datan"] ?>">
+                  <input disabled readonly type="text" name="cpf" class="input-padrao" value="<?php echo $r[0]["cpf"] ?>">
                 </td>
               </tr>
               <tr>
@@ -148,7 +149,7 @@ if($_SESSION["ADM_PODER"] >= 2){
               <tr>
                 <td>
                 <label for="nome" class="label-padrao">Aniversário</label><br>
-                <input disabled  type="date" name="data_nascimento" class="input-padrao" value="<?php echo $r[0]["datan"] ?>">
+                <input disabled  type="date" name="data_nascimento" class="input-padrao" value="<?php echo $dataFormatada ?>">
                 </td>
                     </tr>
             </table>

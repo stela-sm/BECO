@@ -1050,56 +1050,7 @@ setInterval(checkMemoryUsage, checkInterval);
                 </script>
             </div>
         </div>
-        <div id="permi_frame" inFrame="permi_frame" style="display: none;">
-            <button class="voltarBTN__voltar vltrPMenuConfig" id="vltrPMenuConfig">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M15 6l-6 6l6 6" /></svg>
-            <span>Voltar</span>
-            </button>
-            <div id="permissoes_container" class="section">
-                <h1 class="titulo-publi">Geolocalização</h1>
-                <p class="descRecurso">Para oferecer uma experiência mais personalizada e relevante, solicitamos acesso
-                    à sua localização geográfica. Isso nos permite fornecer informações e serviços baseados em sua
-                    localização atual, como ofertas locais e atualizações pertinentes. Seu consentimento para a
-                    geolocalização é opcional, e você pode optar por desativá-la a qualquer momento através das
-                    configurações do seu navegador.</p>
-                <div class="container-inpCheckbox">
-                    <div class="checkbox-wrapper-22">
-                        <label class="switch" for="geoPermissao_site">
-                            <input type="checkbox" id="geoPermissao_site">
-                            <div class="slider round"></div>
-                        </label>
-                    </div>
-                    <span class="containerInOn">Permissão <isOn id="isOn_geo">Ativa</isOn></span>
-                </div>
-            </div>
-            <div id="permissoes_container" class="section">
-                <h1 class="titulo-publi">Notificações Push</h1>
-                <p class="descRecurso">Gostaríamos de enviar notificações push para mantê-lo atualizado sobre novidades,
-                    promoções e outras informações importantes. As notificações push nos permitem comunicar-se
-                    diretamente com você, mesmo quando você não está no site. Você pode gerenciar suas preferências de
-                    notificações a qualquer momento nas configurações do seu navegador e escolher quais notificações
-                    deseja receber ou desativar completamente.</p>
-                <div class="container-inpCheckbox">
-                    <div class="checkbox-wrapper-22">
-                        <label class="switch" for="notificacaoPermissao_site">
-                            <input type="checkbox" id="notificacaoPermissao_site">
-                            <div class="slider round"></div>
-                        </label>
-                    </div>
-                    <span class="containerInOn">Permissão <isOn id="isOn_notificacao">Ativa</isOn></span>
-                </div>
-            </div>
-            <br>
-            <p class="adnt__warn">Permitir as permissões de localização e notificações nos ajuda a personalizar sua experiência no site e mantê-lo atualizado sobre nossas novidades. Se
-                tiver dúvidas ou precisar de mais informações sobre como usamos esses dados, por favor, consulte nossa
-                <a class="inside__aLink" href="../assets/media/terms/politica_de_privacidade.pdf"
-                    target="_blank">Política de Privacidade</a> para mais detalhes.
-            </p>
-        </div>
+       
         <div id="hisCo_frame" inFrame="hisCo_frame" style="display: none;">
             <button class="voltarBTN__voltar vltrPMenuConfig" id="vltrPMenuConfig">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -1308,58 +1259,6 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
             if (senhaEdit) {
                 tPassAst(senhaEdit.value);
             }
-            const geoCheckbox = document.getElementById('geoPermissao_site');
-            const notificacaoCheckbox = document.getElementById('notificacaoPermissao_site');
-
-            const geoStatus = document.getElementById('isOn_geo');
-            const notificacaoStatus = document.getElementById('isOn_notificacao');
-
-            function updatePermissions() {
-                const geoPermissao = geoCheckbox.checked;
-                const notificacaoPermissao = notificacaoCheckbox.checked;
-
-                localStorage.setItem('geoPermissao', geoPermissao);
-                localStorage.setItem('notificacaoPermissao', notificacaoPermissao);
-
-                geoStatus.textContent = geoPermissao ? 'Ativa' : 'Desativada';
-                notificacaoStatus.textContent = notificacaoPermissao ? 'Ativa' : 'Desativada';
-
-                if (geoPermissao) {
-                    navigator.geolocation.getCurrentPosition(
-                        position => console.log('Geolocalização permitida:', position),
-                        error => console.error('Erro ao obter geolocalização:', error)
-                    );
-                } else {
-                    console.log('Geolocalização desativada.');
-                }
-
-                if (notificacaoPermissao) {
-                    Notification.requestPermission().then(permission => {
-                        if (permission !== 'granted') {
-                            notificacaoCheckbox.checked = false;
-                            notificacaoStatus.textContent = 'Desativada';
-                            localStorage.setItem('notificacaoPermissao', false);
-                        }
-                    });
-                } else {
-                    console.log('Notificações desativadas.');
-                }
-            }
-
-            function loadPermissions() {
-                const savedGeoPermissao = localStorage.getItem('geoPermissao') === 'true';
-                const savedNotificacaoPermissao = localStorage.getItem('notificacaoPermissao') === 'true';
-
-                geoCheckbox.checked = savedGeoPermissao;
-                notificacaoCheckbox.checked = savedNotificacaoPermissao;
-
-                geoStatus.textContent = savedGeoPermissao ? 'Ativa' : 'Desativada';
-                notificacaoStatus.textContent = savedNotificacaoPermissao ? 'Ativa' : 'Desativada';
-            }
-
-            geoCheckbox.addEventListener('change', updatePermissions);
-            notificacaoCheckbox.addEventListener('change', updatePermissions);
-            loadPermissions();
         });
         /*FONTE DE TODO O MAL CUIDADO! */
 /*         window.addEventListener('beforeunload', function () {

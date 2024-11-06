@@ -1,6 +1,18 @@
 <?php
 session_start();
-session_destroy();
+unset($_SESSION["ADM_ID"]);
+unset($_SESSION["ADM_NOME"]);
+unset($_SESSION["ADM_EMAIL"]);
+unset($_SESSION["ADM_PFP"]);
+unset($_SESSION["ADM_CPF"]);
+unset($_SESSION["ADM_CEP"]);
+unset($_SESSION["ADM_RG"]);
+unset($_SESSION["ADM_PODER"]);
+unset($_SESSION["ADM_NUMERO"]);
+unset($_SESSION["ADM_CELULAR"]);
+unset($_SESSION["ADM_DATAN"]);
+unset($_SESSION["ADM_ESTADO_CIVIL"]);
+
 require '../model/ferramentas.class.php';
 $ferramentas = new Ferramentas();
 $ferramentas -> unsetCookie('ADM_ID');
