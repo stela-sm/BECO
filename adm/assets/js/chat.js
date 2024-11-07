@@ -16,6 +16,10 @@ const scrollToBottom = () =>{
     
 }
 
+const textClear = () =>{
+    input.value = "";     
+    
+}
 
 
 
@@ -42,7 +46,8 @@ function enviarMensagem(idConversa, idRemetente, textoMensagem) {
             alert('Erro na requisição: ' + error);
         }
     });
-    scrollToBottom()
+    scrollToBottom()    
+    textClear()
 }
 
 

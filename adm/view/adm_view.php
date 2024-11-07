@@ -84,7 +84,6 @@ $r = $manager-> getAdmData("$_REQUEST[id]");
                 <a class="nav-link active-link" onclick="change()"> Informações Pessoais <span class="sr-only">(Página atual)</span></a>
               </li>
               <li class="nav-item active">
-                <span class="nav-link">|</span>
               </li>
              
               </ul>

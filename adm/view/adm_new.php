@@ -62,10 +62,9 @@ if($_SESSION["ADM_PODER"] <= 3){
                 <a class="nav-link active-link" onclick="change()"> Informações Pessoais <span class="sr-only">(Página atual)</span></a>
               </li>
               <li class="nav-item active">
-                <span class="nav-link">|</span>
               </li>
               <li class="nav-item">
-                <a class="nav-link" onclick="changeTwo()">Financeiro e Contrato</a>
+                <a class="nav-link" style='display:none' onclick="changeTwo()">Financeiro e Contrato</a>
               </li>
               </ul>
           </nav>

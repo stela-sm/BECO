@@ -126,8 +126,7 @@
   $post = $prod + $serv;
   $access = $manager -> getAccessesByMonth(); //não tenho mais criatividade pra nome de variável
 
-  $months = $manager -> getUsersByMonth();
-
+  $months = $manager -> getUsersByMonth();;
   $artistas = $manager -> selectArtistas();
   $dados = array();
   $ii = 0;
@@ -335,17 +334,17 @@ echo "
     "oct": <?php echo json_encode($months[10]); ?>,
     "nov": <?php echo json_encode($months[11]); ?>,
     "dec": <?php echo json_encode($months[12]); ?>
-  
+ 
 };
 
-
+console.log(data)
       new Chart(ctx, {
         type: 'line',
         data: {
           labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
           datasets: [{
             label: '# of Votes',
-            data: [data['jan'], data['feb'], data['mar'], data['jun'], data['jul'], data['aug'], data['sep'], data['oct'],data['nov'],data['dec']],
+            data: [data['jan'], data['feb'], data['mar'],data['apr'], data['may'], data['jun'], data['jul'], data['aug'], data['sep'], data['oct'], data['nov'], data['dec']],
             borderWidth: 3,
             borderColor: 'rgb(156, 155, 255)',
           }]
@@ -457,7 +456,7 @@ echo "
           labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
           datasets: [{
             label: '# of Votes',
-            data: [data['jan'], data['feb'], data['mar'], data['jun'], data['jul'], data['aug'], data['sep'], data['oct'],data['nov'],data['dec']],
+            data: [data['jan'], data['feb'], data['mar'], data['apr'], data['may'],data['jun'], data['jul'], data['aug'], data['sep'], data['oct'],data['nov'],data['dec']],
             borderWidth: 3,
             borderColor: 'rgb(156, 155, 255)',
           }]

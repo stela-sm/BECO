@@ -371,7 +371,7 @@ if ($postagens["result"]==0){
             
             <?PHP if(!isset($_SESSION['artista'])){ ?>
             <div class="container-othrAcessButtons">
-              <a href="#" class="acss-btn Profeql_btn" id="Profbtn-goTo_">trabalhos</a>
+              <a href="#" class="acss-btn Profeql_btn" style='display:none' id="Profbtn-goTo_"></a>
              
             </div>
           </header>

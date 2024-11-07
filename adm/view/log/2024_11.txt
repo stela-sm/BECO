@@ -16,3 +16,14 @@
 2024-11-06 01:45:04 - ::1 - Login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
 2024-11-06 01:45:55 - ::1 - Erro no login do administrador stelamontenegro21@gmail.comste pelo dispositivo de ip ::1.
 2024-11-06 01:46:07 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-11-06 23:23:48 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-11-07 00:28:24 - ::1 - Criação do administrador tese@tese.com2024-11-07 00:32:11 - ::1 - Login do administrador tese@tese.com pelo dispositivo de ip ::1.
+2024-11-07 00:37:39 - ::1 - Login do administrador 16, via cookies, pelo dispositivo de ip ::1.
+2024-11-07 00:40:05 - ::1 - Login do administrador 16, via cookies, pelo dispositivo de ip ::1.
+2024-11-07 00:40:15 - ::1 - Login do administrador stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-11-07 00:50:42 - ::1 - Erro no login do usuario juliana.pereira@gmail.com pelo dispositivo de ip ::1.
+2024-11-07 00:50:50 - ::1 - Erro no login do usuario juliana.pereira@gmail.com pelo dispositivo de ip ::1.
+2024-11-07 00:52:00 - ::1 - Erro no login do usuario juliana.pereira@gmail.com pelo dispositivo de ip ::1.
+2024-11-07 00:52:22 - ::1 - Erro no login do usuario juliana.pereira@gmail.com pelo dispositivo de ip ::1.
+2024-11-07 00:53:35 - ::1 - Login do usuario juliana.pereira@gmail.com pelo dispositivo de ip ::1.
+2024-11-07 01:20:44 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.

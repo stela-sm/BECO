@@ -1373,10 +1373,12 @@ LIMIT 3;";
 }
 
 public function newChamado($dados){
-    $sql = "INSERT INTO chamados (email, mensagem, datahora, status)
-    VALUES ('{$dados['email']}','{$dados['text']}',now()
-    ,'Em Análise')";
     $conn = $this->connect();
+    $email = $conn->real_escape_string($dados['email']);
+    $texto = $conn->real_escape_string($dados['text']);
+    $sql = "INSERT INTO chamados (email, mensagem, datahora, status)
+    VALUES ('{$email}','{$texto}',now(),'Em Análise')";
+ 
     $res = $conn->query($sql);
     if ($res) {
         return true;
