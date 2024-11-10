@@ -28,11 +28,11 @@
 
 </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        /* document.addEventListener('DOMContentLoaded', function () {
             if (window.top === window.self) {
                 window.location.href = 'index.php';
             }
-        })
+        }) */
 
         window.addEventListener('message', function (event) {
             if (event.data === 'darkMode') {
@@ -288,7 +288,7 @@ $concurso= $manager -> getConcursoAtual();
              const cards = document.querySelectorAll('.card-portifolio');
              cards.forEach(card => {
                  const width = card.offsetWidth
-                 const height = width * 0.98
+                 const height = width * 0.95
                  card.style.height = `${height}px`
              });
              const firstCard = cards[0];
@@ -314,7 +314,7 @@ $concurso= $manager -> getConcursoAtual();
         document.addEventListener('DOMContentLoaded', function () {
             console.log(window.innerWidth)
             if (window.innerWidth >= 1300 && window.innerWidth > 1300) {
-                var card_port = document.querySelector('.card-portifolio').offsetWidth
+                /* var card_port = document.querySelector('.card-portifolio').offsetWidth
                 console.log(card_port)
                 var card_port = document.querySelector('.card-portifolio').style.height = `${card_port - 15}px`
 
@@ -326,7 +326,7 @@ $concurso= $manager -> getConcursoAtual();
                 if (isDecimal.test(document.querySelector('.card-portifolio').style.height)) {
                     document.querySelector('.card-portifolio').style.height =
                         `${toFixed(document.querySelector('.card-portifolio').style.height)}px`
-                }
+                } */
 
                 var images = document.querySelectorAll('.img_portFolio');
 
@@ -591,7 +591,7 @@ $id = isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : '';
         limpar();
         carregarPosts(event.data)
     }});
-
+    
 </script>
 </body>
 

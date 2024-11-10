@@ -365,7 +365,7 @@ notas: alterei muita coisa só depois eu fui ler isso aqui tmj
                 </form>
                 <footer>
                     <span class="copyright">© 2024 Beco Inc.</span>
-                    <a href="#" class="link" ajudaCenter="ligado">Precisa de ajuda?</a>
+                    <a href="#" class="link" ajudaCenterLog="ligado">Precisa de ajuda?</a>
                 </footer>
             </div>
 
@@ -430,7 +430,7 @@ notas: alterei muita coisa só depois eu fui ler isso aqui tmj
                     </div>
                     <footer>
                         <span class="copyright">© 2024 Beco Inc.</span>
-                        <a href="login.php" target="_blank" class="link" ajudaCenter="ligado">Precisa de ajuda?</a>
+                        <a href="login.php" target="_blank" class="link" ajudaCenterLog="ligado">Precisa de ajuda?</a>
                     </footer>
                 </div>
                 <!--SEGUNDA ETAPA DO CADASTRO-->
@@ -534,7 +534,7 @@ notas: alterei muita coisa só depois eu fui ler isso aqui tmj
                     <footer>
                         <!--footer-->
                         <span class="copyright">© 2024 Beco Inc.</span>
-                        <a href="login.php" target="_blank" class="link" ajudaCenter="ligado">Precisa de ajuda?</a>
+                        <a href="login.php" target="_blank" class="link" ajudaCenterLog="ligado">Precisa de ajuda?</a>
                     </footer>
                 </div>
             </form>
@@ -657,7 +657,7 @@ notas: alterei muita coisa só depois eu fui ler isso aqui tmj
 
                 <footer>
                     <span class="copyright">© 2024 Beco Inc.</span>
-                    <a href="#" class="link" ajudaCenter="ligado">Precisa de ajuda?</a>
+                    <a href="#" class="link" ajudaCenterLog="ligado">Precisa de ajuda?</a>
                 </footer>
             </div>
 
@@ -682,6 +682,17 @@ notas: alterei muita coisa só depois eu fui ler isso aqui tmj
     </script>
   
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('a.link[ajudaCenterLog="ligado"]');
+            links.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    window.open('atendimento.php', '_blank',
+                        "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=800,width=431,height=585"
+                    )
+                })
+            })
+        })
         /***************** ESSE SCRIPT RECEBE OQ O PHP MANDOU PARA MOSTRAR O FORMULARIO CERTO ******************/
         // Função para ocultar todos os formulários
         function esconderForms() {

@@ -25,6 +25,13 @@
 </script>
     <title>Chat</title>
     <script>
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        })
+
+        document.addEventListener('dragstart', function (event) {
+            event.preventDefault();
+        })
          window.addEventListener('message', function (event) {
       if (event.data === 'darkMode') {
         document.body.classList.toggle('dark');

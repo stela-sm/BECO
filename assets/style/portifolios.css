@@ -195,7 +195,7 @@ body::-webkit-scrollbar {
 .card-portifolio {
   background: transparent;
   cursor: pointer;
-  height: 205px;
+  height: auto;
   position: relative;
   width: 100%;
   font-family: "Raleway", "Radikal Regular", system-ui;

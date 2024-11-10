@@ -758,14 +758,14 @@ function scheduleNotifications() {
     const lastNotificationTime = localStorage.getItem('lastNotificationTime');
     const now = Date.now();
     const tenDays = 10 * 24 * 60 * 60 * 1000
-    criarNotificacao()
-    /* if (!lastNotificationTime) {
-       
+    
+     if (!lastNotificationTime) {
+        criarNotificacao()
         localStorage.setItem('lastNotificationTime', now)
     } else if (now - lastNotificationTime >= tenDays) {
         criarNotificacao()
         localStorage.setItem('lastNotificationTime', now)
-    } */
+    } 
 }
 
 document.addEventListener('DOMContentLoaded', () => {

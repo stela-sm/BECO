@@ -95,7 +95,13 @@ if ($postagens["result"]==0){
         G__fontNVerif()
     }
 }) 
+document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        })
 
+        document.addEventListener('dragstart', function (event) {
+            event.preventDefault();
+        })
 </script>
 </head>
 <style>
@@ -145,8 +151,11 @@ if ($postagens["result"]==0){
       white-space: nowrap;
     }
   }
-
   @media (max-width: 750px) {
+    .voltarBTN__voltar.vltrPMenuConfig{
+    margin-left: 5%;
+    margin-top: 2%;
+    width: 52%;}
     .container-portifolios {
       display: flex;
       width: 100%;
@@ -352,14 +361,16 @@ if ($postagens["result"]==0){
             <span><?php echo $_SESSION['USER_USERNAME']?></span>
           </div>
           <div class="bioRespContainer">
-            <p><?PHP echo $_SESSION['USER_BIOGRAFIA']?></p>
+            <p><?php echo $_SESSION['USER_BIOGRAFIA']?></p>
           </div>
           <div class="containerGrid_respButtons">
             
-            <button id="salvosRespBTN" class="normanEqualBTN">Salvos</button>
-            <button id="configRespBTN" class="normanEqualBTN">Configurações</button>
+          <button id="salvosRespBTN" onclick="pgRedirect(this)" pgRedirect="salvos.php" class="normanEqualBTN">Salvos</button>
+          <button id="configRespBTN" onclick="pgRedirect(this)" pgRedirect="configuracoes.php" class="normanEqualBTN">Configurações</button>
+
             <button id="notifRespBTN" class="normanEqualBTN">Notificações</button>
-            <button id="logoutRespBTN" class="normanEqualBTN LOGOUTSYS__BTN"style="font-weight:600;border: 1px solid rgb(255 0 0 / 50%) !important;color: rgb(255 0 0 / 50%) !important;">Logout</button>
+            <button id="logoutRespBTN" onclick="pgRedirect(this)" pgRedirect="logout.php" class="normanEqualBTN LOGOUTSYS__BTN"style="font-weight:600;border: 1px solid rgb(255 0 0 / 50%) !important;color: rgb(255 0 0 / 50%) !important;">Logout</button>
+
           </div>
           <hr class="prof__divider">
         </div>
@@ -369,7 +380,7 @@ if ($postagens["result"]==0){
           <header class="container-title__buttonsHeader">
             <h1 style="font-size: 3rem; font-family: 'Raleway' !important;">Publicações</h1>
             
-            <?PHP if(!isset($_SESSION['artista'])){ ?>
+            <?php if(!isset($_SESSION['artista'])){ ?>
             <div class="container-othrAcessButtons">
               <a href="#" class="acss-btn Profeql_btn" style='display:none' id="Profbtn-goTo_"></a>
              
@@ -473,7 +484,15 @@ for ($i=0;$i<$postagens['result'];$i++){
     <script src="../assets/js/resppuchnoti.js"></script>
 </body>
 <script>
+   function pgRedirect(button) {
+    console.log('Você clicou no botão');
+    var url = button.getAttribute('pgRedirect');
+      window.location.href = `${url}`;
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
+    
+    
     const notifRespBTN = document.getElementById('notifRespBTN')
     const vltrPMenuConfig = document.getElementById('vltrPMenuConfig')
     const notificacoesContainer = document.querySelector('.notificacoesRepContainerFront')

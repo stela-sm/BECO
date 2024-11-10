@@ -33,6 +33,13 @@ $salvos= $manager -> getSalvos($_SESSION['USER_ID']);
 
 </script>
     <script>
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        })
+
+        document.addEventListener('dragstart', function (event) {
+            event.preventDefault();
+        })
         /* document.addEventListener('DOMContentLoaded', function () {
             if (window.top === window.self) {
                 window.location.href = 'index.php';

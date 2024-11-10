@@ -20,102 +20,75 @@ session_start();
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script src="../assets/js/texto_audio.js"></script><script src="../assets/js/teste.js"></script>
     <script>
-
-</script>
-    <script>
         
         document.addEventListener('DOMContentLoaded', function() {
-
-
-
-    var SoundIsOn = localStorage.getItem('com.beco/audio_recurso01x.all?ison');
-    if (SoundIsOn === 'ativo') {
-        inicializar2();
-        console.log('a')
-    }else if(SoundIsOn === 'desativado'){
-        naoinicializar()
-        console.log('b')
-    }
-});
-
-</script>
-    <script>
-        window.addEventListener('message', function (event) {
-            if (event.data === 'darkMode') {
-                document.body.classList.toggle('dark');
-            } else if (event.data === 'com.br/?darkMode__changeBtn?ToContainerConfig__portraid.br') {
-                if (localStorage.getItem('DarkMode') == 1 || localStorage.getItem('DarkMode') == 'ativo') {
-                    document.querySelector('#ThemeModeRecurso_site').checked = true
-                    document.querySelector('#acess_frame').style.display = 'block'
-                } else {
-                    document.querySelector('#ThemeModeRecurso_site').checked = false
-                    document.querySelector('#acess_frame').style.display = 'block'
-
+            var SoundIsOn = localStorage.getItem('com.beco/audio_recurso01x.all?ison');
+            if (SoundIsOn === 'ativo') {
+                inicializar2();
+            }else if(SoundIsOn === 'desativado'){
+                naoinicializar()
+            }
+        })
+            window.addEventListener('message', function (event) {
+            if (event.data.type === 'darkmode__control') {
+                const isOn = event.data.target
+                var body = document.body;
+                if (isOn == 'on') {
+                    if(body.classList.contains("dark")){
+                        return
+                    }else{
+                        body.classList.add('dark');
+                    }
+                }else{
+                    if(body.classList.contains("dark")){
+                        body.classList.remove('dark');
+                    }else{
+                        return
+                    }
                 }
+            }else if (event.data.type === 'changeIframe') {
+                console.log('CHEGOU OP CHANGEIFRAMEEEEEE')
+                const targetIframe = event.data.target
+                console.log(targetIframe)
+                
+                // Esconde todas as seções
+                document.querySelectorAll('[inFrame]').forEach(section => {
+                    section.style.display = 'none'
+                })
+                
+                // Corrigido o seletor do atributo 'inFrame' com a interpolação de string
+                const targetSection = document.querySelector(`[inFrame="${targetIframe}"]`); // Fix: Use a string interpolada corretamente
 
+                if (targetSection) {
+                    targetSection.style.display = 'block'
+                } else {
+                    console.warn('Seção não encontrada para o iframe:', targetIframe);
+                }
+            }else if(event.data.type === 'com.beco/audio_recurso01x.all?TurnOff_index-iframe'){
+                const opr = event.data.target
+                naoinicializar()
+                document.querySelector('#audioRecurso_site').checked = false
             }
-        })
 
-        window.addEventListener('message', function (event) {
-            const targetIframe = event.data;
+            })
+        function aplicarTemaDark() {
+        const darkModeState = localStorage.getItem('DarkMode'); 
+        const body = document.body;
 
-            // Ocultar todas as divs com inFrame
-            document.querySelectorAll('[inFrame]').forEach(section => {
-                section.style.display = 'none';
-            });
-
-            // Exibir a div correspondente
-            const targetSection = document.querySelector(`[inFrame="${targetIframe}"]`);
-            if (targetSection) {
-                targetSection.style.display = 'block';
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            let previousMemoryUsage = performance.memory.usedJSHeapSize;
-let checkInterval = 1000; // Verifica a cada segundo
-
-function checkMemoryUsage() {
-    const currentMemoryUsage = performance.memory.usedJSHeapSize;
-    const memoryDifference = currentMemoryUsage - previousMemoryUsage;
-
-    if (memoryDifference > 100 * 1024 * 1024) { // Se a diferença for maior que 100MB
-        console.warn("Alerta: uso de memória muito alto!", {
-            previousMemoryUsage,
-            currentMemoryUsage,
-            memoryDifference
-        });
+        if (darkModeState === '1' || darkModeState === 'ativo') {
+            console.log('Aplicando tema escuro');
+            body.classList.add('dark')
+            document.querySelector('#lightTheme__on').style.display = 'none';
+            document.querySelector('#darkTheme__on').style.display = 'block';
+        } else {
+            console.log('Aplicando tema claro');
+            body.classList.remove('dark')
+            document.querySelector('#lightTheme__on').style.display = 'block';
+            document.querySelector('#darkTheme__on').style.display = 'none';
+        }
     }
 
-    previousMemoryUsage = currentMemoryUsage;
-}
-
-// Inicia a verificação
-setInterval(checkMemoryUsage, checkInterval);
-
-
-
-
-
-
-
-
-            var DarkMode__isOn = localStorage.getItem('DarkMode');
-            if (DarkMode__isOn === '1') {
-                document.body.classList.add('dark');
-                document.querySelector('#ThemeModeRecurso_site').checked = true
-            } else {
-                document.body.classList.remove('dark');
-                document.querySelector('#ThemeModeRecurso_site').checked = false
-            }
-        })
-        document.addEventListener('contextmenu', function (event) {
-            event.preventDefault();
-        })
-
-        document.addEventListener('dragstart', function (event) {
-            event.preventDefault();
-        })
+    document.addEventListener('DOMContentLoaded', aplicarTemaDark);
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -130,11 +103,11 @@ setInterval(checkMemoryUsage, checkInterval);
         background-color: rgba(202, 228, 237, 0.5);
         border-radius: 3px;
     }
-    @media(max-width: 750px){
+    /* @media(max-width: 750px){
         .portifolios-viewport {
         margin-top: calc(9vh + 3%);
     }
-    }
+    } */
     :root {
         --regular-title: "Regular Title";
         --italic-title: "Italic Title";
@@ -501,7 +474,7 @@ setInterval(checkMemoryUsage, checkInterval);
 
     .containerAlterarInfoPrincipal {
         height: 100%;
-        width: 100%;
+        width: auto;
         background-color: var(--default_background);
         border-radius: 10px;
         padding: 2%;
@@ -571,6 +544,7 @@ setInterval(checkMemoryUsage, checkInterval);
 
     #biografiadjka {
         display: flex;
+        width: 100%;
         flex-direction: column !important;
     }
 
@@ -687,7 +661,12 @@ setInterval(checkMemoryUsage, checkInterval);
             transition: none;
         }
     }
-
+    @media(max-width: 750px){
+        .containerAlterarInfoPrincipal {
+            height: 100%;
+            width: 100%;
+    }
+}
     @media(width < 748px) {
         @media (width < 748px) {
     .container-inpCheckbox {
@@ -1171,7 +1150,7 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
         }
 
         document.querySelectorAll('#username_edit, #nickname_edit, #bio_edit, #changeProfilePhoto').forEach(input => {
-            input.addEventListener('blur', handleBlur);
+            input.addEventListener('input', handleBlur);
         });
 
         document.getElementById('changeProfilePhoto').addEventListener('change', function () {
@@ -1324,41 +1303,11 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
                 });
             });
         });
-        /*             document.querySelector('#acess_frame').style.display = 'block' */
-
-        //AQUI É DO DARK MODE:
-        /* document.querySelector('#ThemeModeRecurso_site').addEventListener('change', () => {
-            var inputi = document.querySelector('#ThemeModeRecurso_site');
-            var DarquiMode = localStorage.getItem('DarkMode');
-
-            if (inputi.checked == true) {
-                if (DarquiMode !== "1") {
-                    window.parent.postMessage('DMode?Turn__on', '*');
-                    localStorage.setItem('DarkMode', "1");
-                }
-            } else {
-                if (DarquiMode !== "0") {
-                    window.parent.postMessage('DMode?Turn__off', '*');
-                    localStorage.setItem('DarkMode', "0");
-                }
-            }
-        }); */
-
         function updateRecurso(checkboxId, textId, localStorageKey) {
             const checkbox = document.getElementById(checkboxId);
             const statusText = document.getElementById(textId);
 
             if (checkbox.checked) {
-                if(checkboxId == 'audioRecurso_site'){
-                    var geo = document.querySelector('#geoPermissao_site').checked
-                    if(geo == true){
-                        geo.disabled = true
-                        return 
-                    }else{
-                        geo.checked = true
-                        geo.disabled = true
-                    }
-                }
                 if(checkboxId == 'audioRecurso_site'){
                     window.parent.postMessage('com.beco/audio_recurso01x.all?ison:TurnON', '*');
                 }
@@ -1367,7 +1316,7 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
                     console.log('ThemeModeRecurso_site ativo')
                     localStorage.setItem(localStorageKey, '1');
                     window.parent.postMessage('Theme?DarkIs__on', '*');
-                                        document.querySelector('#acess_frame').style.display = 'block'
+                    document.querySelector('#acess_frame').style.display = 'block'
 
                 }
                 statusText.textContent = 'Ativo';
@@ -1528,6 +1477,7 @@ document.getElementById('acess_frame').style.display = 'none';
         ";
       }
     ?>
+    </script>
     
 </body>
 </html>

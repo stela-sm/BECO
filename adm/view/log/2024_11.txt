@@ -27,3 +27,15 @@
 2024-11-07 00:52:22 - ::1 - Erro no login do usuario juliana.pereira@gmail.com pelo dispositivo de ip ::1.
 2024-11-07 00:53:35 - ::1 - Login do usuario juliana.pereira@gmail.com pelo dispositivo de ip ::1.
 2024-11-07 01:20:44 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
+2024-11-08 11:42:33 - ::1 - Login do usuario joao@gmail.com pelo dispositivo de ip ::1.
+2024-11-08 12:22:04 - ::1 -Alteração dos dados do do usuário joao@gmail.com2024-11-08 12:27:53 - ::1 - Login do usuario claudia.goncalves@gmail.com pelo dispositivo de ip ::1.
+2024-11-08 12:28:16 - ::1 -Alteração dos dados do do usuário claudia.goncalves@gmail.com2024-11-08 12:58:15 - ::1 -Alteração de senha do usuário stelamontenegro21@gmail.com2024-11-08 12:58:35 - ::1 - Login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-11-08 14:11:40 - ::1 - Login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-11-08 14:36:48 - ::1 - Login do usuario stelamontenegro2@gmail.com pelo dispositivo de ip ::1.
+2024-11-08 14:38:34 - ::1 -Alteração dos dados do do usuário stelamontenegro2@gmail.com2024-11-08 15:07:05 - ::1 -Alteração dos dados do do usuário stelamontenegro2@gmail.com2024-11-08 15:07:16 - ::1 -Alteração dos dados do do usuário stelamontenegro2@gmail.com2024-11-08 15:07:57 - ::1 - Login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-11-08 15:11:36 - ::1 -Alteração dos dados do do usuário stelamontenegro21@gmail.com2024-11-08 15:29:09 - ::1 -Alteração dos dados do do usuário stelamontenegro21@gmail.com2024-11-08 15:39:11 - ::1 - Login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-11-08 15:43:11 - ::1 -Alteração dos dados do do usuário stelamontenegro21@gmail.com2024-11-08 15:51:51 - ::1 - Login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-11-08 15:54:48 - ::1 - Login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-11-08 15:55:05 - ::1 -Alteração dos dados do do usuário stelamontenegro21@gmail.com2024-11-09 01:13:20 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
+2024-11-09 23:10:19 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
+2024-11-09 23:14:16 - ::1 - Novo concurso criado por stelamontenegro21@gmail.com2024-11-09 23:15:47 - ::1 - Novo banner adicionado por stelamontenegro21@gmail.com2024-11-09 23:15:51 - ::1 - Banner excluido por stelamontenegro21@gmail.com2024-11-09 23:15:53 - ::1 - Banner excluido por stelamontenegro21@gmail.com2024-11-09 23:15:55 - ::1 -Concurso excluido por stelamontenegro21@gmail.com2024-11-09 23:15:58 - ::1 -Concurso excluido por stelamontenegro21@gmail.com2024-11-10 23:09:04 - ::1 - Login do usuario isabel@gmail.com pelo dispositivo de ip ::1.

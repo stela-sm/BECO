@@ -54,6 +54,13 @@ if ($concurso["result"]==0){
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="assets/js/texto_audio.js"></script>
 <script>
+    document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        })
+
+        document.addEventListener('dragstart', function (event) {
+            event.preventDefault();
+        })
             document.addEventListener('DOMContentLoaded', function() {
                 var SoundIsOn = localStorage.getItem('com.beco/audio_recurso01x.all?ison');
                 if (SoundIsOn === 'ativo') {
@@ -62,7 +69,23 @@ if ($concurso["result"]==0){
                     naoinicializar()
                 }
             })
-
+/*Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire({
+      title: "Deleted!",
+      text: "Your file has been deleted.",
+      icon: "success"
+    });
+  }
+}); */
 </script>
     <script async>
 
@@ -189,10 +212,9 @@ if ($concurso["result"]==0){
                 });
             });
 
-            var VLibrasRecurso = localStorage.getItem('com.beco/VLibras_recurso02x.all?ison');
-            document.querySelector('#recVLIBRAS__webBeco').style.display = (VLibrasRecurso === 'ativo') ?
-                'block' : 'none';
-        });
+            
+        })
+        
     </script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -238,7 +260,41 @@ if ($concurso["result"]==0){
             document.querySelector('#right-menu_JScontainer-configProf').style.display = 'flex'
         }else if(event.data === 'vltrPMenuConfig'){
             location.reload();
-
+        }else if(event.data === 'com.beco/audio_recurso01x.all?ison:TurnON'){
+            Swal.fire({
+                title: "Reiniciar o site?",
+                text: "Para ativar o recurso de áudio, precisamos reiniciar a aplicação. Deseja continuar?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Reiniciar",
+                cancelButtonText: "Cancelar"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload()
+                }else if(result.dismiss === Swal.DismissReason.cancel){
+                    iframe.contentWindow.postMessage({ type: 'com.beco/audio_recurso01x.all?TurnOff_index-iframe', target: 'off' }, '*')
+                    naoinicializar()
+                }
+            })
+        }else if(event.data === 'com.beco/audio_recurso01x.all?ison:TurnOFF'){
+            Swal.fire({
+                title: "Reiniciar o site?",
+                text: "Para desativar o recurso de áudio, precisamos reiniciar a aplicação. Deseja continuar?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Reiniciar",
+                cancelButtonText: "Cancelar"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload()
+                }else if(result.dismiss === Swal.DismissReason.cancel){
+                    return false
+                }
+            })
         } else if (event.data === 'Theme?DarkIs__on') {
             if (localStorage.getItem('DarkMode') == 0 || localStorage.getItem('DarkMode') == 'ativo') {
                 if (window.innerWidth < 748) {
@@ -484,6 +540,7 @@ if ($concurso["result"]==0){
         color: #BDBBBB;
     }
 .portifolio-content img{
+    height:100%;
     width: 100%;
 }
     textarea#descricaoPortifolio {
@@ -901,7 +958,7 @@ justify-content: center;
                                             </svg>
                                         </span>
                                     </a>
-                                    <a class="card_filtro" style="border-color: #D9544D;"onclick=filtrarPosts(this)>
+                                    <a class="card_filtro" style="border-color: #D9544D;"onclick=filtrarPosts(this) id="limpar__todosOsFiltros">
                                         <div class="filter_name">
                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#D9544D"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
                                             </svg> <span style="color:#D9544D;" class="filter__name capitalize">Limpar</span>
@@ -951,27 +1008,40 @@ justify-content: center;
                             </svg></a>
                     </li>
 
-                    <li class="nav-item ">
+                    <li class="nav-item">
                         <a class="btn d-flex linkCamin__menu flex-row justify-content-between align-items-center user_face"
-                        <?php echo isset($_SESSION['USER_ID']) ? 'pgDirect="view/usuario.php" onclick="destroy()"' : 'onclick="login()"'; ?>>
-                            <span class="img round-img noProfThumb">
-                                <svg class="" xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-ghost">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M5 11a7 7 0 0 1 14 0v7a1.78 1.78 0 0 1 -3.1 1.4a1.65 1.65 0 0 0 -2.6 0a1.65 1.65 0 0 1 -2.6 0a1.65 1.65 0 0 0 -2.6 0a1.78 1.78 0 0 1 -3.1 -1.4v-7" />
-                                    <path d="M10 10l.01 0" />
-                                    <path d="M14 10l.01 0" />
-                                    <path d="M10 14a3.5 3.5 0 0 0 4 0" />
-                                </svg>
+                        <?php 
+                        if (isset($_SESSION['USER_ID'])) {
+                            echo 'pgDirect="view/usuario.php" onclick="destroy()"';
+                        } else {
+                            echo 'onclick="login()"';
+                        }
+                        ?>>
+                            <span class="img round-img noProfThumb" style="align-self: auto !important;">
+                                <?php if (isset($_SESSION["USER_PFP"])): ?>
+                                    <img style="width: 32px;border-radius: 50%;height: 32px;" id="indexProf__content" src="assets/media/pfp/<?php echo $_SESSION["USER_PFP"]; ?>">
+                                <?php else: ?>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-ghost">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M5 11a7 7 0 0 1 14 0v7a1.78 1.78 0 0 1 -3.1 1.4a1.65 1.65 0 0 0 -2.6 0a1.65 1.65 0 0 1 -2.6 0a1.65 1.65 0 0 0 -2.6 0a1.78 1.78 0 0 1 -3.1 -1.4v-7" />
+                                        <path d="M10 10l.01 0" />
+                                        <path d="M14 10l.01 0" />
+                                        <path d="M10 14a3.5 3.5 0 0 0 4 0" />
+                                    </svg>
+                                <?php endif; ?>
                             </span>
-                            <span class="username"><span class="opacity" style="opacity: .8;">Olá,</span>
-                                <?php echo isset($_SESSION["USER_USERNAME"]) ? $_SESSION["USER_USERNAME"] : "desconhecido";
- ?></span>
+                            <span class="username">
+                                <span class="opacity" style="opacity: .8;">Olá,</span>
+                                <?php 
+                                $username = isset($_SESSION["USER_USERNAME"]) ? $_SESSION["USER_USERNAME"] : "desconhecido";
+                                $username = str_replace('@', '', $username);
+                                echo $username;
+                                ?>
+
+                            </span>
                         </a>
                     </li>
+
                 </ul>
                 <div class="containerViewNotifications cssContainerVNot" style="display: none;">
                     <div class="header_notificacoes">
@@ -1247,23 +1317,26 @@ justify-content: center;
             </svg>
         </span>
         <a class='card-body linkCamin__menu' href='#' pgDirect='view/usuario.php' onclick='sendId({$dados['ID_USER']})' data-idUser='{$dados['ID_USER']}'>
-    <!--aqui leva pro usuario da pessoa-->
-    <div class='container-authorUserImg' >
-        <svg class='icone-thumb' xmlns='http://www.w3.org/2000/svg' width='24'
-            height='24' viewBox='0 0 24 24' fill='none' stroke='#000000'
-            stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'
-            class='icon icon-tabler icons-tabler-outline icon-tabler-user'>
-            <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-            <path d='M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0'></path>
-            <path d='M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2'></path>
-        </svg> 
-    </div>
-    <div class='authorName'>
-        <span class='authorNick'>{$dados['nome']}</span>
-        <span class='authorUser'>{$artistas[$i]['total_compras']} materiais vendidos</span>
-    </div>
-</a>
-</div>
+            <!--aqui leva pro usuario da pessoa-->
+            <div class='container-authorUserImg' >
+            <img class='person-thumbArt' style='  border-radius: 8px 8px 8px 8px;
+        height: 40px;
+        width: 41px;' src='assets/media/pfp/$dados[pfp]'>
+                <!--<svg class='icone-thumb' xmlns='http://www.w3.org/2000/svg' width='24'
+                    height='24' viewBox='0 0 24 24' fill='none' stroke='#000000'
+                    stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'
+                    class='icon icon-tabler icons-tabler-outline icon-tabler-user'>
+                    <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+                    <path d='M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0'></path>
+                    <path d='M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2'></path>
+                </svg> -->
+            </div>
+            <div class='authorName'>
+                <span class='authorNick'>{$dados['nome']}</span>
+                <span class='authorUser'>{$artistas[$i]['total_compras']} materiais vendidos</span>
+            </div>
+        </a>
+        </div>
 ";
                         }
                         ?>
@@ -1329,7 +1402,7 @@ justify-content: center;
                             <div class="containerSelects__FcP">
                                 <div class="software__select d-column jumboContainer">
                                     <span class="Subsection__Title">Software</span>
-                                    <select name="software" id="#">
+                                    <select name="software" id="#" require>
                                         <option value="0" disabled selected>Selecione</option>
 <?PHP
                                    
@@ -1559,37 +1632,37 @@ justify-content: center;
                                                                 <select name="banco_produto" id="banco_produto">
                                                                     <option selected value="null">Banco</option>
                                                                     <option value="Banco do Brasil">Banco do Brasil</option>
-    <option value="Banco da Amazônia">Banco da Amazônia</option>
-    <option value="Banco do Nordeste">Banco do Nordeste</option>
-    <option value="BNDES">Banco Nacional de Desenvolvimento Econômico e Social (BNDES)</option>
-    <option value="Credicoamo Crédito Rural Cooperativa">Credicoamo Crédito Rural Cooperativa</option>
-    <option value="Banestes">Banestes S.A. - Banco do Estado do Espírito Santo</option>
-    <option value="Banco de Pernambuco">Banco de Pernambuco (Bandepe)</option>
-    <option value="Banco Alfa">Banco Alfa</option>
-    <option value="Banco Itaú Consignado">Banco Itaú Consignado S.A.</option>
-    <option value="Banco Santander">Banco Santander (Brasil) S.A.</option>
-    <option value="Banco Bradesco BBI">Banco Bradesco BBI S.A.</option>
-    <option value="Banpará">Banco do Estado do Pará (Banpará)</option>
-    <option value="Banrisul">Banco do Estado do Rio Grande do Sul (Banrisul)</option>
-    <option value="Banese">Banco do Estado de Sergipe (Banese)</option>
-    <option value="BRB">BRB - Banco de Brasília S.A.</option>
-    <option value="Banco Inter">Banco Inter S.A.</option>
-    <option value="Ailos">Cooperativa Central de Crédito Urbano - Ailos</option>
-    <option value="Caixa Econômica Federal">Caixa Econômica Federal</option>
-    <option value="Banco Bradesco">Banco Bradesco S.A.</option>
-    <option value="Itaú Unibanco">Itaú Unibanco S.A.</option>
-    <option value="Banco Mercantil do Brasil">Banco Mercantil do Brasil S.A.</option>
-    <option value="Banco Safra">Banco Safra S.A.</option>
-    <option value="Banco ItauBank">Banco ItauBank S.A.</option>
-    <option value="Banco Pottencial">Banco Pottencial</option>
-    <option value="Banco Cetelem">Banco Cetelem S.A.</option>
-    <option value="Banco Citibank">Banco Citibank S.A.</option>
-    <option value="Banco Cooperativo do Brasil">Banco Cooperativo do Brasil (Sicoob)</option>
-    <option value="Nubank">Nu Pagamentos S.A. (Nubank)</option>
-    <option value="Pagseguro">Pagseguro Internet S.A.</option>
-    <option value="Mercado Pago">Mercado Pago</option>
-    <option value="Acesso Soluções de Pagamento">Acesso Soluções de Pagamento</option>
-    <option value="PicPay">PicPay Serviços S.A.</option>
+                                                <option value="Banco da Amazônia">Banco da Amazônia</option>
+                                                <option value="Banco do Nordeste">Banco do Nordeste</option>
+                                                <option value="BNDES">Banco Nacional de Desenvolvimento Econômico e Social (BNDES)</option>
+                                                <option value="Credicoamo Crédito Rural Cooperativa">Credicoamo Crédito Rural Cooperativa</option>
+                                                <option value="Banestes">Banestes S.A. - Banco do Estado do Espírito Santo</option>
+                                                <option value="Banco de Pernambuco">Banco de Pernambuco (Bandepe)</option>
+                                                <option value="Banco Alfa">Banco Alfa</option>
+                                                <option value="Banco Itaú Consignado">Banco Itaú Consignado S.A.</option>
+                                                <option value="Banco Santander">Banco Santander (Brasil) S.A.</option>
+                                                <option value="Banco Bradesco BBI">Banco Bradesco BBI S.A.</option>
+                                                <option value="Banpará">Banco do Estado do Pará (Banpará)</option>
+                                                <option value="Banrisul">Banco do Estado do Rio Grande do Sul (Banrisul)</option>
+                                                <option value="Banese">Banco do Estado de Sergipe (Banese)</option>
+                                                <option value="BRB">BRB - Banco de Brasília S.A.</option>
+                                                <option value="Banco Inter">Banco Inter S.A.</option>
+                                                <option value="Ailos">Cooperativa Central de Crédito Urbano - Ailos</option>
+                                                <option value="Caixa Econômica Federal">Caixa Econômica Federal</option>
+                                                <option value="Banco Bradesco">Banco Bradesco S.A.</option>
+                                                <option value="Itaú Unibanco">Itaú Unibanco S.A.</option>
+                                                <option value="Banco Mercantil do Brasil">Banco Mercantil do Brasil S.A.</option>
+                                                <option value="Banco Safra">Banco Safra S.A.</option>
+                                                <option value="Banco ItauBank">Banco ItauBank S.A.</option>
+                                                <option value="Banco Pottencial">Banco Pottencial</option>
+                                                <option value="Banco Cetelem">Banco Cetelem S.A.</option>
+                                                <option value="Banco Citibank">Banco Citibank S.A.</option>
+                                                <option value="Banco Cooperativo do Brasil">Banco Cooperativo do Brasil (Sicoob)</option>
+                                                <option value="Nubank">Nu Pagamentos S.A. (Nubank)</option>
+                                                <option value="Pagseguro">Pagseguro Internet S.A.</option>
+                                                <option value="Mercado Pago">Mercado Pago</option>
+                                                <option value="Acesso Soluções de Pagamento">Acesso Soluções de Pagamento</option>
+                                                <option value="PicPay">PicPay Serviços S.A.</option>
                                                                 </select>
 
                                                             </div>
@@ -1704,14 +1777,14 @@ justify-content: center;
                             <div class="userProfileImg overflow-hidden" id="user_profPic">
                                 <img style="height:100%"src="assets/media/pfp/<?php echo $_SESSION["USER_PFP"]?>" alt="Nome do usuario">
                             </div>
-                            <span class="user_profNam" id="username"><?PHP echo $_SESSION["USER_USERNAME"]?></span>
+                            <span class="user_profNam" id="username"><?php echo $_SESSION["USER_USERNAME"]?></span>
                         </div>
                     </div>
                     <hr class="prof__divider">
                     <div class="secondContainer-info">
                         <div class="container-userBio__btns">
                             <div class="container__profBio" id="user-bio">
-                                <p id="userP-bio" class="truncateBio"><?PHP echo $_SESSION["USER_BIOGRAFIA"]?></p>
+                                <p id="userP-bio" class="truncateBio"><?php echo $_SESSION["USER_BIOGRAFIA"]?></p>
                             </div>
                             <hr class="prof__divider">
                             <div class="container__profBtns" id="user-rmenuBtns">
@@ -1882,7 +1955,6 @@ if ($data_atual < $data_fim) {
                 </svg>
             </button>
             <div class="noMargin modal-dialog modal-container_portifolio" id="portifolio-completo" role="document">
-
                 <!-- <div class="modal-content portifolio-content w100">
                     Aqui fica o portifólio
                 </div> -->
@@ -1903,7 +1975,7 @@ if ($data_atual < $data_fim) {
                             </svg>
                         </button>
                         <div class="ContainerAuthorProfileNamePic d-flex flex-row linkCamin__menu" id="divProfileLink" pgDirect='view/usuario.php'>
-                            <img width="25%" src="assets/media/logo/4.png" id="pfp_modal_portifolio"  alt="">
+                            <img width="50px" height="50px" src="assets/media/logo/4.png" id="pfp_modal_portifolio" class="majorContainerimgPort__mod" style="border-radius: 50% !important;" alt="">
                             <div class="containerProfileNam d-flex flex-column">
                                 <div id="nickname_modal_portifolio" class="nomeRealAutorTotal">Nome do Autor</div>
                                 <div id="username_modal_portifolio"  class="usernameAutorTotal">@username</div>
@@ -1975,14 +2047,14 @@ if ($data_atual < $data_fim) {
                            
                         </div>
                         <style>
-                            .comment {
+                            /* .comment {
                                 position: relative;
                                 padding-left: 0 !important;
                                 padding: 10px;
                                 margin-bottom: 10px;
                                 transition: all 0.3s;
                             }
-
+ */
                             .comment-body .name {
                                 font-weight: bold;
                             }
@@ -2303,12 +2375,13 @@ if ($data_atual < $data_fim) {
                         </div>
                         <style>
                             .comment {
-                                position: relative;
-                                padding-left: 0 !important;
-                                padding: 10px;
-                                margin-bottom: 10px;
-                                transition: all 0.3s;
-                            }
+    position: relative;
+    padding-left: 0 !important;
+    padding: 10px;
+    padding-bottom: 2px;
+     margin-bottom: 0px;
+    transition: all 0.3s;
+}
 
                             .comment-body .name {
                                 font-weight: bold;
@@ -2669,6 +2742,74 @@ function sendId(valor) {
 
 </script>
 <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        var VLibrasRecurso = localStorage.getItem('com.beco/VLibras_recurso02x.all?ison');
+        var recElement = document.querySelector('#recVLIBRAS__webBeco');
+        if (VLibrasRecurso === 'ativo') {
+            recElement.style.display = 'block';
+        } else {
+            recElement.style.display = 'none';
+        }
+
+    })
+    document.addEventListener('DOMContentLoad', ()=>{
+        function adjustCardHeight() {
+            const cards = document.querySelectorAll('.card-portifolio');
+            cards.forEach(card => {
+                const width = card.offsetWidth
+                const height = width * 0.99
+                card.style.height = `${height}px`
+            });
+            const firstCard = cards[0];
+            if (firstCard) {
+                const bannerHeight = firstCard.offsetWidth * 0.99
+                window.parent.postMessage({
+                    type: 'com.beco?bannerOffset/new',
+                    bannerNOffsetH: bannerHeight
+                }, '*');
+                document.querySelector('#banner-central').style.height = `${bannerHeight}px`
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', adjustCardHeight);
+        window.addEventListener('resize', adjustCardHeight);
+        window.addEventListener('load', adjustCardHeight);
+
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        })
+        document.addEventListener('dragstart', function (event) {
+            event.preventDefault();
+        })
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log(window.innerWidth)
+            if (window.innerWidth >= 1300 && window.innerWidth > 1300) {
+                var card_port = document.querySelector('.card-portifolio').offsetWidth
+                console.log(card_port)
+                var card_port = document.querySelector('.card-portifolio').style.height = `${card_port - 15}px`
+
+                isDecimal = new RegExp(".");
+                if (isDecimal.test(document.querySelector('.card-portifolio').style.width)) {
+                    document.querySelector('.card-portifolio').style.width =
+                        `${toFixed(document.querySelector('.card-portifolio').style.width)}px`
+                }
+                if (isDecimal.test(document.querySelector('.card-portifolio').style.height)) {
+                    document.querySelector('.card-portifolio').style.height =
+                        `${toFixed(document.querySelector('.card-portifolio').style.height)}px`
+                }
+
+                var images = document.querySelectorAll('.img_portFolio');
+
+                images.forEach(function (img) {
+                    img.setAttribute('onselect', 'return false')
+                    img.setAttribute('dragstart', 'return false')
+                })
+            }
+        })
+    })
+
+    </script>
+<script>
 //carregar comentários
  
 function loadComentsFunction(id) {
@@ -2958,28 +3099,33 @@ for (let i = 0; i < countdowns.length; i++) {
         });
 
         document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.reDirectConfigFrame__link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            console.log('teste link menu config')
+            const menuConfig = document.querySelector('#right-menu_JScontainer-configProf');
+            if (window.innerWidth > 750) {
+                menuConfig.style.display = 'flex'
+            } else {
+                menuConfig.style.display = 'none'
+            }
+            e.preventDefault()
+            const targetIframe = this.getAttribute('ChangeIframe')
+            console.log('preciso que mude o', targetIframe)
+            const iframe = document.querySelector('#containerIframe')
+            iframe.contentWindow.postMessage({
+                type: 'changeIframe',
+                target: targetIframe
+            }, '*')
+
             document.querySelectorAll('.reDirectConfigFrame__link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    console.log('teste link menu config')
-                    const menuConfig = document.querySelector('#right-menu_JScontainer-configProf');
-                    if (window.innerWidth > 750) {
-                        menuConfig.style.display = 'flex'
-                    } else {
-                        menuConfig.style.display = 'none'
-                    }
-                    e.preventDefault()
-                    const targetIframe = this.getAttribute('ChangeIframe')
-                    const iframe = document.querySelector('#containerIframe')
-                    iframe.contentWindow.postMessage(targetIframe, '*')
+                link.classList.remove('rDCF_ativo')
+            });
 
-                    document.querySelectorAll('.reDirectConfigFrame__link').forEach(link => {
-                        link.classList.remove('rDCF_ativo')
-                    });
+            this.classList.add('rDCF_ativo')
+        })
+    })
+})
 
-                    this.classList.add('rDCF_ativo')
-                })
-            })
-        })
     </script>
     <script>
         //notificacoes
@@ -3370,11 +3516,26 @@ for (let i = 0; i < countdowns.length; i++) {
                 })
             })
             document.querySelector('#darkmode').addEventListener('change', function(event) {
+                
                 const icons = document.querySelectorAll('.icone-thumb')
                 var iframe = document.getElementById('containerIframe')
-                iframe.contentWindow.postMessage('darkMode', '*');
-                iframe.contentWindow.postMessage(
-                    'com.br/?darkMode__changeBtn?ToContainerConfig__portraid.br', '*');
+                
+                
+                var containerSRC = document.querySelector('#containerIframe').getAttribute('src')
+                console.log(containerSRC, '- src atual')
+                if(containerSRC == 'view/configuracoes.php'){
+                    if (document.querySelector('#darkmode').checked) {
+                    // Modo escuro ativo
+                    iframe.contentWindow.postMessage({ type: 'darkmode__control', target: 'on' }, '*');
+                } else {
+                    // Modo escuro desativado
+                    iframe.contentWindow.postMessage({ type: 'darkmode__control', target: 'off' }, '*');
+                }
+
+                }else{
+                    iframe.contentWindow.postMessage('darkMode', '*');
+                    iframe.contentWindow.postMessage('com.br/?darkMode__changeBtn?ToContainerConfig__portraid.br', '*');
+                }
                 document.body.classList.toggle('dark')
                 if (document.body.classList.contains('dark')) {
                     document.querySelector('#lightTheme__on').style.display = 'none'
@@ -3580,17 +3741,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.13.1/dist/sweetalert2.all.min.js
     "></script>
     <!--VLibras -> não mexer-->
-    <div vw class="enabled" id="recVLIBRAS__webBeco" style="display: none;">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script src="assets/js/vlibras.js"></script>
     <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
-    <script>
+        
         //PARTE DE ATIVOS DO MODAL DE CRIAR PUBLICAÇÃO
         const truncateString = (string = '', maxLength = 50) =>
             string.length > maxLength ? `${string.substring(0, maxLength)}[…]` : string
@@ -3676,11 +3829,14 @@ function filtrarPosts(link) {
     console.log(formattedFilterName);
     const iframe = document.getElementById('containerIframe');
     iframe.contentWindow.postMessage(formattedFilterName, '*');
+    if (link.id === 'limpar__todosOsFiltros') {
+        document.querySelectorAll('.card_filtro').forEach(card => {
+            card.style.border = ''
+        });
+    } else {
+        link.style.border = 'var(--default_borderCardFiltroHover)';
+    }
 }
-
-   
 </script>
-
 </body>
-
 </html>
