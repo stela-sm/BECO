@@ -39,3 +39,4 @@
 2024-11-08 15:55:05 - ::1 -Alteração dos dados do do usuário stelamontenegro21@gmail.com2024-11-09 01:13:20 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
 2024-11-09 23:10:19 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
 2024-11-09 23:14:16 - ::1 - Novo concurso criado por stelamontenegro21@gmail.com2024-11-09 23:15:47 - ::1 - Novo banner adicionado por stelamontenegro21@gmail.com2024-11-09 23:15:51 - ::1 - Banner excluido por stelamontenegro21@gmail.com2024-11-09 23:15:53 - ::1 - Banner excluido por stelamontenegro21@gmail.com2024-11-09 23:15:55 - ::1 -Concurso excluido por stelamontenegro21@gmail.com2024-11-09 23:15:58 - ::1 -Concurso excluido por stelamontenegro21@gmail.com2024-11-10 23:09:04 - ::1 - Login do usuario isabel@gmail.com pelo dispositivo de ip ::1.
+2024-11-11 00:38:23 - ::1 -Alteração dos dados do do usuário rafael@gmail.com

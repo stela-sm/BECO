@@ -555,7 +555,7 @@ public function admLoginID($dados){
             $dados = [];
             $i = 0;
             while($row=$res->fetch_assoc()){
-                var_dump($row);
+              //  var_dump($row);
                 if ($row["id_user1"]==$idRemetente){
                 $infoUsuario = $this->getUserInfo($row["id_user2"]);
                 $dados[$i]["id_user"] = $row["id_user2"];

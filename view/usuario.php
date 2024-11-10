@@ -2,7 +2,10 @@
 <html lang="pt-br" style="background-color: var(--contentBG);">
 <?php
 session_start();
-
+if (!isset($_SESSION['USER_ID'])) {
+  header("Location: login.php");
+  exit(); 
+}
 require_once "../model/manager.class.php";
 $manager = new Manager();
 if(isset($_SESSION['artista'])){
@@ -15,6 +18,8 @@ if(isset($_SESSION['artista'])){
 if ($postagens["result"]==0){
 
 }
+
+//var_dump($postagens);
 ?>
 <head> 
   <meta charset="UTF-8">
@@ -414,7 +419,6 @@ document.addEventListener('contextmenu', function (event) {
 
 <?php
 for ($i=0;$i<$postagens['result'];$i++){
-
   echo "
 
 <div class='card-portifolio'>

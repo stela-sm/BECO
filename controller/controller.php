@@ -161,7 +161,7 @@ if(isset($_REQUEST["cadastro"])){
     require_once "../model/log.class.php";
     $log = new Log();
     
-    var_dump($r);
+   // var_dump($r);
     if($r["result"] == 0){
     $ip = $_SERVER['REMOTE_ADDR'];
     $log->setTexto("{$ip} - Erro na Criação do usuario {$dados['email']} pelo dispositivo de ip {$ip}.\n");
@@ -260,7 +260,7 @@ if(isset($_REQUEST["verificar"])){
     require_once "../model/manager.class.php";
     $manager = new Manager();
     $r = $manager-> verificar_cod($cod);
-    var_dump($r);
+    //var_dump($r);
   
     if($r!=1){
         ?>
@@ -288,7 +288,7 @@ if(isset($_REQUEST["verificar"])){
         require_once "../model/ferramentas.class.php";
         $ferramentas = new Ferramentas();
         
-    var_dump($_SESSION);
+   // var_dump($_SESSION);
         $senhaCript = $ferramentas->sha256($senha);
         require_once "../model/manager.class.php";
         $manager = new Manager();
@@ -377,8 +377,8 @@ for($i = 0;$i < 3;$i++){
     }
 }
 if(isset($_FILES["changeProfilePhoto"]['name']) && !empty($_FILES["changeProfilePhoto"]['name'])){
-    var_dump($_FILES);
-    var_dump($_SESSION);
+   // var_dump($_FILES);
+   // var_dump($_SESSION);
     $img = $_FILES["changeProfilePhoto"];
     move_uploaded_file($img['tmp_name'], "../assets/media/pfp/" . $img['name']);
     if($_SESSION["USER_PFP"]!== "nopfp.jpg"){$antigo = "../assets/media/pfp/".$_SESSION["USER_PFP"];
@@ -390,7 +390,7 @@ if(isset($_FILES["changeProfilePhoto"]['name']) && !empty($_FILES["changeProfile
             $dados["username"] = !empty($_REQUEST["username_edit"]) ? $_REQUEST["username_edit"] : $_SESSION["USER_USERNAME"];
             $dados["nickname"] = !empty($_REQUEST["nickname_edit"]) ? $_REQUEST["nickname_edit"] : $_SESSION["USER_NOME"];
             $dados["biografia"] = !empty($_REQUEST["bio_edit"]) ? $_REQUEST["bio_edit"] : $_SESSION["USER_BIOGRAFIA"];
-             var_dump($dados);
+          //   var_dump($dados);
             require_once "../model/manager.class.php";
             $manager = new Manager();
             $edit = $manager->editUser($dados);
@@ -616,9 +616,9 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
 require_once "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> criarPublicacao($dados);
-var_dump($dados);
-echo "<br><br>";
-    var_dump($_REQUEST);
+//var_dump($dados);
+//echo "<br><br>";
+  //  var_dump($_REQUEST);
     ?>
      <form action="../index.php" name="return" id="return" method="get">
      <input type="hidden" name="success" value="Publicado com sucesso!">
@@ -670,7 +670,7 @@ if(isset($_REQUEST['download'])){
 if(isset($_REQUEST['chamado'])){
     $dados['email'] = $_REQUEST['email'];
     $dados['text'] = $_REQUEST['text'];
-    var_dump($dados);
+//    var_dump($dados);
 require_once "../model/manager.class.php";
 $manager = new Manager();
 $r = $manager-> newChamado($dados);
@@ -694,7 +694,7 @@ if(isset($_REQUEST['payed'])){
         $method = 'debito';
     }
     require_once "../model/manager.class.php";
-    var_dump($_REQUEST);
+   // var_dump($_REQUEST);
 $manager = new Manager();
 $r = $manager-> updateCompra($id,$card,$method);
 ?>

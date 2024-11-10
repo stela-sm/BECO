@@ -539,10 +539,10 @@ if ($concurso["result"]==0){
         font-size: 12px;
         color: #BDBBBB;
     }
-.portifolio-content img{
+/* .portifolio-content img{
     height:100%;
     width: 100%;
-}
+} */
     textarea#descricaoPortifolio {
         outline: none !important;
         color: #BDBBBB;
@@ -1318,7 +1318,7 @@ justify-content: center;
         </span>
         <a class='card-body linkCamin__menu' href='#' pgDirect='view/usuario.php' onclick='sendId({$dados['ID_USER']})' data-idUser='{$dados['ID_USER']}'>
             <!--aqui leva pro usuario da pessoa-->
-            <div class='container-authorUserImg' >
+            <div class='container-authorUserImg' onclick='sendId({$dados['ID_USER']})' data-idUser='{$dados['ID_USER']}'>
             <img class='person-thumbArt' style='  border-radius: 8px 8px 8px 8px;
         height: 40px;
         width: 41px;' src='assets/media/pfp/$dados[pfp]'>
@@ -1402,7 +1402,7 @@ justify-content: center;
                             <div class="containerSelects__FcP">
                                 <div class="software__select d-column jumboContainer">
                                     <span class="Subsection__Title">Software</span>
-                                    <select name="software" id="#" require>
+                                    <select name="software" id="#" required>
                                         <option value="0" disabled selected>Selecione</option>
 <?PHP
                                    
@@ -2717,6 +2717,7 @@ observer.observe(iframe, { attributes: true, attributeFilter: ['src'] });
 
 
 function sendId(valor) {
+console.log('OI');
     fetch('controller/controller.php?findUser='+valor, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2824,13 +2825,14 @@ function loadComentsFunction(id) {
                             for (var i = 0; i <= response.number; i++) {
                                 console.log("ok");
                                 var comment = response.comentarios[i];
+
                                 console.log(comment);
                                 
                                 // Acumular o HTML de cada comentário
                                 comentariosHTML += 
                                 '<div class="comment">' +
                                 '<div class="comment-body">' +
-                                '<span class="name">' + comment.username + ' </span>' +
+                                '<span class="name"> </span>' +
                                 comment.texto +
                                 '</div></div>';
                                 div_comentarios.innerHTML = comentariosHTML;

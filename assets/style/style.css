@@ -1958,9 +1958,9 @@ a.reDirectConfigFrame__linkV2 {
     flex-direction: column;
   }
 
-  .portifolio-content {
+  /* .portifolio-content {
     width: 100% !important;
-  }
+  } */
 
   /* modal */
   .container-totalincrement,
