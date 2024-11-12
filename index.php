@@ -1789,8 +1789,8 @@ justify-content: center;
                             <hr class="prof__divider">
                             <div class="container__profBtns" id="user-rmenuBtns">
                                 <div class="container-divideBtn" id="displayNoneJS">
-                                    <a href="view/salvos.php" target="iframe_chat" class="equalBtn-profUser">Salvos</a>
-                                    <a id="GoToConfig__fromUserpage" href="view/configuracoes.php?configperfil=1" target="iframe_chat" class="equalBtn-profUser">Configurações</a>
+                                    <a href="view/salvos.php" style="color:black; font-weight: 700;" target="iframe_chat" class="equalBtn-profUser">Salvos</a>
+                                    <a id="GoToConfig__fromUserpage" style="color:black; font-weight: 700;" href="view/configuracoes.php?configperfil=1" target="iframe_chat" class="equalBtn-profUser">Configurações</a>
                                 </div>
                             </div>
                         </div>
@@ -2197,26 +2197,7 @@ if ($data_atual < $data_fim) {
                                 box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .5);
 
                             }
-                            .fixedFooterModal {
-                                position: absolute;
-                                bottom: 0;
-                                left: 0;
-                                right: 0;
-                                height: auto; 
-                                width: 100%;
-                                background-color: white; 
-                                text-align: center;
-                                line-height: 60px; 
-                            border:none;
-                            border-radius: 6px;
-                            box-shadow: rgba(0, 0, 0, 0.15) 0px -15px 20px -10px;
-
-                            }
-                            .tableFixedFooter{
-                                width: 100%;
-                                
-                            background-color: transparent !important;
-                            }
+                        
                             
                             .botaoContainer_thumbInterativo {
                             border: none !important;
@@ -2261,7 +2242,7 @@ if ($data_atual < $data_fim) {
                         </a>
                     </section>
                 </div>
-                <div class="fixedFooterModal">
+                <!-- <div class="fixedFooterModal">
                     <table class="tableFixedFooter">
                         <tr class="trFixedFooter">
                         <td class="tdFixerFooter">
@@ -2280,7 +2261,7 @@ if ($data_atual < $data_fim) {
                         </td>
                     </tr>
                     </table>
-    </div>
+    </div> -->
             </div>
         
         </div>
@@ -2822,7 +2803,7 @@ function loadComentsFunction(id) {
                     div_comentarios.innerHTML = '';
                         if (response && response.comentarios) {
                             var comentariosHTML = ''; // Variável para acumular os comentários
-                            for (var i = 0; i <= response.number; i++) {
+                            for (var i = 0; i < response.number; i++) {
                                 console.log("ok");
                                 var comment = response.comentarios[i];
 
@@ -2832,8 +2813,8 @@ function loadComentsFunction(id) {
                                 comentariosHTML += 
                                 '<div class="comment">' +
                                 '<div class="comment-body">' +
-                                '<span class="name"> </span>' +
-                                comment.texto +
+                                '<span class="name"> ' +comment.username+ '</span> ' +
+                                 comment.texto +
                                 '</div></div>';
                                 div_comentarios.innerHTML = comentariosHTML;
                             }

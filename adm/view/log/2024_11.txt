@@ -39,4 +39,18 @@
 2024-11-08 15:55:05 - ::1 -Alteração dos dados do do usuário stelamontenegro21@gmail.com2024-11-09 01:13:20 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
 2024-11-09 23:10:19 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
 2024-11-09 23:14:16 - ::1 - Novo concurso criado por stelamontenegro21@gmail.com2024-11-09 23:15:47 - ::1 - Novo banner adicionado por stelamontenegro21@gmail.com2024-11-09 23:15:51 - ::1 - Banner excluido por stelamontenegro21@gmail.com2024-11-09 23:15:53 - ::1 - Banner excluido por stelamontenegro21@gmail.com2024-11-09 23:15:55 - ::1 -Concurso excluido por stelamontenegro21@gmail.com2024-11-09 23:15:58 - ::1 -Concurso excluido por stelamontenegro21@gmail.com2024-11-10 23:09:04 - ::1 - Login do usuario isabel@gmail.com pelo dispositivo de ip ::1.
-2024-11-11 00:38:23 - ::1 -Alteração dos dados do do usuário rafael@gmail.com
+2024-11-11 00:38:23 - ::1 -Alteração dos dados do do usuário rafael@gmail.com2024-11-11 13:48:20 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
+2024-11-11 13:56:47 - ::1 - Login do usuario clara@gmail.com pelo dispositivo de ip ::1.
+2024-11-11 13:57:35 - ::1 -Alteração dos dados do do usuário clara@gmail.com2024-11-11 14:48:31 - ::1 -Alteração de senha do usuário stelamontenegro3@gmail.com2024-11-11 14:48:42 - ::1 - Erro no login do usuario stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-11-11 14:48:53 - ::1 - Login do usuario stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-11-11 14:49:37 - ::1 -Alteração dos dados do do usuário stelamontenegro3@gmail.com2024-11-11 14:57:56 - ::1 - Login do usuario clara@gmail.com pelo dispositivo de ip ::1.
+2024-11-12 00:05:44 - ::1 - Login do usuario stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-11-12 00:26:17 - ::1 - Login do usuario laura@gmail.com pelo dispositivo de ip ::1.
+2024-11-12 00:26:58 - ::1 -Alteração dos dados do do usuário laura@gmail.com2024-11-12 00:35:42 - ::1 - Login do usuario samuel@gmail.com pelo dispositivo de ip ::1.
+2024-11-12 00:48:58 - ::1 - Login do usuario stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-11-12 01:20:17 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
+2024-11-12 14:09:32 - ::1 - Exclusão do adminstrador 16 2024-11-12 14:16:54 - ::1 - Criação do administrador samuel@gmail.com2024-11-12 14:22:55 - ::1 - Criação do administrador clara@gmail.com2024-11-12 14:23:06 - ::1 - Exclusão do adminstrador 6 2024-11-12 14:23:15 - ::1 - Exclusão do adminstrador 1 2024-11-12 14:27:55 - ::1 - Criação do administrador laura@gmail.com2024-11-12 14:32:41 - ::1 - Criação do administrador stelamontenegro3@gmail.com2024-11-12 14:32:51 - ::1 - Login do administrador 2, via cookies, pelo dispositivo de ip ::1.
+2024-11-12 14:32:58 - ::1 - Erro no login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-11-12 14:33:12 - ::1 - Login do administrador stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-11-12 14:33:21 - ::1 - Exclusão do adminstrador 2 2024-11-12 14:36:50 - ::1 - Erro no login do administrador samuel@gmail..com pelo dispositivo de ip ::1.
+2024-11-12 14:37:06 - ::1 - Login do administrador samuel@gmail.com pelo dispositivo de ip ::1.

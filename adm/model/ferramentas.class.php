@@ -50,9 +50,11 @@ class Ferramentas{
 
     public function geradorMicroTime() {
         $time = microtime(true);
-        $valor = explode('.', $time);
+        $randomValue = rand(1, 1000); // Gera um valor aleatório entre 1 e 1000
+        $valor = explode('.', $time + $randomValue); // Soma o valor aleatório ao microtime
         return $valor[0];
     }
+    
 
 public function criptografar($message, $key)
 {

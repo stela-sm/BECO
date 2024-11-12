@@ -546,8 +546,12 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
     }
     $dados["descricao"] = $_REQUEST['descricaoPortifolio'];
     $dados["software"] = $_REQUEST['software'];
-    $dados["thumbnail"] = $_FILES['thumbnail']['name'];
-    move_uploaded_file($_FILES['thumbnail']['tmp_name'], "../assets/media/thumbnail/" . $_FILES['thumbnail']['name']);
+    require_once "../model/ferramentas.class.php";
+            $ferramentas = new ferramentas();
+            $ext = $ferramentas->pegaExtensao($_FILES['thumbnail']['name']);
+            $newName = $ferramentas->geradorMicroTime() . "." . $ext;
+    $dados["thumbnail"] = $newName;
+    move_uploaded_file($_FILES['thumbnail']['tmp_name'], "../assets/media/thumbnail/" . $newName);
    
     
     if (!empty($_REQUEST['tagsCheck'])) {
@@ -571,12 +575,18 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
     if (!empty($_REQUEST['imagemPort'])) {
         $inputs = $_REQUEST['imagemPort'];
         $i = 0;
-        foreach ($inputs as $input) {
-            $dados['img'][$i] = $input; 
+        foreach ($inputs as $input) { 
             $file = $input; // Nome do arquivo que você salvou
+
             $sourcePath = '../assets/media/temp_midia/' . $file; // Caminho original
-            $destinationPath = '../assets/media/port_midia/' . $file; // Caminho de destino
+            require_once "../model/ferramentas.class.php";
+            $ferramentas = new ferramentas();
+            $ext = $ferramentas->pegaExtensao($file);
+            $newName = $ferramentas->geradorMicroTime() . "." . $ext;
+            $destinationPath = '../assets/media/port_midia/' . $newName; // Caminho de destino
             rename($sourcePath, $destinationPath);
+            
+            $dados['img'][$i] = $newName;
             $i++;
         }
     } else {
@@ -586,11 +596,15 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
     if (!empty($_REQUEST['videoPort'])) {
         $inputs = $_REQUEST['videoPort'];
         $i = 0;
-        foreach ($inputs as $input) {
-            $dados['video'][$i] = $input; 
+        foreach ($inputs as $input) { 
             $file = $input; // Nome do arquivo que você salvou
             $sourcePath = '../assets/media/temp_midia/' . $file; // Caminho original
-            $destinationPath = '../assets/media/port_midia/' . $file; // Caminho de destino
+            $ferramentas = new ferramentas();
+            $ext = $ferramentas->pegaExtensao($file);
+            $newName = $ferramentas->geradorMicroTime() . "." . $ext;
+            $destinationPath = '../assets/media/port_midia/' . $newName; // Caminho de destino
+            
+            $dados['video'][$i] = $newName;
             rename($sourcePath, $destinationPath);
             $i++;
         }
@@ -601,10 +615,13 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
         $inputs = $_REQUEST['ativos'];
         $i = 0;
         foreach ($inputs as $input) {
-            $dados['ativos'][$i] = $input; 
             $file = $input; // Nome do arquivo que você salvou
             $sourcePath = '../assets/media/temp_ativos/' . $file; // Caminho original
-            $destinationPath = '../assets/media/port_ativos/' . $file; // Caminho de destino
+            $ext = $ferramentas->pegaExtensao($file);
+            $newName = $ferramentas->geradorMicroTime() . "." . $ext;
+            $destinationPath = '../assets/media/port_ativos/' . $newName; // Caminho de destino
+            
+            $dados['ativos'][$i] = $newName; 
             rename($sourcePath, $destinationPath);
             $i++;
         }
