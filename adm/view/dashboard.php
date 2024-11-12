@@ -121,9 +121,7 @@
   $pix = $manager->quantidadePayment("pix");
   $credito = $manager->quantidadePayment("credito");
   $debito = $manager->quantidadePayment("debito");
-  $prod = $manager->quantidade("produtos");
-  $serv = $manager->quantidade("servicos");
-  $post = $prod + $serv;
+  $post = $manager->quantidade("postagem");
   $access = $manager -> getAccessesByMonth(); //não tenho mais criatividade pra nome de variável
 
   $months = $manager -> getUsersByMonth();;
@@ -220,7 +218,7 @@ echo "
                           </svg>
                         </a>
                         <a href="" class="text-card">
-                        <span class="data-card"><?php echo $users;?></span>
+                        <span class="data-card"><?php echo $acessos;?></span>
                         <span class="name-card">Acessos</span>
                     </a>
                                       
