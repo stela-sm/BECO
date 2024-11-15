@@ -726,7 +726,54 @@ if(isset($_REQUEST["excluir_concurso"])){
    
    <?php
    }
-       
+if(isset($_REQUEST['excluir'])){
+    $id = $_REQUEST['id'];
+    require_once "../model/manager.class.php";
+    $manager = new Manager();
+    $r = $manager-> excluirPost($id);
+    ?>
+    <form action="../view/posts.php?success=1" name="return" id="return" method="get">
+    <input type="hidden" name="sucesso" value=1>
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+    
+    <?php
+    
+}
+if(isset($_REQUEST['reativar'])){
+    $id = $_REQUEST['id'];
+    require_once "../model/manager.class.php";  
+    $manager = new Manager();   
+    $r = $manager-> reativarPost($id);
+    ?>
+     <form action="../view/posts.php?success=1" name="return" id="return" method="get">
+    <input type="hidden" name="sucesso" value=1>
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+      
+        <?php
+        
+}
+if(isset($_REQUEST['inativar'])){
+    $id = $_REQUEST['id'];
+    require_once "../model/manager.class.php";  
+    $manager = new Manager();   
+    $r = $manager-> inativarPost($id);
+    ?>
+    <form action="../view/posts.php?success=1" name="return" id="return" method="get">
+    <input type="hidden" name="sucesso" value=1>
+    </form>
+    <script>
+        document.getElementById("return").submit();
+    </script>
+    
+        <?php
+        
+}
 ?>
            
            

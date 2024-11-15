@@ -979,44 +979,23 @@ public function transacoesTable($busca){
     }
 
    
-public function postsTable($limit, $offset, $search, $con) {
-    //tem concurso e busca
-    if($con !== "none" && $search !== "none"){
-        $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
-        FROM postagem p 
-        JOIN usuario u ON p.id_user = u.ID_USER 
-        WHERE p.status = 1 AND p.titulo LIKE '%{$search}%' AND p.descricao LIKE '%{$con}%' 
-        ORDER BY p.datahora DESC 
-        LIMIT {$limit};"
-        ;
-    }
-    //tem concurso sem busca
-    if($con !== "none" && $search == "none"){
-        $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
-        FROM postagem p 
-        JOIN usuario u ON p.id_user = u.ID_USER 
-        WHERE p.status = 1 AND p.descricao LIKE '%{$con}%' 
-        ORDER BY p.datahora DESC 
-        LIMIT {$limit}  OFFSET {$offset}; "
-        ;
-    }
-    //nem concurso nem busca
-    if($search == "none" && $con == "none"){
+public function postsTable($limit, $search) {
+  
+    if($search == "none"){
     $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
     FROM postagem p 
     JOIN usuario u ON p.id_user = u.ID_USER 
-    WHERE p.status = 1 
     ORDER BY p.datahora DESC 
-    LIMIT {$limit} OFFSET {$offset}
+    LIMIT {$limit} 
     
     ;
     ";
     //só busca
-    }else if($search !== "none" && $con == "none"){
+    }else if($search !== "none" ){
            $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
             FROM postagem p 
             JOIN usuario u ON p.id_user = u.ID_USER 
-            WHERE p.status = 1 AND p.titulo LIKE '%{$search}%' OR p.descricao LIKE '%{$search}%'
+            WHERE p.titulo LIKE '%{$search}%' OR p.descricao LIKE '%{$search}%'
             ORDER BY p.datahora DESC 
             LIMIT {$limit}
             ;
@@ -1092,6 +1071,51 @@ LIMIT 3;";
 } else {
     return []; 
 }
+
+}
+public function excluirPost($id){
+    $sql = "DELETE FROM postagem WHERE ID_POST = '{$id}'";
+    $this -> excluirCompras($id);
+    $this -> excluirSalvos($id);
+    $res = $this->connect()->query($sql);
+    $this->connect()->close();
+    return $res;
+}
+public function excluirCompras($id){
+    $id2 = $this -> pegarProduto($id);
+    $sql = "DELETE FROM compras WHERE id_prod = '{$id2}'";
+    $res = $this->connect()->query($sql);
+    $this -> excluirProdutos($id);
+    $this->connect()->close();
+}
+public function pegarProduto($id){
+    $sql = "SELECT ID_PROD FROM produtos WHERE id_postagem = '{$id}'";
+    $res = $this->connect()->query($sql);
+    $row = $res->fetch_assoc();    
+    return $row['ID_PROD'];
+}
+public function excluirProdutos($id){
+    $sql = "DELETE FROM produtos WHERE id_postagem = '{$id}'";
+    $res = $this->connect()->query($sql);
+    $this->connect()->close();
+
+}
+public function excluirSalvos($id){
+    $sql = "DELETE FROM salvos WHERE id_post = '{$id}'";
+    $res = $this->connect()->query($sql);
+    $this->connect()->close();
+
+}
+public function reativarPost($id){
+    $sql= "UPDATE `postagem` SET `status`=1 WHERE 'ID_POST' = '{$id}' ";
+    $res = $this->connect()->query($sql);
+    $this->connect()->close();
+
+}
+public function inativarPost($id){
+    $sql= "UPDATE `postagem` SET `status`= 0 WHERE 'ID_POST' = '{$id}' ";
+    $res = $this->connect()->query($sql);
+    $this->connect()->close();
 
 }
 }

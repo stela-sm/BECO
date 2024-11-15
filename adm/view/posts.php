@@ -108,8 +108,8 @@ if (isset($_GET["pesquisa"])){
   $pesquisa = "";
 }
 
-$r = $manager-> postsTable(20,0,$pesquisa,'');
-for($i=1; $i<$r["result"]; $i++){
+$r = $manager-> postsTable(20,$pesquisa);
+for($i=0; $i<$r["result"]; $i++){
   if($r[$i][0]["post_status"]='1'){
     $action = 'Inativar';
   }else{
@@ -140,8 +140,8 @@ for($i=1; $i<$r["result"]; $i++){
 <td class='eye-td'>
   <a class='btn btn-eye' href='#' ata-container='body' data-toggle='popover' data-placement='top'  data-html='true'  data-content=\"
 
-   <button type='button' onclick='BDaction(".$action."')' class='btn btn-primary btn-sm'>".$action."</button>
-                    <button type='button' class='btn btn-danger btn-sm'>Excluir</button>
+   <button type='button' id='botao_acao' onclick='BDaction( ".$r[$i][0]["ID_POST"].", 1)' class='btn btn-primary btn-sm'>".$action."</button>
+                    <button type='button' onclick='BDaction( ".$r[$i][0]["ID_POST"].", 2)'  class='btn btn-danger btn-sm'>Excluir</button>
   \">
     <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-pencil'>
     <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
@@ -166,8 +166,22 @@ $(function () {
     container: 'body'
   })
 })
-function BDaction(action){
-alert('OI PORRA')
+function BDaction(id,action){
+  if(action == 2){
+    if(confirm('Deseja excluir essa postagem?')){
+
+    window.location.href = "../controller/controller.php?excluir=1&id="+id;
+    }
+  }else{
+    const botao = document.getElementById('botao_acao');
+const textoDoBotao = botao.textContent;
+if(textoDoBotao == 'Reativar'){
+      
+    window.location.href = "../controller/controller.php?reativar=1&id="+id;
+  }else{
+    window.location.href = "../controller/controller.php?inativar=1&id="+id;
+  }
+}
 }
 </script>
 
