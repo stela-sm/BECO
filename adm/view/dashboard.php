@@ -171,6 +171,7 @@ echo "
                 </li> 
                 
                 </div>
+                
                 <div class="col-2 dashboard-upper-cards">
 
                     <li class="upper-card">

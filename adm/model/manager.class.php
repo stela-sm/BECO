@@ -978,7 +978,84 @@ public function transacoesTable($busca){
         }
     }
 
+   
+public function postsTable($limit, $offset, $search, $con) {
+    //tem concurso e busca
+    if($con !== "none" && $search !== "none"){
+        $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
+        FROM postagem p 
+        JOIN usuario u ON p.id_user = u.ID_USER 
+        WHERE p.status = 1 AND p.titulo LIKE '%{$search}%' AND p.descricao LIKE '%{$con}%' 
+        ORDER BY p.datahora DESC 
+        LIMIT {$limit};"
+        ;
+    }
+    //tem concurso sem busca
+    if($con !== "none" && $search == "none"){
+        $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
+        FROM postagem p 
+        JOIN usuario u ON p.id_user = u.ID_USER 
+        WHERE p.status = 1 AND p.descricao LIKE '%{$con}%' 
+        ORDER BY p.datahora DESC 
+        LIMIT {$limit}  OFFSET {$offset}; "
+        ;
+    }
+    //nem concurso nem busca
+    if($search == "none" && $con == "none"){
+    $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
+    FROM postagem p 
+    JOIN usuario u ON p.id_user = u.ID_USER 
+    WHERE p.status = 1 
+    ORDER BY p.datahora DESC 
+    LIMIT {$limit} OFFSET {$offset}
+    
+    ;
+    ";
+    //só busca
+    }else if($search !== "none" && $con == "none"){
+           $sql = "SELECT p.ID_POST, p.id_user, u.username, u.ID_USER AS user_id,  p.thumbnail, p.titulo, p.descricao, p.tipo, p.datahora, p.status 
+            FROM postagem p 
+            JOIN usuario u ON p.id_user = u.ID_USER 
+            WHERE p.status = 1 AND p.titulo LIKE '%{$search}%' OR p.descricao LIKE '%{$search}%'
+            ORDER BY p.datahora DESC 
+            LIMIT {$limit}
+            ;
+            ";
+    }
+    $conn = $this->connect();
+    $res = $conn->query($sql);
 
+    $dados = array();
+    
+    if ($res->num_rows > 0) {
+        // Inicializa o contador de postagens
+        $dados['result'] = $res->num_rows; // Número total de postagens
+        $i=0;
+        // Percorrer todos os resultados
+        while ($row = $res->fetch_assoc()) {
+            $dados[$i][] = [
+                'ID_USER'   => $row['user_id'], // Usar 'user_id' que é o alias no SQL
+                'username'  => $row['username'],
+                'thumbnail' => $row['thumbnail'],
+                'ID_POST'   => $row['ID_POST'],
+                'titulo'    => $row['titulo'],
+                'descricao' => $row['descricao'],
+                'tipo'      => $row['tipo'],
+                'post_datahora' => $row['datahora'], // Corrigido para 'datahora'
+                'post_status' => $row['status'],
+            ];
+                $i++;
+                $dados['result'] = $i;
+        }
+    } else {
+        $dados['result'] = 0; // Se não houver postagens
+        
+    }
+    
+    $dados['query'] = $sql;
+    $conn->close(); // Fechar a conexão
+    return $dados; // Retornar os dados
+}
     public function excluirBanner($id){
         $sql = "DELETE FROM banner WHERE ID_BANNER = '{$id}'";
         $res = $this->connect()->query($sql);
