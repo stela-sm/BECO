@@ -57,3 +57,5 @@
 2024-11-13 22:53:45 - ::1 - Login do administrador 17, via cookies, pelo dispositivo de ip ::1.
 2024-11-14 15:26:25 - ::1 - Login do administrador 17, via cookies, pelo dispositivo de ip ::1.
 2024-11-15 15:30:46 - ::1 - Login do administrador 17, via cookies, pelo dispositivo de ip ::1.
+2024-11-16 15:06:16 - ::1 - Login do administrador 17, via cookies, pelo dispositivo de ip ::1.
+2024-11-16 15:09:07 - ::1 - Novo banner adicionado por samuel@gmail.com

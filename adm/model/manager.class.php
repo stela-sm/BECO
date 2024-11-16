@@ -1013,14 +1013,14 @@ public function postsTable($limit, $search) {
         // Percorrer todos os resultados
         while ($row = $res->fetch_assoc()) {
             $dados[$i][] = [
-                'ID_USER'   => $row['user_id'], // Usar 'user_id' que é o alias no SQL
+                'ID_USER'   => $row['user_id'], 
                 'username'  => $row['username'],
                 'thumbnail' => $row['thumbnail'],
                 'ID_POST'   => $row['ID_POST'],
                 'titulo'    => $row['titulo'],
                 'descricao' => $row['descricao'],
                 'tipo'      => $row['tipo'],
-                'post_datahora' => $row['datahora'], // Corrigido para 'datahora'
+                'post_datahora' => $row['datahora'], 
                 'post_status' => $row['status'],
             ];
                 $i++;
@@ -1107,14 +1107,15 @@ public function excluirSalvos($id){
 
 }
 public function reativarPost($id){
-    $sql= "UPDATE `postagem` SET `status`=1 WHERE 'ID_POST' = '{$id}' ";
+    $sql = "UPDATE postagem SET status = 1 WHERE ID_POST = {$id}";
     $res = $this->connect()->query($sql);
     $this->connect()->close();
 
 }
 public function inativarPost($id){
-    $sql= "UPDATE `postagem` SET `status`= 0 WHERE 'ID_POST' = '{$id}' ";
+    $sql = "UPDATE postagem SET status = 0 WHERE ID_POST = {$id}";
     $res = $this->connect()->query($sql);
+    
     $this->connect()->close();
 
 }

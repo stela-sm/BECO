@@ -553,7 +553,7 @@ function carregarPosts(search) {
           
         })
         
-        }else{
+        }else if(data.result = 0 && page == 0){
           nothing = "<p class='nothingText'>Ainda nenhuma publicação, seja o primeiro a participar!</p>"
           $('.container-portifolios').append(nothing);
             loading = false; 

@@ -110,7 +110,7 @@ if (isset($_GET["pesquisa"])){
 
 $r = $manager-> postsTable(20,$pesquisa);
 for($i=0; $i<$r["result"]; $i++){
-  if($r[$i][0]["post_status"]='1'){
+  if($r[$i][0]["post_status"]=='1'){
     $action = 'Inativar';
   }else{
     $action = 'Reativar';
