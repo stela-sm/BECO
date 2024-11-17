@@ -1119,6 +1119,13 @@ public function inativarPost($id){
     $this->connect()->close();
 
 }
+public function concluirChamado($id){
+    $sql = "UPDATE chamados SET status = 'Concluído' WHERE ID_CHAMADO = {$id}";
+    $res = $this->connect()->query($sql);
+    
+    $this->connect()->close();
+
+}
 }
 
 

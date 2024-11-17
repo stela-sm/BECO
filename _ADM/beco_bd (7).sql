@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12/11/2024 às 16:06
+-- Tempo de geração: 17/11/2024 às 16:13
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -135,20 +135,18 @@ CREATE TABLE `ativos` (
 INSERT INTO `ativos` (`ID_ATIVO`, `id_post`, `arquivo`, `datahora`) VALUES
 (46, 61, 'wallpaper.avif', '2024-11-06 21:11:02'),
 (47, 62, 'pexels-mccutcheon-1566909.jpg', '2024-11-06 21:14:43'),
-(48, 63, 'trees.rar', '2024-11-10 19:12:04'),
-(50, 65, 'images.jpeg', '2024-11-10 19:40:14'),
-(51, 66, 'pintura-digital-de-menina-1024x538.jpg', '2024-11-10 19:49:56'),
 (52, 67, 'girl-8799169_1280.jpg', '2024-11-11 10:08:47'),
 (56, 71, '1731332496.jpeg', '2024-11-11 10:41:36'),
 (57, 72, '1731333378.jpeg', '2024-11-11 10:56:18'),
 (58, 73, '1731333679.jpeg', '2024-11-11 11:01:19'),
 (59, 74, '1731366563.jpeg', '2024-11-11 20:09:23'),
-(60, 75, '1731366708.gif', '2024-11-11 20:11:48'),
 (61, 76, '1731367069.jpeg', '2024-11-11 20:17:49'),
 (62, 77, '1731367771.jpeg', '2024-11-11 20:29:31'),
 (63, 78, '1731368100.jpeg', '2024-11-11 20:35:00'),
 (64, 79, '1731368382.jpeg', '2024-11-11 20:39:42'),
-(66, 81, '1731368847.jpeg', '2024-11-11 20:47:27');
+(66, 81, '1731368847.jpeg', '2024-11-11 20:47:27'),
+(71, 86, '1731856058.jpeg', '2024-11-17 11:59:51'),
+(73, 88, '1731856813.jpeg', '2024-11-17 12:07:49');
 
 -- --------------------------------------------------------
 
@@ -171,7 +169,8 @@ INSERT INTO `banner` (`ID_BANNER`, `img`, `datahora`, `status`) VALUES
 (12, '1729950372.png', '2024-10-26 10:46:12', 0),
 (13, '1730851233.png', '2024-11-05 21:00:33', 0),
 (14, '1730851938.jpeg', '2024-11-05 21:12:18', 0),
-(15, '1731190547.jpeg', '2024-11-09 19:15:47', 1);
+(15, '1731190547.jpeg', '2024-11-09 19:15:47', 0),
+(16, '1731766300.jpg', '2024-11-16 11:09:07', 1);
 
 -- --------------------------------------------------------
 
@@ -192,10 +191,6 @@ CREATE TABLE `chamados` (
 --
 
 INSERT INTO `chamados` (`ID_CHAMADO`, `email`, `mensagem`, `datahora`, `status`) VALUES
-(1, 'stelamontenegro21@gmail.com', 'aaaaa', '2024-10-21 20:37:52', 'Em Análise'),
-(2, 'stelamontenegro21@gmail.com', 'socorro', '2024-10-21 20:43:16', 'Em Análise'),
-(3, 'lucas@gmail.com', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '2024-10-21 20:43:54', 'Em Análise'),
-(4, 'lucas@gmail.com', 'hhfhgfffgfghhgfhfhgfhg', '2024-10-21 20:44:14', 'Em Análise'),
 (5, 'stelamontenegro3@gmail.com', 'Precisa de um aviso para ataque epilético. É o post \'psicodélico\' da @julianapereira', '2024-11-06 21:20:32', 'Em Análise');
 
 -- --------------------------------------------------------
@@ -279,7 +274,7 @@ INSERT INTO `comentario` (`ID_COMENTARIO`, `id_user`, `id_post`, `texto`, `datah
 
 CREATE TABLE `compras` (
   `ID_COMPRA` int(11) NOT NULL,
-  `id_prod` int(11) NOT NULL,
+  `id_prod` int(11) UNSIGNED NOT NULL,
   `valor` float NOT NULL,
   `comprador` varchar(110) NOT NULL,
   `vendedor` varchar(110) NOT NULL,
@@ -295,13 +290,12 @@ CREATE TABLE `compras` (
 --
 
 INSERT INTO `compras` (`ID_COMPRA`, `id_prod`, `valor`, `comprador`, `vendedor`, `metodo`, `cod_card_num`, `codigo`, `datahora`, `status`) VALUES
-(65, 61, 1.5, '10', '10', 'credito', '1111 1111 1111 1111', NULL, '2024-11-06 21:12:38', 2),
-(66, 63, 1.5, '50', '50', 'credito', '1111 1111 1111 1111', NULL, '2024-11-10 19:16:56', 2),
 (67, 70, 5, '57', '57', 'credito', '1222 2222 2222 2222', NULL, '2024-11-11 10:39:08', 2),
 (68, 71, 5, '57', '57', 'credito', '1111 1111 1111 1111', NULL, '2024-11-11 10:41:43', 2),
 (69, 71, 5, '55', '57', 'credito', '1233 8473 8483 8348', NULL, '2024-11-11 10:51:01', 2),
 (70, 76, 1.5, '51', '55', 'credito', '1211 2121 2121 2121', NULL, '2024-11-11 20:29:57', 2),
-(71, 81, 25, '55', '56', 'credito', '2323 2323 2323 2323', NULL, '2024-11-11 20:49:31', 2);
+(71, 81, 25, '55', '56', 'credito', '2323 2323 2323 2323', NULL, '2024-11-11 20:49:31', 2),
+(72, 71, 5, '55', '57', 'credito', '1111 1111 1111 1111', NULL, '2024-11-13 18:54:24', 2);
 
 -- --------------------------------------------------------
 
@@ -328,7 +322,7 @@ CREATE TABLE `concursos` (
 INSERT INTO `concursos` (`ID_CONCURSO`, `titulo`, `tag`, `descricao`, `img_anuncio`, `img_banner`, `data_inicio`, `data_fim`, `status`) VALUES
 (3, 'Purple', '#Purple', 'Purple', '1726791405.png', '1726791405.png', '2024-09-29', '2024-10-24', 1),
 (15, 'Etec JRM', '#JRM', 'Artes da ETEC JRM', '1729950194.png', '1729950195.png', '2024-10-25', '2024-11-09', 1),
-(16, 'Espiríto Natalino', '#Natal2024', 'Celebre o Espírito Natalino com nosso concurso especial de Natal!', '1731190456.jpg', '1731190457.jpg', '2024-11-10', '2024-11-26', 1);
+(16, 'Espiríto Natalino', '#Natal2024', 'Celebre o Espírito Natalino com nosso concurso especial de Natal!', '1731190456.jpg', '1731190457.jpg', '2024-11-10', '2024-12-26', 1);
 
 -- --------------------------------------------------------
 
@@ -383,7 +377,8 @@ INSERT INTO `likes` (`ID_LIKE`, `id_user`, `id_post`, `datahora`) VALUES
 (127, 13, 1, '2024-10-20 13:45:54'),
 (129, 13, 2, '2024-10-20 14:02:07'),
 (132, 38, 57, '2024-10-27 15:20:06'),
-(133, 1, 60, '2024-11-06 00:46:29');
+(133, 1, 60, '2024-11-06 00:46:29'),
+(135, 55, 73, '2024-11-16 23:54:48');
 
 -- --------------------------------------------------------
 
@@ -450,20 +445,18 @@ CREATE TABLE `midia` (
 INSERT INTO `midia` (`ID_MIDIA`, `id_postagem`, `arquivo`, `tipo`, `datahora`) VALUES
 (68, 61, 'wallpaper.avif', 'imagem', '2024-11-07 00:11:02'),
 (69, 62, 'pexels-mccutcheon-1566909.jpg', 'imagem', '2024-11-07 00:14:43'),
-(71, 63, 'pexels-valeriya-19142753.jpg', 'imagem', '2024-11-10 22:12:04'),
-(74, 65, 'images.jpeg', 'imagem', '2024-11-10 22:40:14'),
-(75, 66, 'pintura-digital-de-menina-1024x538.jpg', 'imagem', '2024-11-10 22:49:56'),
 (76, 67, 'girl-8799169_1280.jpg', 'imagem', '2024-11-11 13:08:47'),
 (80, 71, '1731332496.jpeg', 'imagem', '2024-11-11 13:41:36'),
 (81, 72, '1731333378.jpeg', 'imagem', '2024-11-11 13:56:18'),
 (82, 73, '1731333679.jpeg', 'imagem', '2024-11-11 14:01:19'),
 (83, 74, '1731366563.jpeg', 'imagem', '2024-11-11 23:09:23'),
-(84, 75, '1731366708.gif', 'imagem', '2024-11-11 23:11:48'),
 (85, 76, '1731367069.jpeg', 'imagem', '2024-11-11 23:17:49'),
 (86, 77, '1731367771.jpeg', 'imagem', '2024-11-11 23:29:31'),
 (87, 78, '1731368100.jpeg', 'imagem', '2024-11-11 23:35:00'),
 (88, 79, '1731368382.jpeg', 'imagem', '2024-11-11 23:39:42'),
-(91, 81, '1731368847.jpeg', 'imagem', '2024-11-11 23:47:27');
+(91, 81, '1731368847.jpeg', 'imagem', '2024-11-11 23:47:27'),
+(98, 86, '1731856217.jpeg', 'imagem', '2024-11-17 14:59:51'),
+(101, 88, '1731856626.jpeg', 'imagem', '2024-11-17 15:07:49');
 
 -- --------------------------------------------------------
 
@@ -490,20 +483,18 @@ CREATE TABLE `postagem` (
 INSERT INTO `postagem` (`ID_POST`, `id_user`, `thumbnail`, `software`, `titulo`, `descricao`, `tipo`, `datahora`, `status`) VALUES
 (61, 10, 'wallpaper.avif', 99, 'Color Wallpapers', 'Wallpaper para monitor. Extensão AVIF. #ArteDigital', 1, '2024-11-06', 1),
 (62, 10, 'pexels-mccutcheon-1566909.jpg', 99, 'Psicodélico', 'Arte psicodélica #ArteDigital', 1, '2024-11-06', 1),
-(63, 50, 'pexels-lisettkruusimae-14387627.jpg', 99, 'Pinheiros de natal ', 'Mais de 40 inspirações para sua árvore de natal este ano! #Fotografia #Natal2024', 1, '2024-11-10', 1),
-(65, 50, 'images.jpeg', 99, 'Girl', 'Rascunhos #ArteDigital', 1, '2024-11-10', 1),
-(66, 54, 'pintura-digital-de-menina-1024x538.jpg', 121, 'Wallpaper', 'Primeiro post aqui, oq acharam? #Ilustração #ArteDigital', 1, '2024-11-10', 1),
 (67, 57, 'girl-8799169_1280.jpg', 99, 'Garota Lofi', 'Primeira arte no beco! #Ilustração #ArteDigital', 1, '2024-11-11', 1),
 (71, 57, '1731332496.jpeg', 99, 'Ícones digitalizados', 'Desenhei e digitalizei esses ícones, os materiais estão em png e svg, oq acharam? #ArteDigital #Natal2024', 1, '2024-11-11', 1),
 (72, 55, '1731333378.jpeg', 121, 'Menina png', 'Mais de 40 poses todas separadas em png ou svg, aproveitem! #Ilustração #ArteDigital', 1, '2024-11-11', 1),
 (73, 57, '1731333679.jpeg', 121, 'Ilustrção Menino', 'Rascunho de alguns desenhos da semana :p #ArteDigital', 1, '2024-11-11', 1),
 (74, 55, '1731366563.jpeg', 100, 'Templates posts', 'Esses e mais 20 templates de posts para instagram, com qualidade máxima e 100% editáveis! #ArteDigital #Natal2024', 1, '2024-11-11', 1),
-(75, 55, '1731366708.gif', 106, 'Natal GIF', 'Gif de natal, adorei produzir esse! Oq acharam? #Animação #Natal2024', 1, '2024-11-11', 1),
 (76, 55, '1731367069.jpeg', 121, 'Pikachu ', 'Wallpaper de celular 4k <3 #Ilustração', 1, '2024-11-11', 1),
 (77, 51, '1731367771.jpeg', 121, 'Hands', 'A arte dessa semana foi baseada num estudo sobre mãos, oq acharam? #Ilustração #ArteDigital', 1, '2024-11-11', 1),
 (78, 51, '1731368100.jpeg', 121, 'Percy', 'Arte de um dos meus personagens favoritos! #ArteDigital', 1, '2024-11-11', 1),
 (79, 56, '1731368382.jpeg', 121, 'Templos', 'Alguns estudos sobre estruturas antigas, mais de 40 anotações todas reunidas. Vale a pena! #Ilustração #ArteDigital', 1, '2024-11-11', 1),
-(81, 56, '1731368847.jpeg', 103, 'Modelos 3d', 'Modelo 3d da estação de metrô ucraniana, incrível! #ArteDigital', 1, '2024-11-11', 1);
+(81, 56, '1731368847.jpeg', 103, 'Modelos 3d', 'Modelo 3d da estação de metrô ucraniana, incrível! #ArteEm3D', 1, '2024-11-11', 1),
+(86, 55, '1731855719.jpeg', 99, 'INDIGO', 'Adorei esse pôster que fiz recentemente, pegaram a referência?  #Ilustração', 1, '2024-11-17', 1),
+(88, 51, '1731856277.jpeg', 121, 'Natal21', '30 ilustrações de natal com BT21!  #Ilustração #ArteDigital #Natal2024', 1, '2024-11-17', 1);
 
 -- --------------------------------------------------------
 
@@ -512,7 +503,7 @@ INSERT INTO `postagem` (`ID_POST`, `id_user`, `thumbnail`, `software`, `titulo`,
 --
 
 CREATE TABLE `produtos` (
-  `ID_PROD` int(11) NOT NULL,
+  `ID_PROD` int(11) UNSIGNED NOT NULL,
   `id_postagem` int(11) NOT NULL,
   `licenca` varchar(11) NOT NULL,
   `valor` decimal(10,2) DEFAULT NULL,
@@ -536,11 +527,8 @@ INSERT INTO `produtos` (`ID_PROD`, `id_postagem`, `licenca`, `valor`, `banco`, `
 (38, 60, 'Gratuito', 0.00, 'Caixa Econômica Federal', '34334', '4343', '2024-11-04', 1),
 (39, 61, 'Pago', 1.50, 'Banco Bradesco BBI', '0898', '187181781', '2024-11-06', 1),
 (40, 62, 'Pago', 1.30, 'Banese', '3333', '23232323', '2024-11-06', 1),
-(41, 63, 'Pago', 1.50, 'Banco Bradesco BBI', '619', '12345678', '2024-11-10', 1),
 (42, 64, 'Gratuito', 0.00, 'null', '', '', '2024-11-10', 1),
-(43, 65, 'Gratuito', 0.00, 'null', '', '', '2024-11-10', 1),
-(44, 66, 'Gratuito', 0.00, 'null', '', '', '2024-11-10', 1),
-(45, 67, 'Gratuito', 0.00, 'null', '', '', '2024-11-11', 1),
+(45, 67, 'Gratuito', 0.00, 'null', '', '', '2024-11-11', 0),
 (46, 68, 'Pago', 3.00, 'Banco Inter', '111', '88986756', '2024-11-11', 1),
 (47, 69, 'Pago', 5.00, 'Banco Inter', '111', '23232323', '2024-11-11', 1),
 (48, 70, 'Pago', 5.00, 'Banco Inter', '111', '1111111', '2024-11-11', 1),
@@ -548,13 +536,14 @@ INSERT INTO `produtos` (`ID_PROD`, `id_postagem`, `licenca`, `valor`, `banco`, `
 (50, 72, 'Pago', 10.00, 'Banco Inter', '123', '123455667', '2024-11-11', 1),
 (51, 73, 'Gratuito', 0.00, 'null', '', '', '2024-11-11', 1),
 (52, 74, 'Pago', 10.00, 'BRB', '111', '11111111', '2024-11-11', 1),
-(53, 75, 'Gratuito', 0.00, 'null', '', '', '2024-11-11', 1),
 (54, 76, 'Pago', 1.50, 'Banco Inter', '111', '12233433', '2024-11-11', 1),
 (55, 77, 'Gratuito', 0.00, 'null', '', '', '2024-11-11', 1),
 (56, 78, 'Pago', 10.00, 'Banco Inter', '111', '11111111', '2024-11-11', 1),
 (57, 79, 'Pago', 20.00, 'Banpará', '122', '12323323', '2024-11-11', 1),
 (58, 80, 'Gratuito', 0.00, 'Banrisul', '111', '22232323', '2024-11-11', 1),
-(59, 81, 'Pago', 25.00, 'Caixa Econômica Federal', '145', '14532456', '2024-11-11', 1);
+(59, 81, 'Pago', 25.00, 'Caixa Econômica Federal', '145', '14532456', '2024-11-11', 1),
+(64, 86, 'Gratuito', 0.00, 'null', '', '', '2024-11-17', 1),
+(66, 88, 'Pago', 19.00, 'BRB', '123', '23234232', '2024-11-17', 1);
 
 -- --------------------------------------------------------
 
@@ -643,7 +632,21 @@ INSERT INTO `registros` (`ID_REG`, `nome`, `datahora`) VALUES
 (501, '2024_11.txt', 2147483647),
 (502, '2024_11.txt', 2147483647),
 (503, '2024_11.txt', 2147483647),
-(504, '2024_11.txt', 2147483647);
+(504, '2024_11.txt', 2147483647),
+(505, '2024_11.txt', 2147483647),
+(506, '2024_11.txt', 2147483647),
+(507, '2024_11.txt', 2147483647),
+(508, '2024_11.txt', 2147483647),
+(509, '2024_11.txt', 2147483647),
+(510, '2024_11.txt', 2147483647),
+(511, '2024_11.txt', 2147483647),
+(512, '2024_11.txt', 2147483647),
+(513, '2024_11.txt', 2147483647),
+(514, '2024_11.txt', 2147483647),
+(515, '2024_11.txt', 2147483647),
+(516, '2024_11.txt', 2147483647),
+(517, '2024_11.txt', 2147483647),
+(518, '2024_11.txt', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -663,33 +666,18 @@ CREATE TABLE `salvos` (
 --
 
 INSERT INTO `salvos` (`ID_SALVO`, `id_post`, `id_user`, `datahora`) VALUES
-(15, 2, 1, '2024-10-06 21:18:27'),
 (16, 7, 1, '2024-10-06 21:18:30'),
 (17, 26, 1, '2024-10-09 21:05:05'),
 (21, 48, 44, '2024-10-16 22:11:10'),
 (22, 1, 44, '2024-10-19 11:09:12'),
 (27, 5, 44, '2024-10-20 00:44:32'),
 (28, 1, 13, '2024-10-20 10:45:59'),
-(30, 2, 13, '2024-10-21 10:14:19'),
 (31, 56, 13, '2024-10-23 18:33:08'),
 (32, 57, 38, '2024-10-27 12:20:08'),
 (33, 54, 1, '2024-10-28 11:14:20'),
 (34, 60, 1, '2024-11-05 21:46:30'),
 (35, 62, 10, '2024-11-06 21:15:06'),
 (38, 67, 55, '2024-11-11 10:52:53');
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `seguidores`
---
-
-CREATE TABLE `seguidores` (
-  `ID_FOLLOW` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_follower` int(11) NOT NULL,
-  `datahora` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -734,7 +722,8 @@ INSERT INTO `softwares` (`ID_SOFTWARE`, `software`) VALUES
 (121, 'Sketchbook'),
 (122, 'Tayasui Sketches'),
 (123, 'Vectornator'),
-(124, 'Não Informado');
+(124, 'Não Informado'),
+(125, 'Não Informado');
 
 -- --------------------------------------------------------
 
@@ -833,7 +822,19 @@ INSERT INTO `tags` (`ID_TAG`, `id_post`, `tag`, `datahora`) VALUES
 (85, 79, '#ArteDigital', 2147483647),
 (86, 80, '#Ilustração', 2147483647),
 (87, 80, '#ArteDigital', 2147483647),
-(88, 81, '#ArteDigital', 2147483647);
+(88, 81, '#ArteEm3D', 2147483647),
+(89, 82, '#Ilustração', 2147483647),
+(90, 83, '#ArteEm3D', 2147483647),
+(91, 84, '#ArteDigital', 2147483647),
+(92, 85, '#ArteDigital', 2147483647),
+(93, 85, '#Natal2024', 2147483647),
+(94, 86, '#Ilustração', 2147483647),
+(95, 87, '#Ilustração', 2147483647),
+(96, 87, '#ArteDigital', 2147483647),
+(97, 87, '#Natal2024', 2147483647),
+(98, 88, '#Ilustração', 2147483647),
+(99, 88, '#ArteDigital', 2147483647),
+(100, 88, '#Natal2024', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -885,11 +886,6 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`ID_USER`, `username`, `nome`, `cpf`, `email`, `celular`, `senha`, `data_nascimento`, `estado`, `pais`, `pfp`, `biografia`, `datahora`, `status`, `obs`) VALUES
 (1, '@frfrfr', 'for real', '12345678901', 'stelamontenegro21@gmail.com', '2147483647', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2024-11-04', 'São Paulo', 'Brasil', 'nopfp.jpg', 'jjljljljljlkjlkjlk', '2024-06-16 23:21:02', '1', ''),
 (9, '@rodrigocosta', 'Rodrigo Costa', '987.321.654-33', 'rodrigo.costa@gmail.com', '11966554433', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '1980-12-03', 'Santa Catarina', 'Brasil', 'nopfp.jpg', 'aaaaaaaaaaaa', '2024-11-05 02:31:35', '1', ''),
-(10, '@julianapereira', 'Juliana Pereira', '321.987.654-55', 'juliana.pereira@gmail.com', '11944332211', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '1997-01-22', 'Mato Grosso', 'Brasil', 'nopfp.jpg', 'aaaaaaaaaaaa', '2024-11-05 02:31:35', '1', ''),
-(13, '@stelasm0', 'STEEE', '28278278278272', 'lucas@gmail.com', '2147483647', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '0000-00-00', '', '', 'nopfp.jpg', 'oiiii', '2024-07-30 19:14:56', '1', ''),
-(44, '@kikikik', 'bexouser', '310.770.454-76', 'kikiik@kikik.bom', '11925252525', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '1970-01-01', 'São Paulo', 'Brasil', 'nopfp.jpg', 'Olá!', '2024-10-15 23:17:30', '1', ''),
-(45, '@anaclarafs', 'Ana', '981.851.976-\r\n01', 'anana@gmail.com', '1136589720', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '2005-03-17', 'MinasGerais', 'Brasil', 'nopfp.jpg', 'Olá', '0000-00-00 00:00:00', '1', ''),
-(46, '@joaosilva', 'João Silva', '123.456.789-00', 'joao@gmail.com', '11987654321', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '1990-05-10', 'São Paulo', 'Brasil', '1730853297.jpg', 'Olá, sou João.', '2024-11-05 02:27:55', '1', ''),
 (50, '@isabelmartins', 'Isabel Martins', '345.678.901-23', 'isabel@gmail.com', '11777766666', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '1997-09-30', 'Santa Catarina', 'Brasil', 'nopfp.jpg', 'Olá, sou Isabel.', '2024-11-05 02:28:41', '1', ''),
 (51, '@lauracruz', 'Laura', '456.789.012-34', 'laura@gmail.com', '11666655555', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '1992-03-21', 'Ceará', 'Brasil', 'Results for quiz I’m going to give you a hazbin Hotel character.jpg', 'Me chame de Bárbara ', '2024-11-05 02:28:41', '1', ''),
 (54, '@rafaeloliveira', 'Rafael Oliveira', '789.012.345-67', 'rafael@gmail.com', '11333322222', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '1983-08-18', 'Rio de Janeiro', 'Brasil', 'Kermit.jpg', 'Olá, sou Rafael.', '2024-11-05 02:28:41', '1', ''),
@@ -1008,12 +1004,6 @@ ALTER TABLE `salvos`
   ADD PRIMARY KEY (`ID_SALVO`);
 
 --
--- Índices de tabela `seguidores`
---
-ALTER TABLE `seguidores`
-  ADD PRIMARY KEY (`ID_FOLLOW`);
-
---
 -- Índices de tabela `softwares`
 --
 ALTER TABLE `softwares`
@@ -1065,13 +1055,13 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de tabela `ativos`
 --
 ALTER TABLE `ativos`
-  MODIFY `ID_ATIVO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `ID_ATIVO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT de tabela `banner`
 --
 ALTER TABLE `banner`
-  MODIFY `ID_BANNER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID_BANNER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de tabela `chamados`
@@ -1095,7 +1085,7 @@ ALTER TABLE `comentario`
 -- AUTO_INCREMENT de tabela `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `ID_COMPRA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `ID_COMPRA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de tabela `concursos`
@@ -1113,7 +1103,7 @@ ALTER TABLE `conversas`
 -- AUTO_INCREMENT de tabela `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `ID_LIKE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `ID_LIKE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- AUTO_INCREMENT de tabela `mensagens`
@@ -1125,25 +1115,25 @@ ALTER TABLE `mensagens`
 -- AUTO_INCREMENT de tabela `midia`
 --
 ALTER TABLE `midia`
-  MODIFY `ID_MIDIA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `ID_MIDIA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT de tabela `postagem`
 --
 ALTER TABLE `postagem`
-  MODIFY `ID_POST` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `ID_POST` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `ID_PROD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `ID_PROD` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT de tabela `registros`
 --
 ALTER TABLE `registros`
-  MODIFY `ID_REG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=505;
+  MODIFY `ID_REG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=519;
 
 --
 -- AUTO_INCREMENT de tabela `salvos`
@@ -1152,16 +1142,10 @@ ALTER TABLE `salvos`
   MODIFY `ID_SALVO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
--- AUTO_INCREMENT de tabela `seguidores`
---
-ALTER TABLE `seguidores`
-  MODIFY `ID_FOLLOW` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
 -- AUTO_INCREMENT de tabela `softwares`
 --
 ALTER TABLE `softwares`
-  MODIFY `ID_SOFTWARE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `ID_SOFTWARE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT de tabela `status`
@@ -1173,7 +1157,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT de tabela `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `ID_TAG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `ID_TAG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT de tabela `temp_midia`

@@ -121,12 +121,14 @@ for($i=0;$i<$r["result"];$i++){
           
             </td>
           
-         
-
+        
 <td class='eye-td'>
-  <a class='btn btn-eye'  >
-<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-pencil'>
-    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+  <a class='btn btn-eye' href='#' ata-container='body' data-toggle='popover' data-placement='top'  data-html='true'  data-content=\"
+
+                       <button type='button' onclick='BDaction( ".$r[$i]["ID_CHAMADO"].")'  class='btn btn-primary btn-sm'>Concluir</button>
+  \">
+    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-pencil'>
+    <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
     <path d='M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4' />
     <path d='M13.5 6.5l4 4' />
 </svg>
@@ -139,21 +141,23 @@ for($i=0;$i<$r["result"];$i++){
     
   </div>
 </section>
-<script>
-  function enableSelect(select, id){
-    select.disabled = false;
-    select.addEventListener('change', function(){
-      var status = select.value;
-      var id = id;
-      $.ajax({
-        type: "POST",
-        url: "update_status.php",
-        data: {status: status, id: id},
-        success: function(){
-          alert("Status atualizado com sucesso!");
-          }
-          });
-        })}
+<script>$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+$(function () {
+  $('.popover-exemplo').popover({
+    container: 'body'
+  })
+})
+
+        function BDaction(id){
+
+    if(confirm('Deseja concluir esse chamado?')){
+
+    window.location.href = "../controller/controller.php?concluir=1&id="+id;
+    }
+ 
+}
 </script>
 
 </body>

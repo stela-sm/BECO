@@ -1303,7 +1303,10 @@ button.containerAddTool {
   /* border: var(--default_border); */
   padding: 32px;
 }
-
+.portifolio-content img, .portifolio-content video{
+  max-height: -webkit-fill-available;
+    max-width: -webkit-fill-available;
+}
 .modal-content.infoport-content {
   padding: 0 !important;
   background-color: transparent !important;
