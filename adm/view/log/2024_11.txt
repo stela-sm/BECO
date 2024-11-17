@@ -62,3 +62,5 @@
 2024-11-17 01:05:03 - ::1 - Login do administrador 17, via cookies, pelo dispositivo de ip ::1.
 2024-11-17 15:39:27 - ::1 - Login do administrador 17, via cookies, pelo dispositivo de ip ::1.
 2024-11-17 15:53:39 - ::1 - Exclusão do usuário 46 2024-11-17 15:53:47 - ::1 - Exclusão do usuário 10 2024-11-17 15:54:08 - ::1 - Exclusão do usuário 45 2024-11-17 15:54:24 - ::1 - Exclusão do usuário 13 2024-11-17 15:54:32 - ::1 - Exclusão do usuário 44 2024-11-17 16:05:27 - ::1 - Login do usuario laura@gmail.com pelo dispositivo de ip ::1.
+2024-11-18 00:38:44 - ::1 - Login do usuario samuel@gmail.com pelo dispositivo de ip ::1.
+2024-11-18 00:42:45 - ::1 - Login do administrador 17, via cookies, pelo dispositivo de ip ::1.

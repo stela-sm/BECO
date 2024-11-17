@@ -138,7 +138,7 @@ if ($concurso["result"]==0){
                         break;
                     case 'right-menu_JScontainer-usuario':
                         iframe.src = 'view/usuario.php';
-                        document.title = '[Nome do usuario] - Perfil';
+                        document.title = 'Perfil';
                         break;
                     case 'right-menu_JScontainer-cPubli':
                         document.querySelector('#criarPubli-link_sidebar').click();
@@ -148,7 +148,7 @@ if ($concurso["result"]==0){
                     case 'right-menu_JScontainer-configProf':
                         document.querySelector('#settings-link_sidebar').click();
                         iframe.src = 'view/configuracoes.php';
-                        document.title = '[nome usuario] - Configurações';
+                        document.title = 'Configurações';
                         break;
                     case 'right-menu_JScontainer-concurso':
                         document.querySelector('#concurso-link_sidebar').click();
