@@ -312,10 +312,10 @@ $concurso= $manager -> getConcursoAtual();
             event.preventDefault();
         })
         document.addEventListener('DOMContentLoaded', function () {
-            console.log(window.innerWidth)
+            //console.log(window.innerWidth)
             if (window.innerWidth >= 1300 && window.innerWidth > 1300) {
                 /* var card_port = document.querySelector('.card-portifolio').offsetWidth
-                console.log(card_port)
+                //console.log(card_port)
                 var card_port = document.querySelector('.card-portifolio').style.height = `${card_port - 15}px`
 
                 isDecimal = new RegExp(".");
@@ -388,8 +388,8 @@ function carregarPosts(busca) {
         data: { page: page            },
         dataType: 'json',
         success: function(data) {
-            console.log('controller/controller.php?loadposts=1&search='+busca)
-            console.log("Resposta do servidor:", data)
+            //console.log('controller/controller.php?loadposts=1&search='+busca)
+            //console.log("Resposta do servidor:", data)
             if (data.result > 0){
 
              $.each(data, function(key, postsArray) {
@@ -427,10 +427,10 @@ function carregarPosts(busca) {
     dataType: 'json',  
     success: function(data) {
         if (data.like) {
-            // console.log("Offset:", data.offset);  
+            // //console.log("Offset:", data.offset);  
              isLiked = data.like;
              isSave = data.save;               
-            //  console.log("Resposta do servidor:", isLiked + data.save);  
+            //  //console.log("Resposta do servidor:", isLiked + data.save);  
                    
     const postHtml = `
         <div class="card-portifolio fade-in-css">
@@ -481,13 +481,13 @@ function carregarPosts(busca) {
         $('.fade-in-css').addClass('fade-in'); // Adiciona a classe após 1 segundo
     }, 50); 
 } else {
-            console.log("Nenhum dado retornado ou erro na resposta.");
+            //console.log("Nenhum dado retornado ou erro na resposta.");
         }
     },
     error: function(xhr, status, error) {
         console.error('Erro na requisição AJAX:', error);
-        console.log('Status:', status);
-        console.log('Resposta completa:', xhr.responseText);
+        //console.log('Status:', status);
+        //console.log('Resposta completa:', xhr.responseText);
     }
    });
 
@@ -515,7 +515,7 @@ $id = isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : '';
                     success: function(response) {
                         // Lida com a resposta do servidor
                        
-                        console.log('Requisição bem-sucedida:', response);
+                        //console.log('Requisição bem-sucedida:', response);
                         if(response!='"added"'){
                             button.addClass('no-like').removeClass('liked');
                         }else{
@@ -546,7 +546,7 @@ $id = isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : '';
                     success: function(response) {
                         // Lida com a resposta do servidor
                        
-                        console.log('Requisição bem-sucedida:', response);
+                        //console.log('Requisição bem-sucedida:', response);
                         if(response!='"added"'){
                             button.addClass('no-saved').removeClass('saved');
                         }else{
@@ -576,10 +576,10 @@ $id = isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : '';
       window.addEventListener('message', function(event) {
         if (event.data.startsWith('#')) {
             if(event.data !== "#Limpar"){
-                console.log('Mensagem recebida: ' + event.data)
+                //console.log('Mensagem recebida: ' + event.data)
                 filtro = event.data              
                 const encodedFiltro = encodeHash(filtro);
-                console.log(encodedFiltro);
+                //console.log(encodedFiltro);
                 limpar()
                 carregarPosts(encodedFiltro)
             }else{
@@ -587,7 +587,7 @@ $id = isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : '';
 
             }
             } else{
-        console.log("AAAAAAAAAAAAAAAAAAAAA"+event.data)
+        //console.log("AAAAAAAAAAAAAAAAAAAAA"+event.data)
         limpar();
         carregarPosts(event.data)
     }});

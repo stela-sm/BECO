@@ -428,9 +428,9 @@ if ($concurso["result"]==0){
     // Função que atualiza o temporizador
     
     var diferenca = <?php echo $diferenca; ?>;
-    console.log(diferenca)
+    //console.log(diferenca)
         function atualizarTemporizador() {
-            // console.log(diferenca+"cu")
+            // //console.log(diferenca+"cu")
             if (diferenca > 0) {
                 diferenca--;
                 var dias = Math.floor(diferenca / (24 * 60 * 60));
@@ -442,7 +442,7 @@ if ($concurso["result"]==0){
                 horas = horas < 10 ? "0" + horas : horas;
                 minutos = minutos < 10 ? "0" + minutos : minutos;
                 segundos = segundos < 10 ? "0" + segundos : segundos; // ta calculando os segundos mas fds
-                // console.log("porra")
+                // //console.log("porra")
                
                 let countdowns = document.getElementsByClassName('temporizador');
 for (let i = 0; i < countdowns.length; i++) {
@@ -526,8 +526,8 @@ $(window).scroll(function() {
 
 function carregarPosts(search) {
     
- //console.log("page=" + page)
-    // console.log("caralho")
+ ////console.log("page=" + page)
+    // //console.log("caralho")
     loading = true;
     $.ajax({
         url: '../controller/controller.php?loadconcurso=1&search='+search, 
@@ -538,8 +538,8 @@ function carregarPosts(search) {
         dataType: 'json',
         success: function(data) {
          
-            console.log(data.offset)
-            console.log("Resposta do servidor:", data)
+            //console.log(data.offset)
+            //console.log("Resposta do servidor:", data)
             if (data.result > 0){
 
              $.each(data, function(key, postsArray) {
@@ -553,7 +553,7 @@ function carregarPosts(search) {
           
         })
         
-        }else if(data.result = 0 && page == 0){
+        }else if(data.result == 0 && page == 0){
           nothing = "<p class='nothingText'>Ainda nenhuma publicação, seja o primeiro a participar!</p>"
           $('.container-portifolios').append(nothing);
             loading = false; 
@@ -579,10 +579,10 @@ function carregarPosts(search) {
     dataType: 'json',  
     success: function(data) {
         if (data.like) {
-            // console.log("Offset:", data.offset);  
+            // //console.log("Offset:", data.offset);  
              isLiked = data.like;
              isSave = data.save;               
-            //  console.log("Resposta do servidor:", isLiked + data.save);  
+            //  //console.log("Resposta do servidor:", isLiked + data.save);  
                    
     const postHtml = `
         <div class="card-portifolio fade-in-css">
@@ -633,13 +633,13 @@ function carregarPosts(search) {
         $('.fade-in-css').addClass('fade-in'); // Adiciona a classe após 1 segundo
     }, 50); // 1000 milissegundos = 1 segundo
 } else {
-            console.log("Nenhum dado retornado ou erro na resposta.");
+            //console.log("Nenhum dado retornado ou erro na resposta.");
         }
     },
     error: function(xhr, status, error) {
         console.error('Erro na requisição AJAX:', error);
-        console.log('Status:', status);
-        console.log('Resposta completa:', xhr.responseText);
+        //console.log('Status:', status);
+        //console.log('Resposta completa:', xhr.responseText);
     }
    });
 
@@ -666,7 +666,7 @@ function carregarPosts(search) {
                     success: function(response) {
                         // Lida com a resposta do servidor
                        
-                        console.log('Requisição bem-sucedida:', response);
+                        //console.log('Requisição bem-sucedida:', response);
                         if(response!='"added"'){
                             button.addClass('no-like').removeClass('liked');
                         }else{
@@ -697,7 +697,7 @@ function carregarPosts(search) {
                     success: function(response) {
                         // Lida com a resposta do servidor
                        
-                        console.log('Requisição bem-sucedida:', response);
+                        //console.log('Requisição bem-sucedida:', response);
                         if(response!='"added"'){
                             button.addClass('no-saved').removeClass('saved');
                         }else{
@@ -722,10 +722,10 @@ function carregarPosts(search) {
     }
       window.addEventListener('message', function(event) {
         if (event.data.startsWith('#')) {
-                console.log('Mensagem recebida: ' + event.data)
+                //console.log('Mensagem recebida: ' + event.data)
                 
             } else{
-        console.log("AAAAAAAAAAAAAAAAAAAAA"+event.data)
+        //console.log("AAAAAAAAAAAAAAAAAAAAA"+event.data)
         limpar();
         carregarPosts(event.data)
     }});
@@ -750,10 +750,10 @@ $(document).ready(function () {
       window.addEventListener('message', function(event) {
         if (event.data.startsWith('#')) {
             if(event.data !== "#Limpar"){
-                console.log('Mensagem recebida: ' + event.data)
+                //console.log('Mensagem recebida: ' + event.data)
                 filtro = event.data              
                 const encodedFiltro = encodeHash(filtro);
-                console.log(encodedFiltro);
+                //console.log(encodedFiltro);
                 limpar()
                 carregarPosts(encodedFiltro)
             }else{
@@ -761,7 +761,7 @@ $(document).ready(function () {
 
             }
             } else{
-        console.log("AAAAAAAAAAAAAAAAAAAAA"+event.data)
+        //console.log("AAAAAAAAAAAAAAAAAAAAA"+event.data)
         limpar();
         carregarPosts(event.data)
     }});

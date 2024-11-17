@@ -94,13 +94,13 @@
         };
 
         function atualizarConversas() {
-    console.log('CHAMOU')
+    //console.log('CHAMOU')
             $.ajax({
                 url: '../controller/controller_chat.php?conversas=1',
                 method: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response)
+                    //console.log(response)
                     var chatList = $('.ul-conversa');
                     chatList.empty();
                     // Itera sobre as propriedades numéricas da resposta

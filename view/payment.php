@@ -419,8 +419,8 @@ for ($i = 1; $i < $_SESSION['ativos']['number']; $i++) {
 
       card = verif(type)
       if(verif(type)){
-        console.log(card)
-      console.log(id)
+        //console.log(card)
+      //console.log(id)
       event.preventDefault(); 
 
       var links = document.querySelectorAll('a[id^="file"]');

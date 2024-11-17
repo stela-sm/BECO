@@ -488,7 +488,7 @@ for ($i=0;$i<$postagens['result'];$i++){
 </body>
 <script>
    function pgRedirect(button) {
-    console.log('Você clicou no botão');
+    //console.log('Você clicou no botão');
     var url = button.getAttribute('pgRedirect');
       window.location.href = `${url}`;
   }
@@ -590,7 +590,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   document.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'hidden') {
-        CONSOLE.LOG("FECHOU")
+        //console.log("FECHOU")
     }
 });
 

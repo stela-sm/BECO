@@ -105,7 +105,7 @@ if ($concurso["result"]==0){
             rightSides.forEach(container => {
                 if (container == container[3]) {
                     if (window.innerWidth <= 748) {
-                        console.log('a tela é pequena: mpostrar o right-side')
+                        //console.log('a tela é pequena: mpostrar o right-side')
                         document.querySelector(`${rightSides[3]}`).style.display = 'flex';
                         document.querySelector('#containerHeader__ConPH3').textContent = 'Configurações'
                     } else {
@@ -119,7 +119,7 @@ if ($concurso["result"]==0){
 
             /* document.querySelectorAll('#right-menu_JScontainer, #right-menu_JScontainer-usuario, #right-menu_JScontainer-cPubli, #right-menu_JScontainer-configProf, #right-menu_JScontainer-concurso, #right-menu_JScontainer-conversas').forEach(container => {
                 if (container == 'right-menu_JScontainer-configProf') {
-                    console.log('abrir conversas')
+                    //console.log('abrir conversas')
                 }
                 container.style.display = 'none';
             }) */
@@ -132,7 +132,7 @@ if ($concurso["result"]==0){
                         document.title = 'BECO - Portifólios';
                         break;
                     case 'right-menu_JScontainer-conversas':
-                        console.log('abrir conversas')
+                        //console.log('abrir conversas')
                         iframe.src = 'view/chat.php';
                         document.title = 'Conversas';
                         break;
@@ -198,7 +198,7 @@ if ($concurso["result"]==0){
                             pageId = 'right-menu_JScontainer-configProf';
                             break;
                         case "view/chat.php":
-                            console.log('abrir conversas')
+                            //console.log('abrir conversas')
                             pageId = 'right-menu_JScontainer-conversas';
                             break;
                     }
@@ -236,7 +236,7 @@ if ($concurso["result"]==0){
     let SecurityTamG__isOn = false
     window.addEventListener('message', function(event) {
      if (event.data === 'confirmReset') {
-            console.log('JSAJDAS')
+            //console.log('JSAJDAS')
             Swal.fire({
                 title: 'Tem certeza?',
                 text: 'Você deseja apagar todas as alterações?',
@@ -367,7 +367,7 @@ if ($concurso["result"]==0){
                 SecurityTamG__isOn = true
             }
         } else if (event.data.type === 'com.beco?bannerOffset/new') {
-            console.log()
+            //console.log()
             const bannerHeight = event.data.bannerNOffsetHeight;
             document.querySelector('#main-RMbanners_area').style.height = `${bannerHeight}px`;
         }
@@ -841,7 +841,7 @@ justify-content: center;
                                                 <path d="M12 22v-10" />
                                                 <path d="M12 12l8.73 -5.04" />
                                                 <path d="M3.27 6.96l8.73 5.04" />
-                                            </svg> <span class="filter__name capitalize">Arte em 3D</span>
+                                            </svg> <span class="filter__name capitalize">Arte Em 3D</span>
                                         </div>
                                         <span class="arrowChevron">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -1436,10 +1436,10 @@ justify-content: center;
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
                                                 <input class="checkbox__personal-css" name="tagsCheck[]" type="checkbox"
-                                                value ="#ArteVetorial"  id="#">
+                                                value ="#ArteEm3D"  id="#">
                                                 <span class="checkmark"></span>
                                             </label>
-                                            <span for="#" class="checkbox__informationN">Arte Vetorial</span>
+                                            <span for="#" class="checkbox__informationN">Arte Em 3D</span>
                                         </div>
                                         <div class="container-input_checkbox relative">
                                             <label class="checkbox">
@@ -2682,7 +2682,7 @@ setCookie("acceptCookies", "0", 1);
     <?php if (isset($_SESSION['USER_ID']) || !isset($_SESSION['USER_ID'])) { ?>
 <script>
    
-console.log(document.cookie);
+//console.log(document.cookie);
 
 const iframe = document.getElementById('containerIframe');
 function destroy(){
@@ -2694,7 +2694,7 @@ function destroy(){
 function verificarIframe() {
     if (iframe && !iframe.src.includes('usuario.php')) {
         fetch('controller/controller.php?destruirArtista=1', { method: 'POST' });
-        console.log('EXPLODE')
+        //console.log('EXPLODE')
     }
 }
 
@@ -2703,7 +2703,7 @@ observer.observe(iframe, { attributes: true, attributeFilter: ['src'] });
 
 
 function sendId(valor) {
-console.log('OI');
+//console.log('OI');
     fetch('controller/controller.php?findUser='+valor, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2769,10 +2769,10 @@ console.log('OI');
             event.preventDefault();
         })
         document.addEventListener('DOMContentLoaded', function () {
-            console.log(window.innerWidth)
+            //console.log(window.innerWidth)
             if (window.innerWidth >= 1300 && window.innerWidth > 1300) {
                 var card_port = document.querySelector('.card-portifolio').offsetWidth
-                console.log(card_port)
+                //console.log(card_port)
                 var card_port = document.querySelector('.card-portifolio').style.height = `${card_port - 15}px`
 
                 isDecimal = new RegExp(".");
@@ -2809,10 +2809,10 @@ function loadComentsFunction(id) {
                         if (response && response.comentarios) {
                             var comentariosHTML = ''; // Variável para acumular os comentários
                             for (var i = 0; i < response.number; i++) {
-                                console.log("ok");
+                                //console.log("ok");
                                 var comment = response.comentarios[i];
 
-                                console.log(comment);
+                                //console.log(comment);
                                 
                                 // Acumular o HTML de cada comentário
                                 comentariosHTML += 
@@ -2826,7 +2826,7 @@ function loadComentsFunction(id) {
 
                             
                         } else {
-                            console.log('Nenhum comentário encontrado.');
+                            //console.log('Nenhum comentário encontrado.');
                         }
                 },
                 error: function(xhr, status, error) {
@@ -2840,9 +2840,9 @@ function loadComentsFunction(id) {
 <script>
 function new_comment(){
         
-        console.log(id_post)
+        //console.log(id_post)
         var comment = $('#textarea_comment').val();
-        console.log(comment);
+        //console.log(comment);
         $.ajax({
             type: 'POST',
             url: 'controller/controller.php?coment=1',
@@ -2852,7 +2852,7 @@ function new_comment(){
                 id_post: id_post,
             }, 
             success: function(response) {
-                console.log("aaaaa");
+                //console.log("aaaaa");
                  loadComentsFunction(id_post);
                 $('#textarea_comment').val(''); // Limpa o campo de comentário
                 // selectComent();
@@ -2868,7 +2868,7 @@ function new_comment(){
     
     var diferenca = <?php echo $diferenca; ?>;
         function atualizarTemporizador() {
-            // console.log(diferenca+"cu")
+            // //console.log(diferenca+"cu")
             if (diferenca > 0) {
                 diferenca--;
                 var dias = Math.floor(diferenca / (24 * 60 * 60));
@@ -2880,7 +2880,7 @@ function new_comment(){
                 horas = horas < 10 ? "0" + horas : horas;
                 minutos = minutos < 10 ? "0" + minutos : minutos;
                 segundos = segundos < 10 ? "0" + segundos : segundos; // ta calculando os segundos mas fds
-                // console.log("porra")
+                // //console.log("porra")
                 document.getElementById('temporizador2').innerHTML = dias + ": " + horas + ": " + minutos;
                 document.getElementById('temporizador').innerHTML = dias + ": " + horas + ": " + minutos;
 
@@ -2991,7 +2991,7 @@ for (let i = 0; i < countdowns.length; i++) {
                 method: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response)
+                    //console.log(response)
                     var chatList = $('.ul-conversa');
                     chatList.empty();
                     // Itera sobre as propriedades numéricas da resposta
@@ -3089,7 +3089,7 @@ for (let i = 0; i < countdowns.length; i++) {
         document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.reDirectConfigFrame__link').forEach(link => {
         link.addEventListener('click', function(e) {
-            console.log('teste link menu config')
+            //console.log('teste link menu config')
             const menuConfig = document.querySelector('#right-menu_JScontainer-configProf');
             if (window.innerWidth > 750) {
                 menuConfig.style.display = 'flex'
@@ -3098,7 +3098,7 @@ for (let i = 0; i < countdowns.length; i++) {
             }
             e.preventDefault()
             const targetIframe = this.getAttribute('ChangeIframe')
-            console.log('preciso que mude o', targetIframe)
+            //console.log('preciso que mude o', targetIframe)
             const iframe = document.querySelector('#containerIframe')
             iframe.contentWindow.postMessage({
                 type: 'changeIframe',
@@ -3164,7 +3164,7 @@ for (let i = 0; i < countdowns.length; i++) {
         })
         window.addEventListener('message', function(event) {
             if(event.data.type === 'alterarTituloPubli?criar'){
-            // console.log('o titulo chegou aq')
+            // //console.log('o titulo chegou aq')
             document.querySelector('#tituloModal_Port').value = event.data.oqtaescrito
         }
 
@@ -3175,7 +3175,7 @@ for (let i = 0; i < countdowns.length; i++) {
              const container = document.querySelector('#filtro__menuNAV');
 
             if (window.innerWidth > 750) {
-                console.log(window.innerWidth, 'aqui é responsivo')
+                //console.log(window.innerWidth, 'aqui é responsivo')
                 if (container.style.display === 'none' || container.style.display === '') {
                     document.querySelector('.container__inputSearch ').style.position = 'relative !important'
                     container.style.display = 'block';
@@ -3184,7 +3184,7 @@ for (let i = 0; i < countdowns.length; i++) {
                     container.style.display = 'none';
                 }
             } else {
-                console.log(window.innerWidth, 'aqui não é responsivo')
+                //console.log(window.innerWidth, 'aqui não é responsivo')
                 if (container.style.display === 'none' || container.style.display === '') {
                     document.querySelector('.container__inputSearch ').style.position = 'unset !important'
                     container.style.display = 'block';
@@ -3196,10 +3196,10 @@ for (let i = 0; i < countdowns.length; i++) {
         })
 
         document.getElementById('searchInput').addEventListener('input', function() {
-    console.log("O usuário começou a digitar: " + this.value);
+    //console.log("O usuário começou a digitar: " + this.value);
         const myIframe = document.getElementById('containerIframe');
             myIframe.contentWindow.postMessage(this.value, '*');  
-            console.log("BBBBBBBBBBBBB");
+            //console.log("BBBBBBBBBBBBB");
         });
         window.addEventListener('message', function(event) {
             if (event.data.type === 'updateTitle') {
@@ -3208,7 +3208,7 @@ for (let i = 0; i < countdowns.length; i++) {
                 document.getElementById('PortTitle__official').value = titleValue;
                 document.getElementById('tituloModal_Port').value = titleValue;
             }else if(event.data.type === 'alterarTituloPubli?criar'){
-            console.log('o titulo chegou aq')
+            //console.log('o titulo chegou aq')
             document.querySelector('#tituloPubli__jsDirect').value = event.data.oqtaescrito
         }
 
@@ -3288,7 +3288,7 @@ for (let i = 0; i < countdowns.length; i++) {
          id_post = ""
         function receiveMessage(event) {
             if (event.data.action === 'modalClicked') {
-                console.log(event.data.id)
+                //console.log(event.data.id)
                 makeModalAjax(event.data.id)
                 // makeComentarios(event.data.id)
                 var modal = document.getElementById('portifolio-modal');
@@ -3323,7 +3323,7 @@ for (let i = 0; i < countdowns.length; i++) {
         data: { id: id }, 
         dataType: 'json',
         success: function(response) {
-            console.log(response);
+            //console.log(response);
             const fileUrl = 'assets/media/port_ativos/'; 
             for(i=1;i<response.number;i++){
             const fileName = response[i].arquivo; 
@@ -3349,7 +3349,7 @@ for (let i = 0; i < countdowns.length; i++) {
             div_midia.innerHTML = '';
             tags.innerHTML = '';
             softwares.innerHTML = '';
-            console.log(response);
+            //console.log(response);
             loadComentsFunction(id)
             nickname.innerHTML = response.user.nickname;
             username.innerHTML = response.user.username;
@@ -3359,12 +3359,12 @@ for (let i = 0; i < countdowns.length; i++) {
             document.getElementById('pfp_modal_portifolio').src = 'assets/media/pfp/'+response.user.pfp;
             link_user.setAttribute('onclick', 'sendId('+response.user.ID_USER+'); closeModal()');
             for (i = 0; i < response.tags.result; i++) {
-                 console.log("Tag: " + response.tags[i]);
+                 //console.log("Tag: " + response.tags[i]);
                  tags.innerHTML += "<span>" + response.tags[i] + "</span>";
 }
                         
                     for (i = 0; i < response.media.result; i++) {
-                                    console.log("midia: " + response.media[i][1]);
+                                    //console.log("midia: " + response.media[i][1]);
                                     if(response.media[i][1] == "imagem"){
                                     div_midia.innerHTML += "<div class=\"modal-content portifolio-content w100\"><img src=\"assets/media/port_midia/" + response.media[i][0] + "\"></div>";
                                     }else{
@@ -3379,7 +3379,7 @@ for (let i = 0; i < countdowns.length; i++) {
                                             }}
             valor.innerHTML="";
             if(response.produtos.valor == null || response.produtos.valor == 0.00){
-                console.log("de graça")
+                //console.log("de graça")
                 valor.innerHTML = ` <h3  class='valorPortifolio_cCPB'> GRATUITO </h3> <a href='#' onclick='downloadA(${id})' id='link_modal_portifolio'class='btn btn-primary'>Download</a>` ;
                
             }else{
@@ -3404,7 +3404,7 @@ for (let i = 0; i < countdowns.length; i++) {
     const links = document.querySelectorAll('a.link[ajudaCenter="ligado"]');
     links.forEach(link => {
         link.addEventListener('click', function (event) {
-            console.log("carai")
+            //console.log("carai")
             event.preventDefault();
             window.open('view/atendimento.php', '_blank',
                 "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=800,width=431,height=585"
@@ -3510,7 +3510,7 @@ for (let i = 0; i < countdowns.length; i++) {
                 
                 
                 var containerSRC = document.querySelector('#containerIframe').getAttribute('src')
-                console.log(containerSRC, '- src atual')
+                //console.log(containerSRC, '- src atual')
                 if(containerSRC == 'view/configuracoes.php'){
                     if (document.querySelector('#darkmode').checked) {
                     // Modo escuro ativo
@@ -3568,7 +3568,7 @@ for (let i = 0; i < countdowns.length; i++) {
             const precoInput = document.getElementById('precoInicial_modalPort')
             
             checkbox.addEventListener('change', function() {
-                console.log(checkbox)
+                //console.log(checkbox)
                 if (checkbox.checked) {
                     precoInput.value = '00'
                 } else {
@@ -3601,7 +3601,7 @@ for (let i = 0; i < countdowns.length; i++) {
                     inputImage.className = 'inputFormImg_inp';
                     inputImage.value = file.name;
                     document.getElementById('mainForm-CriarPubli').appendChild(inputImage);
-                    console.log(inputImage)
+                    //console.log(inputImage)
                
                 };
                 reader.readAsDataURL(file);
@@ -3618,7 +3618,7 @@ for (let i = 0; i < countdowns.length; i++) {
             contentType: false,
             processData: false,
             success: function(response) {
-               console.log(response);
+               //console.log(response);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error(textStatus, errorThrown);
@@ -3644,7 +3644,7 @@ for (let i = 0; i < countdowns.length; i++) {
                     inputVideo.className = 'inputFormMid_inp';
                     inputVideo.value = file.name;
                     document.getElementById('mainForm-CriarPubli').appendChild(inputVideo);
-                    console.log(inputVideo)
+                    //console.log(inputVideo)
                 };
                 reader.readAsDataURL(file);
                 const formData = new FormData();
@@ -3658,7 +3658,7 @@ for (let i = 0; i < countdowns.length; i++) {
             contentType: false,
             processData: false,
             success: function(response) {
-               console.log(response);
+               //console.log(response);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error(textStatus, errorThrown);
@@ -3763,7 +3763,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     inputImage.className = 'ativos_input';
                     inputImage.value = file.name;
                     document.getElementById('mainForm-CriarPubli').appendChild(inputImage);
-                    console.log(inputImage)
+                    //console.log(inputImage)
                
         const truncatedFileName = sprdNom_Ext(file);
 
@@ -3782,7 +3782,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                console.log(response);
+                //console.log(response);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.error(textStatus, errorThrown);
@@ -3814,7 +3814,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 function filtrarPosts(link) {
     const filterName = link.querySelector('.filter__name').textContent;
     const formattedFilterName = '#' + filterName.trim().replace(/\s+/g, '');
-    console.log(formattedFilterName);
+    //console.log(formattedFilterName);
     const iframe = document.getElementById('containerIframe');
     iframe.contentWindow.postMessage(formattedFilterName, '*');
     if (link.id === 'limpar__todosOsFiltros') {

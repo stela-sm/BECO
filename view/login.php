@@ -37,11 +37,11 @@
         <script>
     pageId = "right-menu_JScontainer"
    localStorage.setItem('com.beco_ultPag_localData', pageId);
-    console.log("OH BOSTA")
+    //console.log("OH BOSTA")
 </script>
     <script>
         function attachSignin(element) {
-            console.log(element.id);
+            //console.log(element.id);
             auth2.attachClickHandler(element, {},
                 function (googleUser) {
                     document.getElementById('name').innerText = "Signed in: " +
@@ -854,7 +854,7 @@ notas: alterei muita coisa só depois eu fui ler isso aqui tmj
             });
 
             paraLogin.addEventListener('click', function () {
-                console.log('clicou no paraLogin')
+                //console.log('clicou no paraLogin')
                 document.title = "Login | BECO";
                 logForm.style.transform = "TranslateX(0%)";
                 cadForm.style.transform = "TranslateX(100%)";
@@ -1081,18 +1081,18 @@ notas: alterei muita coisa só depois eu fui ler isso aqui tmj
         // signIn do Google
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId());
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail());
+            //console.log('ID: ' + profile.getId());
+            //console.log('Name: ' + profile.getName());
+            //console.log('Image URL: ' + profile.getImageUrl());
+            //console.log('Email: ' + profile.getEmail());
         }
 
         function onSuccess(googleUser) {
-            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+            //console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
         }
 
         function onFailure(error) {
-            console.log(error);
+            //console.log(error);
         }
 
         function renderButton() {
@@ -1135,14 +1135,14 @@ notas: alterei muita coisa só depois eu fui ler isso aqui tmj
         });
 
         mostrarSenhaV2.addEventListener('click', () => {
-            console.log('clicou')
+            //console.log('clicou')
             mostrarSenhaV2.style.display = 'none'
             NmostrarSenhaV2.style.display = 'block'
             senha_inpConf.type = 'text'
         });
 
         NmostrarSenhaV2.addEventListener('click', () => {
-            console.log('clicou')
+            //console.log('clicou')
 
             NmostrarSenhaV2.style.display = 'none'
             mostrarSenhaV2.style.display = 'block'

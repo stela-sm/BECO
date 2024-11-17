@@ -141,7 +141,7 @@ echo "
     let val2 = " . json_encode($artistas[1]['total_compras']) . ";
     let val3 = " . json_encode($artistas[2]['total_compras']) . ";
     
-    console.log(nome1, nome2, nome3);
+    //console.log(nome1, nome2, nome3);
 </script>
 ";
 
@@ -336,7 +336,7 @@ echo "
  
 };
 
-console.log(data)
+//console.log(data)
       new Chart(ctx, {
         type: 'line',
         data: {

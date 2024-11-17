@@ -293,10 +293,10 @@ echo "
             event.preventDefault();
         })
         document.addEventListener('DOMContentLoaded', function () {
-            console.log(window.innerWidth)
+            //console.log(window.innerWidth)
             if (window.innerWidth >= 1300 && window.innerWidth > 1300) {
                 var card_port = document.querySelector('.card-portifolio').offsetWidth
-                console.log(card_port)
+                //console.log(card_port)
                 var card_port = document.querySelector('.card-portifolio').style.height = `${card_port - 15}px`
 
                 isDecimal = new RegExp(".");
@@ -320,7 +320,7 @@ echo "
     </script>
     <script>
     function Card__clickDetector(id){
-        console.log("buceta")
+        //console.log("buceta")
             const message = {
         action: 'modalClicked',
         id: id

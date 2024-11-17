@@ -25,9 +25,9 @@ function garantirVoces() {
 }
 
 function listarVoces() {
-    console.log('Vozes disponíveis:');
+    //console.log('Vozes disponíveis:');
     voces.forEach(voz => {
-        console.log(`Nome: ${voz.name}, Idioma: ${voz.lang}`);
+        //console.log(`Nome: ${voz.name}, Idioma: ${voz.lang}`);
     });
 }
 
@@ -40,7 +40,7 @@ function falarTexto(texto, idioma) {
             return;
         }
 
-        console.log(`Usando a voz: ${voz.name}`);
+        //console.log(`Usando a voz: ${voz.name}`);
         if (utterance) {
             synth.cancel();
         }
@@ -103,9 +103,9 @@ function adicionarEventosElemento(elemento) {
             elemento.classList.add('highlight');
             const texto = obterTextoElemento(elemento);
             if (texto) {
-                console.log(`Texto a ser falado: "${texto}"`);
+                //console.log(`Texto a ser falado: "${texto}"`);
                 const idioma = await obterIdioma();
-                console.log('Idioma selecionado:', idioma);
+                //console.log('Idioma selecionado:', idioma);
                 falarTexto(texto, idioma);
             }
         }, TEMPO_ESPERA);
@@ -129,9 +129,9 @@ function adicionarEventosElemento(elemento) {
 
         const texto = obterTextoElemento(elemento);
         if (texto) {
-            console.log(`Texto a ser falado ao focar: "${texto}"`);
+            //console.log(`Texto a ser falado ao focar: "${texto}"`);
             const idioma = await obterIdioma();
-            console.log('Idioma selecionado:', idioma);
+            //console.log('Idioma selecionado:', idioma);
             falarTexto(texto, idioma);
         }
     });

@@ -311,7 +311,7 @@ if($_SESSION["ADM_PODER"] >= 4){
             iframe.src = iframeSrc.toString();
 
             // Exiba a URL atualizada no console
-            console.log('Link do iFrame:', iframe.src);
+            //console.log('Link do iFrame:', iframe.src);
         });
         function changeClass(selectedLink) {
         const links = document.querySelectorAll('.nav-link a');

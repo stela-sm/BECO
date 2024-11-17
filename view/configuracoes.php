@@ -47,9 +47,9 @@ session_start();
                     }
                 }
             }else if (event.data.type === 'changeIframe') {
-                console.log('CHEGOU OP CHANGEIFRAMEEEEEE')
+                //console.log('CHEGOU OP CHANGEIFRAMEEEEEE')
                 const targetIframe = event.data.target
-                console.log(targetIframe)
+                //console.log(targetIframe)
                 
                 // Esconde todas as seções
                 document.querySelectorAll('[inFrame]').forEach(section => {
@@ -76,12 +76,12 @@ session_start();
         const body = document.body;
 
         if (darkModeState === '1' || darkModeState === 'ativo') {
-            console.log('Aplicando tema escuro');
+            //console.log('Aplicando tema escuro');
             body.classList.add('dark')
             document.querySelector('#lightTheme__on').style.display = 'none';
             document.querySelector('#darkTheme__on').style.display = 'block';
         } else {
-            console.log('Aplicando tema claro');
+            //console.log('Aplicando tema claro');
             body.classList.remove('dark')
             document.querySelector('#lightTheme__on').style.display = 'block';
             document.querySelector('#darkTheme__on').style.display = 'none';
@@ -1106,7 +1106,7 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
     <script>
         //function download(classe) to click all the links with de class link+classe
         function download(classe) {
-            console.log('e')
+            //console.log('e')
             var links = document.querySelectorAll('.'+ classe);
             links.forEach(function(link) {
                 link.click();
@@ -1207,7 +1207,7 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
         });
 
         document.querySelector('#editForm_reset').addEventListener('click', function (event) {
-            console.log('clicou em resetar')
+            //console.log('clicou em resetar')
             event.preventDefault()
 
             const username = document.querySelector('#username_edit').value;
@@ -1220,7 +1220,7 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
                 bio !== initialValues['#bio_edit'] ||
                 document.querySelector('#changeProfilePhoto').files.length > 0) {
                 window.parent.postMessage('confirmReset', '*');
-                console.log('enviado')
+                //console.log('enviado')
             }
         });
 
@@ -1313,7 +1313,7 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
                 }
                 if (checkboxId == 'ThemeModeRecurso_site') {
                     document.querySelector('#acess_frame').style.display = 'block'
-                    console.log('ThemeModeRecurso_site ativo')
+                    //console.log('ThemeModeRecurso_site ativo')
                     localStorage.setItem(localStorageKey, '1');
                     window.parent.postMessage('Theme?DarkIs__on', '*');
                     document.querySelector('#acess_frame').style.display = 'block'
@@ -1330,7 +1330,7 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
                 }
                 if (checkboxId == 'ThemeModeRecurso_site') {
                     document.querySelector('#acess_frame').style.display = 'block'
-                    console.log('ThemeModeRecurso_site inativo')
+                    //console.log('ThemeModeRecurso_site inativo')
                     localStorage.setItem(localStorageKey, '0');
                     window.parent.postMessage('Theme?DarkIs__off', '*');
                     document.querySelector('#acess_frame').style.display = 'block'
@@ -1428,9 +1428,9 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
             data: {
                 user: user}, 
             success: function(response) {
-                console.log(response)
+                //console.log(response)
                 if(response == "existe"){
-                console.log("aaaaa");
+                //console.log("aaaaa");
             usernameError.style.display = "block";
             buttonSubmit.disabled = true;
 

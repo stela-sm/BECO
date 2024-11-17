@@ -108,7 +108,7 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
   
 
             function atualizarChat(idConvo, imgO, imgI) {
-                console.log(idConvo, imgO, imgI)
+                //console.log(idConvo, imgO, imgI)
                 $.ajax({
                     url: '../controller/controller_chat.php?select=1',
                     method: 'GET',
@@ -121,7 +121,7 @@ echo "<input type=\"hidden\" name=\"\" class=\"pfp-incoming\" value='".$_REQUEST
                         chatList.empty();
                         for (var i = 0; i <= response.number; i++) {
                             var mensagem = response[i];
-                            /* console.log(response) */
+                            /* //console.log(response) */
                             if(mensagem.texto_mensagem != false){
                             if (mensagem.id_remetente == <?php echo $_SESSION["USER_ID"]; ?>) {
                               
@@ -267,7 +267,7 @@ function uploadFile(file, idConversa, idRemetente) {
         contentType: false,
         processData: false,
         success: function(response) {
-            console.log('Arquivo enviado com sucesso:', response);
+            //console.log('Arquivo enviado com sucesso:', response);
             // Faça algo com a resposta aqui
         },
         error: function(xhr, status, error) {
@@ -278,7 +278,7 @@ function uploadFile(file, idConversa, idRemetente) {
 
     // Adiciona um listener para o evento 'change' no input file
     document.getElementById('arquivoInput').addEventListener('change', function(event) {
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        //console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
       var file = event.target.files[0]; // Obtém o arquivo selecionado
       if (file) {
         uploadFile(file, idConversa,idRemetente); // Chama a função AJAX para enviar o arquivo

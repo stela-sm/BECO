@@ -534,7 +534,7 @@ if(isset($_REQUEST['criarPost']) && isset($_SESSION['USER_ID'])){
     $dados["titulo"] = $_REQUEST['ttlPortifolio'];
     if(isset($_REQUEST['store'])){
         $dados['direcionamento'] = '1';
-        $dados['valor'] = $_REQUEST['precoPost'];
+        $dados['valor'] = isset($_REQUEST['precoPost']) ? $_REQUEST['precoPost'] : '0';
         $dados['licenca'] = $_REQUEST['licenca'];
         $dados['banco'] = $_REQUEST['banco_produto'];
         $dados['agencia'] = $_REQUEST['agencia_produto'];

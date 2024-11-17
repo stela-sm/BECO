@@ -16,7 +16,7 @@ function pegaAsFontes() {
 
 function storeOriginalFontSizes() {
     const fontSizes = pegaAsFontes();
-    console.log(fontSizes)
+    //console.log(fontSizes)
     fontSizes.forEach(item => {
         if (!originalFontSizes.has(item.element)) {
             originalFontSizes.set(item.element, item.fontSize);

@@ -763,7 +763,7 @@ if(isset($_REQUEST['inativar'])){
     require_once "../model/manager.class.php";  
     $manager = new Manager();   
     $r = $manager-> inativarPost($id);
-var_dump($_REQUEST);
+//var_dump($_REQUEST);
     ?>
     <!-- <form action="../view/posts.php?success=1" name="return" id="return" method="get">
     <input type="hidden" name="sucesso" value=1>

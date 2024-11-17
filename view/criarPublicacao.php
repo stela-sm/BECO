@@ -681,7 +681,7 @@
 
         if (inputElement) {
             inputElement.addEventListener('input', ()=>{
-                console.log('to mandando titulo')
+                //console.log('to mandando titulo')
                 window.parent.postMessage({
                     type: 'alterarTituloPubli?criar',
                     oqtaescrito: inputElement.value
