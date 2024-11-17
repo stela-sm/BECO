@@ -1,0 +1,9 @@
+Título: Layers Digitais
+Descrição: Confira o processo criativo por trás de uma arte digital incrível, veja como as sombras ganham vida na tela.
+Software: Procreate
+Tags: Arte Digital, Ilustração
+Preço: 10,00
+Banco: Inter
+Agência: 123
+Conta: 12345678
+

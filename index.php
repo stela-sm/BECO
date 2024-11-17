@@ -3370,7 +3370,7 @@ for (let i = 0; i < countdowns.length; i++) {
                                     }else{
                                     div_midia.innerHTML += `
                                     <div class="modal-content portifolio-content w100">
-                                        <video width="100%" controls>
+                                        <video width="100%" controls autoplay loop muted>
                                             <source src="assets/media/port_midia/${response.media[i][0]}" type="video/mp4">
                                             </video>
                                             </div>
