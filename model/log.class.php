@@ -37,9 +37,7 @@ class Log extends Manager{
             fclose($arquivo);
         }
 
-        $manager = new Manager();
-     $manager->registrosAdd($nameFile); //verificar pq nn tá funcionando
-     
+       
     }
     
     

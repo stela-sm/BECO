@@ -161,12 +161,6 @@ public function getPostagensUser($id){
 
 
 
-//FUNÇÃO PRA ADICIONAR O LOG NO BD
-        public function registrosAdd($nome){
-            $sql = "INSERT INTO registros (nome, datahora) VALUES ('{$nome}', now());";
-            $res = $this->connect()->query($sql);
-        }
-
 
 
 

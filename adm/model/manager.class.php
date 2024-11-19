@@ -289,10 +289,7 @@ public function admLoginID($dados){
         }
 
 
-        public function registrosAdd($nome){
-            $sql = "INSERT INTO registros (nome, datahora) VALUES ('{$nome}', now());";
-            $res = $this->connect()->query($sql);
-        }
+       
 
 
     public function admNew($dados){
