@@ -65,3 +65,4 @@
 2024-11-18 00:38:44 - ::1 - Login do usuario samuel@gmail.com pelo dispositivo de ip ::1.
 2024-11-18 00:42:45 - ::1 - Login do administrador 17, via cookies, pelo dispositivo de ip ::1.
 2024-11-19 00:55:06 - ::1 - Login do administrador 17, via cookies, pelo dispositivo de ip ::1.
+2024-11-20 21:05:15 - ::1 - Login do usuario samuel@gmail.com pelo dispositivo de ip ::1.

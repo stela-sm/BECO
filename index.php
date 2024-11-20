@@ -1789,8 +1789,8 @@ justify-content: center;
                             <hr class="prof__divider">
                             <div class="container__profBtns" id="user-rmenuBtns">
                                 <div class="container-divideBtn" id="displayNoneJS">
-                                    <a href="view/salvos.php" style="color:black; font-weight: 700;" target="iframe_chat" class="equalBtn-profUser">Salvos</a>
-                                    <a id="GoToConfig__fromUserpage" style="color:black; font-weight: 700;" href="view/configuracoes.php?configperfil=1" target="iframe_chat" class="equalBtn-profUser">Configurações</a>
+                                    <a href="view/salvos.php" target="iframe_chat" class="equalBtn-profUser">Salvos</a>
+                                    <a id="GoToConfig__fromUserpage"  href="view/configuracoes.php?configperfil=1" target="iframe_chat" class="equalBtn-profUser">Configurações</a>
                                 </div>
                             </div>
                         </div>

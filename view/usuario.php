@@ -11,7 +11,7 @@ $manager = new Manager();
 if(isset($_SESSION['artista'])){
 
   $postagens= $manager -> getPostagensUser($_SESSION["artista"][0]["ID_USER"]);
-}else{
+}else if (!isset($_SESSION['artista'])){
   $postagens= $manager -> getPostagensUser($_SESSION["USER_ID"]);
 
 }
