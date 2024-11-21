@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br" style="background-color: var(--contentBG);">
+  <script>
+ 
+ if (!sessionStorage.getItem('pageReloaded')) {
+            sessionStorage.setItem('pageReloaded', 'true'); // Marca que já recarregou
+            window.location.reload(); // Recarrega a página
+        } else {
+            console.log("A página foi recarregada uma vez nesta sessão.");
+        }
+    </script>
 <?php
 session_start();
 // if (!isset($_SESSION['USER_ID'])) {
