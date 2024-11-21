@@ -2704,6 +2704,7 @@ observer.observe(iframe, { attributes: true, attributeFilter: ['src'] });
 
 function sendId(valor) {
 //console.log('OI');
+    sessionStorage.removeItem('pageReloaded')
     fetch('controller/controller.php?findUser='+valor, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
