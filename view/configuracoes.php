@@ -1088,8 +1088,9 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
                 </div>
             </div>
         ";
-    }
+    };
     
+  
     echo '</div>'; // Fecha a div.grid_tableMajorContent
 ?>
 

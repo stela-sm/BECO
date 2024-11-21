@@ -369,15 +369,16 @@ document.addEventListener('contextmenu', function (event) {
         <div class="containerInform__resp">
           <div class="userImg_resp">
             <div class="imagemContainerRESP">
-              <img src="../assets/media/pfp/<?php echo $_SESSION['USER_PFP']?>" alt="Imagem de perfil"><!--o alt deve ser o nome do usuario-->
+              <img src="../assets/media/pfp/<?php echo $_SESSION['artista'][0]['pfp'] ?? $_SESSION['USER_PFP']; ?>" alt="Imagem de perfil"><!--o alt deve ser o nome do usuario-->
             </div>
-            <span><?php echo $_SESSION['USER_USERNAME']?></span>
+            <span><?php echo $_SESSION['artista'][0]['username'] ?? $_SESSION['USER_USERNAME'];?></span>
           </div>
           <div class="bioRespContainer">
-            <p><?php echo $_SESSION['USER_BIOGRAFIA']?></p>
+            <p><?php echo $_SESSION['artista'][0]['bio'] ?? $_SESSION['USER_BIOGRAFIA'];?></p>
           </div>
+          
+          <?php if(!isset($_SESSION['artista'])){?>
           <div class="containerGrid_respButtons">
-            
           <button id="salvosRespBTN" onclick="pgRedirect(this)" pgRedirect="salvos.php" class="normanEqualBTN">Salvos</button>
           <button id="configRespBTN" onclick="pgRedirect(this)" pgRedirect="configuracoes.php" class="normanEqualBTN">Configurações</button>
 
@@ -385,6 +386,7 @@ document.addEventListener('contextmenu', function (event) {
             <button id="logoutRespBTN" onclick="pgRedirect(this)" pgRedirect="logout.php" class="normanEqualBTN LOGOUTSYS__BTN"style="font-weight:600;border: 1px solid rgb(255 0 0 / 50%) !important;color: rgb(255 0 0 / 50%) !important;">Logout</button>
 
           </div>
+          <?php } ?>
           <hr class="prof__divider">
         </div>
 
