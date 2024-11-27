@@ -68,3 +68,14 @@
 2024-11-20 21:05:15 - ::1 - Login do usuario samuel@gmail.com pelo dispositivo de ip ::1.
 2024-11-22 00:23:42 - ::1 - Login do usuario clara@gmail.com pelo dispositivo de ip ::1.
 2024-11-22 00:24:10 - ::1 - Login do administrador 17, via cookies, pelo dispositivo de ip ::1.
+2024-11-22 13:52:46 - ::1 - Criação do usuario srmoraisilva@gmail.com pelo dispositivo de ip ::1.
+2024-11-27 00:27:33 - ::1 - Login do usuario clara@gmail.com pelo dispositivo de ip ::1.
+2024-11-27 00:27:51 - ::1 - Login do usuario samuel@gmail.com pelo dispositivo de ip ::1.
+2024-11-27 00:47:37 - ::1 - Login do usuario stelamontenegro21@gmail.com pelo dispositivo de ip ::1.
+2024-11-27 00:47:50 - ::1 - Erro no login do usuario stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-11-27 00:47:58 - ::1 - Erro no login do usuario stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-11-27 00:48:44 - ::1 - Login do usuario stelamontenegro3@gmail.com pelo dispositivo de ip ::1.
+2024-11-27 01:08:25 - ::1 - Login do usuario laura@gmail.com pelo dispositivo de ip ::1.
+2024-11-27 01:15:19 - ::1 - Login do usuario clara@gmail.com pelo dispositivo de ip ::1.
+2024-11-27 01:19:56 - ::1 - Login do usuario isabel@gmail.com pelo dispositivo de ip ::1.
+2024-11-27 01:23:25 - ::1 - Login do administrador 17, via cookies, pelo dispositivo de ip ::1.

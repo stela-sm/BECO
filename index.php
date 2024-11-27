@@ -91,6 +91,8 @@ if ($concurso["result"]==0){
 
         //NÃO MEXER EM ABSOLUTAMENTE NADA DESSE SCRIPT INTEIRO
         //AQUI SERVE PARA MOSTRAR A ULTIMA PAGINA CARREGADA E FAZER UMA SÉRIE DE VERIFICAÇÕES DO SITE ANTES DELE CARREGAR POR COMPLETO
+
+
         function showPage(pageId) {
             const rightSides = [
                 '#right-menu_JScontainer',
@@ -296,22 +298,28 @@ if ($concurso["result"]==0){
                 }
             })
         } else if (event.data === 'Theme?DarkIs__on') {
-            if (localStorage.getItem('DarkMode') == 0 || localStorage.getItem('DarkMode') == 'ativo') {
+            console.log('asdadsdas')
+            if (localStorage.getItem('DarkMode') == 1 || localStorage.getItem('DarkMode') == 'ativo') {
                 if (window.innerWidth < 748) {
-                    document.querySelector('#darkmodeMobile').click()
+                    document.body.classList.add('dark');
+                    document.querySelector('#containerIframe').contentWindow.postMessage({ type: 'darkmode__control', target: 'on' }, '*');
                 } else {
-                    document.querySelector('#darkmode').click()
+                    document.body.classList.add('dark');
+                    document.querySelector('#containerIframe').contentWindow.postMessage({ type: 'darkmode__control', target: 'on' }, '*');
                 }
 
             } else {
                 return false
             }
         } else if (event.data === 'Theme?DarkIs__off') {
-            if (localStorage.getItem('DarkMode') == 1 || localStorage.getItem('DarkMode') == 'desativado') {
+            if (localStorage.getItem('DarkMode') == 0 || localStorage.getItem('DarkMode') == 'desativado') {
                 if (window.innerWidth < 748) {
-                    document.querySelector('#darkmodeMobile').click()
+                    document.body.classList.remove('dark');
+                    document.querySelector('#containerIframe').contentWindow.postMessage({ type: 'darkmode__control', target: 'off' }, '*');
                 } else {
-                    document.querySelector('#darkmode').click()
+                    document.body.classList.remove('dark');
+                    document.querySelector('#containerIframe').contentWindow.postMessage({ type: 'darkmode__control', target: 'off' }, '*');
+
                 }
 
             } else {
@@ -372,7 +380,32 @@ if ($concurso["result"]==0){
             document.querySelector('#main-RMbanners_area').style.height = `${bannerHeight}px`;
         }
     })
+    document.addEventListener('DOMContentLoaded', () => {
+        var VLibrasRecurso = localStorage.getItem('com.beco/VLibras_recurso02x.all?ison');
+        var recElement = document.querySelector('#recVLIBRAS__webBeco');
+            if (VLibrasRecurso === '1' ||VLibrasRecurso === 'ativo') {
+                document.querySelector('#recVLIBRAS__webBeco').style.display = 'block'
+            } else {
+                document.querySelector('#recVLIBRAS__webBeco').style.display = 'none'
+            }
+    });
 
+
+    var lsdm = localStorage.getItem('DarkMode');
+
+// Verifica se o valor é 'ativo' ou '1' (considerando que localStorage sempre retorna strings)
+document.addEventListener('DOMContentLoaded', function () {
+        var DarkMode__isOn = localStorage.getItem('DarkMode');
+        if (DarkMode__isOn === '1') {
+            document.body.classList.add('dark');
+            document.querySelector('#lightTheme__on').style.display = 'block';
+            document.querySelector('#darkTheme__on').style.display = 'none';
+        } else {
+            document.body.classList.remove('dark');
+            document.querySelector('#lightTheme__on').style.display = 'none';
+                    document.querySelector('#darkTheme__on').style.display = 'block';
+        }
+    })
 </script>
 <style>
     #containerIframe {
@@ -757,7 +790,7 @@ justify-content: center;
             <div class="container_search">
                 <form class="form_search" method="POST" action="#" id="SearchForm">
                     <div class="container__logo">
-                        <a class="logo" id="logoContainerLink" href="#">
+                        <a class="logo" id="logoContainerLink"  href="portifolios.php" target="iframe_chat">
                             <img id="logotipoPrincipal" width="90%" src="assets/media/logo/4.png">
                         </a>
                     </div>
@@ -916,38 +949,7 @@ justify-content: center;
                                             </svg> <span class="filter__name capitalize">Arte
                                                 Digital</span>
                                         </div>
-                                        <span class="arrowChevron">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="0 0 24 24" fill="none" stroke="#858585" stroke-width="1.5"
-                                                stroke-linecap="round" stroke-linejoin="round"
-                                                class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M9 6l6 6l-6 6" />
-                                            </svg>
-                                        </span>
-                                    </a>
-                                    <a class="card_filtro" onclick=filtrarPosts(this)>
-                                        <div class="filter_name">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="#858585" stroke-width="1.75"
-                                                stroke-linecap="round" stroke-linejoin="round"
-                                                class="icon icon-tabler icons-tabler-outline icon-tabler-vector">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path
-                                                    d="M3 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
-                                                <path
-                                                    d="M17 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
-                                                <path
-                                                    d="M17 17m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
-                                                <path
-                                                    d="M3 17m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
-                                                <path d="M5 7l0 10" />
-                                                <path d="M19 7l0 10" />
-                                                <path d="M7 5l10 0" />
-                                                <path d="M7 19l10 0" />
-                                            </svg> <span class="filter__name capitalize">Arte
-                                                Vetorial</span>
-                                        </div>
+                                       
                                         <span class="arrowChevron">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                 viewBox="0 0 24 24" fill="none" stroke="#858585" stroke-width="1.5"
@@ -970,7 +972,7 @@ justify-content: center;
                             </div>
                         </div>
                     </div>
-                    <a class="btn ico_btn linkCamin__menu" <?php echo isset($_SESSION['USER_ID']) ? 'onclick="pgDirect(\'view/chat.php\')"' : 'onclick="login()"'; ?>  id="superChat_goout">
+                    <a class="btn ico_btn linkCamin__menu" <?php echo isset($_SESSION['USER_ID']) ? 'href="view/chat.php"pgdirect="view/chat.php" target="iframe_chat"' : 'onclick="login()"'; ?>  id="superChat_goout">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round"
@@ -1143,7 +1145,7 @@ justify-content: center;
             <!--=-=-=-=-=-==-=-=-=-=- side menu =-=-=-=-=-=-=-=-=-=-=-->
             <div class="sidebar sidebar-resp">
                 <div class="container__logo">
-                    <a class="logo" id="logoContainerLink" href="#">
+                    <a class="logo" id="logoContainerLink" href="portifolios.php" target="iframe_chat">
                         <img id="logotipoPrincipal" width="90%" src="assets/media/logo/white_becoComplete.png">
                     </a>
                 </div>
@@ -2730,16 +2732,8 @@ function sendId(valor) {
 
 </script>
 <script>
-    document.addEventListener('DOMContentLoaded', ()=>{
-        var VLibrasRecurso = localStorage.getItem('com.beco/VLibras_recurso02x.all?ison');
-        var recElement = document.querySelector('#recVLIBRAS__webBeco');
-        if (VLibrasRecurso === 'ativo') {
-            recElement.style.display = 'block';
-        } else {
-            recElement.style.display = 'none';
-        }
 
-    })
+
     document.addEventListener('DOMContentLoad', ()=>{
         function adjustCardHeight() {
             const cards = document.querySelectorAll('.card-portifolio');
@@ -3036,6 +3030,8 @@ for (let i = 0; i < countdowns.length; i++) {
         });
     </script>
     <script>
+
+
        document.addEventListener('DOMContentLoaded',()=>{
             const links = document.querySelectorAll('.a-conversa');
         links.forEach(link => {
@@ -3442,87 +3438,20 @@ for (let i = 0; i < countdowns.length; i++) {
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            //AQUI É PRA VERIFICAR SE O DARK MODE ESTÁ ATIVO VIA LOCALSTORAGE
-
-            //-==--=-----------------------------------------------------------
-            var DarkMode__isOn = localStorage.getItem('DarkMode');
-            const icons = document.querySelectorAll('.icone-thumb')
-
-            function updateIconColors(color) {
-                icons.forEach(function(icon) {
-                    icon.setAttribute('stroke', color);
-                });
-            }
-            var DarkMode__isOn = localStorage.getItem('DarkMode');
-            document.querySelector('#darkTheme__on').style.display = 'none'
-            if (DarkMode__isOn === null) {
-                localStorage.setItem('DarkMode', '0');
-                updateIconColors('#000000');
-                document.querySelector('#lightTheme__on').style.display = 'block'
-                document.querySelector('#darkTheme__on').style.display = 'none'
-            } else if (DarkMode__isOn === '1') {
-                document.querySelector('#lightTheme__on').style.display = 'none'
-                document.querySelector('#darkTheme__on').style.display = 'block'
-                document.body.classList.add('dark');
-                updateIconColors('#FFFFFF');
-            } else if (DarkMode__isOn === '0') {
-                if (document.body.classList.contains('dark')) {
-                    document.querySelector('#lightTheme__on').style.display = 'block'
-                    document.querySelector('#darkTheme__on').style.display = 'none'
-                    document.body.classList.remove('dark');
-                }
-                updateIconColors('#000000');
-            }
             //VERIFICAR INPUT CHECKBOX DO DARKMODE
             document.querySelector('#darkmodeMobile').addEventListener('change', function(event) {
-                const icons = document.querySelectorAll('.icone-thumb')
                 var iframe = document.getElementById('containerIframe')
-                iframe.contentWindow.postMessage('darkMode', '*');
-                iframe.contentWindow.postMessage(
-                    'com.br/?darkMode__changeBtn?ToContainerConfig__portraid.br', '*');
-                document.body.classList.toggle('dark')
-                if (document.body.classList.contains('dark')) {
-                    document.querySelector('#lightTheme__on').style.display = 'none'
-                    document.querySelector('#darkTheme__on').style.display = 'block'
-                    localStorage.setItem('DarkMode', 1);
-                    icons.forEach(function(icon) {
-                        icon.setAttribute('stroke', '#FFFFFF')
-                    })
-                } else {
-                    document.querySelector('#lightTheme__on').style.display = 'block'
-                    document.querySelector('#darkTheme__on').style.display = 'none'
-                    localStorage.setItem('DarkMode', 0);
-                    icons.forEach(function(icon) {
-                        icon.setAttribute('stroke', '#000000')
-                    })
-                }
-                icons.forEach(function(icon) {
-                    if (event.target.checked) {
-                        icon.setAttribute('stroke', '#FFFFFF')
-                    } else {
-                        icon.setAttribute('stroke', '#000000')
-                    }
-                })
-            })
-            document.querySelector('#darkmode').addEventListener('change', function(event) {
-                
-                const icons = document.querySelectorAll('.icone-thumb')
-                var iframe = document.getElementById('containerIframe')
-                
                 
                 var containerSRC = document.querySelector('#containerIframe').getAttribute('src')
-                //console.log(containerSRC, '- src atual')
                 if(containerSRC == 'view/configuracoes.php'){
                     if (document.querySelector('#darkmode').checked) {
-                    // Modo escuro ativo
-                    iframe.contentWindow.postMessage({ type: 'darkmode__control', target: 'on' }, '*');
-                } else {
-                    // Modo escuro desativado
-                    iframe.contentWindow.postMessage({ type: 'darkmode__control', target: 'off' }, '*');
-                }
-
+                        iframe.contentWindow.postMessage({ type: 'darkmode__control', target: 'on' }, '*');
+                    } else {
+                        iframe.contentWindow.postMessage({ type: 'darkmode__control', target: 'off' }, '*');
+                    }
                 }else{
-                    iframe.contentWindow.postMessage('darkMode', '*');
+                    localStorage.setItem('DarkMode', 1);
+                    iframe.contentWindow.location.reload()
                     iframe.contentWindow.postMessage('com.br/?darkMode__changeBtn?ToContainerConfig__portraid.br', '*');
                 }
                 document.body.classList.toggle('dark')
@@ -3530,24 +3459,37 @@ for (let i = 0; i < countdowns.length; i++) {
                     document.querySelector('#lightTheme__on').style.display = 'none'
                     document.querySelector('#darkTheme__on').style.display = 'block'
                     localStorage.setItem('DarkMode', 1);
-                    icons.forEach(function(icon) {
-                        icon.setAttribute('stroke', '#FFFFFF')
-                    })
                 } else {
                     document.querySelector('#lightTheme__on').style.display = 'block'
                     document.querySelector('#darkTheme__on').style.display = 'none'
                     localStorage.setItem('DarkMode', 0);
-                    icons.forEach(function(icon) {
-                        icon.setAttribute('stroke', '#000000')
-                    })
                 }
-                icons.forEach(function(icon) {
-                    if (event.target.checked) {
-                        icon.setAttribute('stroke', '#FFFFFF')
+            })
+            document.querySelector('#darkmode').addEventListener('change', function(event) { 
+                var iframe = document.getElementById('containerIframe')
+                
+                var containerSRC = document.querySelector('#containerIframe').getAttribute('src')
+                if(containerSRC == 'view/configuracoes.php'){
+                    if (document.querySelector('#darkmode').checked) {
+                        iframe.contentWindow.postMessage({ type: 'darkmode__control', target: 'on' }, '*');
                     } else {
-                        icon.setAttribute('stroke', '#000000')
+                        iframe.contentWindow.postMessage({ type: 'darkmode__control', target: 'off' }, '*');
                     }
-                })
+                }else{
+                    localStorage.setItem('DarkMode', 1);
+                    iframe.contentWindow.location.reload()
+                    iframe.contentWindow.postMessage('com.br/?darkMode__changeBtn?ToContainerConfig__portraid.br', '*');
+                }
+                document.body.classList.toggle('dark')
+                if (document.body.classList.contains('dark')) {
+                    document.querySelector('#lightTheme__on').style.display = 'none'
+                    document.querySelector('#darkTheme__on').style.display = 'block'
+                    localStorage.setItem('DarkMode', 1);
+                } else {
+                    document.querySelector('#lightTheme__on').style.display = 'block'
+                    document.querySelector('#darkTheme__on').style.display = 'none'
+                    localStorage.setItem('DarkMode', 0);
+                }
             })
             //CLICAR NO BOTAO DE ACORDO COM O LOCAL QUE VICE CLICA PRA FUNCIONAR A ANIMAÇÃO DO MENU
             document.querySelector('#logoContainerLink').addEventListener('click', function() {
@@ -3819,10 +3761,15 @@ function filtrarPosts(link) {
     const iframe = document.getElementById('containerIframe');
     iframe.contentWindow.postMessage(formattedFilterName, '*');
     if (link.id === 'limpar__todosOsFiltros') {
-        document.querySelectorAll('.card_filtro').forEach(card => {
-            card.style.border = ''
-        });
-    } else {
+    document.querySelectorAll('.card_filtro').forEach(card => {
+        card.style.border = '';
+    });
+        document.querySelector('#limpar__todosOsFiltros').style.borderColor = '#D9544D';
+}
+ else {
+        if(localStorage.getItem('DarkMode') == 1 ||localStorage.getItem('DarkMode') == 'ativo' ){
+            link.style.backgroundColor = 'var(--cardFiltroHover)';
+        }
         link.style.border = 'var(--default_borderCardFiltroHover)';
     }
 }

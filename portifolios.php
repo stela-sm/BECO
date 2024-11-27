@@ -17,6 +17,14 @@
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/jquery-3.7.1.min.map"></script>
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+            var DarkMode__isOn = localStorage.getItem('DarkMode');
+            if (DarkMode__isOn === '1') {
+                document.body.classList.add('dark');
+            } else {
+                document.body.classList.remove('dark');
+            }
+        })
             document.addEventListener('DOMContentLoaded', function() {
                 var SoundIsOn = localStorage.getItem('com.beco/audio_recurso01x.all?ison');
                 if (SoundIsOn === 'ativo') {
@@ -39,17 +47,11 @@
                 document.body.classList.toggle('dark');
             }
         })
-        document.addEventListener('DOMContentLoaded', function () {
-            var DarkMode__isOn = localStorage.getItem('DarkMode');
-            if (DarkMode__isOn === '1') {
-                document.body.classList.add('dark');
-            } else {
-                document.body.classList.remove('dark');
-            }
-        })
-        document.addEventListener('contextmenu', function (event) {
+        
+
+/*         document.addEventListener('contextmenu', function (event) {
             event.preventDefault();
-        })
+        }) */
 
         document.addEventListener('dragstart', function (event) {
             event.preventDefault();
@@ -478,7 +480,7 @@ function carregarPosts(busca) {
     `;
     $('.container-portifolios').append(postHtml);
     setTimeout(function() {
-        $('.fade-in-css').addClass('fade-in'); // Adiciona a classe após 1 segundo
+        $('.fade-in-css').addClass('fade-in');
     }, 50); 
 } else {
             //console.log("Nenhum dado retornado ou erro na resposta.");

@@ -7,6 +7,9 @@
     --primary-color: lightblue;
     --default_border: 1px solid #e8e8e8;
     --default_background: #f9f9f9;
+    --icones__index: #000000;
+    --supra-colors: #212529;
+    --blackWhite: #000;
     /*--secondary-color:;
     --toogle-color:; */
     --text-color: #707070;
@@ -20,12 +23,36 @@
     /***** tipografia *****/
 
 }
+  
+  /*fim do root*/
+  /*cores para modo dark*/
+  .dark {
+    --supra-colors: #454d55;
+    --contentBG: #06070d;
+    --webkit-scrollbar: #06070d;
+    --default_border: 1px solid #21272b;
+    --divider-border: #21272b;
+    --default_background: #f9f9f903;
+    --offwhite: #f0f0f0;
+  
+    --user-color: #c7c7c7;
+    --congrats_background: #f9f9f9;
+    --default-color: #f2f2f2;
+    --blackWhite: #FFF;
+
+  }
 *{
     font-family: "Raleway", system-ui !important;
 }
 body {
-    background-color: var(--sidebar-color) !important;
+    background-color: var(--contentBG) ;
     overflow: hidden;
+}
+.dark{
+    --icones__index: #FFFFFF;
+}
+.icone-thumb{
+    stroke: var(--icones__index);
 }
 body::-webkit-scrollbar {
     display: none;
@@ -36,8 +63,13 @@ body {
 .col-8 {
     height: 100vh;
 }
+.chat{
+    background-color: var(--contentBG) ;
 
-
+}
+#textClear{
+    color: var(--blackWhite);
+}
 .chat header {
     font-family: 'Raleway';
     padding: 16px;
@@ -157,11 +189,12 @@ body {
 .frase {
     font-family: 'Raleway';
     font-size: 1.2em;
-
+    color: var(--supra-colors);
 }
 
 .container-flex {
     display: flex;
+    background-color: var(--contentBG) ;
     position: absolute;
     top: 50;
     height: 100%;

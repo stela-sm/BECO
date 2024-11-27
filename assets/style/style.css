@@ -1088,13 +1088,14 @@ button.containerAddTool {
 }
 .container__profBtns .container-divideBtn a{
   font-weight: 700;
-  color:black;
+  color:var(--default-color);
 }
 .container__profBtns .container-divideBtn a:hover{
   font-weight: 700;
-  color:black;
+  color:var(--default-color);
   text-transform: none;
   text-decoration: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
 .userProfileImg {
   width: 120px;

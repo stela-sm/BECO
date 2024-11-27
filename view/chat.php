@@ -23,8 +23,14 @@
 });
 
 </script>
+
     <title>Chat</title>
-    <script>
+<script>
+    window.addEventListener('message', function (event) {
+            if (event.data === 'darkMode') {
+                document.body.classList.toggle('dark');
+            }
+        })
         document.addEventListener('contextmenu', function (event) {
             event.preventDefault();
         })
@@ -74,6 +80,7 @@
 })  */
 
 </script>
+
 </head>
 <body style="background-color: var(--sidebar-color)">
 

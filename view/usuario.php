@@ -232,8 +232,9 @@ document.addEventListener('contextmenu', function (event) {
   }
   .imagemContainerRESP{
     background-color: var(--default_background);
+    overflow: hidden;
     border: var(--default_border);
-    border-radius: 50%;
+    border-radius: 50% !important;
     height: 160px;
     width: 160px;
     

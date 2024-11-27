@@ -7,6 +7,7 @@
     --body-color: #edebfa;
     --sidebar-color: #ffffff;
     --primary-color: lightblue;
+    --liactive: rgb(240, 240, 240);
     /*--secondary-color:;
     --toogle-color:; */
     --text-color: #707070;
@@ -20,6 +21,9 @@
         /***** tipografia *****/
 
 
+}
+.dark{
+    --liactive: #06070d;
 }
 .highlight {
     box-shadow: rgba(202, 228, 237, 0.5) 2px 0px 0px 0px, rgba(202, 228, 237, 0.5) -2px 0px 0px 0px;
@@ -125,11 +129,11 @@
 
 
 
-
-.ul-conversa li.active {
-    background-color: rgb(240, 240, 240);
-    transition: 0.2s;
+.ul-conversa li.active{
+    background-color: var(--liactive);
+transition:0.2s;
 }
+
 
 .ul-conversa a:hover {
     transition: 0.2s;

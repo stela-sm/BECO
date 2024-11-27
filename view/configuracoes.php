@@ -21,14 +21,7 @@ session_start();
     <script src="../assets/js/texto_audio.js"></script><script src="../assets/js/teste.js"></script>
     <script>
         
-        document.addEventListener('DOMContentLoaded', function() {
-            var SoundIsOn = localStorage.getItem('com.beco/audio_recurso01x.all?ison');
-            if (SoundIsOn === 'ativo') {
-                inicializar2();
-            }else if(SoundIsOn === 'desativado'){
-                naoinicializar()
-            }
-        })
+        
             window.addEventListener('message', function (event) {
             if (event.data.type === 'darkmode__control') {
                 const isOn = event.data.target
@@ -78,13 +71,9 @@ session_start();
         if (darkModeState === '1' || darkModeState === 'ativo') {
             //console.log('Aplicando tema escuro');
             body.classList.add('dark')
-            document.querySelector('#lightTheme__on').style.display = 'none';
-            document.querySelector('#darkTheme__on').style.display = 'block';
         } else {
             //console.log('Aplicando tema claro');
             body.classList.remove('dark')
-            document.querySelector('#lightTheme__on').style.display = 'block';
-            document.querySelector('#darkTheme__on').style.display = 'none';
         }
     }
 
@@ -1105,6 +1094,38 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
     <script src="../assets/js/font.js"></script>
     <script src="../assets/js/ferramentas.js"></script>
     <script>
+        function verif_rec() {
+    var SoundIsOn = localStorage.getItem('com.beco/audio_recurso01x.all?ison');
+    var darkmode_ls = localStorage.getItem('DarkMode');
+    var vlibras_ls = localStorage.getItem('com.beco/VLibras_recurso02x.all?ison');
+
+    // Verificando o estado do VLibras
+    if (vlibras_ls === 'ativo' || vlibras_ls === '1') {
+        document.querySelector('#VLibras_site').checked = true;
+    } else {
+        document.querySelector('#VLibras_site').checked = false;
+    }
+
+    // Verificando o estado do áudio
+    if (SoundIsOn === 'ativo') {
+        document.querySelector('#audioRecurso_site').checked = true;
+        inicializar2();
+    } else if (SoundIsOn === 'desativado') {
+        naoinicializar();
+        document.querySelector('#audioRecurso_site').checked = false;
+    }
+
+    // Verificando o estado do dark mode
+    if (darkmode_ls === '1') {
+        document.querySelector('#ThemeModeRecurso_site').checked = true;
+    } else {
+        document.querySelector('#ThemeModeRecurso_site').checked = false;
+    }
+}
+
+        document.addEventListener('DOMContentLoaded', verif_rec);
+        window.addEventListener('load', verif_rec);
+
         //function download(classe) to click all the links with de class link+classe
         function download(classe) {
             //console.log('e')
@@ -1313,15 +1334,11 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
                     window.parent.postMessage('com.beco/audio_recurso01x.all?ison:TurnON', '*');
                 }
                 if (checkboxId == 'ThemeModeRecurso_site') {
-                    document.querySelector('#acess_frame').style.display = 'block'
-                    //console.log('ThemeModeRecurso_site ativo')
                     localStorage.setItem(localStorageKey, '1');
                     window.parent.postMessage('Theme?DarkIs__on', '*');
-                    document.querySelector('#acess_frame').style.display = 'block'
-
                 }
                 statusText.textContent = 'Ativo';
-                localStorage.setItem(localStorageKey, 'ativo');
+                localStorage.setItem(localStorageKey, '1');
                 if (checkboxId == 'VLibras_site') {
                     window.parent.postMessage('VLibras__on', '*');
                 }
@@ -1330,12 +1347,8 @@ $compra= $manager -> getCompras($_SESSION["USER_ID"]);
                     window.parent.postMessage('com.beco/audio_recurso01x.all?ison:TurnOFF', '*');
                 }
                 if (checkboxId == 'ThemeModeRecurso_site') {
-                    document.querySelector('#acess_frame').style.display = 'block'
-                    //console.log('ThemeModeRecurso_site inativo')
                     localStorage.setItem(localStorageKey, '0');
                     window.parent.postMessage('Theme?DarkIs__off', '*');
-                    document.querySelector('#acess_frame').style.display = 'block'
-
                 }
                 statusText.textContent = 'Desativado';
                 localStorage.setItem(localStorageKey, 'desativado');
